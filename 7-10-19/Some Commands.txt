@@ -1,0 +1,15 @@
+node -v: To check current version of node
+npm -v: To check current version of Node Package Manager.
+node 'filename': To run js file on node.
+
+Note : Node.js uses asynchronous programming!
+
+To Use jquery in node, we can go ahead and install a jquery extension/Package.
+After installation we can go ahead and use it in our code using :
+import $ from 'jquery';
+window.jQuery = window.$ = $;
+$(selector).hide();
+
+in command lines when we run a js file which runs on server, then to stop it from running we use 'ctrl + c' to kill it, or use 'ctrl + z'
+to terminate it. Note that even after terminating the file it can still be running, so we should try to kill it using 'ctrl + c' as it sends
+SIGINT, which allows the program to end gracefully, unbinding from any ports it is listening on.
