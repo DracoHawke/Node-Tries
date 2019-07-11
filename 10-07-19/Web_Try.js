@@ -1,8 +1,11 @@
 var http = require('http');
 var dt = require('./myfirstmodule');
+//Note: The up here we our including our own module which is in the same folder, denoted by './',to this js file.
 var url = require('url');
 var fs = require('fs');
-//Note: The up here we our including our own module which is in the same folder, denoted by './',to this js file.
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+//Note: Here, we create our own event using Eventemitter.
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -41,6 +44,12 @@ http.createServer(function (req, res) {
     if (err) throw err;
     console.log('File Renamed!');
   });
+  var myEventHandler = function () {
+    console.log('I hear a scream!');
+  } //Assign the event handler to an event:
+  eventEmitter.on('scream', myEventHandler);
+  //Fire the 'scream' event:
+  eventEmitter.emit('scream');
   // The fs.rename() method renames the specified file.
   res.write(' Hello World!');
 }).listen(8080);

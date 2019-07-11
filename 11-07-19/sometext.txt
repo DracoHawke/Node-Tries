@@ -1,0 +1,3 @@
+npm init -y
+
+npm install --save body-parser cors express ejs
