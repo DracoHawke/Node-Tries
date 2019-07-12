@@ -26,11 +26,11 @@ app.get('/', function(req, res) {
      ]
    });
 });
-app.post('/submition', url1,function(req,res){
-    var q = url.parse(req.url, true);
-    var qdata = q.query;
-    console.log(qdata);
-    res.render('submission',{qdata});
+app.post('/submission', url1,function(req,res){
+  //  var q = url.parse(req.url, true);
+    //var qdata = q.query;
+    console.log(req.body);
+    res.render('submission',{qdata: req.body});
     // or you can use this {q:req.query} instead of {qdata};
 })
 app.get('/about', function(req, res) {

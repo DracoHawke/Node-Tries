@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Using Ejs with express</title>
+    <link rel="stylesheet" href="/assets/style.css" />
   </head>
   <body>
     <h1>Enter your name</h1>
@@ -13,9 +14,9 @@
     <ul>
       <% for (person of people) {%>
         <% if(person.name === 'dave'){ %>
-          <li>This is definately <% person.name %></li>
+          <li>This is definately <%= person.name %></li>
         <% } else { %>
-          <li> This is definately not dave. This is <% person.name %></li>
+          <li> This is definately not dave. This is <%= person.name %></li>
         <% } %>
       <% } %>
   </body>

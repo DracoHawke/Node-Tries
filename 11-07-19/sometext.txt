@@ -1,3 +1,58 @@
 npm init -y
 
 npm install --save body-parser cors express ejs
+
+
+
+
+Following is the training schedule:
+-----------------------------------------
+
+*********Module 1*********
+
+PHP Basic:
+Functions related to following, each followed by a related program:
+- String
+- array
+- datetime
+- file
+- mail
+- misc functions
+Session handling and cookies implementation with examples.
+
+*********Module 2*********
+
+Database:
+- Connectivity.
+- MySQL functions
+- CRUD operations with examples.
+- Joins
+- Functions and stored procedures.
+
+*********Module 3 and 4*********
+
+Forms:
+- Basic Form elements.
+- Handle form submission.
+- Server side validation.
+- Insert/update data in database through form
+- Implement listing/delete/search/pagination/filters
+- File upload.
+
+*********Module 5*********
+
+Security:
+- SQL injection protection.
+- Character escaping in php.
+- XSS vulnerability protection.
+- CSRF token validation.
+
+*********Module 6 and 7*********
+
+UI:
+- Html/css/Bootstrap.
+- PSD to html.
+- Javascript/jquery.
+- Client side validation.
+- History api.
+- Submit form through ajax.

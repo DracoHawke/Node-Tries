@@ -1,0 +1,67 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+#div1{
+  border-radius: 10px;
+  margin-left: 30%;
+  height:auto;
+  width:500px;
+  margin-right:10%;
+  border-color:  rgba(71, 30, 5,0.5);
+  border-style: solid;
+  border-width: medium;
+
+}
+button{
+  font-size:20px;
+  width:50%;
+  height:8%;
+  border-color: rgba(71, 30, 5,0.5);
+  background-color: Transparent;
+  /*color:rgb(255, 255, 255);*/
+  display: inline-block;
+}
+button#LoginButton{
+  border-radius: 8px 0px 0px 0px;
+}
+button#SignupButton{
+  border-radius: 0px 8px 0px 0px;
+}
+body.ho1{
+  background: url("IMG/Background1.jpg") no-repeat;
+  background-size: cover;
+}
+table.table1 {
+  border: none;
+  width:100%;
+  font-size:16px;
+  padding:20px;
+}
+.error{
+  color:#e92828;
+  font-size: 10px;
+  margin-left: 10%;
+}
+#error{
+  color:#e92828;
+  font-size: 10px;
+  margin-left: 10%;
+}
+input[type=text]{
+  width: 95%;
+}
+input[type=password]{
+  width: 95%;
+}
+textarea{
+  width: 95%;
+  resize: none;
+}
+#Signup{
+  display:none;
+}
