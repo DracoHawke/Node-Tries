@@ -7,8 +7,8 @@ $(function() {
             success: function(response) {
                 var tbodyEl = $('tbody');
                 tbodyEl.html('');
-                response.products.forEach(function(product) {
-                    tbodyEl.append('<tr><td class="id">' + product.id + '</td><td><input type="text" class="name" value="' + product.name + '"></td><td><button class="update-button">UPDATE/PUT</button><button class="delete-button">DELETE</button></td></tr>');
+                response.products.forEach(function(data) {
+                    tbodyEl.append('<tr><td class="id">' + data.sno + '</td><td><input type="text" class="name" value="' + data.fname + '"></td><td class="lname">' + data.lname + '</td><td class="email">' + data.email + '</td><td class="address">' + data.address + '</td><td class="gender">' + data.gender + '</td><td class="subjects">' + data.subjects + '</td><td class="sports">' + data.sports + '</td><td class="image"><img src="' + data.path1 + '"></td><td><button class="update-button">UPDATE/PUT</button><button class="delete-button">DELETE</button></td></tr>');
                 });
             }
         });
@@ -16,12 +16,12 @@ $(function() {
     // CREATE/POST
     $('#create-form').on('submit', function(event) {
         event.preventDefault();
-        var createInput = $('#create-input');
+        var formData=new FormData(document.getElementById('create-form'));
         $.ajax({
             url: '/products',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ name: createInput.val() }),
+            data: formData,
             success: function(response) {
                 console.log(response);
                 createInput.val('');

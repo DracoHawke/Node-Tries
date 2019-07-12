@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1> Ajax </h1>
+    <button type="button" name="button1" id="get-button">read/get all data</button>
+    <form class="create-form" method="post" id="create-form">
+      <p style="Font-Size:10px;" id="Error">* -> Required Field.</p>
+      <table class="table1" cellspacing=10>
+        <tr>
+          <th> First Name*: </th><td colspan="2"><input type="text" id="fname" name ="fname" onblur="myfunction('fname','FnameErr','name');"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="FnameErr"></p></td>
+        </tr>
+        <tr>
+          <th>Last Name: </th><td colspan="2"><input type="text" id="lname" name ="lname" onblur= "myfunction('lname','LnameErr','name');"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="LnameErr"></p></td>
+        </tr>
+        <tr>
+          <th>E-mail*: </th><td colspan="2"><input type="text" id="email" name ="email" onblur="myfunction('email','EmailErr','email');"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="EmailErr"></p></td>
+        </tr>
+        <tr>
+          <th>Password*: </th><td colspan="2"><input type="Password" id="password" name ="password" onblur="myfunction('password','PassError','password');"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="PassError"></p></td>
+        </tr>
+        <tr>
+          <th>Confirm Password*: </th><td colspan="2"><input type="Password" id="cpassword" name="cpassword" onblur="myfunction('cpassword','cpasserror','password','password');"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id ="cpasserror"></p></td>
+        </tr>
+        <tr>
+          <th>Address: </th><td colspan="2"><textarea rows="3" cols="22" name="address"></textarea></td>
+        </tr>
+        <tr>
+          <th>Gender: </th><td colspan="2"><input type="radio" name="gender" value="Male" checked>Male&nbsp;&nbsp;<input type="radio" name="gender" value="Female">Female&nbsp;&nbsp;<input type="radio" name="gender" value="Other">Other</td>
+        </tr>
+        <tr>
+          <th>Subjects*:</th><td colspan="2"><input type="checkbox" id="Eng" name="Eng" value="Eng">English&nbsp;<input type="checkbox" id="Math" name="Math" value="Math">Math&nbsp;<input type="checkbox" id="Sc" name="Sc" value="Sc">Science&nbsp;
+            <input type="checkbox" id="CSc" name="CSc" value="CSc">Computer Science&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="SubErr"></p></td>
+        </tr>
+        <tr>
+          <th>Sports*: </th><td colspan="2"><select name="Sports" id="Sports">
+            <option selected disabled value="<---Select one option--->"><---Select one option---></option>
+            <option value = "Football">Football</option>
+            <option value = "Cricket">Cricket</option>
+            <option value = "Baseball">Baseball</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="SportsErr"></td>
+        </tr>
+        <tr>
+          <th>Image*:</th><td colspan="2"><input type="file" name="fileUpload" id="fileUpload" class = "middle"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="error"><p id="fileErr"></p></td>
+        </tr>
+        <tr>
+          <td></td><td><input type="submit" class="btn btn-default" value="submit"></td><td></td>
+        </tr>
+      </table>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Sno</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Subjects</th>
+          <th>Sports</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script src="jquery.js"></script>
+    <script type="text/javascript" src="formsubmit.js"></script>
+  </body>
+</html>
