@@ -1,0 +1,274 @@
+.img1{
+  height: auto;
+  max-width: 15px;
+}
+.img2{
+  height: auto;
+  max-width: 30px;
+}
+.font1{
+  font-size: 1.3vw;
+}
+.padleft1{
+  padding-left: 40px;
+}
+.top1{
+  /* position: absolute; */
+  background-color: rgba(92, 189, 177, 1);
+  color: white;
+}
+#logo{
+  height: auto;
+  max-width: 60px;
+}
+.padright1{
+  padding-right: 170px;
+}
+.nav1{
+  font-weight: bold;
+}
+.a1{
+  color: black;
+}
+.button1{
+  border-radius: 30px;
+  background-color: rgb(99, 203, 191);
+  color: white;
+  margin-left: 10px;
+}
+.button2{
+  border-radius: 30px;
+  background-color: rgb(99, 203, 191);
+  color: white;
+  margin-left: 10vw;
+  margin-top: -45vw;
+  font-size: 1.4vw;
+}
+.button3{
+  border-radius: 30px;
+  border-color: rgb(233, 116, 154);;
+  color: black;
+  margin-left: 5vw;
+  margin-top: -45vw;
+  font-size: 1.4vw;
+  display: inline-flex;
+  text-align: center;
+}
+.car{
+  color:black;
+}
+.imgcar1{
+  height: auto;
+  max-height: 405px;
+  width: 49vw;
+}
+.imgcar2{
+  width:49.2vw;
+  height:auto;
+}
+.carousel-indicators li {
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    background-color: rgb(99, 203, 191);
+}
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 9px solid rgb(229, 46, 82);
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  /*margin-right: 10px;*/
+}
+.center1{
+  font-size: 3vw;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.img3{
+  max-width: 50%;
+  max-height: 250px;
+  float: left;
+}
+.listmar{
+  margin-top: 10px;
+}
+.head2{
+  color: rgb(229, 46, 82);
+  font-weight: bold;
+  font-size: 2.3vw;
+  margin-left: 5%;
+}
+.list2{
+  padding-left: 15px;
+  margin-left: 56%;
+}
+.button4{
+  border-radius: 30px;
+  background-color: rgb(99, 203, 191);
+  color: white;
+  font-size: 1.2vw;
+  margin-left: 5%;
+}
+.l1{
+  font-size: 1.5vw;
+}
+.div1 {
+  border-bottom: 1px solid rgb(172, 172, 187);
+  padding-bottom: 10px;
+  margin-top: 1%;
+}
+.head3{
+  color: rgb(229, 46, 82);
+  font-weight: bold;
+  font-size: 2.3vw;
+  margin-left: 5%;
+  margin-bottom: 5px;
+}
+.padleft2{
+  padding-left: 15px;
+}
+.line {
+    margin-top:4px;
+    width:20px;
+    background:black;
+    height:2px;
+    float: left;
+}
+.pointright {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid black;
+    /* float:right; */
+}
+.marleft2{
+  margin-left: 8%;
+}
+.pointleft {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 8px solid black;
+    margin-left: 22%;
+    /* float:right; */
+}
+.display1{
+  display: inline-flex;
+}
+.mates1{
+  width: 12vw;
+  height: auto;
+  border-radius: 8px;
+  margin-left: 2vw;
+  margin-top: 5px;
+}
+.matename{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5vw;
+  margin-bottom: 1px;
+}
+.matetype{
+  text-align: center;
+  font-weight: bold;
+  color: rgb(128, 128, 150);
+  font-size: 1vw;
+  margin-bottom: 1px;
+}
+.checked{
+  color: red;
+}
+.numbers1{
+  padding-left: 1px;
+  color: rgb(128, 128, 150);
+  font-size: 1vw;
+}
+@media only screen and (max-width: 900px){
+  .padright1{
+    padding-right: 70px;
+  }
+  .list2{
+    margin-bottom: 5px;
+  }
+  .arrow-right {
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid rgb(229, 46, 82);
+    margin-top: 3px;
+  }
+  .pointleft{
+    margin-left: 18%;
+  }
+}
+@media (max-width: 767px){
+  .md1{
+    align-content: center;
+    padding-left: 50px;
+  }
+  .font1{
+    font-size: 2vw;
+  }
+  .button2{
+    font-size: 2vw;
+  }
+  .button3{
+    font-size: 2vw;
+  }
+  .head2{
+    margin-left: 15%;
+    font-size: 3vw;
+  }
+  .list2{
+    margin-left: 57%;
+  }
+  .button4{
+    font-size: 2vw;
+    margin-left: 15%;
+  }
+  .l1{
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 575px){
+  .font1{
+    font-size: 4vw;
+  }
+  .button3{
+    margin-left: 3vw;
+  }
+  .button2{
+    margin-left: 5vw;
+  }
+  .arrow-right {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid rgb(233, 116, 82);
+    margin-top: 2px;
+  }
+}
+@media only screen and (max-width: 500px){
+  .imgcar2{
+    width:49vw;
+    height:auto;
+  }
+  .imgcar1{
+    width:49vw;
+    height:auto;
+  }
+  .list2{
+    margin-left: 67%;
+  }
+  .head2{
+    font-size: 4vw;
+  }
+  .l1{
+    font-size: 3.5vw;
+  }
+}
