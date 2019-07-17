@@ -1,6 +1,7 @@
 .img1{
   height: auto;
-  max-width: 15px;
+  max-width: 30px;
+  width: 1vw;
 }
 .img2{
   height: auto;
@@ -30,12 +31,15 @@
 }
 .a1{
   color: black;
+  font-size: 1.4vw;
 }
 .button1{
   border-radius: 30px;
   background-color: rgb(99, 203, 191);
   color: white;
   margin-left: 10px;
+  font-size: 1.3vw;
+  margin-top: -1%;
 }
 .button2{
   border-radius: 30px;
@@ -70,9 +74,9 @@
 .arrow-right {
   width: 0;
   height: 0;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  border-left: 9px solid rgb(229, 46, 82);
+  border-top: 0.8vw solid transparent;
+  border-bottom: 0.8vw solid transparent;
+  border-left: 1vw solid rgb(229, 46, 82);
   font-size: 10px;
   margin-top: 5px;
   margin-bottom: 0px;
@@ -85,7 +89,7 @@
 }
 .img3{
   max-width: 50%;
-  max-height: 250px;
+  width: 20vw;
   float: left;
 }
 .listmar{
@@ -127,18 +131,18 @@
   padding-left: 15px;
 }
 .line {
-    margin-top:6px;
-    width:25px;
+    margin-top:0.5vw;
+    width:2vw;
     background:black;
-    height:4px;
+    height:0.2vw;
     float: left;
 }
 .pointright {
     width: 0;
     height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 10px solid black;
+    border-top: 0.6vw solid transparent;
+    border-bottom: 0.6vw solid transparent;
+    border-left: 1vw solid black;
     /* float:right; */
 }
 .marleft2{
@@ -147,9 +151,9 @@
 .pointleft {
     width: 0;
     height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 10px solid black;
+    border-top: 0.6vw solid transparent;
+    border-bottom: 0.6vw solid transparent;
+    border-right: 1vw solid black;
     margin-left: 12%;
     /* float:right; */
 }
@@ -207,11 +211,17 @@
   width: 100%;
   float: left;
 }
+.justify1{
+  height:auto;
+  width: 100%;
+}
 .img5{
-  background-image: url(Files/girloncliffwithdog.png);
-  background-repeat: no-repeat;
-  /* background-position: center; */
-  background-size: contain;
+  max-width:100%;
+  max-height:100%;
+  width: auto;
+  height: auto;
+  position: relative;
+  overflow: hidden;
 }
 .head4{
   margin-top: 5%;
@@ -232,12 +242,17 @@
   padding-left: 0px;
 }
 .line2 {
-    margin-top:16px;
-    width:30px;
-    background: rgb(229, 46, 82);
-    height:2px;
-    float: left;
-    margin-right: 1%;
+  margin-top: 2vw;
+width: 2vw;
+background: rgb(229, 46, 82);
+height: 0.2vw;
+float: left;
+margin-right: 1%;
+}
+.profpic {
+    max-width: 3vw;
+    max-height: 2.5vw;
+    width: 2.5vw;
 }
 .cgp1{
   border-style: none;
@@ -247,6 +262,8 @@
 }
 .dbquotes{
   margin-top: 20%;
+  max-height: 30px;
+  max-width: 30px;
 }
 .head5{
   color: rgb(229, 46, 82);
@@ -255,12 +272,19 @@
   margin-top: -4%;
 }
 .left1{
-  margin-top: -20.1vw;
-  margin-left: 0;
+    margin-top: -31.15vw;
+    margin-left: -7vw;
+    max-height: 35px;
+    max-width: 70px;
+    width: 4vw;
+    height: auto;
 }
 .right1{
-  margin-top: -20vw;
-  margin-left: -10vw;
+  margin-top: -31vw;
+    margin-left: -12vw;
+    max-height: 40px;
+    max-width: 70px;
+    width: 4.5vw;
 }
 .item2{
   padding-left: 15px;
@@ -317,8 +341,8 @@
 }
 .job1{
   color: rgb(128, 128, 150);
-  margin-left: 5.5vw;
-  margin-top: -2.2vw;
+  margin-left: 5vw;
+  margin-top: -1.8vw;
   font-size: 1vw;
 }
 .sue1{
@@ -329,24 +353,36 @@
   width: 20vw;
   margin-top: 5vw;
 }
+.p4{
+  font-size: 1vw;
+}
+.lorem{
+  font-size: 1.5vw;
+}
+.quotes{
+
+}
+@media only screen and (min-width: 1500px){
+  .padleft2{
+    padding-left: 1.7vw;
+  }
+}
 @media only screen and (max-width: 1125px){
   .part6{
     display: none;
   }
   .left1{
-    margin-top: -40.1vw;
-    margin-left: 0;
+    margin-top: -37.1vw;
   }
   .right1{
-    margin-top: -40vw;
-    margin-left: -8vw;
+    margin-top: -37vw;
+margin-left: -13vw;
   }
-  .img5{
+  .crd2{
     display: none;
   }
   .job1{
-    margin-left: 6.8vw;
-    margin-top: -2.4vw;
+    margin-top: -2vw;
   }
 }
 @media only screen and (max-width: 900px){
@@ -385,20 +421,35 @@
     font-size: 3vw;
   }
   .left1{
-    margin-top: -61.1vw;
-    margin-left: 0;
+    margin-top: -39.1vw;
   }
   .right1{
-    margin-top: -61vw;
-    margin-left: -8vw;
+    margin-top: -38.9vw;
+    margin-left: -14vw;
   }
   .job1{
-    margin-left: 8.4vw;
     margin-top: -2.8vw;
-    font-size: 1.2vw;
+    font-size: 1.4vw;
+    margin-left: 6vw;
   }
   .sue1{
     font-size: 2.3vw;
+  }
+  .a1{
+    font-size: 18px;
+  }
+  .button1{
+    font-size: 16px;
+  }
+  .img1{
+    width: auto;
+    max-width: 15px;
+  }
+  .profpic {
+    width: 4vw;
+    height: 4vw;
+    max-height: 4vw;
+    max-width: 4vw;
   }
 }
 @media (max-width: 767px){
@@ -407,7 +458,7 @@
     padding-left: 50px;
   }
   .font1{
-    font-size: 2vw;
+    font-size: 3vw;
   }
   .button2{
     font-size: 2vw;
@@ -462,12 +513,14 @@
     font-size: 2.5vw;
   }
   .left1{
-    margin-top: -35px;
-    margin-left: 94vw;
+    margin-top: -41px;
+    margin-left: 84vw;
+    width: 10vw;
   }
   .right1{
-    margin-top: -34px;
+    margin-top: -41.8px;
     margin-left: -65vw;
+    width: 10.5vw;
   }
   .p1{
     margin-top: 2.5%;
@@ -497,13 +550,17 @@
     font-size: 4vw;
     padding-right: 5px;
   }
-  .job1{
-    margin-left: 11.4vw;
-    margin-top: -3.8vw;
-    font-size: 1.4vw;
-  }
   .img6{
     display: none;
+  }
+  .img3{
+    width:40vw;
+  }
+  .lorem{
+    font-size: 3vw;
+  }
+  .p4{
+    font-size: 2vw;
   }
 }
 @media (max-width: 682px) {
@@ -550,7 +607,7 @@
     /* float:right; */
   }
   .sue1{
-    font-size: 2.6vw;
+        font-size: 2.6vw;
   }
 }
 @media (max-width: 575px){
@@ -576,9 +633,15 @@
     margin-top: 0px;
   }
   .job1{
-    margin-left: 15.4vw;
-    margin-top: -4.8vw;
-    font-size: 1.8vw;
+    margin-left: 4.4vw;
+margin-top: -3.8vw;
+font-size: 2vw;
+  }
+  .line2{
+    display: none;
+  }
+  .sue1{
+        font-size: 3.6vw;
   }
 }
 @media only screen and (max-width: 500px){
@@ -632,14 +695,13 @@
     font-size: 6vw;
   }
   .sue1{
-    font-size: 2.9vw;
+    font-size: 3.9vw;
   }
 }
 @media (max-width: 400px) {
   .job1{
-    margin-left: 23.4vw;
-    margin-top: -7.8vw;
-    font-size: 2.8vw;
+    margin-top: -4.8vw;
+font-size: 2.8vw;
   }
   .sue1{
     font-size: 4vw;
