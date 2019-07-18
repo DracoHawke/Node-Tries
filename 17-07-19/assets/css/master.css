@@ -312,6 +312,7 @@ margin-right: 1%;
   border: none;
   /* max-height: 40px; */
   height: 2vw;
+  /* font-size: 1vw; */
   /* min-height: 40px; */
 }
 .submit1{
@@ -359,15 +360,85 @@ margin-right: 1%;
 .lorem{
   font-size: 1.5vw;
 }
-.quotes{
-
-}
 a:visited{
   color: rgba(229, 46, 82, 1);
+}
+.cards1{
+  color: rgb(2, 2, 47);
+  border-style: solid;
+  border-color: rgb(242, 242, 244);
+  margin-bottom: 1vw;
+  font-size: 1.2vw;
+}
+.nono{
+  color: rgb(130, 130, 152);
+  font-size: 1.2vw;
+}
+.fluid1{
+  background-color: rgb(242, 242, 244);
+  color: rgb(2, 2, 47);
+  height: 3vw;
+  font-size: 1.9vw;
+  margin-bottom: 1vw;
+}
+.tick{
+  color: rgb(103, 214, 66);
+  margin-left: -2.2vw;
+  padding-right: 1vw;
+}
+.button6{
+  border-radius: 30px;
+  background-color: rgb(99, 203, 191);
+  color: white;
+  font-size: 1.2vw;
+  width: 12vw;
+  height: 2.8vw;
+}
+.loginbutton{
+  width: 49%;
+  font-size: 2vw;
+  border-bottom: 0.1vw solid rgb(99, 203, 191);
+}
+.signupbutton{
+  width: 49%;
+  font-size: 2vw;
+  border-bottom: 0.1vw solid rgb(99, 203, 191);
+}
+.main1{
+max-width: 50vw;
+}
+.inline1{
+  font-size: 1.5vw;
+  color: rgb(99, 203, 191);
+}
+.formicons{
+  font-size: 1vw;
+  color: rgb(2, 2, 47);
+  margin-top: 0.35vw;
+  padding-left: 5px;
+}
+.input1{
+  font-size: 1vw;
+  border-style: none;
+}
+.inline2{
+  font-size: 1vw;
+}
+.underline1{
+  width: 100%;
+  background:rgb(99, 203, 191);
+  height: 0.1vw;
+  float: left;
 }
 @media only screen and (min-width: 1500px){
   .padleft2{
     padding-left: 1.7vw;
+  }
+  .emailadd{
+    font-size: 1vw;
+  }
+  .icon4{
+    font-size: 1vw;
   }
 }
 @media only screen and (max-width: 1125px){
@@ -571,7 +642,29 @@ a:visited{
   .submit1{
     height: 4.5vw;
   }
-  .padr{}
+  .inline1{
+    font-size: 2.5vw;
+    margin-bottom: 0vw;
+  }
+  .formicons{
+    font-size: 2vw;
+    margin-top: 1.35vw;
+    padding-left: 5px;
+  }
+  .input1{
+    font-size: 1.5vw;
+    border-style: none;
+  }
+  .inline2{
+    font-size: 1.5vw;
+  }
+  .underline1{
+    height: 0.1vw;
+    float: left;
+  }
+  .main1{
+    max-width: 90vw;
+  }
 }
 @media (max-width: 682px) {
   .part4{
@@ -644,14 +737,22 @@ a:visited{
   }
   .job1{
     margin-left: 4.4vw;
-margin-top: -3.8vw;
-font-size: 2vw;
+    margin-top: -3.8vw;
+    font-size: 2vw;
   }
   .line2{
     display: none;
   }
   .sue1{
-        font-size: 3.6vw;
+    font-size: 3.6vw;
+  }
+  .flexflow1{
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .cards1{
+    width: 35vw;
   }
 }
 @media only screen and (max-width: 500px){
