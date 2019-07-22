@@ -328,14 +328,14 @@ margin-right: 1%;
 }
 .p1{
   margin-top: 5%;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 }
 .p2{
   font-size: 1.5vw;
   margin-top: 3.5vw;
 }
 .p3{
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 }
 .icon5{
   padding-right: 15px;
@@ -359,9 +359,6 @@ margin-right: 1%;
 }
 .lorem{
   font-size: 1.5vw;
-}
-a:visited{
-  color: rgba(229, 46, 82, 1);
 }
 .cards1{
   color: rgb(2, 2, 47);
@@ -464,6 +461,9 @@ a:visited{
   color: rgba(229, 46, 82, 1);
   font-size: 0.9vw;
 }
+.icon4{
+  font-size: 1.3vw;
+}
 @media only screen and (min-width: 1500px){
   .padleft2{
     padding-left: 1.7vw;
@@ -472,6 +472,9 @@ a:visited{
     font-size: 1vw;
   }
   .icon4{
+    font-size: 1vw;
+  }
+  .icon6{
     font-size: 1vw;
   }
 }
@@ -655,8 +658,8 @@ a:visited{
     font-size: 4.5vw;
   }
   .icon4{
-    /* font-size: 4vw; */
-    /* padding-right: 5px; */
+    font-size: 4vw;
+    padding-right: 5px;
   }
   .img6{
     display: none;
@@ -711,7 +714,7 @@ a:visited{
 font-size: 2vw;
 }
   .faded{
-    font-size: 2.5vw;
+font-size: 2.5vw;
   }
 }
 @media (max-width: 682px) {

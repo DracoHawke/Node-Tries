@@ -18,7 +18,9 @@
     <p class="p3">Find a Sitter</p>
     <p class="p3">Register a Dog</p>
     <p class="p3">Register a Sitter</p>
-    <p class="p3">Login</p>
+    <% if (typeof uname === 'undefined') {%>
+      <p class="p3">Login</p>
+    <% } %>
   </div>
   <div class="col-md-2 padrt1">
     <span class="head6">Contact</span>
@@ -32,7 +34,7 @@
     <p class="p4">Sign Up for free Newsteller</p>
     <form class="" action="" method="" name="form1">
       <input type="text" name="emailadd" placeholder="Email address" class="emailadd">
-      <button class="submit1"><i class="fa fa-paper-plane icon4"></i></button>
+      <button class="submit1"><i class="fa fa-paper-plane icon6"></i></button>
     </form>
     <img src="Files/manwalkdog.png" alt="manwalkdog" class="img6">
   </div>

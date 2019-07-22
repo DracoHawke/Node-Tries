@@ -1,0 +1,58 @@
+.card {
+    border: solid #f2f2f4 1px;
+    color: rgb(2, 2, 46);
+}
+.fa-ul li {
+    padding-bottom: 2%;
+}
+.card-body {
+  border: solid #f2f2f4 1px;
+  background-color: #f3f3f5;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: bolder;
+}
+ul.card-footer-list {
+    font-weight: 500;
+    padding-top: 10%;
+    padding-bottom: 3%;
+}
+.tick{
+  list-style-type: none;
+}
+span.fa-li {
+    color: rgb(95, 214, 65);
+}
+.card-header {
+    background-color: white;
+    text-align: center;
+    font-size: 1.7vw;
+    font-weight: 400;
+}
+
+.card-footer {
+    background-color: white;
+}
+.pricing{
+padding-bottom: 10%;
+border-top: solid rgb(215, 215, 222) 1px;
+padding-top: 1%;
+}
+.card.middle-card {
+    height: 106%;
+    margin-top: -3%;
+    border: solid rgb(2, 2, 46);
+}
+
+.middle-card .card-body {
+    background: rgb(2, 2, 46);
+    color: white;
+    border: solid rgb(2, 2, 46);
+}
+.unchecked{
+  color: rgb(130, 130, 152);
+}
+.align-cen{
+  text-align: center;
+  font-weight: 500;
+}
