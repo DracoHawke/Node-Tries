@@ -9,6 +9,11 @@
 }
 .font1{
   font-size: 1.3vw;
+  color: white;
+}
+.a2:hover{
+  text-decoration: none;
+  color: black;
 }
 .padleft1{
   padding-left: 40px;
@@ -310,17 +315,12 @@ margin-right: 1%;
   width: 80%;
   background-color: rgb(45, 45, 69);
   border: none;
-  /* max-height: 40px; */
   height: 2vw;
-  /* font-size: 1vw; */
-  /* min-height: 40px; */
 }
 .submit1{
   width: 18%;
   background-color: rgba(229, 46, 82, 1);
   border: none;
-  /* max-width: 60px; */
-  /* max-height: 40px; */
   height: 2vw;
 }
 .padrt1{

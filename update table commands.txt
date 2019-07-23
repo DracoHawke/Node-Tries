@@ -1,0 +1,17 @@
+ALTER TABLE sitters ADD COLUMN Experience VARCHAR(15) AFTER Age;
+ALTER TABLE sitters ADD COLUMN Prefered_Dogs VARCHAR(40) AFTER experience;
+ALTER TABLE sitters CHANGE Add_info Description varchar(255);
+ALTER TABLE sitters ADD COLUMN Reviews int AFTER Rating;
+ALTER TABLE sitters ADD COLUMN VerificationStatus int AFTER Reviews;
+ALTER TABLE sitters ADD COLUMN AdminStatus int AFTER VerificationStatus;
+ALTER TABLE sitters ADD COLUMN Pic varchar(255) AFTER AdminStatus;
+
+ALTER TABLE users DROP COLUMN DOB, DROP COLUMN Phone, DROP COLUMN Address;
+ALTER TABLE users ADD COLUMN Age int AFTER U_password;
+
+ALTER TABLE dogs ADD COLUMN Address varchar(255) AFTER DogAge;
+ALTER TABLE dogs ADD COLUMN DogWeight varchar(20) AFTER DogAge;
+ALTER TABLE dogs ADD COLUMN Description varchar(255) AFTER DogWeight;
+ALTER TABLE dogs ADD COLUMN Reviews int AFTER Rating;
+ALTER TABLE dogs ADD COLUMN VerificationStatus int AFTER Reviews;
+ALTER TABLE dogs ADD COLUMN AdminStatus int AFTER VerificationStatus;

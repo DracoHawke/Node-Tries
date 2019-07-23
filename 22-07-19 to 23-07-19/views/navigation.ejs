@@ -1,3 +1,4 @@
+<% if (uname === " ") { %>
   <div class="modal fade" id="modalLoginForm" tabindex="-1">
     <div class="modal-dialog main1" role="document">
       <div class="modal-content">
@@ -32,7 +33,7 @@
               <span id="passerr" class="err"></span>
             </div>
             <div class="inline2">
-              <p class="fp"><a href="#"> Forgot Password? </a></p><a href="#"><button class="btn btn-default btn1" id="loginbtn">Login</button></a>
+              <p class="fp"><a href="#"> Forgot Password? </a></p><button class="btn btn-default btn1" id="loginbtn">Login</button>
             </div>
           </div>
         </div>
@@ -42,12 +43,13 @@
       </div>
     </div>
   </div>
+  <% } %>
   <div class="viewport">
     <div class="row top1">
       <div class="col-md-1"></div>
       <div class="col-md-3 md1"><img src="Files/dog_head1.png" alt="dog head" class="img1"><span class="font1">Find a mate | <img src="Files/person1.png" alt="Person" class="img1">Find a Sitter</span></div>
       <div class="col-md-3"></div>
-      <div class="col-md-4"><span class="padleft1 font1"><a href="/registersitter">Register as Sitter</a> |<a href="/registerdog"> Register a dog </a> | <a href ="/"> Support </a></span></div>
+      <div class="col-md-4"><span class="padleft1 font1"><a href="/registersitter" class="a2"><span class="font1">Register as Sitter</span></a> | <a href="/registerdog" class="a2"><span class="font1"> Register a dog </span></a> | <a href ="/" class="a2"><span class="font1"> Support </span></a></span></div>
       <div class="col-md-1"></div>
     </div>
     <div class="row">
@@ -69,10 +71,10 @@
             </div>
             <div class="navbar-nav ml-auto padright1">
               <ul class="navbar-nav nav2 ">
-                <% if (typeof uname !== 'undefined') { %>
+                <% if (uname !== " ") { %>
                   <li class="navbar-text text-dark"><a href="#"><span class="a1"><%= uname%></span></a><a href="/logout"><button type="button" name="button1" class="btn button1">Log Out</button></a></li>
                 <% } else { %>
-                <li class="navbar-text text-dark"><a href="pricing?signin" ><span class="a1">Sign In</span></a><button type="button" name="button1" class="btn button1">Get Started</button></li>
+                <li class="navbar-text text-dark"><a href="?signin" ><span class="a1">Sign In</span></a><button type="button" name="button1" class="btn button1">Get Started</button></li>
                 <% } %>
               </ul>
             </div>

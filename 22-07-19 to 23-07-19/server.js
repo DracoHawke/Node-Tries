@@ -45,7 +45,7 @@ app.get('/',function(req,res) {
     });
   }
   else{
-    res.render('index');
+    res.render('index', {uname: " "});
   }
 });
 
@@ -57,7 +57,7 @@ app.get('/pricing',function(req,res){
     });
   }
   else{
-    res.render('pricing');
+    res.render('pricing', {uname:" "});
   }
 });
 
@@ -103,7 +103,7 @@ app.get('/logout',function(req,res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.redirect('/');
+			res.redirect('/', {uname: " "});
 		}
 	});
 });
@@ -113,7 +113,7 @@ app.get('/registerdog',function(req,res){
     res.render('registerdog', {uname : req.session.uname, data: ""});
   }
   else{
-    res.render('registerdog', {data: ""});
+    res.render('registerdog', {uname: " ",data: ""});
   }
 })
 
@@ -122,7 +122,7 @@ app.get('/registersitter',function(req,res){
     res.render('registersitter', {uname : req.session.uname, data: ""});
   }
   else{
-    res.render('registersitter', {data: ""});
+    res.render('registersitter', {uname: " ", data: ""});
   }
 })
 
