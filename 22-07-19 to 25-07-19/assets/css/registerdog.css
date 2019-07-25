@@ -4,6 +4,7 @@
 .sel1{
   font-size: 1.5vw;
   border: 0.1vw solid #ced4da;
+  width: 100%;
 }
 .padlr2{
   padding-left: 5vw;
@@ -72,6 +73,10 @@
   font-size: 1vw;
   font-weight: bold;
 }
+.red3{
+  color: rgba(229, 46, 82, 1);
+  font-size: 1vw;
+}
 .fontplus{
   color:white;
   font-size: 1vw;
@@ -94,6 +99,13 @@
   max-width: 20vw;
   text-align: center;
 }
+.icon7{
+  margin-top: 1vw;
+}
+.display2{
+  display: inline-flex;
+  width: 104%;
+}
 @media (max-width: 575px){
   .btn2{
     font-size: 3vw;
@@ -104,6 +116,12 @@
   }
   .sel1{
     font-size: 2.5vw;
+  }
+  .display2{
+    width: 99%;
+  }
+  .icon7{
+    font-size: 3vw;
   }
   .fsize{
     font-size: 4vw;

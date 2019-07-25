@@ -1,9 +1,10 @@
 var express = require('express');
 var url = require('url');
-var formvalidator=require('./assets/javascript/formvalidator');
-var dogformvalidator=require('./assets/javascript/dogformvalidator');
+var formvalidator = require('./assets/javascript/formvalidator');
+var dogformvalidator = require('./assets/javascript/dogformvalidator');
+var checkval = require('./assets/javascript/checkval');
 var bodyparser = require('body-parser');
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var app = express();
@@ -118,32 +119,102 @@ app.get('/registerdog',function(req,res){
 })
 
 app.post('/registerdog',function(req,res){
-  if(req.session.uname){
-    res.render('registerdog', {uname : req.session.uname, data: ""});
+  console.log(req.body);
+  var nod = {};
+  var nod2 = {};
+  var flag = 1;
+  var it = 0;
+  var b = "form"+it;
+  var data_err = {};
+  for(var a in req.body){
+    nod2[a] = req.body[a];
+    if(a == b){
+      nod[it] = nod2;
+      nod2 = {};
+      it = it + 1;
+      b = "form"+it;
+    }
+  }
+  nod[it] = nod2;
+  console.log(nod);
+  console.log(it);
+  dog = {};
+  nods = {};
+  var c = nod[0];
+  var d = c['dog_name'];
+  var len = c['dog_name'].length;
+  if(typeof(d) == "string"){
+    len = 0;
+    d = 0;
+    dog = nod;
   }
   else{
-    console.log(req.body.b);
-    var nod = req.body.b;
-    var flag = 0;
-    var it = 0;
-    while(it < nod-1){
-      console.log(req.body);
-      var data_err=formvalidator.fval(req.body);
-      if(data_err.success != "Yes"){
-        flag = 1;
+    d = 0;
+    while(d < len){
+      for(var a in c){
+        e = c[a];
+        console.log(e);
+        if(a == "dog_age"){
+          e[d] = Number(e[d]);
+          console.log(e[d]);
+        }
+        nods[a] = e[d];
       }
-      it = it + 1;
-    }
-    console.log(flag);
-    if(flag == 0){
-      res.render('Success', {uname:" ",data: ""});
-    }
-    else {
-      res.render('registerdog', {uname: " ", data: data_err})
+      dog[d] = nods;
+      nods = {};
+      d = d + 1;
     }
   }
+  nod2 = 0;
+  console.log(dog);
+  console.log(d);
+  var err = "";
+  while(nod2 < it){
+    data_err[nod2]=dogformvalidator.fval(dog[nod2]);
+    c = data_err[nod2];
+    if(c['success'] != "Yes"){
+      err = err +"Dog"+ (nod2+1) + ". ";
+      for(i in c){
+        if(i == "success"){
+          continue;
+        }
+        console.log(i);
+        err = err + c[i] + ",";
+      }
+      flag = 0;
+    }
+    err = err + "\n";
+    nod2 = nod2 + 1;
+  }
+  console.log(nod2);
+  console.log(flag);
+  data_err[nod2] = formvalidator.fval(dog[nod2]);
+  c = data_err[nod2];
+  console.log(dog[nod2]);
+  if(c['success'] != "Yes"){
+    err = err +"User: ";
+    for(i in c){
+      if(i == "success"){
+        continue;
+      }
+      console.log(i);
+      err = err + c[i] + ",";
+    }
+    flag = 0;
+  }
+  err = err + "\n";
+  if(flag == 1){
+    data1 = checkval.fval(dog[nod2]);
+    if(data1 == "successful" || data1 == "successful1"){
+      res.render('Success', {uname:" ",data: ""});
+      console.log('yes');
+    }
+  }
+  else {
+    res.render('registerdog', {uname: " ",body: req.body, data: err});
+    res.end();
+  }
 })
-
 app.get('/registersitter',function(req,res){
   if(req.session.uname){
     res.render('registersitter', {uname : req.session.uname, data: ""});

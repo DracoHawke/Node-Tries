@@ -10,9 +10,9 @@ var pool = mysql.createPool({
 // add rows in the table
 function addRow(data) {
     let insertQuery = 'INSERT INTO ?? VALUES (?,?,?,?,?,?,?,?,?)';
-    let values = [["shahid","Khan","shahidkhan1232@gmail.com","palace number 3","Other","Computer_Science","Baseball","$2y$10$jSTB0rXUQcd9MymEArKWSOSoE41Dl4avnycAqbjqoQ3...","Uploads/Default.jpeg"],["shahida","Singla","shahidasingla1232@gmail.com","palace number 4","Female","Computer_Science","Football","$2y$10$jSTB0rXUQcd9MymEArKWSOSoE41Dl4avnycAqbjqoQ3...","Uploads/Default.jpeg"]]; // each array is one row
-    let query = mysql.format(insertQuery,["emails",values]);
-    let insertQuery = 'INSERT INTO ?? VALUES (?,?,?,?,?,?,?,?,?,?)';
+    //let values = [["shahid","Khan","shahidkhan1232@gmail.com","palace number 3","Other","Computer_Science","Baseball","$2y$10$jSTB0rXUQcd9MymEArKWSOSoE41Dl4avnycAqbjqoQ3...","Uploads/Default.jpeg"],["shahida","Singla","shahidasingla1232@gmail.com","palace number 4","Female","Computer_Science","Football","$2y$10$jSTB0rXUQcd9MymEArKWSOSoE41Dl4avnycAqbjqoQ3...","Uploads/Default.jpeg"]]; // each array is one row
+    //let query = mysql.format(insertQuery,["emails",values]);
+    //let insertQuery = 'INSERT INTO ?? VALUES (?,?,?,?,?,?,?,?,?,?)';
     let query = mysql.format(insertQuery,["emails",data.sno,data.fname,data.lname,data.email,data.address,data.gender,data.subjects,data.sports,data.password,data.path1]);
     pool.query(query,(err, response) => {
         if(err) {

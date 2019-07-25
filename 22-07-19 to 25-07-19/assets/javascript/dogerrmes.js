@@ -2,7 +2,7 @@
 exports.message=function(err){
   switch (err.details[0].type) {
     case "string.regex.base":
-      err.details[0].message = "Incorrect Name";
+      err.details[0].message = "Incorrect Value";
       break;
     case "any.allowOnly":
       err.details[0].message = "Nope";
