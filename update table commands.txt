@@ -48,3 +48,56 @@ ALTER TABLE dogs ADD COLUMN ZIP int AFTER State;
   <option value=9>9 Yr</option>
   <option value=10>10 Yr</option>
 </select>
+
+<% if (data != "") { %> <script type="text/javascript">
+  $('document').ready(function(){
+    var a = 1;
+    while(a < <% if(data['err']  %>){
+      console.log('yes');
+      $("#add_another").trigger("click");
+      a = a + 1;
+    }
+  });
+  </script>  <% } %>
+
+  /*data1 = checkval.fval(dog[nod2]);
+  if(data1 == "successful" || data1 == "successful1"){
+    console.log("successful?");
+    res.render('Success', {uname:" ",data: ""});
+    console.log('yes');
+  }
+  }
+  else {
+  if(req.session.uname){
+    res.render('registerdog', {uname: req.session.uname, body: req.body, data: {error: err, Email: req.session.email}});
+    res.end();
+  }
+  else{
+    res.render('registerdog', {uname: " ",body: req.body, data: {error: err}});
+    res.end();
+  }
+  }*/
+
+
+  function users(req,dog,nod2,flags){
+    return new Promise(function(resolve, reject) {
+
+      console.log(flags);
+      resolve(flags);
+    });
+  }
+
+  users(req,dog,nod2,flags).then(function(req1,flags1) {
+    console.log(flags1);
+  }).catch((err) => setImmediate(() => { throw err; }));
+
+if (data !== "") {
+  \<p class\="red3"\> 
+  if(data.error){
+     data.error
+   }
+   else if(data !== "") {
+      data
+      </p>
+     }
+   }
