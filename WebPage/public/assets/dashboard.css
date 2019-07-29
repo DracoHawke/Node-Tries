@@ -1,0 +1,31 @@
+.dashboard_form {
+    margin-top: 4%;
+    color: rgb(2, 2, 46);
+  }
+
+.dashboard_form input{
+  height: 3em;
+}
+
+.col-sm-9.col-md-9.col-lg-9.dashboard_lay{
+    font-weight: 500;
+    border: solid rgb(236, 236, 238) 1px;
+    background-color: #f8f8fd;
+}
+.menu{
+  padding:5%;
+  border: solid rgb(236, 236, 238) 1px;
+    background-color: #f8f8fd;
+    font-weight: 500;
+}
+.my-account{
+  font-weight: 700;
+  margin-top: 3%;
+      color: rgb(2, 2, 46);
+}
+.col-12.menu a {
+    color: rgb(2, 2, 46);
+}
+.col-12.menu a:hover{
+  text-decoration: none;
+}

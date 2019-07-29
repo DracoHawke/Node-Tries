@@ -1,0 +1,171 @@
+.cards2{
+  font-size: 1.5vw;
+}
+.sel1{
+  font-size: 1.5vw;
+  border: 0.1vw solid #ced4da;
+  width: 100%;
+}
+.padlr2{
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+.crdleft{
+  margin-left: 0vw;
+}
+.fsize{
+  font-size: 2vw;
+}
+.margins{
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+}
+.underline2{
+  width: 20%;
+  background: rgba(229, 46, 82, 1);
+  height: 0.1vw;
+  float: left;
+}
+.marlr1{
+  margin-left: 8vw;
+  margin-right: 8vw;
+}
+.policies{
+  font-weight: bold;
+  font-size: 1vw;
+}
+.policieslink{
+  color: rgb(99, 203, 191);
+}
+.btn2{
+    border-radius: 30px;
+    background-color: rgb(99, 203, 191);
+    color: white;
+    font-size: 1.2vw;
+    width: 12vw;
+}
+.circleBase {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+.green1{
+  color: rgb(99, 208, 60);
+  font-size: 1vw;
+  font-weight: bold;
+}
+.type1{
+    width: 1.5vw;
+    height: 1.5vw;
+    background: rgb(99, 208, 60);
+    color: rgb(99, 208, 60);
+    border: none;
+    text-align: center;
+}
+.type2{
+    width: 1.5vw;
+    height: 1.5vw;
+    background: rgba(229, 46, 82, 1);
+    border: none;
+    text-align: center;
+}
+.red2{
+  color: rgba(229, 46, 82, 1);
+  font-size: 1vw;
+  font-weight: bold;
+}
+.red3{
+  color: rgba(229, 46, 82, 1);
+  font-size: 1vw;
+}
+.fontplus{
+  color:white;
+  font-size: 1vw;
+  font-weight: bold;
+}
+.remove_another:hover{
+  color: rgba(229, 46, 82, 1);
+  text-decoration: none;
+}
+#add_another:hover{
+  color: rgb(99, 208, 60);
+  text-decoration: none;
+}
+.tooltip{
+  font-size: 1vw;
+  width: 20vw;
+  max-width: 20vw;
+}
+.tooltip-inner {
+  max-width: 20vw;
+  text-align: center;
+}
+.icon7{
+  margin-top: 1vw;
+}
+.display2{
+  display: inline-flex;
+  width: 104%;
+}
+.imgupload{
+  height: 6vw;
+  width: 6vw;
+  text-align: center;
+  background-color: silver;
+  border-radius: 25%;
+  margin-right: 2vw;
+}
+.plus{
+  font-size: 3.5vw;
+  color: grey;
+}
+.display3{
+  display: inline-flex;
+}
+.crdpad1{
+  padding-bottom: 0px;
+}
+.imgpic{
+  height: 6vw;
+  width: 6vw;
+  border-radius: 25%;
+  display: none;
+}
+@media (max-width: 575px){
+  .imgupload{
+    height: 10vw;
+    width: 10vw;
+  }
+  .imgpic{
+    height: 10vw;
+    width: 10vw;
+  }
+  .plus{
+    font-size: 6vw;
+  }
+  .btn2{
+    font-size: 3vw;
+    width: 20vw;
+  }
+  .cards2{
+    font-size: 3.5vw;
+  }
+  .sel1{
+    font-size: 2.5vw;
+  }
+  .display2{
+    width: 99%;
+  }
+  .icon7{
+    font-size: 3vw;
+  }
+  .fsize{
+    font-size: 4vw;
+  }
+  .marlr1{
+    margin-left: 0vw;
+    margin-right: 0vw;
+  }
+  .policies{
+    font-size: 2.5vw;
+  }
+}

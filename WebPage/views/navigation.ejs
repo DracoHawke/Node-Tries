@@ -1,0 +1,99 @@
+<div class="modal fade" id="modalLoginForm" tabindex="-1">
+  <div class="modal-dialog main1" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center header">
+        <div class="loginbutton"><span class="modal-title font-weight-bold">LOGIN</span></div>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true" class="cross">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3 body1">
+        <div class="signin">
+          <div class="md-form mb-5 inline1">
+            <label data-error="wrong" data-success="right" for="defaultForm-email">Email Address</label>
+            <div class="input-group">
+              <input type="email" id="loginemail" class="form-control validate input1" placeholder="Email Address">
+              <div class="input-group-append">
+                <span class="fas fa-envelope prefix grey-text formicons red"></span>
+              </div>
+            </div>
+            <span class="underline1"></span>
+            <span id="emailerr" class="err"></span>
+          </div>
+          <div class="md-form mb-4 inline1">
+            <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
+            <div class="input-group">
+              <input type="password" id="loginpass" class="form-control validate input1" placeholder="Password">
+              <div class="input-group-append">
+                <i class="fas fa-lock prefix grey-text formicons red"></i>
+              </div>
+            </div>
+            <span class="underline1"></span>
+            <span id="passerr" class="err"></span>
+          </div>
+          <div class="inline2">
+            <p class="fp"><a href="#" class="red"> Forgot Password? </a></p><button class="btn custom-btn" id="loginbtn">Login</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center footer1">
+        <p class="faded"> Don't have an Account? <span class="linkred"><a href="signup" class="red linkred">Register Here</a></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row top-nav">
+  <div class="col-xs-1 col-sm-1 col-lg-1 col-xl-1 col-md-1"></div>
+  <div class="col-xs-9 col-sm-9 col-lg-9 col-xl-9 col-md-9">
+    <nav class="navbar navbar-expand nav-top-belt">
+      <div class="navbar-nav navbar-top">
+        <a href="#demo" class="nav-item nav-link "><i class="fas fa-dog"></i>&nbsp;Find a Mate</a>
+        <a class="nav-item nav-link"><div class="stick ml-2"></div></a>
+        <a href="#denial" class="nav-item nav-link "><i class="fas fa-user"></i>&nbsp;Find a Sitter</a>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <ul class="navbar-nav nav2  navbar-top">
+        <% if(sid!=1) {%>
+          <li class="navbar-text li ml-3"><a href="/sitter">Register as Sitter</a></li>
+          <div class="stick ml-2"></div>
+          <% }%>
+          <li class="navbar-text li ml-3"><a href="/dog">Register a Dog</a></li>
+          <div class="stick ml-2"></div>
+          <li class="navbar-text li ml-3">Support</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-lg-2 col-xl-2 col-md-2"></div>
+</div>
+<div class="row address1">
+  <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 col-md-12">
+    <nav class="navbar navbar-expand-md second-nav">
+      <a href="/" class="navbar-brand">
+        <img class="assets/images/logo-image" src="assets/images/logo.png" alt="CoolBrand">
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+          <a href="/about" class="nav-item nav-link ">ABOUT US</a>
+          <a href="/faq" class="nav-item nav-link ">FAQ's</a>
+          <a href="/blog" class="nav-item nav-link ">BLOG</a>
+          <a href="/contact" class="nav-item nav-link ">CONTACT US</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+          <ul class="navbar-nav nav2 ">
+            <% if (uname !== '') { %>
+              <li class="navbar-text text-dark ml-3"><a class="nav-link" href="/dashboard"><%= uname %></a></li>
+              <li class="navbar-text text-light ml-3"><a class=" nav-link btn custom-btn size-1" href="/logout">LOG OUT</a></li>
+            <% } else { %>
+            <li class="navbar-text text-dark ml-3"><a class="nav-link" href="?signin">SIGN IN</a></li>
+            <li class="navbar-text text-light ml-3"><a class=" nav-link btn custom-btn size-1" href="/register">GET STARTED</a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
