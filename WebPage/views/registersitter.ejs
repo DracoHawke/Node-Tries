@@ -31,9 +31,9 @@
           <h2 class="red">Please Verify Your email to Access This Feature......</h2>
     <%  }
       else{ %>
-      <form class="size-1" name="myform" method="post" action="">
+      <form class="size-1" name="myform" method="post" action="" enctype="multipart/form-data">
         <div class="form-group row">
-            <label for="file-upload" class="col-sm-2 col-form-label"><img class="image_profile" id="imageload" src="<% if(data.file==''){ %>assets/images/profile.png<%} else{ %><%= data.file %><% }%>" ><span class="red" >*</span></label>
+            <label for="file-upload" class="col-sm-2 col-form-label"><img class="image_profile" id="imageload" src="<% if(data.file==''){ %> assets/images/profile.png <%} else{ %><%= data.file %><% }%>" ><span class="red" >*</span></label>
               <div class="col-sm-9">
                 <input hidden style="width:1%;height:1%;" type="file" class="form-control size-1" name="fileUpload" id="file-upload" accept="image/*" value="" <% if(data.file!=''){ %>disabled <% } %> onchange="loadFile(event)">
                 <span class="red"><%= data.file_err %></span>

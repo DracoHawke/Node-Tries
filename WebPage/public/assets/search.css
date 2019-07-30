@@ -1,0 +1,45 @@
+.jumbo{
+  background-color: #37b3a7;
+  text-align: center;
+}
+.heading{
+  font-size: 2.5em;
+  font-weight: 500;
+  color:white;
+}
+.search-bar{
+  width: 40%;
+  margin: 2%;
+  margin-left: 30%;
+  box-shadow: 6px 6px 6px rgb(78, 158, 149);
+}
+input.form-control {
+    padding: 30px;
+    border:0;
+}
+.btn{
+  background-color: #ed2154;
+  color: white;
+}
+img.profile {
+    border-radius: 25%;
+    /* width: 73%; */
+    width: 15em;
+    height: 15em;
+     box-shadow: 3px 3px 3px grey;
+}
+.container{
+  padding: 0;
+}
+.fname{
+  text-align: center;
+}
+.review{
+  text-align: right;
+}
+.rating{
+  font-size: small;
+}
+.checked{
+  color: #ed2154;
+}

@@ -92,7 +92,7 @@ ALTER TABLE dogs ADD COLUMN ZIP int AFTER State;
   }).catch((err) => setImmediate(() => { throw err; }));
 
 if (data !== "") {
-  \<p class\="red3"\> 
+  \<p class\="red3"\>
   if(data.error){
      data.error
    }
@@ -100,4 +100,16 @@ if (data !== "") {
       data
       </p>
      }
+   }
+
+
+
+   e[g].mv(path, function(err) {
+     if(err)
+       return res.status(500).send(err);
+   })
+   dpic[g] = path;
+   }
+   else{
+   dpic[g] = 'NULL';
    }

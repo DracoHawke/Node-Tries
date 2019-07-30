@@ -100,6 +100,7 @@ function success1(){
     output.src = URL.createObjectURL(event.target.files[0]);
     console.log(event);
   };
+  //if(document)
 
 function validate(email1,password){
   var err = 0;
@@ -144,3 +145,45 @@ function validate(email1,password){
     });
   }
 }
+// sitter sitterdetails
+function change(obj){
+  document.getElementById("about-sitter").setAttribute("hidden", true);
+  document.getElementById("give-rating").setAttribute("hidden", true);
+  //document.getElementById(res).style.display="none";
+  var element = document.getElementsByClassName("active");
+    element[0].classList.remove("active");
+    var x=obj.parentElement
+    x.classList.add("active");
+    var l = obj.href.length;
+    var n = obj.href.lastIndexOf("#");
+    var res = obj.href.slice(n+1, l);
+    document.getElementById(res).removeAttribute("hidden");
+}
+//star Rating
+function star_rating(obj){
+  var x=obj.id;
+  var rating=Number(x);
+  for(var i=1;i<=rating;i++){
+    var ele=document.getElementById(i.toString());
+    ele.classList.remove("far");
+    ele.classList.add("fas");
+  }
+  for(var i=rating+1;i<=5;i++)
+  {
+    var ele=document.getElementById(i.toString());
+    ele.classList.remove("fas");
+    ele.classList.add("far");
+  }
+}
+
+function reset_rating(){
+  var x=document.getElementsByClassName("rate");
+  var c =x[0].children;
+  for(var i=0;i<5;i++)
+  {
+    c[i].classList.remove("fas");
+    c[i].classList.add("far");
+  }
+}
+
+//star-rating finish
