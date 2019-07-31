@@ -1,0 +1,117 @@
+<% if (uname === " ") { %>
+  <div class="modal fade" id="modalLoginForm" tabindex="-1">
+    <div class="modal-dialog main1" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center header">
+          <button class="btn btn-default loginbutton"><p class="modal-title w-100 font-weight-bold">LOGIN</p></button>
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true" class="cross">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3 body1">
+          <div class="signin">
+            <div class="md-form mb-5 inline1">
+              <label data-error="wrong" data-success="right" for="defaultForm-email">Email Address</label>
+              <div class="input-group">
+                <input type="email" id="loginemail" class="form-control validate input1" placeholder="Email Address">
+                <div class="input-group-append">
+                  <span class="fas fa-envelope prefix grey-text formicons"></span>
+                </div>
+              </div>
+              <span class="underline1"></span>
+              <span id="emailerr" class="err"></span>
+            </div>
+            <div class="md-form mb-4 inline1">
+              <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
+              <div class="input-group">
+                <input type="password" id="loginpass" class="form-control validate input1" placeholder="Password">
+                <div class="input-group-append">
+                  <i class="fas fa-lock prefix grey-text formicons"></i>
+                </div>
+              </div>
+              <span class="underline1"></span>
+              <span id="passerr" class="err"></span>
+            </div>
+            <div class="inline2">
+              <p class="fp"><a href="#"> Forgot Password? </a></p><button class="btn btn-default btn1" id="loginbtn">Login</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center footer1">
+          <p class="faded"> Don't have an Account? <span class="linkred"><a href="signup" class="linkred">Register Here</a></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+  <div class="viewport">
+    <div class="row top1">
+      <div class="col-md-1"></div>
+      <div class="col-md-3 md1">
+        <a href="/findmate" class="a2">
+          <img src="assets/images/dog_head1.png" alt="dog head" class="img1">
+          <span class="font1">
+            Find a mate
+          </span>
+        </a>
+          <span class="font1">
+             |
+          </span>
+         <a href="findsitter" class="a2">
+          <img src="assets/images/person1.png" alt="Person" class="img1">
+          <span class="font1">
+            Find a Sitter
+          </span>
+        </a>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-4">
+        <% if(sid != 1) { %>
+        <span class="padleft1 font1">
+          <a href="/registersitter" class="a2">
+            <span class="font1">Register as Sitter</span>
+          </a>
+          <% } if(sid != 1 || did != 1) { %>
+           |
+           <% } if(did != 1) { %>
+           <a href="/registerdog" class="a2">
+             <span class="font1"> Register a dog </span>
+           </a>
+           |
+           <% } %>
+           <a href ="/" class="a2">
+             <span class="font1"> Support </span>
+           </a>
+         </span>
+       </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 nav1">
+        <nav class="navbar navbar-expand-md">
+          <a href="/" class="navbar-brand" id="brand01">
+            <img src="assets/images/dogmateicon1.png" id="logo" alt="CoolBrand">
+          </a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"><img src="assets/images/navbar-icon1.png" class="img2" alt="toggle"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+              <a href="/" class="nav-item nav-link a1"><span class="a1"><span class="a1">About Us</span></a>
+              <a href="/" class="nav-item nav-link a1"><span class="a1">FAQ'S</span></a>
+              <a href="/" class="nav-item nav-link a1"><span class="a1">BLOG</span></a>
+              <a href="/" class="nav-item nav-link a1"><span class="a1">Contact Us</span></a>
+            </div>
+            <div class="navbar-nav ml-auto padright1">
+              <ul class="navbar-nav nav2 ">
+                <% if (uname !== " ") { %>
+                  <li class="navbar-text text-dark"><a href="#"><span class="a1"><%= uname%></span></a><a href="/logout"><button type="button" name="button1" class="btn button1">Log Out</button></a></li>
+                <% } else { %>
+                <li class="navbar-text text-dark"><a href="?signin" ><span class="a1">Sign In</span></a><a href="/registeration"><button type="button" name="button1" class="btn button1">Get Started</button></a></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>

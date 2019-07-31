@@ -1,0 +1,64 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/search.css">
+<title>DogMate</title>
+</head>
+<body>
+  <% include navigation %>
+  <div class="jumbotron jumbo">
+    <div class="heading">
+        FIND A MATE
+    </div>
+  <form>
+  <div class="input-group search-bar">
+  <input type="text" class="form-control" name="Location" placeholder="Location">
+  <input type="text" class="form-control" name="name" placeholder="Search">
+  <button class="btn" type="submit" name="button">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
+</div>
+</form>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <br><h2 class="h2">TOP RATED MATES</h2><br>
+      </div>
+      <% for(var i=0;i<rows.length;i++){ %>
+        <div class="card crd1 crdleft">
+          <div class="card-body crdpad2">
+            <a href="/matedetails?id=<%= rows[i].Email %>&did=<%= rows[i].Did %>">
+              <img class="profile" src="<% if(rows[i].DogPic1){%><%= rows[i].DogPic1 %><% }else if(rows[i].DogPic2){ %><%= rows[i].DogPic2 %><%}else if(rows[i].DogPic3){%><%= rows[i].DogPic3%><%}else if(rows[i].DogPic4){%><%= rows[i].DogPic4%><%}else if(rows[i].DogPic5){%><%= rows[i].DogPic5%><%}else{%>users/default.png<%}%>">
+              </a>
+              <div class="fname">
+                <%= rows[i].DogName %>
+              </div>
+              <div class="grey2">
+                <%= rows[i].DogBreed %>
+              </div>
+              <div class="display1">
+                <div class="rating">
+                  <%
+                  if((rows[i].Rating*2)%2!=0){ rows[i].Rating=rows[i].Rating-1;}
+                  for(var j=0;j<rows[i].Rating;j++){
+                     %>
+                  <span class="fa fa-star checked"></span>
+                  <% }
+                  if((rows[i].Rating*2)%2==1){%>
+                    <i class="fas fa-star-half-alt checked"></i>
+                    <% j=j+1;}
+                  for(var k=0;k<5-j;k++){
+                  %>
+                  <span class="far fa-star" style="color:#ed2154"></span>
+                <% }%>
+                </div>
+                <div class="review">
+                  <i class="fas fa-vote-yea"></i>&nbsp;<%= rows[i].Reviews %>
+                </div>
+              </div>
+            </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <% include footer %>
+</body>
+</html>

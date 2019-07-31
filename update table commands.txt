@@ -113,3 +113,5 @@ if (data !== "") {
    else{
    dpic[g] = 'NULL';
    }
+
+<% if(rows[i].DogPic1){%><% =rows[i].DogPic1 %><% }else if(rows[i].DogPic2){ %><%= rows[i].DogPic2 %><%}else if(rows[i].DogPic3){%><%= rows[i].DogPic3%><%}else if(rows[i].DogPic4){%><%= rows[i].DogPic4%><%}else if(rows[i].DogPic5){%><%= rows[i].DogPic5%><%}%>

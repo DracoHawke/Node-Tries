@@ -1,0 +1,103 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/signup.css">
+<script type="text/javascript" src="assets/javascript/Files/register.js"></script>
+<title>DogMate</title>
+</head>
+<body>
+  <% include navigation %>
+  <div class="container-fluid pricing">
+    <div class="row">
+        <div class="col-sm-1 col-md-1 col-lg-1"></div>
+        <div class="col-sm-11 col-md-11 col-lg-11 size-1 font-weight-bold">
+          <a href="/" class="red ">Home</a>&nbsp;/&nbsp;<a href="/pricing" class="red ">Pricing</a>&nbsp;/&nbsp;Contact Us
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 col-md-5 col-lg-5"></div>
+      <div class="col-sm-2 col-md-2 col-lg-2">
+        <div class=" size-3">SIGN-UP
+          <div class="row">
+            <div class="col-sm col-md col-lg">
+              <span class="green-line"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5 col-md-5 col-lg-5"></div>
+    </div>
+    <div class="container">
+      <form class="size-1" name="myform" method="post" action="<%= data.success %> " enctype="multipart/form-data">
+        <div class="form-group row">
+          <label for="file-upload" class="col-sm-2 col-form-label"><img class="image_profile" id="imageload" src="assets/images/profile.png"><span class="red">*</span></label>
+            <div class="col-sm-7">
+              <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1" name="fileUpload" id="file-upload" accept="image/*" value="" onchange="loadFile(event)">
+              <span class="red"><%= data.file_err %></span>
+            </div>
+          </div>
+        <div class="form-group row">
+          <label for="fname" class="col-sm-2 col-form-label">First Name<span class="red">*</span></label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control size-1" name="fname" id="name" value="" placeholder="Enter Your First Name Here">
+              <span class="red"><%= data.fname_err %></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lname" class="col-sm-2 col-form-label">Last Name<span class="red">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control size-1" name="lname" value="" placeholder="Enter Your Last Name Here">
+                <span class="red"><%= data.lname_err %></span>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label for="Email" class="col-sm-2 col-form-label">Email<span class="red">*</span></label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control size-1" name="email" id="email" value="" placeholder="Enter Email">
+              <span class="red"><%= data.email_err %></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Phone" class="col-sm-2 col-form-label">Phone<span class="red">*</span></label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control size-1" name="phone" value="" placeholder="Enter Phone">
+              <span class="red"><%= data.phone_err %></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password<span class="red">*</span></label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control size-1" id="inputPassword" name="password" placeholder="Enter Password">
+              <span class="red"><%= data.password_err %></span>
+            </div>
+            <div class="col-sm-1">
+              <a data-toggle="tooltip" data-placement="right" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc.    "><i class="red fas fa-info-circle"></i></a>
+            </div>
+            <script>
+            $(document).ready(function(){
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+            </script>
+          </div>
+          <div class="form-group row">
+            <label for="confirmPassword" class="col-sm-2 col-form-label">Confirm Password<span class="red">*</span></label>
+            <div class="col-sm-9">
+              <input type="password" name="confirmPass" class="form-control size-1" id="inputCPassword" placeholder="Re-enter the above Password">
+              <span class="red"><%= data.confirm_err %></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="pack" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-2">
+              <button type="submit" class="btn btn-primary size-1 mt-4">Submit</button>
+            </div>
+            <div class="col-sm-2">
+              <button type="reset" class="btn btn-danger size-1 mt-4">Reset</button>
+            </div>
+            <label for="pack" class="col-sm-4 col-form-label"></label>
+          </div>
+        </form>
+    </div>
+  </div>
+  <% include footer %>
+</body>
+</html>

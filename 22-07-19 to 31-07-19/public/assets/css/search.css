@@ -1,0 +1,64 @@
+.jumbo{
+  background-color: #37b3a7;
+  text-align: center;
+}
+.heading{
+  font-size: 2.5em;
+  font-weight: 500;
+  color:white;
+}
+.search-bar{
+  width: 40%;
+  margin: 2%;
+  margin-left: 30%;
+  box-shadow: 6px 6px 6px rgb(78, 158, 149);
+}
+input.form-control {
+    padding: 30px;
+    border:0;
+}
+.btn{
+  background-color: #ed2154;
+  color: white;
+}
+img.profile {
+    border-radius: 25%;
+    width: 15vw;
+    height: 15vw;
+    box-shadow: 3px 3px 3px grey;
+}
+.container{
+  padding: 0;
+}
+.fname{
+  text-align: center;
+  font-size: 2vw;
+}
+.review{
+  font-size: 1vw;
+  text-align: right;
+  padding-left: 5vw;
+}
+.rating{
+  font-size: 1vw;
+}
+.checked{
+  color: #ed2154;
+}
+.crdpad2{
+  width: 100%;
+}
+h2.h2{
+  font-size: 3vw;
+}
+.grey2{
+  font-size: 1.5vw;
+  color: rgb(143, 143, 163);
+  text-align: center;
+}
+@media (max-width: 682px) {
+  img.profile{
+    max-width: 25vw;
+    max-height: 25vw;
+  }
+}

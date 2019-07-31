@@ -8,12 +8,14 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <img class="profile" src="<%= rows[0].Profile %>">
+        <img class="profile" src="<% if(rows[0].DogPic1){%><%= rows[0].DogPic1 %><% }else if(rows[0].DogPic2){ %><%= rows[0].DogPic2 %><%}else if(rows[0].DogPic3){%><%= rows[0].DogPic3%><%}else if(rows[0].DogPic4){%><%= rows[0].DogPic4%><%}else if(rows[0].DogPic5){%><%= rows[0].DogPic5%><%}else{%>users/default.png<%}%>">
       </div>
       <div class="col-sm-6">
-        <div class="name-head"><%= rows[0].Fname %> <%= rows[0].Lname %></div>
+        <div class="name-head"><%= rows[0].DogName %></div>
         <div class="details">
-          <span >Age:</span><span class="values"><%= rows[0].DOB %></span>
+          <div>Age:<span class="values"><%= rows[0].DogAge %></span></div></div>
+        <div class="details">
+          <div>Breed:<span class="values"><%= rows[0].DogBreed %></span></div>
         </div>
         <div class="details">
           <span >Rating:</span>
