@@ -43,7 +43,7 @@ function success1(){
     success: function(response) {
       console.log(response);
       //$('#brand01').click();
-      window.location.assign('/');
+      window.location.assign(window.location.href);
     }
   });
 }

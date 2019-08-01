@@ -17,7 +17,7 @@ input.form-control {
     padding: 30px;
     border:0;
 }
-.btn{
+.btn5{
   background-color: #ed2154;
   color: white;
 }
@@ -55,6 +55,9 @@ h2.h2{
   font-size: 1.5vw;
   color: rgb(143, 143, 163);
   text-align: center;
+}
+.lineheight1{
+  line-height: 2vw !important;
 }
 @media (max-width: 682px) {
   img.profile{

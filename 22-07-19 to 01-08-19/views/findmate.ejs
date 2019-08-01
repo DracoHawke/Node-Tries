@@ -9,13 +9,25 @@
     <div class="heading">
         FIND A MATE
     </div>
-  <form>
-  <div class="input-group search-bar">
-  <input type="text" class="form-control" name="Location" placeholder="Location">
-  <input type="text" class="form-control" name="name" placeholder="Search">
-  <button class="btn" type="submit" name="button">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
-</div>
-</form>
+    <form>
+      <div class="inlineflex search-bar">
+        <!--Blue select-->
+        <select class="form-control js-example-basic-multiple selectmateloc" placeholder="state" style="width:40%;height:4.4vw;" name="state"  multiple="multiple">
+          <option value="Select" disabled>Select State</option>
+          <option value="Australian Capital Territory" >Australian Capital Territory</option>
+          <option value="New South Wales" >New South Wales</option>
+          <option value="Northern Territory" >Northern Territory</option>
+          <option value="Queensland" >Queensland</option>
+          <option value="South Australia" >South Australia</option>
+          <option value="Tasmania" >Tasmania</option>
+          <option value="Victoria" >Victoria</option>
+          <option value="Western Australia" >Western Australia</option>
+        </select>
+        <!--<input type="text" class="form-control" name="Location" placeholder="Location">-->
+        <input type="text" class="form-control heights" name="name" placeholder="Search">
+        <button class="btn btn8" type="submit" name="button">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
+      </div>
+    </form>
   </div>
   <div class="container">
     <div class="row">
@@ -61,4 +73,5 @@
   </div>
   <% include footer %>
 </body>
+<script src="assets/javascript/Files/findmate.js"></script>
 </html>

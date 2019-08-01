@@ -1,6 +1,7 @@
 <% include header %>
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <link rel="stylesheet" type="text/css" href="assets/css/sitterdetails.css">
+<script src="assets/javascript/Files/sitterdetails.js"></script>
 <title>DogMate</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
       <div class="col-sm-6">
         <div class="name-head"><%= rows[0].Fname %> <%= rows[0].Lname %></div>
         <div class="details">
-          <span >Age:</span><span class="values"><%= rows[0].DOB %></span>
+          <span >Age:</span><span class="values" id="age1"><%= rows[0].DOB %></span>
         </div>
         <div class="details">
           <span >Rating:</span>
@@ -55,7 +56,7 @@
     </div>
     <div class="row border-bottom">
       <div class="col-sm-2  heads active"><a href="#about-sitter" onclick="return change(this)" class="text-dark">About</a></div>
-      <div class="col-sm-2 heads"><a href="#image-sitter" onclick="return change(this)" class="text-dark">Images</a></div>
+      <!-- <div class="col-sm-2 heads"><a href="#image-sitter" onclick="return change(this)" class="text-dark">Images</a></div> -->
       <div class="col-sm-2 heads"><a href="#give-rating" onclick="return change(this)" class="text-dark">Rating</a></div>
     </div>
     <div class="row" id="about-sitter">

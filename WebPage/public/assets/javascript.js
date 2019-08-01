@@ -63,11 +63,11 @@ function dlt(url)
 }
 
 $(document).ready(function(){
-$(document).on('click','.for_ajax',function(){
+  $(document).on('click','.for_ajax',function(){
     var href = $(this).attr('href');
     dlt(href);
     return false;
-});
+  });
 });
 // dashboard ajax finish
 //dog
@@ -186,4 +186,40 @@ function reset_rating(){
   }
 }
 
+//submit your Rating
+function submit_rating(){
+  var x=document.getElementsByClassName("rate");
+  var c =x[0].children;
+  for(var i=4;i>=0;i--)
+  {
+     var y=JSON.stringify(c[i].classList);
+    if(y.lastIndexOf("fas")!=-1)
+      break;
+  }
+  if(i==-1)
+  {
+    alert("Please Rate Before Submiting")
+  }
+  else{
+    var url=window.location.href;
+    var data={stars:(i+1).toString()};
+    alert(url);
+     $.ajax({
+       url: url,
+       type: "GET",
+       data:data,
+       success: function(response) {
+         console.log(response);
+         if(String(response)=="yes")
+         {
+           console.log("rated successfully");
+           location.reload();
+         }
+         else{
+           console.log('oops something went wrong');
+         }
+       }
+     });
+   }
+  }
 //star-rating finish

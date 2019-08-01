@@ -24,6 +24,7 @@ findsitter = require('./public/assets/javascript/controllers/findsitters');
 sitterdetails = require('./public/assets/javascript/controllers/sitterdetails');
 findmate = require('./public/assets/javascript/controllers/findmate');
 matedetails = require('./public/assets/javascript/controllers/matedetails');
+mydogs = require('./public/assets/javascript/controllers/mydogs');
 
 var app = express();
 
@@ -654,5 +655,42 @@ app.get('/findmate',function(req,res){
 app.get('/matedetails',function(req,res){
   matedetails(req,res);
 })
+
+//dashboard
+app.get('/dashboard',function(req,res){
+  var error1={};
+  dashboard(req,res,error1);
+});
+
+app.post('/dashboard',function(req,res){
+  var error1={};
+  dashboard(req,res,error1);
+});
+
+app.get('/myacc',function(req,res){
+  console.log(req.url);
+  res.redirect('/dashboard');
+});
+
+app.post('/myacc',function(req,res){
+  update_form(req,res);
+});
+
+app.get('/chat',function(req,res){
+  console.log(req.url);
+  res.render('chat');
+});
+
+app.get('/settings',function(req,res){
+  console.log(req.url);
+  res.render('settings');
+});
+
+app.get('/mydogs',function(req,res){
+  console.log(req.url);
+  var error1 = {};
+  mydogs(req,res,error1);
+});
+
 app.listen(3000);
 console.log('listening on port 3000...');

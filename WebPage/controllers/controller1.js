@@ -222,34 +222,34 @@ server.listen(1212);
 });
 
 //dashboard
-  app.get('/dashboard',function(req,res){
-    var error1={};
-    dashboard(req,res,error1);
+app.get('/dashboard',function(req,res){
+  var error1={};
+  dashboard(req,res,error1);
+});
+app.post('/dashboard',function(req,res){
+  var error1={};
+  dashboard(req,res,error1);
+});
+app.get('/myacc',function(req,res){
+  console.log(req.url);
+  res.redirect('/dashboard');
+});
+app.post('/myacc',function(req,res){
+  var form = new formidable.IncomingForm();
+  form.parse(req,function (err, fields, files) {
+    req.body=fields;
+    req.files=files;
+    update_form(req,res);
   });
-  app.post('/dashboard',function(req,res){
-    var error1={};
-    dashboard(req,res,error1);
-  });
-  app.get('/myacc',function(req,res){
-    console.log(req.url);
-    res.redirect('/dashboard');
-  });
-  app.post('/myacc',function(req,res){
-    var form = new formidable.IncomingForm();
-    form.parse(req,function (err, fields, files) {
-      req.body=fields;
-      req.files=files;
-      update_form(req,res);
-  });
-  });
-  app.get('/chat',function(req,res){
-    console.log(req.url);
-    res.render('chat');
-  });
-  app.get('/settings',function(req,res){
-    console.log(req.url);
-    res.render('settings');
-  });
+});
+app.get('/chat',function(req,res){
+  console.log(req.url);
+  res.render('chat');
+});
+app.get('/settings',function(req,res){
+  console.log(req.url);
+  res.render('settings');
+});
 //find Mate
 app.get('/findmate',function(req,res){
   if(req.session.uname){
