@@ -15,7 +15,7 @@ var error_data={success:''};
 var f=0;
   var txt ='{ "u_fname":"'+app.u_fname+'"}';
   var obj = JSON.parse(txt);
-  var { error } =Joi.validate(obj, schema_name);
+  var { error } =Joi.validate(obj, schema_fname);
   if (error){
     error_data['u_fname_err']="name "+mes.message(error);
     f=1;
@@ -23,7 +23,7 @@ var f=0;
 
   var txt ='{ "u_lname":"'+app.u_lname+'"}';
   var obj = JSON.parse(txt);
-  var { error } =Joi.validate(obj, schema_name);
+  var { error } =Joi.validate(obj, schema_lname);
   if (error){
     error_data['u_lname_err']="name "+mes.message(error);
     f=1;

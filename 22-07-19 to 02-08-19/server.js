@@ -25,7 +25,8 @@ sitterdetails = require('./public/assets/javascript/controllers/sitterdetails');
 findmate = require('./public/assets/javascript/controllers/findmate');
 matedetails = require('./public/assets/javascript/controllers/matedetails');
 mydogs = require('./public/assets/javascript/controllers/mydogs');
-
+searchmate = require('./public/assets/javascript/controllers/searchmate')
+//mydogsimgs = require('./public/assets/javascript/controllers/mydogsimgs')
 var app = express();
 
 app.use(fileUpload({
@@ -359,15 +360,17 @@ app.post('/registerdog',function(req,res){ // function when a user enters inform
       if(rows.length > 0){ // if any rows returned. if true(user already registered):
         if(rows[0].status == 0){ // check the status value of that user.(0 -> not verified, 1-> verified). if true:
           flags = 300; // user not authenticated;
-          res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status});
+          res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status,sid:'', did: ''});
         }
         else if(c.logedin == '1'){ // check if user is logged in from hidden element in the form.
-          if(c.u_pass == rows[0].U_password){ // check if user input correct password.
+          if(bcrypt.compareSync(c.u_pass, rows[0].U_password.toString())){ // check if user input correct password.
             //console.log("successful1");
             req.session.uid = rows[0].Uid; // set seesion uid for current user.
             flags = 1; // user logged in and password correct.
           }
           else{
+            console.log(c.u_pass);
+            console.log(rows[0].U_password);
             flags = 2; // user logged in but password wrong.
             //console.log("wrong pass");
             res.render('registerdog',{uname : req.session.uname, data: {error1: "Wrong Password"}, sid: req.session.sid, did: req.session.did, status: req.session.status});
@@ -469,7 +472,7 @@ app.post('/registerdog',function(req,res){ // function when a user enters inform
                 console.log(a);
                 var pos = a.search("/");
                 var res1 = a.slice(pos+1);
-                path = 'assets/images/'+req.session.uid+'/dog'+i+'/'+f+'.'+res1;
+                path = 'public/assets/images/'+req.session.uid+'/dog'+i+'/'+f+'.'+res1;
                 if(e.name){
                   e.mv(path, function(err) {
                     if(err)
@@ -510,6 +513,7 @@ app.post('/registerdog',function(req,res){ // function when a user enters inform
           }
         }
         else{
+          console.log(flags);
           console.log("ouch");
         }
       }
@@ -575,7 +579,7 @@ app.post('/registerdog',function(req,res){ // function when a user enters inform
                         console.log(a);
                         var pos = a.search("/");
                         var res1 = a.slice(pos+1);
-                        path = 'assets/images/'+req.session.uid+'/dog'+i+'/'+f+'.'+res1;
+                        path = 'public/assets/images/'+req.session.uid+'/dog'+i+'/'+f+'.'+res1;
                         if(e.name){
                           e.mv(path, function(err) {
                             if(err)
@@ -692,5 +696,80 @@ app.get('/mydogs',function(req,res){
   mydogs(req,res,error1);
 });
 
+app.get('/searchmate',function(req,res){
+  //console.log(req.url);
+  //console.log(req.params);
+  //console.log(req.body);
+  if(!req.session.uname){
+    console.log('in no status');
+    res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
+  }
+  else if(req.session.status == 0){
+    console.log('in zero status');
+    res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
+  }
+  else{
+    console.log(req.query);
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    var error1 = {};
+    if(Object.keys(req.query).length == 2){
+      if(req.query.name == ""){
+        res.redirect('/findmate');
+      }
+      else{
+        console.log(Object.keys(req.query).length);
+        searchmate(req,res,error1);
+      }
+    }
+    else{
+      console.log(Object.keys(req.query).length);
+      searchmate(req,res,error1);
+    }
+  }
+});
+
+app.get('/searchmate/:id',function(req,res){
+  if(!req.session.uname){
+    res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did});
+  }
+  if(req.session.status == 0){
+    res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did});
+  }
+  console.log("i'm in searchmate id");
+  var error1 = {};
+  var a = req.url.substring(req.url.length - 1, req.url.length);
+  if (a == '&'){
+    req.url = req.url.slice(0, -1);
+    req.params.id = req.params.id.slice(0, -1);
+  }
+  console.log(req.url);
+  console.log(req.params);
+  console.log(req.params.id);
+  //console.log(req.body);
+  searchmate(req,res,error1);
+})
+
+app.post('/searchmate',function(req,res){
+  /*console.log('i"m in searchmate post');
+  //console.log(req.url);
+  var a = "/";
+  console.log(req.body);
+  //console.log(req.files);
+  if(req.body.name!=""){
+    a = a +"name="+ req.body.name + "&";
+  }
+  if(req.body.state && (req.body.state != "" || req.body.state.toLowerCase() != "select")){
+    a = a + "state="+ req.body.state + "&";
+  }
+  //console.log(req.url+a);
+  if(a != "/"){
+    console.log(a);
+    //searchmate(req,res,error1,a);
+    res.redirect('searchmate'+a);
+  }
+  else{
+    res.redirect('findmate');
+  }*/
+})
 app.listen(3000);
 console.log('listening on port 3000...');

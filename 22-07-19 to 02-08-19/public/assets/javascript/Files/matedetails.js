@@ -1,7 +1,8 @@
-// sitter sitterdetails
+// sitter matedetails
 function change(obj){
-  document.getElementById("about-sitter").setAttribute("hidden", true);
+  document.getElementById("about-mate").setAttribute("hidden", true);
   document.getElementById("give-rating").setAttribute("hidden", true);
+  document.getElementById("image-mate").setAttribute("hidden", true);
   //document.getElementById(res).style.display="none";
   var element = document.getElementsByClassName("active");
     element[0].classList.remove("active");
@@ -12,6 +13,12 @@ function change(obj){
     var res = obj.href.slice(n+1, l);
     document.getElementById(res).removeAttribute("hidden");
 }
+
+//function show_images(obj,a,b){
+  //document.getElementById(a).setAttribute("hidden", true);
+  //document.getElementById(b).setAttribute("hidden", true);
+
+//}
 
 //star Rating
 function star_rating(obj){

@@ -14,7 +14,8 @@
       <div class="col-sm-6">
         <div class="name-head"><%= rows[0].DogName %></div>
         <div class="details">
-          <div>Age:<span class="values"><%= rows[0].DogAge %></span></div></div>
+          <div>Age:<span class="values"><%= rows[0].DogAge %></span></div>
+        </div>
         <div class="details">
           <div>Breed:<span class="values"><%= rows[0].DogBreed %></span></div>
         </div>
@@ -57,26 +58,41 @@
       </div>
     </div>
     <div class="row border-bottom">
-      <div class="col-sm-2  heads active"><a href="#about-sitter" onclick="return change(this)" class="text-dark">About</a></div>
-      <div class="col-sm-2 heads"><a href="#image-sitter" onclick="return change(this)" class="text-dark">Images</a></div>
+      <div class="col-sm-2  heads active"><a href="#about-mate" onclick="return change(this)" class="text-dark">About</a></div>
+      <div class="col-sm-2 heads"><a href="#image-mate" onclick="return change(this)" class="text-dark">Images</a></div>
       <div class="col-sm-2 heads"><a href="#give-rating" onclick="return change(this)" class="text-dark">Rating</a></div>
     </div>
-    <div class="row" id="about-sitter">
+    <div class="row" id="about-mate">
       <div class="row">
           <div class="col-sm-12 content">
             <%= rows[0].Description %>
           </div>
       </div>
     </div>
+    <div class="row" id="image-mate" hidden>
+      <div class="col-md-12">
+        <% if(rows[0].DogPic1) {%>
+          <img class="profile1" src="<%= rows[0].DogPic1 %>" alt="DogPic1">&nbsp;&nbsp;
+        <% } if(rows[0].DogPic2) { %>
+          <img class="profile1" src="<%= rows[0].DogPic2 %>" alt="DogPic2">&nbsp;&nbsp;
+        <% } if(rows[0].DogPic3) { %>
+          <img class="profile1" src="<%= rows[0].DogPic3 %>" alt="DogPic3">&nbsp;&nbsp;
+        <% } if(rows[0].DogPic4) { %>
+          <img class="profile1" src="<%= rows[0].DogPic4 %>" alt="DogPic4">&nbsp;&nbsp;
+        <% } if(rows[0].DogPic5) { %>
+          <img class="profile1" src="<%= rows[0].DogPic5 %>" alt="DogPic5">&nbsp;&nbsp;
+        <% } %>
+      </div>
+    </div>
     <div class="row" id="give-rating" hidden>
       <div class="row">
         <div class="rate">
           <% if(update==''){%>
-              <i id="1" class="far fa-star  red" onclick="return star_rating(this)"></i>
-              <i id="2" class="far fa-star  red" onclick="return star_rating(this)"></i>
-              <i id="3" class="far fa-star  red" onclick="return star_rating(this)"></i>
-              <i id="4" class="far fa-star  red" onclick="return star_rating(this)"></i>
-              <i id="5" class="far fa-star  red" onclick="return star_rating(this)"></i>
+            <i id="1" class="far fa-star  red" onclick="return star_rating(this)"></i>
+            <i id="2" class="far fa-star  red" onclick="return star_rating(this)"></i>
+            <i id="3" class="far fa-star  red" onclick="return star_rating(this)"></i>
+            <i id="4" class="far fa-star  red" onclick="return star_rating(this)"></i>
+            <i id="5" class="far fa-star  red" onclick="return star_rating(this)"></i>
         </div>
         <button class="btn btn-pink1 " onclick="return reset_rating()">RESET</button>
         <button class="btn custom-btn" onclick="return submit_rating()">SUBMIT</button>
@@ -86,11 +102,11 @@
         <%} for(var i=update+1;i<=5;i++){%>
            <i id="<%= i %>" class="far fa-star  red" onclick="return star_rating(this)"></i>
         <% } %>
-        </div>
+      </div>
         <button class="btn custom-btn" onclick="return update_rating()">UDATE</button>
       <% } %>
-      </div>
     </div>
+  </div>
   </div>
   <% include footer %>
 </body>

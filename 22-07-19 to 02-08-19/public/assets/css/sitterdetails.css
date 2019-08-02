@@ -9,6 +9,12 @@ img.profile {
   height: 30vw;
     border-radius: 10%;
 }
+img.profile1 {
+    border-radius: 25%;
+    width: 15vw;
+    height: 15vw;
+    box-shadow: 3px 3px 3px grey;
+}
 .name-head {
     margin-top: 6%;
     font-size: 3vw;

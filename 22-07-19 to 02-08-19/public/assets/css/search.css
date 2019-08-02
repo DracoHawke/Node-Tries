@@ -74,6 +74,48 @@ span.select2-selection.select2-selection--multiple{
 input.form-control.heights{
   padding: 0px;
 }
+.line4{
+  width: 100%;
+  border-bottom-style: solid;
+  border-color: rgb(143, 143, 163);
+  border-bottom-width: 0.15vw;
+}
+.left4{
+  text-align: left;
+}
+.right4{
+  text-align: right;
+  font-size: 1vw;
+  color:  rgb(143, 143, 163);
+  margin-left: 58%;
+}
+.text4{
+  display: inline-flex;
+  width: 100%;
+  font-size: 1.5vw;
+}
+select.form-control.age_group{
+  width: 35%;
+  margin-left: 1vw;
+  font-size: 1.5vw;
+  padding: 0.1vw 0.1vw;
+  height: 3vw;
+}
+select.form-control.sort_by{
+  width: 38%;
+  margin-left: 1vw;
+  font-size: 1.5vw;
+  padding: 0.1vw 0.1vw;
+  height: 3vw;
+}
+.right5{
+  display: inline-flex;
+  text-align: right;
+}
+.text5{
+  font-size: 1.5vw;
+  margin-left: 40%;
+}
 @media (max-width: 682px) {
   img.profile{
     max-width: 25vw;
@@ -85,5 +127,11 @@ input.form-control.heights{
   .btn8{
     height: 31px;
     font-size: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .text5{
+    margin-left: 0vw;
   }
 }

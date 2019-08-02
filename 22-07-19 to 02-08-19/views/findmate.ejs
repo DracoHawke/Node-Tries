@@ -9,7 +9,7 @@
     <div class="heading">
         FIND A MATE
     </div>
-    <form>
+    <form action ="/searchmate" method="get" enctype="multipart/form-data">
       <div class="inlineflex search-bar">
         <!--Blue select-->
         <select class="form-control js-example-basic-multiple selectmateloc" placeholder="state" style="width:40%;height:4.4vw;" name="state"  multiple="multiple">
@@ -24,15 +24,46 @@
           <option value="Western Australia" >Western Australia</option>
         </select>
         <!--<input type="text" class="form-control" name="Location" placeholder="Location">-->
-        <input type="text" class="form-control heights" name="name" placeholder="Search">
+        <input type="text" class="form-control heights" name="name" placeholder="Search Dog by Dog Breed or Age">
         <button class="btn btn8" type="submit" name="button">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
       </div>
-    </form>
+      <% if(typeof search === 'undefined') { %>
+    </form><% }%>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <br><h2 class="h2">TOP RATED MATES</h2><br>
+        <% if(typeof search === 'undefined') { %>
+        <br><h2 class="h2">TOP RATED MATES</h2><br><% } else { %>
+          <br><div class="line4">
+            <h2 class="h2 left4">Search Results<span class="right4"><%= rows.length %> Results </span></h2>
+          </div>
+          <div class = "row">
+            <div class = "col-sm-6 left4">
+              <span class="text4"> Filter by Age Group
+                <select class="form-control age_group" name="age_group">
+                  <option value= "All" selected>All</option>
+                  <option id= "l1" value= "l1"> < 1 years </option>
+                  <option id= "b12" value= "b12"> 1-2 years </option>
+                  <option id= "b23" value= "b23"> 2-3 years </option>
+                  <option id= "b35" value= "b35"> 3-5 years </option>
+                  <option id= "b57" value= "b57"> 5-7 years </option>
+                  <option id= "b7t" value= "b7t"> 7-10 years </option>
+                  <option id= "gtt" value= "gtt"> > 10 years </option>
+                </select>
+              </span>
+            </div>
+            <div class="col-sm-6 right5">
+              <span class="text5">Sort By:</span>
+                <select class="form-control sort_by" name="sort_by">
+                  <option selected value="Rating"> Top Rated </option>
+                  <option value = "DogAge"> Dog Age </option>
+                  <option value = "Reviews"> Votes </option>
+                </select>
+            </div>
+          </div>
+          </form>
+          <% } %>
       </div>
       <% for(var i=0;i<rows.length;i++){ %>
         <div class="card crd1 crdleft">
@@ -41,9 +72,18 @@
               <img class="profile" src="<% if(rows[i].DogPic1){%><%= rows[i].DogPic1 %><% }else if(rows[i].DogPic2){ %><%= rows[i].DogPic2 %><%}else if(rows[i].DogPic3){%><%= rows[i].DogPic3%><%}else if(rows[i].DogPic4){%><%= rows[i].DogPic4%><%}else if(rows[i].DogPic5){%><%= rows[i].DogPic5%><%}else{%>users/default.png<%}%>">
               </a>
               <div class="fname">
-                <%= rows[i].DogName %>
+                <span>
+                  <%= rows[i].DogName %>,
+                  <% if(rows[i].DogAge >= 1 && rows[i].DogAge < 2) { %>
+                    <%= rows[i].DogAge %> Yr
+                  <% } else if(rows[i].DogAge >= 2) { %>
+                    <%= rows[i].DogAge %> Yrs
+                  <% } else if(rows[i].DogAge < 1) {%>
+                    <%= (Number(rows[i].DogAge)/0.1) %> months <% } %>
+                </span>
               </div>
               <div class="grey2">
+                <% rows[i].DogBreed = rows[i].DogBreed.replace(/_/g,' '); %>
                 <%= rows[i].DogBreed %>
               </div>
               <div class="display1">

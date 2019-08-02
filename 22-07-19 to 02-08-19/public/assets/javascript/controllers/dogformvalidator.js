@@ -17,14 +17,15 @@ exports.fval=function(app){
     error_data['dog_name_err']=mes.message(error);
     f=1;
   }
-  var txt ='{ "dog_breed":"'+app.dog_breed+'"}';
+  var txt ='{ "dog_breed":"'+app.dog_breed.trim()+'"}';
   var obj = JSON.parse(txt);
+  console.log(app.dog_breed);
   var { error } =Joi.validate(obj, schema_breed);
   if (error){
     error_data['dog_breed_err']=mes.message(error);
     f=1;
   }
-  var txt ='{"dog_gender":"'+app.dog_gender+'"}';
+  var txt ='{"dog_gender":"'+app.dog_gender.trim()+'"}';
   var obj = JSON.parse(txt);
   var { error } =Joi.validate(obj, schema_gender);
   if (error){
