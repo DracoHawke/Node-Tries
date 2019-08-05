@@ -45,12 +45,18 @@ module.exports = function(req,res,error1){
       // notations: 'l' -> 'less than', 'g' -> 'greater than', 'b' -> 'between'.
       // values: 'l1' -> 'less than 1', 'b12' -> 'between 1 and 2', 'gtt' -> 'greater than 10', 't[2,3]' -> '10'.
       if(age[0] == 'l'){
+        var b1 = 0;
+        var b2 = 1;
         console.log("less than 1");
       }
       else if(age[0] == 'b') {
+        b1 = age[1];
+        b2 = age[2];
         console.log("between");
       }
       else if(age[0] == 'g') {
+        b1 = 10;
+        b2 = 20;
         console.log("greater than 10");
       }
     }
@@ -60,9 +66,11 @@ module.exports = function(req,res,error1){
   }
   if(typeof req.query.sort_by != "undefined") {
     console.log("sort_by");
+    sb = "Rating";
     c.sort_by = req.query.sort_by;
     if(req.query.sort_by != "Rating"){
-      sb = mysql.escape(req.query.age_group).slice(1,-1);
+      sortflag = 1;
+      sb = mysql.escape(req.query.sort_by).slice(1,-1);
     }
   }
   else{
@@ -78,8 +86,11 @@ module.exports = function(req,res,error1){
   var a = mysql.escape(nm).slice(1,-1);
   console.log(a);
   regexp = a+'\.[0-9]{1}';
-  var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and (DogBreed LIKE '%"+ a +"%' OR DogAge = '" + a + "' OR DogAge REGEXP '"+regexp+"') order by `dogs`.`Rating` DESC";
-  //console.log(sql);
+  var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and (DogBreed LIKE '%"+ a +"%' OR DogAge = '" + a + "' OR DogAge REGEXP '"+regexp+"') order by `dogs`.`"+sb+"` DESC";
+  if(ageflag == 1){
+    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and `dogs`.`DogBreed` LIKE '%"+ a +"%' AND  DogAge BETWEEN "+b1+" AND "+b2+" order by `dogs`.`"+sb+"` DESC"
+  }
+  console.log(sql);
   con.query(sql, function (err, rows, fields) {
     if(err) throw err;
     //console.log(sql);
@@ -98,7 +109,7 @@ module.exports = function(req,res,error1){
     }
     else
       var uname=' ';
-    res.render('findmate',{uname: uname, sid: sid, rows: rows, did: did,status: req.session.status, search: 1});
+    res.render('findmate',{uname: uname, sid: sid, rows: rows, did: did,status: req.session.status, search: 1, c: c});
   });
 
 };

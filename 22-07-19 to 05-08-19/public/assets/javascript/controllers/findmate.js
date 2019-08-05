@@ -7,6 +7,7 @@ module.exports = function(req,res){
     if(err) throw err;
     console.log(sql);
     console.log(rows);
+    var c = {};
     if(req.session.uname){
       if(req.session.did)
         var did=req.session.did;
@@ -22,7 +23,7 @@ module.exports = function(req,res){
     else
       var uname=' ';
       //console.log(rows[5].DogPic1);
-    res.render('findmate',{uname: uname, sid: sid, rows: rows, did: did,status: req.session.status});
+    res.render('findmate',{uname: uname, sid: sid, rows: rows, did: did,status: req.session.status, c: c});
   });
 
 };

@@ -25,7 +25,8 @@ sitterdetails = require('./public/assets/javascript/controllers/sitterdetails');
 findmate = require('./public/assets/javascript/controllers/findmate');
 matedetails = require('./public/assets/javascript/controllers/matedetails');
 mydogs = require('./public/assets/javascript/controllers/mydogs');
-searchmate = require('./public/assets/javascript/controllers/searchmate')
+searchmate = require('./public/assets/javascript/controllers/searchmate');
+dogdetails = require('./public/assets/javascript/controllers/dogdetails');
 //mydogsimgs = require('./public/assets/javascript/controllers/mydogsimgs')
 var app = express();
 
@@ -668,6 +669,7 @@ app.get('/dashboard',function(req,res){
 
 app.post('/dashboard',function(req,res){
   var error1={};
+  console.log("i'm in dashboard post");
   dashboard(req,res,error1);
 });
 
@@ -697,9 +699,6 @@ app.get('/mydogs',function(req,res){
 });
 
 app.get('/searchmate',function(req,res){
-  //console.log(req.url);
-  //console.log(req.params);
-  //console.log(req.body);
   if(!req.session.uname){
     console.log('in no status');
     res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
@@ -727,8 +726,7 @@ app.get('/searchmate',function(req,res){
     }
   }
 });
-
-app.get('/searchmate/:id',function(req,res){
+/*app.get('/searchmate/:id',function(req,res){
   if(!req.session.uname){
     res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did});
   }
@@ -745,31 +743,76 @@ app.get('/searchmate/:id',function(req,res){
   console.log(req.url);
   console.log(req.params);
   console.log(req.params.id);
-  //console.log(req.body);
   searchmate(req,res,error1);
-})
+})*/
 
 app.post('/searchmate',function(req,res){
-  /*console.log('i"m in searchmate post');
-  //console.log(req.url);
-  var a = "/";
-  console.log(req.body);
-  //console.log(req.files);
-  if(req.body.name!=""){
-    a = a +"name="+ req.body.name + "&";
+
+})
+
+app.get('/dogdetails',function(req,res){
+  if(!req.session.uname){
+    console.log('in no status');
+    res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
   }
-  if(req.body.state && (req.body.state != "" || req.body.state.toLowerCase() != "select")){
-    a = a + "state="+ req.body.state + "&";
-  }
-  //console.log(req.url+a);
-  if(a != "/"){
-    console.log(a);
-    //searchmate(req,res,error1,a);
-    res.redirect('searchmate'+a);
+  else if(req.session.status == 0){
+    console.log('in zero status');
+    res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
   }
   else{
-    res.redirect('findmate');
-  }*/
-})
+    console.log(req.query);
+    console.log('in dogdetails');
+    var error1 = {};
+    if(Object.keys(req.query).length == 1){
+      console.log(Object.keys(req.query).length);
+      dogdetails(req,res,error1);
+    }
+    else{
+      console.log('no / too many keys ', Object.keys(req.query).length);
+      res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
+    }
+  }
+});
+
+app.post('/dogdetails',function(req,res){
+  console.log("in post");
+  console.log(req.body);
+  console.log(req.files);
+  for(i = 0; i < length1; i++){ // iterate for the all dog pictures array/object.
+    var files1 = req.files['fileUpload['+i+']']; // get dog pic entries for each dogg seperatelly.
+    //console.log(files1);
+    for (var a in files1) { // iterate in the dog pic array for each dog individually.
+      if(files1[a].mimetype == 'application/octet-stream'){ // note this is when user has input no file and our module pics up a default value. if true:
+        //console.log(files1[a]);console.log(files1);
+        delete files1[a]; // delete that entry out of our array. note that this will leave an empty element.
+        continue; // start next iteration.
+      }// note that the file name and other values are either default / empty value for these feild, so that is why we delete it and start next iteration.
+      if(files1[a].name=='') { // check for file name. if true:
+        //console.log(files1[a].name);
+        err = "Please select valid files"; // set err feild for file.
+        flag = 0; // set validation flag to 0.
+      }
+      if(files1[a].size> 40000000){
+        //console.log(files1[a].size);
+        err='File Size Must Be Less Than 40MB'; // set err feild for file.
+        flag = 0; // set validation flag to 0.
+      }
+      if(!(files1[a].mimetype == 'image/png' || files1[a].mimetype == 'image/jpg' || files1[a].mimetype == 'image/jpeg') ){
+        //console.log(files1[a].mimetype);
+        err = "Please select valid format files"; // set err feild for file.
+        flag = 0; // set validation flag to 0.
+      }
+    }
+    files1 = files1.filter(function () { return true }); // filter out any empty values in our array.
+    //console.log(files1);
+    if(flag == 1){ // check for validation flag. if true:
+      b = dog[i]; // take the info for that dog.
+      b['files'] = files1; // add new feild 'files' for that dag and assign it the dog pic array of that dog.
+      dog[i] = b; // return the updated information to the original array which will now have the dog pic files.
+    }
+  }
+  res.redirect('/dashboard');
+});
+
 app.listen(3000);
 console.log('listening on port 3000...');
