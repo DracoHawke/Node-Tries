@@ -1,0 +1,147 @@
+<link rel="stylesheet" type="text/css" href="/assets/css/settings.css">
+<div class="col-lg-9 dashboard_lay" id="list">
+  <div class="cardlike1">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="my-account headmydog">Settings</h2>
+        <% console.log("Send_Data: ", send_data) %>
+      </div>
+    </div>
+    <% if (typeof send_data.status_err !== 'undefined') {
+    if(send_data.status_err == "verified") { %>
+      <form class="size-1 formloc" name="myform2" id="myform2" action="/dashboard/location" method="post" enctype="multipart/form-data">
+        <div class="row">
+          <% if(send_data.Location != null) { %>
+            <div class="col-md-12 displayinline2">
+            <span class="ptext displayinline2"> Your Location:
+            <a href="/dashboard/Location" class="change">
+              <%= send_data.Location %>
+            </a></span>
+            </div>
+            <div id="map"></div>
+            <button id="locate">Locate ISS</button>
+            <div id="details"></div>
+            Enter Delivery Radius:-<input type="text" placeholder="Radius(in Km)" onkeyup="Make_Circle()" id="rad"><br><br>
+<input type="hidden" name="Long" id="Long" value=<?php echo $_GET['Long']; ?>>
+<input type="hidden" name="Lat" id="Lat" value=<?php echo $_GET['Lat']; ?>>
+<div id='map' style='width:100%; height:500px;'></div>
+<br>
+<input type="button" value="Save" id="Save">
+  <script>
+    function Make_Circle() {
+      $(document).ready(function(){
+        //map.removeLayer('Circle');
+        //alert("Radius");
+        var Rad=$("#rad").val();
+        var Long=$("#Long").val();
+        var Lat=$("#Lat").val();
+        if(!Rad)
+        {
+          return;
+        }
+        var data1={
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates:[Long,Lat]
+          },
+          properties: {
+            name: 'Delivery Radius'
+          }
+        };
+        var circle = turf.buffer(data1, Rad, { unit: 'kilometers' });
+        if(map.getLayer("Circle")) {
+          map.removeLayer("Circle");
+        }
+        if(map.getSource("Circle")) {
+          map.removeSource("Circle");
+        }
+        map.addLayer({
+          id: 'Circle',
+          type: 'fill',
+          source: {
+            type: 'geojson',
+            data: circle
+          },
+          paint:{
+            'fill-color':"rgba(95, 134, 150, 0.59)"
+          }
+        });
+      });
+    }
+    var geojson={
+      type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: {
+         type: 'Point',
+         coordinates: [<?php echo $_GET['Long']; ?>,<?php echo $_GET['Lat']; ?>]
+       },
+       properties: {
+         title: "<?php echo $_GET['Name']; ?>",
+         description: "<?php echo $_GET['Number']; ?>"
+       }
+     }]
+   };
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWppc2hrYWxpYTk5IiwiYSI6ImNqeWljMTF6cjA0bzQzbXBkem5hZ2JzMngifQ.OzX0jUVnSxDi8WIEaC-c5A';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      minZoom:0,
+      zoom:14,
+      maxZoom:22,
+      //center:{lon: "<?php echo $_GET['Long']; ?>", lat: "<?php echo $_GET['Lat']; ?>"}
+    });
+    var Mk1 = new mapboxgl.Marker ({'draggable':false})
+    .setLngLat({lon: /*"<?php echo $_GET['Long']; ?>"*/, lat: /*"<?php echo $_GET['Lat']; ?>"*/})
+    .addTo(map);
+    $(document).ready(function(){
+      $("#Save").on('click',function(){
+        var Rad=$("#rad").val();
+        if(Rad=="" || Rad<=0) {
+          alert("Please Enter Valid Delivery Radius");
+          return false;
+        }
+        var Long=$("#Long").val();
+        var Lat=$("#Lat").val();
+        var data='<?php echo http_build_query($_GET); ?>';
+        data=data+'&Del_Rad='+Rad;
+        data=data+"&Long="+Long+"&Lat="+Lat+"&type=Add_Rest";
+        //alert(data);
+        $.ajax({
+          url:"Ajax.php",
+          type:'GET',
+          data:data,
+          success:function(data) {
+            if(data=="Done") {
+              alert("Data Added Succesfully!");
+              window.location.href="Add_Restaurant.php";
+            }
+            else {
+              alert(data);
+              alert("Some Error Occured");
+              window.location.href="Add_Restaurant.php";
+            }
+          }
+        })
+      });
+    });
+  </script>
+          <% }else{ %>
+            <div class="col-md-3"><span class="ptext displayinline2"> Your Location:</span></div>
+            <div class="col-md-6 displayinline2">
+              <input type="text" class="form-control input2" name="location" placeholder="Please enter your Location for better results">
+            </div>
+            <div class="col-md-3">
+              <button class="submit submit2">Set Location</button>
+            </div>
+          <% } %>
+        </div>
+      </form>
+    <% } }else{ %>
+      <h2 class="red">Please Verify Your email to Access This Feature......</h2>
+    <% } %>
+  </div>
+</div>
+<script src="https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.js"></script>
+<script src="/assets/javascript/Files/main.js"></script>
