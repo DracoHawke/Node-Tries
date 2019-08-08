@@ -31,6 +31,7 @@ registerdogmore = require('./public/assets/javascript/controllers/registerdogmor
 registerdogfirst = require('./public/assets/javascript/controllers/registerdogfirst');
 nodincrement = require('./public/assets/javascript/controllers/nodincrement');
 getlocation = require('./public/assets/javascript/controllers/getlocation');
+setvalues = require('./public/assets/javascript/controllers/setvalues');
 //mydogsimgs = require('./public/assets/javascript/controllers/mydogsimgs')
 var app = express();
 
@@ -98,7 +99,7 @@ app.get('/pricing/:id',urlencodedParser,function(req,res){
   if (Number(id)==0){
     var email = req.query.email;
     var password = req.query.password;
-    connection.query('SELECT users.No_of_Dogs ,users.status, users.Fname, dogs.Did, sitters.Sid, users.U_password FROM users LEFT JOIN dogs ON dogs.Uid = users.Uid LEFT JOIN sitters ON sitters.Uid = users.Uid where users.Email = "' + email +'"', function(err, rows, fields) {
+    connection.query('SELECT `users`.`Uid`,users.No_of_Dogs ,users.status, users.Fname, dogs.Did, sitters.Sid, users.U_password FROM users LEFT JOIN dogs ON dogs.Uid = users.Uid LEFT JOIN sitters ON sitters.Uid = users.Uid where users.Email = "' + email +'"', function(err, rows, fields) {
       if (!err){
         var error = 0;
         if(rows.length > 0){
@@ -107,6 +108,7 @@ app.get('/pricing/:id',urlencodedParser,function(req,res){
             req.session.uname =rows[0].Fname;
             req.session.status = rows[0].status;
             req.session.nod = rows[0].No_of_Dogs;
+            req.session.uid = rows[0].Uid;
             var a = rows.length;
             var i = 0;
             var flag1 = 0;
@@ -676,6 +678,7 @@ app.get('/dashboard/:page',function(req,res){
     dashboard(req,res,error1,"mydogs");
   }
   else if(page == "myacc"){
+    console.log("in myacc");
     dashboard(req,res,error1,"myacc");
   }
   else if(page == "settings"){
@@ -696,21 +699,19 @@ app.post('/dashboard/:page',urlencodedParser,function(req,res){
   var page = req.params.page;
   console.log(page);
   if("location" == page){
-    console.log("body: ",req.body);
-    if(req.body.location){
+    if(req.body.rangebar){
+      setvalues(req,res);
+    }
+    else if(req.body.location){
       getlocation(req,res);
     }
   }
-  else {
-
+  else if(page == "myacc"){
+    console.log("my acc body: ", req.body);
   }
 });
 
-app.post('/dashboard',function(req,res){
-  var error1={};
-  console.log("i'm in dashboard post");
-  dashboard(req,res,error1,"myacc");
-});
+
 
 /*
 app.get('/myacc',function(req,res){
@@ -831,20 +832,26 @@ app.post('/dogdetails',function(req,res){
     var i = 0;
     for (var a in files1) { // iterate in the dog pic array for each dog individually.
       c = 'fileupload'+i;
-      if(dog[c] != "updated"){
+      console.log("c ", c);
+      if(dog[c] != "updated" && dog[c] != null){
         if(dog[c].charAt(0) == "/"){
           dog[c] = dog[c].substr(1);
         }
+        //if(dog[c] == ""){
+          //console.log("set dog[c] ", dog[c]);
+          //dog[c] = null;
+        //}
         var d = {
           name: dog[c],
           size: 10,
           mimetype: 'image/png',
         }
+        console.log("d now is : ", dog[c]);
       }
       if(files1[a].mimetype == 'application/octet-stream'){ // note this is when user has input no file and our module pics up a default value. if true:
         //console.log(files1[a], " files ",files1);
         //delete files1[a];// delete that entry out of our array. note that this will leave an empty element.
-        files1[a]=d;
+        files1[a] = d;
         continue; // start next iteration.
       }// note that the file name and other values are either default / empty value for these feild, so that is why we delete it and start next iteration.
       if(files1[a].name=='') { // check for file name. if true:
@@ -862,6 +869,7 @@ app.post('/dogdetails',function(req,res){
         err = "Please select valid format files"; // set err feild for file.
         flag = 0; // set validation flag to 0.
       }
+      i = i + 1;
     }
     files1 = files1.filter(function () { return true }); // filter out any empty values in our array.
     //console.log("files ",files1);
@@ -880,56 +888,68 @@ app.post('/dogdetails',function(req,res){
     while(i < e.length){
       c = 'fileupload'+i;
       f = req.session.email +'_'+ i;
-      if(e.name){
-        if(dog[c] != "updated"){
-          dpic[i] = dog[c];
+      if(e.name) { // check if array or single entry.
+        if(dog[c] != "updated") { // check for old/new entry
+          if(dog[c] == "") { // check for no entry
+            dpic[i] = null;
+          }
+          else { // if old entry.
+            dpic[i] = dog[c];
+          }
           i = i + 1;
           continue;
         }
         a = e.mimetype;
       }
-      else{
-        if(dog[c] != "updated"){
-          dpic[i] = dog[c];
+      else { // if array entry.
+        if(dog[c] != "updated") { // check for old/new entry
+          if(dog[c] == "") { // check for no entry
+            dpic[i] = null;
+          }
+          else { // if old entry.
+            dpic[i] = dog[c];
+          }
           i = i + 1;
           continue;
         }
         a = e[i].mimetype;
       }
       //console.log(a);
-      var pos = a.search("/");
-      var res1 = a.slice(pos+1);
-      path1 = 'assets/images/'+req.session.uid+'/dog'+dog.dno+'/'+f+'.'+res1;
-      path = 'public/assets/images/'+req.session.uid+'/dog'+dog.dno+'/'+f+'.'+res1;
-      if(e.name){
+      var pos = a.search("/"); // get position of '/' in mimetype of the file.
+      var res1 = a.slice(pos+1); // get the extention i.e. the porition after '/' in mimetype, of the file.
+      path1 = 'assets/images/'+req.session.uid+'/dog'+dog.dno+'/'+f+'.'+res1; // declare path1 which is put in our db entry of that dog.
+      path = 'public/assets/images/'+req.session.uid+'/dog'+dog.dno+'/'+f+'.'+res1; // declare path which is used to move the uploaded pic from temp to correct path.
+      if(e.name) {
         e.mv(path, function(err) {
           if(err)
             return res.status(500).send(err);
+          console.log("e ", e);
         })
       }
-      else{
+      else {
         e[i].mv(path, function(err) {
           if(err)
             return res.status(500).send(err);
+          console.log("e[i] path: ", path);
         })
       }
-      dpic[i] = path1;
+      dpic[i] = path1; // set path to be used in the query.
       i = i + 1;
     }
-    let updatequery = "update ??,?? set DogName = ?, DogBreed = ?, DogGender = ?, DogAge = ?, Description = ?, DogPic1 = ?, DogPic2 = ?, DogPic3 = ?, DogPic4 = ?, DogPic5 = ? where ?.`Uid` = ?.`Uid` and ?.`Did` = ? and ?.`email` = "+mysql.escape(req.session.email);
+    let updatequery = "update ??,?? set DogName = ?, DogBreed = ?, DogGender = ?, DogAge = ?, Description = ?, DogPic1 = ?, DogPic2 = ?, DogPic3 = ?, DogPic4 = ?, DogPic5 = ? where ??.`Uid` = ??.`Uid` and ??.`Did` = ? and ??.`email` = "+mysql.escape(req.session.email);
     let query = mysql.format(updatequery,["dogs","users",dog.dog_name,dog.dog_breed,dog.dog_gender,dog.dog_age,dog.dog_info, dpic[0], dpic[1], dpic[2], dpic[3], dpic[4], `users`,`dogs`,`dogs`,dog.did,`users`]);
     console.log(query);
-    /*connection.query(query,(err, response) => {
+    connection.query(query,(err, response) => {
       console.log(query);
       if(err) {
         console.error(err);
         flags = 4060; // server database connectivity error;
       }
       else{
-        nodincrement(req,res);
-        console.log('data entered'); // entered user'd dog.
+        console.log('data entered'); // updated user's dog.
+        res.redirect("/dashboard/myacc");
       }
-    });*/
+    });
   }
   //console.log(dog);
   //res.redirect('/dashboard');

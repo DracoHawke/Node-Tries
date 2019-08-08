@@ -1,5 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1Ijoid2l0eXZpcyIsImEiOiJjajl4MGo0OWowczk4MnFtZHVob3I0MTdnIn0.KHhjbfQIuxBcoOsukPTldQ';
-var map = new mapboxgl.Map({
+/*var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v9',
     center: [0, 0],
@@ -7,10 +6,9 @@ var map = new mapboxgl.Map({
     zoom: 1
 });
 
-var url = '/findiss';
+//var url = '/dashboard/location';
 
-map.on('load', function () {
-
+/*map.on('load', function () {
     window.setInterval(function () {
         fetch(url).then(function (response) {
             return response.json();
@@ -56,3 +54,4 @@ map.on('load', function () {
     });
 
 });
+*/

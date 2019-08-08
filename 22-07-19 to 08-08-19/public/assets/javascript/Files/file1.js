@@ -41,7 +41,7 @@ function success1(){
     method: 'GET',
     contentType: 'application/json',
     success: function(response) {
-      console.log(response);
+      //console.log(response);
       //$('#brand01').click();
       window.location.assign(window.location.href);
     }
