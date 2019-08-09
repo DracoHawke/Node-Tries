@@ -176,13 +176,13 @@
           <div class = "row mrb1">
           <p class = " text6" >Prefered days:</p>
             <div class="group1">
-              <input type = "checkbox" id="mon" class = "form-control checks checks1" name = "days[mon]" <% var a1 = send_data.Days.indexOf("mon"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Monday&nbsp;</span>
-              <input type = "checkbox" id="tue" class = "form-control checks" name = "days[tue]" <% var a1 = send_data.Days.indexOf("tue"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Tuesday&nbsp;</span>
-              <input type = "checkbox" id="wed" class = "form-control checks" name = "days[wed]" <% var a1 = send_data.Days.indexOf("wed"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Wednesday&nbsp;</span>
-              <input type = "checkbox" id="thu" class = "form-control checks" name = "days[thu]" <% var a1 = send_data.Days.indexOf("thu"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Thursday&nbsp;</span>
-              <input type = "checkbox" id="fri" class = "form-control checks" name = "days[fri]" <% var a1 = send_data.Days.indexOf("fri"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Friday&nbsp;</span>
-              <input type = "checkbox" id="sat" class = "form-control checks" name = "days[sat]" <% var a1 = send_data.Days.indexOf("sat"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Saturday&nbsp;</span>
-              <input type = "checkbox" id="sun" class = "form-control checks" name = "days[sun]" <% var a1 = send_data.Days.indexOf("sun"); if(a1 >= 0) { %> checked <% } %>><span class="mrt1">&nbsp;Sunday&nbsp;</span>
+              <input type = "checkbox" id="mon" class = "form-control checks checks1" name = "days[mon]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("mon"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Monday&nbsp;</span>
+              <input type = "checkbox" id="tue" class = "form-control checks" name = "days[tue]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("tue"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Tuesday&nbsp;</span>
+              <input type = "checkbox" id="wed" class = "form-control checks" name = "days[wed]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("wed"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Wednesday&nbsp;</span>
+              <input type = "checkbox" id="thu" class = "form-control checks" name = "days[thu]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("thu"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Thursday&nbsp;</span>
+              <input type = "checkbox" id="fri" class = "form-control checks" name = "days[fri]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("fri"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Friday&nbsp;</span>
+              <input type = "checkbox" id="sat" class = "form-control checks" name = "days[sat]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("sat"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Saturday&nbsp;</span>
+              <input type = "checkbox" id="sun" class = "form-control checks" name = "days[sun]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("sun"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Sunday&nbsp;</span>
             </div>
           </div>
           <input type="submit" class="btn btn5" value="Update Settings" id="Save">

@@ -103,6 +103,7 @@ select.form-control.age_group{
 }
 select.form-control.sort_by{
   width: 38%;
+  border-width: 0.15vw;
   margin-left: 1vw;
   font-size: 1.5vw;
   padding: 0.1vw 0.1vw;
@@ -115,6 +116,31 @@ select.form-control.sort_by{
 .text5{
   font-size: 1.5vw;
   margin-left: 40%;
+}
+div.form-control.days{
+}
+div.ms-parent.form-control.days{
+  width: 26vw !important;
+  height: 3vw;
+  font-size: 1vw;
+}
+.ms-choice{
+  border: none;
+  height: 100%;
+  font-size: 1vw;
+}
+.ms-choice > span {
+  height: 100%;
+}
+button.ms-choice:focus{
+  outline: none;
+}
+.ms-drop{
+  margin-left: -0.5vw;
+}
+.ms-drop input[type=radio], .ms-drop input[type=checkbox] {
+  height: 1.2vw;
+  width: 1.2vw;
 }
 @media (max-width: 682px) {
   img.profile{
@@ -133,5 +159,22 @@ select.form-control.sort_by{
 @media (max-width: 576px) {
   .text5{
     margin-left: 0vw;
+  }
+  .ms-choice > span {
+    margin-top: -1vw;
+  }
+  .ms-choice {
+    font-size: 1.5vw;
+  }
+  div.ms-parent.form-control.days{
+    height: 4vw;
+    font-size: 2vw;
+  }
+  .ms-drop{
+    margin-left: -2vw;
+  }
+  .ms-drop input[type=radio], .ms-drop input[type=checkbox] {
+    height: 2.5vw;
+    width: 2.5vw;
   }
 }

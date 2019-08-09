@@ -1,9 +1,0 @@
-$query="SELECT  from rest_info where (6371  acos(
-                cos( radians(RLat) )
-              * cos( radians( $Lat ) )
-              * cos( radians( $Long ) - radians(RLong) )
-              + sin( radians(RLat) )
-              * sin( radians( $Lat ) )
-                ) ) < RDelRad";
-
-key = 8f1210175c204ffc9c7bce586508e231

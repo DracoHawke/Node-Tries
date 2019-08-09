@@ -94,11 +94,12 @@
           </form>
           <% } %>
       </div>
-      <% for(var i=0;i<rows.length;i++){ %>
-        <div class="card crd1 crdleft">
-          <div class="card-body crdpad2">
-            <a href="/matedetails?id=<%= rows[i].Email %>&did=<%= rows[i].Did %>">
-              <img class="profile" src="<% if(rows[i].DogPic1){%>/<%= rows[i].DogPic1 %><% }else if(rows[i].DogPic2){ %>/<%= rows[i].DogPic2 %><%}else if(rows[i].DogPic3){%>/<%= rows[i].DogPic3%><%}else if(rows[i].DogPic4){%>/<%= rows[i].DogPic4%><%}else if(rows[i].DogPic5){%>/<%= rows[i].DogPic5%><%}else{%>/users/default.png<%}%>">
+      <% if(rows.length > 0) { %>
+        <% for(var i=0;i<rows.length;i++) { %>
+          <div class="card crd1 crdleft">
+            <div class="card-body crdpad2">
+              <a href="/matedetails?id=<%= rows[i].Email %>&did=<%= rows[i].Did %>">
+                <img class="profile" src="<% if(rows[i].DogPic1){%>/<%= rows[i].DogPic1 %><% }else if(rows[i].DogPic2){ %>/<%= rows[i].DogPic2 %><%}else if(rows[i].DogPic3){%>/<%= rows[i].DogPic3%><%}else if(rows[i].DogPic4){%>/<%= rows[i].DogPic4%><%}else if(rows[i].DogPic5){%>/<%= rows[i].DogPic5%><%}else{%>/users/default.png<%}%>">
               </a>
               <div class="fname">
                 <span>
@@ -136,8 +137,10 @@
                 </div>
               </div>
             </div>
-      </div>
-      <% } %>
+          </div>
+        <% } } else { %>
+        <br><h2 class="h2">No Results :`( </h2><br>
+        <% } %>
     </div>
   </div>
   <% include footer %>

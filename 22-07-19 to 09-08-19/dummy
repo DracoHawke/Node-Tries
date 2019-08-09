@@ -1,0 +1,16 @@
+$query="SELECT  from rest_info where (6371  acos(
+                cos( radians(RLat) )
+              * cos( radians( $Lat ) )
+              * cos( radians( $Long ) - radians(RLong) )
+              + sin( radians(RLat) )
+              * sin( radians( $Lat ) )
+                ) ) < RDelRad";
+
+key = 8f1210175c204ffc9c7bce586508e231
+
+var sql = "SELECT `sitters`.`Rating`,`sitters`.`Reviews`,`sitters`.`Description`, `users`.`Fname`, `users`.`Lname`"+
+",`users`.`Email`,`users`.`Profile`, `users`.`status`, ( 6371 * acos( cos( radians("+a.latitude+") ) *"+
+" cos( radians( `sitters`.`Latitude` ) ) * cos( radians( `sitters`.`Longitude` ) - radians("+a.longitude+") )"+
+" + sin( radians("+a.latitude+") ) * sin(radians(`sitters`.`Latitude`)) ) ) AS distance FROM `sitters`"+
+" INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`=1 "+
+"and `users`.`status`=1 HAVING distance < `sitters`.`Radius` order by `sitters`.`Rating` DESC";

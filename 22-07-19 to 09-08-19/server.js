@@ -32,6 +32,7 @@ registerdogfirst = require('./public/assets/javascript/controllers/registerdogfi
 nodincrement = require('./public/assets/javascript/controllers/nodincrement');
 getlocation = require('./public/assets/javascript/controllers/getlocation');
 setvalues = require('./public/assets/javascript/controllers/setvalues');
+searchsitter = require('./public/assets/javascript/controllers/searchsitter');
 //mydogsimgs = require('./public/assets/javascript/controllers/mydogsimgs')
 var app = express();
 
@@ -711,28 +712,6 @@ app.post('/dashboard/:page',urlencodedParser,function(req,res){
   }
 });
 
-
-
-/*
-app.get('/myacc',function(req,res){
-  console.log(req.url);
-  res.redirect('/dashboard');
-});
-
-app.post('/myacc',function(req,res){
-  update_form(req,res);
-});
-
-app.get('/chat',function(req,res){
-  console.log(req.url);
-  res.render('chat');
-});
-
-app.get('/settings',function(req,res){
-  console.log(req.url);
-  res.render('settings');
-});
-*/
 app.get('/mydogs',function(req,res){
   console.log(req.url);
   var error1 = {};
@@ -761,35 +740,69 @@ app.get('/searchmate',function(req,res){
         searchmate(req,res,error1);
       }
     }
-    else{
+    else if((Object.keys(req.query).length > 2)){
       console.log(Object.keys(req.query).length);
       searchmate(req,res,error1);
     }
+    else{
+      console.log("somehow, length less than 2: ", Object.keys(req.query).length);
+      res.redirect("/findmate");
+    }
   }
 });
-/*app.get('/searchmate/:id',function(req,res){
-  if(!req.session.uname){
-    res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did});
-  }
-  if(req.session.status == 0){
-    res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did});
-  }
-  console.log("i'm in searchmate id");
-  var error1 = {};
-  var a = req.url.substring(req.url.length - 1, req.url.length);
-  if (a == '&'){
-    req.url = req.url.slice(0, -1);
-    req.params.id = req.params.id.slice(0, -1);
-  }
-  console.log(req.url);
-  console.log(req.params);
-  console.log(req.params.id);
-  searchmate(req,res,error1);
-})*/
 
 app.post('/searchmate',function(req,res){
+  console.log("somehow in searchmate post");
+  res.redirect("/findmate");
+});
 
-})
+app.get('/searchsitter',function(req,res){
+  if(!req.session.uname){
+    console.log('in no status');
+    res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
+  }
+  else if(req.session.status == 0){
+    console.log('in zero status');
+    res.render('AuthenticationNeeded',{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
+  }
+  else{
+    console.log(req.query);
+    var error1 = {};
+    if(Object.keys(req.query).length == 3){
+      if(req.query.name == "" && req.query.Location == ""){
+        res.redirect('/findsitter');
+      }
+      else if(req.query.Location != ""){
+        getsitterloc(req,res,"single");
+      }
+      else {
+        console.log(Object.keys(req.query).length);
+        searchsitter(req,res,error1);
+      }
+    }
+    else if((Object.keys(req.query).length > 3)){
+      console.log(Object.keys(req.query).length);
+      if(req.query.Location != ""){
+        getsitterloc(req,res,"multiple");
+      }
+      else if(req.query.Location == "" && req.query.name == "" && req.query.sort_by=="Rating" && req.query.days[0] == "All"){
+        res.redirect("/findsitter");
+      }
+      else{
+        searchsitter(req,res,error1);
+      }
+    }
+    else{
+      console.log("somehow length less than 3: ",Object.keys(req.query).length);
+      res.redirect("/findsitter");
+    }
+  }
+});
+
+app.post('/searchsitter',function(req,res){
+  console.log("somehow in searchmate post");
+  res.redirect("/findsitter");
+});
 
 app.get('/dogdetails',function(req,res){
   if(!req.session.uname){
@@ -816,9 +829,7 @@ app.get('/dogdetails',function(req,res){
 });
 
 app.post('/dogdetails',function(req,res){
-  //console.log("in post");
-  console.log(req.body);
-  //console.log(req.files);
+  //console.log("in post"); console.log(req.body); console.log(req.files);
   dog = req.body;
   var flag = 1;
   var flag2 = 1;
@@ -837,10 +848,6 @@ app.post('/dogdetails',function(req,res){
         if(dog[c].charAt(0) == "/"){
           dog[c] = dog[c].substr(1);
         }
-        //if(dog[c] == ""){
-          //console.log("set dog[c] ", dog[c]);
-          //dog[c] = null;
-        //}
         var d = {
           name: dog[c],
           size: 10,
@@ -872,9 +879,7 @@ app.post('/dogdetails',function(req,res){
       i = i + 1;
     }
     files1 = files1.filter(function () { return true }); // filter out any empty values in our array.
-    //console.log("files ",files1);
     if(flag == 1){ // check for validation flag. if true:
-      //console.log("files1 ",files1);
       b = dog; // take the info for that dog.
       b['files'] = files1; // add new feild 'files' for that dag and assign it the dog pic array of that dog.
       dog = b; // return the updated information to the original array which will now have the dog pic files.
@@ -938,7 +943,7 @@ app.post('/dogdetails',function(req,res){
     }
     let updatequery = "update ??,?? set DogName = ?, DogBreed = ?, DogGender = ?, DogAge = ?, Description = ?, DogPic1 = ?, DogPic2 = ?, DogPic3 = ?, DogPic4 = ?, DogPic5 = ? where ??.`Uid` = ??.`Uid` and ??.`Did` = ? and ??.`email` = "+mysql.escape(req.session.email);
     let query = mysql.format(updatequery,["dogs","users",dog.dog_name,dog.dog_breed,dog.dog_gender,dog.dog_age,dog.dog_info, dpic[0], dpic[1], dpic[2], dpic[3], dpic[4], `users`,`dogs`,`dogs`,dog.did,`users`]);
-    console.log(query);
+    //console.log(query);
     connection.query(query,(err, response) => {
       console.log(query);
       if(err) {
@@ -951,8 +956,6 @@ app.post('/dogdetails',function(req,res){
       }
     });
   }
-  //console.log(dog);
-  //res.redirect('/dashboard');
 });
 
 app.listen(3000);
