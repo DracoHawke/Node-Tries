@@ -1,0 +1,112 @@
+.checked{
+  color:#ed2154;
+}
+html {
+  scroll-behavior: smooth;
+}
+img.profile {
+  width: 30vw;
+  height: 30vw;
+    border-radius: 10%;
+}
+img.profile1 {
+    border-radius: 25%;
+    width: 15vw;
+    height: 15vw;
+    margin-bottom: 1vw;
+    box-shadow: 3px 3px 3px grey;
+}
+.name-head {
+    margin-top: 6%;
+    font-size: 3vw;
+    font-weight: bold;
+}
+.details{
+  color:rgb(129, 129, 150);
+      padding-top: 2%;
+      font-size: 1.5vw;
+}
+span.values {
+    margin-left: 2%;
+    color: black;
+    font-size: 1.5vw;
+}
+.contact{
+  font-size: xx-large;
+  font-weight: 700;
+}
+a.btn.btn-pink {
+    background-color: #ed2154;
+    color: white;
+    border: solid #ed2154 1px;
+}
+button.btn.btn-pink1 {
+    background-color: #ed2154;
+    color: white;
+    border-radius: 3vw;
+}
+a.btn.btn-vote {
+    border: solid black 0.09em;
+}
+
+button.btn.custom-btn,button.btn.btn-pink1 {
+    margin-left: 29%;
+    margin-top: 5%;
+    font-size: large;
+    font-weight: 500;
+    box-shadow: 2px 2px 2px lightslategrey;
+}
+
+.rate i {
+    text-shadow: 4px 4px lightgrey;
+    cursor: pointer;
+}
+
+a.btn.btn-pink,a.btn.btn-vote {
+    width: 111%;
+    padding: 11%;
+    margin-top: 28%;
+    word-spacing: 13%;
+    letter-spacing: 4%;
+    border-radius: 0;
+}
+.border-bottom{
+  border-bottom: solid rgb(212, 212, 220) 2px;
+}
+.heads{
+    font-size: xx-large;
+    font-weight: 500;
+    padding:2%;
+    color: #808096;
+}
+.active{
+  color:black;
+  border-bottom:solid #ed2154 3px;
+}
+.col-sm-12.content {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    text-align: justify;
+    font-size: large;
+    font-weight: 400;
+}
+a.text-dark:focus, a.text-dark:hover {
+    text-decoration: none;
+  }
+
+div#give-rating {
+    text-align: center;
+    padding: 7%;
+    /* align-content: center; */
+}
+
+.rate {
+    text-align: center;
+    font-size: 3em;
+    width: 100%;
+}
+
+div#give-rating .row {
+    text-align: center;
+    width: 100%;
+}

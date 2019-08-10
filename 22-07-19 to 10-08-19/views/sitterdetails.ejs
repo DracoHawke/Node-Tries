@@ -1,0 +1,95 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/sitterdetails.css">
+<script src="assets/javascript/Files/sitterdetails.js"></script>
+<title>DogMate</title>
+</head>
+<body>
+  <% include navigation %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <img class="profile" src="<%= rows[0].Profile %>">
+      </div>
+      <div class="col-sm-6">
+        <div class="name-head"><%= rows[0].Fname %> <%= rows[0].Lname %></div>
+        <div class="details">
+          <span >Age:</span><span class="values" id="age1"><%= rows[0].DOB %></span>
+        </div>
+        <div class="details">
+          <span >Rating:</span>
+          <span class="values">
+          <%  if((rows[0].Rating*2)%2!=0){ rows[0].Rating=rows[0].Rating-1;}
+            for(var j=0;j<rows[0].Rating;j++){
+               %>
+            <span class="fa fa-star checked"></span>
+            <% }
+            if((rows[0].Rating*2)%2==1){%>
+              <i class="fas fa-star-half-alt checked"></i>
+              <% j=j+1;}
+            for(var k=0;k<5-j;k++){
+            %>
+            <span class="far fa-star" style="color:#ed2154"></span>
+          <% }%>
+          </span>
+        </div>
+        <div class="details">
+          <span >Votes:</span>
+          <span class="values"><i class="fas fa-vote-yea"></i>&nbsp;<%= rows[0].Reviews %></span>
+        </div>
+        <div class="contact">Contact info</div>
+        <div>
+          <span class="details"><i class="fas fa-phone-volume"></i></span>&nbsp;<span class="values"><%= rows[0].Phone %></span>
+        </div>
+        <div>
+          <span class="details"><i class="fas fa-envelope"></i></span>&nbsp;<span class="values"><%= rows[0].Email %></span>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+              <a href="/dashboard/chat?to=<%= rows[0].Email %>" class="btn btn-pink"><i class="fas fa-comment-alt"></i>&nbsp;Chat</a>
+          </div>
+          <div class="col-sm-3">
+              <a href="#" class="btn btn-vote"><i class="fas fa-vote-yea"></i>&nbsp;Vote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-sm-2  heads active"><a href="#about-sitter" onclick="return change(this)" class="text-dark">About</a></div>
+      <!-- <div class="col-sm-2 heads"><a href="#image-sitter" onclick="return change(this)" class="text-dark">Images</a></div> -->
+      <div class="col-sm-2 heads"><a href="#give-rating" onclick="return change(this)" class="text-dark">Rating</a></div>
+    </div>
+    <div class="row" id="about-sitter">
+      <div class="row">
+          <div class="col-sm-12 content">
+            <%= rows[0].Description %>
+          </div>
+      </div>
+    </div>
+    <div class="row" id="give-rating" hidden>
+      <div class="row">
+        <div class="rate">
+          <% if(update==''){%>
+              <i id="1" class="far fa-star  red" onclick="return star_rating(this)"></i>
+              <i id="2" class="far fa-star  red" onclick="return star_rating(this)"></i>
+              <i id="3" class="far fa-star  red" onclick="return star_rating(this)"></i>
+              <i id="4" class="far fa-star  red" onclick="return star_rating(this)"></i>
+              <i id="5" class="far fa-star  red" onclick="return star_rating(this)"></i>
+        </div>
+        <button class="btn btn-pink1 " onclick="return reset_rating()">RESET</button>
+        <button class="btn custom-btn" onclick="return submit_rating()">SUBMIT</button>
+        <% } else {
+          for(var i=1;i<=update;i++){%>
+            <i id="<%= i %>" class="fas fa-star  red" onclick="return star_rating(this)"></i>
+        <%} for(var i=update+1;i<=5;i++){%>
+           <i id="<%= i %>" class="far fa-star  red" onclick="return star_rating(this)"></i>
+        <% } %>
+        </div>
+        <button class="btn custom-btn" onclick="return update_rating(<%= update %>)">UPDATE</button>
+      <% } %>
+      </div>
+    </div>
+  </div>
+  <% include footer %>
+</body>
+</html>
