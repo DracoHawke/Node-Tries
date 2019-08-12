@@ -1,0 +1,69 @@
+<% include adminheader %>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ProfilePicture</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Rating</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<allsitter.length;i++){ %>
+      <tr>
+        <td><a href="/details?Uid=<%=allsitter[i].Uid%>"><img class="profile-img" src="<%= allsitter[i].Profile %>" alt="" height="95" width="100"></td>
+        <td><%= allsitter[i].Fname %> <%= allsitter[i].Lname %></td>
+        <td><%= allsitter[i].Phone %></td>
+        <td><%= allsitter[i].Email %>
+            <% if(allsitter[i].status==0){%><p class="text-danger">Not-verified Yet</p><%}%>
+        </td>
+        <td>
+          <span class="values">
+          <%  if((allsitter[i].Rating*2)%2!=0){ allsitter[i].Rating=allsitter[i].Rating-1;}
+            for(var j=0;j<allsitter[i].Rating;j++){
+               %>
+            <span class="fa fa-star" style="color:#33b35a"></span>
+            <% }
+            if((allsitter[i].Rating*2)%2==1){%>
+              <i class="fas fa-star-half-alt" style="color:#33b35a"></i>
+              <% j=j+1;}
+            for(var k=0;k<5-j;k++){
+            %>
+            <span class="far fa-star" style="color:#33b35a"></span>
+          <% }%>
+          </span>
+        </td>
+        <td>
+          <% if(allsitter[i].AdminStatus==0 && url.id!=allsitter[i].Uid){
+                var url12={};
+                url12= Object.assign(url12, url);
+                url12.id=allsitter[i].Uid
+                var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');
+            %>
+          <a class="btn btn-primary" href="?<%= queryString %>">Approve</a>
+          <% } else { %>
+              <a class="btn btn-default">Approved</a> <% } %>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  </div>
+  <div class="cent-pag">
+  <ul class="pagination">
+    <% for(var i=0;i<totalsitters/4;i++){ %>
+      <% var url12={}
+          url12= Object.assign(url12, url);
+        url12.pageno=i+1;
+        var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');  %>
+      <li class="page-item <% if(url.pageno==i+1){ %> active <%}%>">
+
+      <a class="page-link" href="?<%= queryString %>"><%= i+1 %></a>
+      </li>
+    <% } %>
+  </ul>
+</div>
+<% include adminfooter %>

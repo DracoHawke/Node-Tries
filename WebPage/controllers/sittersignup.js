@@ -31,12 +31,12 @@ module.exports=function(res,req){
           name.read='readonly';
           console.log(name);
           console.log(sid);
-          res.render('registersitter',{data:name,error:{},uname:uname,sid:sid});
+          res.render('registersitter',{data:name,error:{},uname:uname,sid:sid,login:req.session});
         }
         else {
           name.status_err='not ver';
           var uname=req.session.uname;
-          res.render('registersitter',{data:name,error:{},uname:uname,sid:sid});
+          res.render('registersitter',{data:name,error:{},uname:uname,sid:sid,login:req.session});
         }
       }
       else {

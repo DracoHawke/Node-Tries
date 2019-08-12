@@ -22,7 +22,7 @@ module.exports=function(req,res,error1){
       if(send_data.DOB!=null)
       send_data.DOB=send_data.DOB.replace(/^'(.*)'$/, '$1');
       console.log(send_data);
-      res.render('dashboard',{uname:req.session.uname,sid:sid,send_data:send_data,error:error1});
+      res.render('dashboard',{uname:req.session.uname,sid:sid,send_data:send_data,error:error1,page:'',login:req.session});
     });}
   }
   else

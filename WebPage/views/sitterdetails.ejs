@@ -1,6 +1,6 @@
 <% include header %>
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-<link rel="stylesheet" type="text/css" href="assets/css/sitterdetails.css">
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+<link rel="stylesheet" type="text/css" href="assets/sitterdetails.css">
 <title>DogMate</title>
 </head>
 <body>
@@ -41,7 +41,7 @@
           <span class="details"><i class="fas fa-phone-volume"></i></span>&nbsp;<span class="values"><%= rows[0].Phone %></span>
         </div>
         <div>
-          <span class="details"><i class="fas fa-envelope"></i></span>&nbsp;<span class="values"><%= rows[0].Email %></span>
+          <span class="details"><i class="fas fa-envelope"></i></span>&nbsp;<span id="emal-sitter" class="values"><%= rows[0].Email %></span>
         </div>
         <div class="row">
           <div class="col-sm-3">

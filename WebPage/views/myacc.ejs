@@ -6,7 +6,7 @@
 <form class="size-1 dashboard_form" name="myform" method="post" onsubmit="return update()">
   Profile Picture<span class="red" >*</span>
 <div class="form-group row">
-    <label for="file-upload" class="col-sm-2 col-form-label"><img class="image_profile" id="imageload" src="<% if(send_data.Profile==''){ %>assets/images/profile.png<%} else{ %><%= send_data.Profile %><% }%>" ></label>
+    <label for="file-upload" class="col-sm-2 col-form-label"><img class="image_profile" id="imageload" src="<% if(send_data.Profile==''){ %>/assets/images/profile.png<%} else{ %><%= send_data.Profile %><% }%>" ></label>
       <div class="col-sm-9">
         <input hidden type="file" style="width:1%;height:1%;" class="form-control size-1" name="fileUpload" id="file-upload" accept="image/*" value="<%=  send_data.Profile %>" onchange="loadFile(event)">
         <span class="red"><%= error.file_err %></span>
@@ -15,7 +15,7 @@
       <div class="form-group row">
         <label for="fname" class="col-sm-12 col-form-label" value="<%= send_data.Description %>">About Me<span class="red">*</span></label>
           <div class="col-sm-12">
-            <textarea name="aboutme" class="form-control size-1" rows="3"></textarea>
+            <textarea name="aboutme" class="form-control size-1" rows="3"><%= send_data.Description %></textarea>
             <span class="red"><%= error.about_err %></span>
           </div>
         </div><% } %>

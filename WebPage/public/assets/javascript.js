@@ -39,37 +39,7 @@ function update()
 	});
 	return false;
 }
-//links
-function dlt(url)
-{
-	 if (typeof (history.pushState) != "undefined") {
-		$.ajax({
-			url: url,
-			type: "GET",
-			success: function(data) {
-				var data1 = jQuery(data).filter("#list").html();
-				if(typeof(data1)=="undefined")
-				{
-			     data1 = jQuery("#list > *", data);
-				}
-				jQuery("#list").html(data1);
-			}
-		});
-	}
-	else  {
-		window.location.href=url;
-	}
-	return false;
-}
-
-$(document).ready(function(){
-  $(document).on('click','.for_ajax',function(){
-    var href = $(this).attr('href');
-    dlt(href);
-    return false;
-  });
-});
-// dashboard ajax finish
+//links// dashboard ajax finish
 //dog
 function addmore()
 {
@@ -90,11 +60,10 @@ function success1(){
     success: function(response) {
       console.log(response);
       //$('#brand01').click();
-      window.location.assign('/');
+      location.reload();
     }
   });
 }
-
   var loadFile = function(event) {
     var output = document.getElementById('imageload');
     output.src = URL.createObjectURL(event.target.files[0]);
@@ -175,7 +144,7 @@ function star_rating(obj){
     ele.classList.add("far");
   }
 }
-
+//reset rating
 function reset_rating(){
   var x=document.getElementsByClassName("rate");
   var c =x[0].children;
@@ -185,7 +154,6 @@ function reset_rating(){
     c[i].classList.add("far");
   }
 }
-
 //submit your Rating
 function submit_rating(){
   var x=document.getElementsByClassName("rate");
@@ -222,4 +190,5 @@ function submit_rating(){
      });
    }
   }
+
 //star-rating finish

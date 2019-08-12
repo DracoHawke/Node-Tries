@@ -1,3 +1,4 @@
+<% if(uname=='') {%>
 <div class="modal fade" id="modalLoginForm" tabindex="-1">
   <div class="modal-dialog main1" role="document">
     <div class="modal-content">
@@ -41,7 +42,8 @@
       </div>
     </div>
   </div>
-</div>
+</div><%} %>
+<p id="uid" hidden><%= login.email %></p>
 <div class="row top-nav">
   <div class="col-xs-1 col-sm-1 col-lg-1 col-xl-1 col-md-1"></div>
   <div class="col-xs-9 col-sm-9 col-lg-9 col-xl-9 col-md-9">
@@ -70,7 +72,7 @@
   <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 col-md-12">
     <nav class="navbar navbar-expand-md second-nav">
       <a href="/" class="navbar-brand">
-        <img class="assets/images/logo-image" src="assets/images/logo.png" alt="CoolBrand">
+        <img class="assets/images/logo-image" src="/assets/images/logo.png" alt="CoolBrand">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <i class="fas fa-bars"></i>
@@ -85,6 +87,27 @@
         <div class="navbar-nav ml-auto">
           <ul class="navbar-nav nav2 ">
             <% if (uname !== '') { %>
+              <script>
+                $(document).ready(function(){
+                  
+                    $("#read_noti").focusout(function(){
+                      $.ajax({
+                    		url: '/read_noti',
+                    		type: "GET",
+                    		success: function(data) {
+                    			}
+                    	});
+                        $("#mark").html("");
+                    });
+                  });
+              </script>
+              <li class="navbar-text text-dark ml-3"><button id="read_noti" class="btn nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bell" style="font-size:x-large;"></i><span class="mark" id="mark"><%= login.notifications.length %></span></button>
+                <div class="dropit dropdown-menu size-1" style="left:auto;top:auto;max-height: 100%;overflow-y:auto;" id="dropit">
+                  <% for(var i=0;i<login.notifications.length;i++){ %>
+                    <div><a href="<%= login.notifications[i].href %>"><%= login.notifications[i].message %></a></div>
+                    <% } %>
+                </div>
+              </li>
               <li class="navbar-text text-dark ml-3"><a class="nav-link" href="/dashboard"><%= uname %></a></li>
               <li class="navbar-text text-light ml-3"><a class=" nav-link btn custom-btn size-1" href="/logout">LOG OUT</a></li>
             <% } else { %>

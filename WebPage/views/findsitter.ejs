@@ -22,7 +22,9 @@
       <div class="col-sm-12">
         <br><h2>TOP RATED SITTERS</h2><br>
       </div>
-      <% for(var i=0;i<rows.length;i++){ %>
+      <% for(var i=0;i<rows.length;i++){
+        if(rows[i].Email!=rows.u_mail){
+        %>
       <div class="col-sm-3">
           <a href="/sitterdetails?id=<%= rows[i].Email %>"><img class="profile" src="<%= rows[i].Profile %>"></a>
           <div class="row">
@@ -49,7 +51,7 @@
               </div>
           </div>
       </div>
-      <% } %>
+      <% }} %>
     </div>
   </div>
   <% include footer %>

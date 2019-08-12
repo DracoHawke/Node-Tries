@@ -1,28 +1,45 @@
-<% include header %>
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/rs-chat@1.0.7/dist/rs-chat.min.css">
-<title>DogMate</title>
-</head>
-<body>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-  <script type="text/javascript" href="https://unpkg.com/rs-chat@1.0.7/dist/rs-chat.min.js"></script>
-  <script type="text/javascript">
-  RSChat.init({
-  socketUrl: 'http://localhost:8080/', // server url,
-    userId: '1', // logged in user id
-    name: 'ravi shukla' // logged in user name
-  });
+<div id="list">
+  <script>
+  //var url='http://localhost:1212/chatroom'
+  //console.log(url);
+  console.log('undefined');
+  function linki(url){
+    window.location.assign(url);
+    }
   </script>
-<div class="red" id="list">
+  
+  <h2 class="chat-head">Chat</h2>
+  <p id="uid" hidden><%= login.email %></p>
+  <p id="tome" hidden><%= to %></p>
+  <div class="row chat-row">
+    <div class="col-sm-4">
+      <div class="all-rooms mb-5 mt-2">
+        <input type="text"  class="fas fa-search form-control room-search" name="search" value="" placeholder="&#xF002; Search" style="font-weight:600; border-radius:0; ">
+        <% for(var i=0;i<ChatList.length;i++){ %>
+        <div class="row d-flex chat-list-container" onclick="return linki('/dashboard/chat?to=<%= ChatList[i].Email %>')" <% if(ChatList[i].Email==to){ %> style="background-color: #02022e;color: white;cursor: pointer;" <% } %>>
+          <div class="col-sm-2 ml-1" style="padding-left:0">
+            <img class="chat-profile" src="<%= ChatList[i].Profile %>" alt="" width="35" height="35">
+          </div>
+          <div class="col-sm-8">
+            <div class="chat-name ml-2"><%= ChatList[i].Fname %> <%= ChatList[i].Lname %>
+              <div class="date">02 July</div>
+            </div>
+          </div>
+          <div class="col-sm-1" style="padding-top: 1%;">
+            <p class="unread" id="<%=ChatList[i].Email%>"><% if(ChatList[i].unread!=0){ %><%= ChatList[i].unread %><% } %></p>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="chat-room mb-5 mt-2" id="chatroom">
+        <% if(to!='') {%>
+          <% include chatroom1 %>
+        <% } %>
+      </div>
 
-</div>
-<div class="chatlist">
-  <div class="ltstChat" style="cursor:pointer;" onclick="return RSChat.start('2','Manju Shukla')">
-    <div class="chatlistDt1">
-      <b>Manju </b>
-      <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor in</small>
+      </div>
     </div>
   </div>
-
 </div>
-</body>
-</html>

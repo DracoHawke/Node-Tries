@@ -21,6 +21,14 @@ module.exports=function(res,req){
           req.session.uname =rows[0].Fname;
           req.session.email_status=rows[0].status;
           req.session.profile=rows[0].Profile;
+          req.session.Uid=rows[0].Uid;
+          connection.query('SELECT `message`, `created_at`, `href` FROM `notifications` WHERE `Email`='+mysql.escape(req.session.email)+' and `seen`=0', function(err, rows, fields) {
+            if (err) {
+                throw err;
+            }
+            req.session.notifications=rows;
+            console.log(rows.length);
+          });
           connection.query('SELECT Sid,AdminStatus from sitters where Uid = "' + mysql.escape(rows[0].Uid) +'"', function(err, rows, fields) {
             if (!err){
               console.log('in2');

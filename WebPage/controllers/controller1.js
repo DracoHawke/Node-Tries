@@ -1,23 +1,41 @@
+//node modules
 var bodyParser=require('body-parser');
-var formvalidator=require('./formvalidator');
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
-insert_db=require('./insert_db');
-login=require('./login');
-var db_connect = require('./db-connect');
-confirmation=require('./confirmation');
-sitter=require('./sittersignup');
-sittervalid=require('./sittervalid');
 var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 const fileUpload = require('express-fileupload');
 const formidable = require('formidable');
-fileval=require('./fileval');
-dashboard=require('./dashboard');
-update_form=require('./update_form');
-findsitter=require('./findsitters');
-sitterdetails=require('./sitterdetails');
+var mysql = require('mysql');
+
+//controllers
+var formvalidator = require('./formvalidator');
+insert_db = require('./insert_db');
+login = require('./login');
+var db_connect = require('./db-connect');
+confirmation = require('./confirmation');
+sitter = require('./sittersignup');
+sittervalid = require('./sittervalid');
+fileval = require('./fileval');
+dashboard = require('./dashboard');
+update_form = require('./update_form');
+findsitter = require('./findsitters');
+sitterdetails = require('./sitterdetails');
+allsitters = require('./allsitters');
+allusers = require('./allusers');
+alldogs = require('./alldogs');
+details = require('./details');
+chat_list = require('./chat_list');
+message_db = require('./message_db');
+chatroom = require('./chatroom');
+ins_notif = require('./ins_notif');
+read_noti = require('./read_noti');
+get_notification = ('./get_notification');
+
+//admin modules
+admin_login = require('./admin_login');
+admin_home = require('./admin_home');
+
+var count = 0;
 
 var options = {
     host: 'localhost',
@@ -34,19 +52,11 @@ var options = {
 var sessionStore = new MySQLStore(options);
 
 module.exports=function(app){
+
   var server = require('http').Server(app);
-  var chat = require('rs-chat')(server);
+  var io = require('socket.io')(server);
+  server.listen(1212);
 
-  chat.init({
-    host     : 'localhost', // DB host
-    user     : 'root', // DB User
-    password : '', // DB Password
-    database : 'dogmate' // DB Name
-  });
-
-server.listen(1212);
-//app.use(formidableMiddleware());
-//app.use(fileUpload());
   app.use(session({
       //cookie: {maxAge: 60000},
       key: 'key1',
@@ -56,10 +66,20 @@ server.listen(1212);
       saveUninitialized: false,
       name: 'id'
   }));
-
   var con=db_connect();
   var urlencodedParser=bodyParser.urlencoded({extended:false});
   var path=[];
+
+  function myMiddleware (req, res, next) {
+    con.query('SELECT `message`, `created_at`, `href` FROM `notifications` WHERE `Email`='+mysql.escape(req.session.email)+' and `seen`=0', function(err, rows, fields) {
+      if (err) throw err;
+      console.log(rows);
+      req.session.notifications=rows;
+      console.log('success and here');
+      next()
+    });
+  }
+  app.use(myMiddleware);
 
   app.post('/',urlencodedParser,function(req,res){
     console.log(req.body);
@@ -67,6 +87,7 @@ server.listen(1212);
   });
 
   app.get('/',urlencodedParser,function(req,res){
+    count++;
     console.log(req.session);
     console.log(req.session.uname);
     if(req.session.uname){
@@ -79,9 +100,13 @@ server.listen(1212);
     else
       var uname='';
     console.log(sid);
-    res.render('index', {uname:uname,sid:sid});
+    res.render('index', {uname:uname,sid:sid,login:req.session});
   });
-
+//read notifications
+app.get('/read_noti',function(req,res){
+  read_noti(req,res);
+})
+//get notification
   app.get('/about',urlencodedParser,function(req,res){
     if(req.session.uname){
       if(req.session.sid)
@@ -92,7 +117,7 @@ server.listen(1212);
     }
     else
       var uname='';
-    res.render('about',{uname:uname,sid:sid});
+    res.render('about',{uname:uname,sid:sid,login:req.session});
   });
 
   app.get('/faq',urlencodedParser,function(req,res){
@@ -105,7 +130,7 @@ server.listen(1212);
     }
     else
       var uname='';
-    res.render('faq',{uname:uname,sid:sid});
+    res.render('faq',{uname:uname,sid:sid,login:req.session});
   });
 
   app.get('/blog',urlencodedParser,function(req,res){
@@ -118,7 +143,7 @@ server.listen(1212);
     }
     else
       var uname='';
-    res.render('blog',{uname:uname,sid:sid});
+    res.render('blog',{uname:uname,sid:sid,login:req.session});
   });
 
   app.get('/verify',urlencodedParser,function(req,res){
@@ -147,7 +172,7 @@ server.listen(1212);
     }
     else
       var uname='';
-    res.render('contact',{uname:uname,sid:sid});
+    res.render('contact',{uname:uname,sid:sid,login:req.session});
   });
 
   app.get('/dog',urlencodedParser,function(req,res){
@@ -160,7 +185,7 @@ server.listen(1212);
     }
     else
       var uname='';
-    res.render('registerdog',{uname:uname,sid:sid});
+    res.render('registerdog',{uname:uname,sid:sid,login:req.session});
   });
 
 //signup as sitter
@@ -187,7 +212,7 @@ server.listen(1212);
       var uname='';
       var sid='';
     console.log(req.query);
-    res.render('registeration',{data:req.query,uname:uname,sid:sid});
+    res.render('registeration',{data:req.query,uname:uname,sid:sid,login:req.session});
   }
   });
 
@@ -208,9 +233,13 @@ server.listen(1212);
     }
     var data_err=formvalidator.fval(req.body);
     data_err=fileval(req.files,data_err);
+    if(data_err.fileval==''){}
+    else {
+      data_err.success='';
+    }
     console.log(data_err);
   if(data_err.success==''){
-    res.render('registeration',{data:data_err,uname:uname,sid:sid});
+    res.render('registeration',{data:data_err,uname:uname,sid:sid,login:req.session});
   }
   else {
     req.body.pack='none';
@@ -222,34 +251,132 @@ server.listen(1212);
 });
 
 //dashboard
-app.get('/dashboard',function(req,res){
-  var error1={};
-  dashboard(req,res,error1);
+  app.get('/dashboard',function(req,res){
+    console.log(req.session.uname);
+    var error1={};
+    dashboard(req,res,error1);
+  });
+  app.post('/dashboard',function(req,res){
+    var error1={};
+    dashboard(req,res,error1);
+  });
+  app.get('/dashboard/:page',function(req,res){
+    console.log(req.url);
+    if(req.session.uname){
+      if(req.session.sid)
+        var sid=req.session.sid;
+      else
+        var sid='';
+      var uname=req.session.uname;
+    }
+    else
+      var uname='';
+    var page=req.params.page;
+    console.log(page);
+    if(page=='myacc'){
+    res.redirect('/dashboard')
+    }
+    else if(page=='chat')
+    {
+      chat_list(req,res);
+    }
+    else {
+      if(req.session.email_status==0){
+        console.log(sid);
+        res.render('dashboard',{uname:req.session.uname,sid:sid,send_data:{status_err:'not ver',file:''},error:{}});
+      }
+      else{
+      res.render('dashboard',{uname:uname,send_data:'',sid:sid,page:page,login:req.session});
+    }
+    }
+  });
+  app.post('/myacc',function(req,res){
+    var form = new formidable.IncomingForm();
+    form.parse(req,function (err, fields, files) {
+      req.body = fields;
+      req.files = files;
+      update_form(req,res);
+    });
+  });
+//chat room
+app.get('/chatroom',function(req,res){
+  chatroom(req,res);
 });
-app.post('/dashboard',function(req,res){
-  var error1={};
-  dashboard(req,res,error1);
+//socket EventListener
+var users={};
+var users_arr=[];
+io.on('connection',socket => {
+  socket.on('new-user',name => {
+    users[name]=socket;
+    var users_arr=[];
+    for(var propt in users){
+      users_arr.push(propt);
+    }
+    console.log(users_arr);
+    socket.broadcast.emit('user-connected',users_arr)
+  })
+  //check if online
+  socket.on('online',to=>{
+    var users_arr=[];
+    for(var propt in users){
+      users_arr.push(propt);
+    }
+    console.log(users_arr);
+    if(users_arr.indexOf(to)!=-1){
+      socket.emit('yes');
+    }
+  });
+  // send message
+  socket.on('send-chat-message',data => {
+    for(var propt in users){
+      if(socket.id==users[propt].id){
+        break;
+      }
+    }
+    send_data={message:data.message,from:propt};
+    for(var propt in users){
+      users_arr.push(propt);
+    }
+    console.log(users_arr);
+    if(users_arr.indexOf(data.to)!=-1){
+      console.log('in');
+      users[data.to].emit('chat-message',send_data);
+      users[data.to].on('unread',unread=>{
+      send_data.read=unread;
+      message_db(data,send_data);
+      console.log('agya me');
+    });
+  }
+  else {
+    send_data.read=0;
+    message_db(data,send_data);
+  }
 });
-app.get('/myacc',function(req,res){
-  console.log(req.url);
-  res.redirect('/dashboard');
+//save notification
+socket.on('notification-added',noti_data=>{
+
+  ins_notif(noti_data);
 });
-app.post('/myacc',function(req,res){
-  var form = new formidable.IncomingForm();
-  form.parse(req,function (err, fields, files) {
-    req.body=fields;
-    req.files=files;
-    update_form(req,res);
+  socket.on('disconnect',()=>{
+    for(var propt in users){
+      if(socket.id==users[propt].id){
+        delete users[propt];
+        break;
+      }
+    }
+    var users_arr=[];
+    for(var propt in users){
+      users_arr.push(propt);
+    }
+    socket.broadcast.emit('user-disconnected',users_arr);
   });
 });
-app.get('/chat',function(req,res){
-  console.log(req.url);
-  res.render('chat');
-});
-app.get('/settings',function(req,res){
-  console.log(req.url);
-  res.render('settings');
-});
+
+
+  app.get('/settings',function(req,res){
+    console.log(req.url);
+    res.render('settings');
+  });
 //find Mate
 app.get('/findmate',function(req,res){
   if(req.session.uname){
@@ -261,7 +388,7 @@ app.get('/findmate',function(req,res){
   }
   else
     var uname='';
-  res.render('findmate',{uname:uname,sid:sid});
+  res.render('findmate',{uname:uname,sid:sid,login:req.session});
 })
 app.post('/findmate',function(req,res){
   res.render('findmate');
@@ -293,6 +420,63 @@ app.post('/findsitter',function(req,res){
 		}
 	});
 });
+//admin-LOGIN
+app.get('/admin-login',function(req,res){
+  if(req.session.admin_name){
+    res.redirect('/admin');
+  }
+  else{
+    var admin_name='';
+    res.render('admin-login',{err:''});
+  }
+});
+app.post('/admin-login',function(req,res){
+  var form = new formidable.IncomingForm();
+  form.parse(req,function (err, fields, files) {
+    req.body=fields;
+    console.log(req.body);
+    admin_login(req,res);
+  });
+});
 
-  //app.listen(1212);
+app.get('/admin_home',function(req,res){
+  console.log(req.url);
+  admin_home(req,res,count);
+});
+
+app.get('/allsitters',function(req,res){
+  console.log(req.url);
+  allsitters(req,res);
+});
+app.get('/allusers',function(req,res){
+  console.log(req.url);
+  allusers(req,res);
+});
+app.get('/alldogs',function(req,res){
+  console.log(req.url);
+  alldogs(req,res);
+});
+
+app.get('/details',function(req,res){
+  console.log(req.url);
+  details(req,res);
+});
+var clients=0;
+app.get('/temp',function(req,res){
+  res.render('chatroom');
+});
+/*io.on('connection',function(socket) {
+  clients++;
+io.sockets.emit('broadcast',{ description: clients + ' clients connected!'});
+socket.on('disconnect', function () {
+ clients--;
+ io.sockets.emit('broadcast',{ description: clients + ' clients connected!'});
+});
+});*/
+
+/*app.get('*', function(req, res) {
+    res.redirect('/');
+});*/
+
+
 };

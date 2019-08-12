@@ -9,8 +9,8 @@ global.res='';
 var con=db_connect();
 
 module.exports=function(req,res){
-    val=req.body;
-    var id='';
+    val = req.body;
+    var id = '';
     function get_info(val, callback){
   const hash = bcrypt.hashSync(val.password, 10);
   var oldpath = req.files.fileUpload.path;
@@ -23,8 +23,8 @@ module.exports=function(req,res){
         console.log(err.code);
         if(err.code=='ER_DUP_ENTRY') {
           console.log('duplicate entry');
-          data_err={email_err:'E-mail Already exist'};
-          res.render('registeration',{data:data_err,uname:'',sid:''});
+          data_err = {email_err:'E-mail Already exist'};
+          res.render('registeration',{data:data_err,uname:' ',sid:'',did:""});
         }
       }
       else{

@@ -11,7 +11,16 @@
           <a href="/" class="red ">Home</a>&nbsp;/&nbsp;Contact Us
         </div>
     </div></div>
-  <h1>CONTACT US</h1>
+  <div class="container-fluid text-center mt-5">
+      <h2 class="mb-5 red">SEND US A MESSAGE</h2>
+      <form class="mb-5" method="post" action="">
+        <div class="input-contact m-3"><input type="text" name="name" value="" placeholder="Full Name"></div>
+        <div class="input-contact m-3"><input type="text" name="email" value="" placeholder="E-mail"></div>
+        <div class="input-contact m-3"><input type="number" name="phone" value="" placeholder="Phone"></div>
+        <div class="input-contact m-3"><textarea name="message" placeholder="Your Message" rows="4" cols="60"></textarea></div>
+        <div class="input-contact m-3"><button type="submit" class="btn custom-btn" name="button"><i class="fas fa-paper-plane m-r-6"></i>&nbsp;SEND</button></div>
+      </form>
+    </div>
   <% include footer %>
 </body>
 </html>

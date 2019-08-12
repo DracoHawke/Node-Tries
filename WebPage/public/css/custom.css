@@ -1,0 +1,17 @@
+.profile-img{
+border-radius: 20px;
+}
+.cent-pag {
+    padding-left: 10%;
+}
+.detail-box{
+  background-color: white;
+  margin-top: 4%;
+}
+img.image-dogs {
+    width: 198px;
+    height: 100%;
+}
+.key-values{
+  border-right: solid #33b35a 2px;
+}

@@ -6,7 +6,7 @@ var con=db_connect();
 module.exports=function(req,res){
   var sql="SELECT `sitters`.`Rating`,`sitters`.`Reviews`,`sitters`.`Description`, `users`.`Fname`, `users`.`Lname`,`users`.`Email`,`users`.`Profile` FROM `users` INNER JOIN `sitters` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`=1 and `users`.`status`=1 order by `sitters`.`Rating` DESC";
   con.query(sql, function (err, rows, fields) {
-    if(err) throw err;
+    if(err) throw errr;
     console.log(rows);
     if(req.session.uname){
       if(req.session.sid)
@@ -17,7 +17,8 @@ module.exports=function(req,res){
     }
     else
       var uname='';
-      res.render('findsitter',{uname:uname,sid:sid,rows:rows});
+      rows.u_mail=req.session.email;
+      res.render('findsitter',{uname:uname,sid:sid,rows:rows,login:req.session});
   });
 
 };

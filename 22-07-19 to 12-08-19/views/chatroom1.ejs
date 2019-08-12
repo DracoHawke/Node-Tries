@@ -1,0 +1,42 @@
+
+  <div class="row d-flex chat-list-container" style="margin:0; padding:2%; padding-right:0;">
+    <div class="col-sm-1 ml-1" style="padding-left:0">
+      <img class="chat-profile" src="<%= to_det[0].Profile %>" alt="" width="35" height="35">
+    </div>
+    <div class="col-sm-8">
+      <div class="chat-name">
+        <%= to_det[0].Fname %> <%= to_det[0].Lname %>
+        <div class="date" id="is_online"></div>
+      </div>
+    </div>
+    <div class="col-sm-2" style="margin-left:5%;">
+      <i class="fas fa-ellipsis-h icon-opener"></i>
+    </div>
+  </div>
+          <div class="msg_history" id="all_messages">
+            <%for(var i=0;i<all_mess.length;i++){
+              if(all_mess[i].Email==to){ %>
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> <img src="<%= to_det[0].Profile %>" alt="sunil"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p><%= all_mess[i].msg %></p>
+                  <span class="time_date"><% d=new Date(all_mess[i].created_at);  var time1= d.getHours()+':'+d.getMinutes()+' | '+d.getDate()+'-'+(d.getMonth()+1) %><%= time1 %></span></div>
+              </div>
+            </div>
+            <% } else if(all_mess[i].Email==login.email){ %>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p><%= all_mess[i].msg %></p>
+                <span class="time_date"><% d=new Date(all_mess[i].created_at);  var time1= d.getHours()+':'+d.getMinutes()+' | '+d.getDate()+'-'+(d.getMonth()+1) %><%= time1 %></span> </div>
+            </div>
+            <% } }%>
+          </div>
+          <div class="row message-sender">
+            <form name="message-sender" id="message-sender" style="width:100%" onsubmit="return sender_submit(this)">
+            <div class="input-group">
+              <input class="form-control" id="m" type="text" name="message" placeholder="Type a Message...." value="" />
+              <button type="submit" class="btn red"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </form>
+          </div>
