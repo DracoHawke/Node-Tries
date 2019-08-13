@@ -3,6 +3,11 @@
 <title>DogMate</title>
 </head>
 <body>
+  <% if(response!=''){ %>
+    <div class="alert alert-success" style="margin: auto;">
+      <strong>Message Sent !!</strong> We have Recieved your message and we will reply Shortly..
+    </div>
+  <% } %>
   <% include navigation %>
   <div class="container-fluid pricing">
     <div class="row">
@@ -15,7 +20,7 @@
       <h2 class="mb-5 red">SEND US A MESSAGE</h2>
       <form class="mb-5" method="post" action="">
         <div class="input-contact m-3"><input type="text" name="name" value="" placeholder="Full Name"></div>
-        <div class="input-contact m-3"><input type="text" name="email" value="" placeholder="E-mail"></div>
+        <div class="input-contact m-3"><input type="text" name="email" value="<%= login.email %>" <% if(login.email){ %> readonly <% } %>   placeholder="E-mail"></div>
         <div class="input-contact m-3"><input type="number" name="phone" value="" placeholder="Phone"></div>
         <div class="input-contact m-3"><textarea name="message" placeholder="Your Message" rows="4" cols="60"></textarea></div>
         <div class="input-contact m-3"><button type="submit" class="btn custom-btn" name="button"><i class="fas fa-paper-plane m-r-6"></i>&nbsp;SEND</button></div>

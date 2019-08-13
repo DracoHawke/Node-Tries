@@ -1,0 +1,85 @@
+.profile-img{
+border-radius: 20px;
+}
+.cent-pag {
+    padding-left: 10%;
+}
+.detail-box{
+  background-color: white;
+  margin-top: 4%;
+}
+img.image-dogs {
+    width: 100%;
+    height: 100%;
+}
+.key-values{
+  border-right: solid #33b35a 2px;
+}
+.greybox1{
+  background-color: rgb(236, 236, 238);
+  overflow: hidden;
+  border: 1px rgba(255,255,255,0.5) solid;
+}
+.photo1{
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  vertical-align: middle;
+}
+.centers7{
+  vertical-align: middle;
+  text-align: center;
+  color: rgb(173, 173, 174);
+  stroke: rgba(255,255,255,0.9);
+  stroke-width:4px;
+  font-size: 2vw;
+  margin-top: 5vh;
+}
+
+img.image-users {
+    margin: auto;
+    min-width: 15em;
+width: 45vmin;
+    border-radius: 3vmin;
+}
+
+/*scroll*/
+.scrollbar {
+height: 32em;
+background: #fff;
+overflow-y: scroll;
+}
+.force-overflow {
+min-height: 450px;
+}
+.scrollbar-primary::-webkit-scrollbar {
+width: 10px;
+background-color: #c1c1c1; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #33b35a; }
+
+/*scroll*/
+.messrow{
+  margin: 0;
+}
+.env:hover{
+      box-shadow:1px 1px 1px grey;
+      cursor: pointer;
+      background-color: #a9e3dd;
+      font-size: large;
+      transition: 0.3s;
+}
+
+
+@media (max-width: 575px) {
+  .centers7{
+    font-size: 10vw;
+    margin-top: 10vw;
+  }
+  .greybox1{
+    min-height: 35vw;
+  }
+}

@@ -59,7 +59,7 @@
           <li class="navbar-text li ml-3"><a href="/sitter">Register as Sitter</a></li>
           <div class="stick ml-2"></div>
           <% }%>
-          <li class="navbar-text li ml-3"><a href="/dog">Register a Dog</a></li>
+          <li class="navbar-text li ml-3"><a href="/registerdog">Register a Dog</a></li>
           <div class="stick ml-2"></div>
           <li class="navbar-text li ml-3">Support</li>
         </ul>
@@ -69,8 +69,8 @@
   <div class="col-xs-2 col-sm-2 col-lg-2 col-xl-2 col-md-2"></div>
 </div>
 <div class="row address1">
-  <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 col-md-12">
-    <nav class="navbar navbar-expand-md second-nav">
+  <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 col-md-12" style="border-bottom:solid 1px lightgray;">
+    <nav class="navbar navbar-expand-md second-nav" style="padding: 0;">
       <a href="/" class="navbar-brand">
         <img class="assets/images/logo-image" src="/assets/images/logo.png" alt="CoolBrand">
       </a>
@@ -89,7 +89,7 @@
             <% if (uname !== '') { %>
               <script>
                 $(document).ready(function(){
-                  
+
                     $("#read_noti").focusout(function(){
                       $.ajax({
                     		url: '/read_noti',

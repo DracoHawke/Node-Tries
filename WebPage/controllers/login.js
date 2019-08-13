@@ -27,7 +27,7 @@ module.exports=function(res,req){
                 throw err;
             }
             req.session.notifications=rows;
-            console.log(rows.length);
+            console.log(req.session.notifications);
           });
           connection.query('SELECT Sid,AdminStatus from sitters where Uid = "' + mysql.escape(rows[0].Uid) +'"', function(err, rows, fields) {
             if (!err){

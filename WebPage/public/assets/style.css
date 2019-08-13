@@ -377,3 +377,25 @@ img.image-topmates {
     /* height: 4em; */
     padding: 3vmin;
 }
+/*about us*/
+.about-text {
+    /* margin: 2vw; */
+    /* margin-bottom: 0; */
+    font-size: larger;
+    padding: 2vw;
+    font-weight: 400;
+    font-style: italic;
+    background-color: #a9e3dd;
+    box-shadow: 6px 6px 10px darkslategrey;
+    color: darkslategrey;
+}
+
+.container-fluid.about {padding: 10vw;padding-top: 2vw;padding-bottom: 5vw;text-align: center;}
+
+h1.about-heading {
+    margin-bottom: 2vw;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: -webkit-xxx-large;
+}

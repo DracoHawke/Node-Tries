@@ -1,4 +1,4 @@
-
+<% if(to_det.length>0){%>
   <div class="row d-flex chat-list-container" style="margin:0; padding:2%; padding-right:0;">
     <div class="col-sm-1 ml-1" style="padding-left:0">
       <img class="chat-profile" src="<%= to_det[0].Profile %>" alt="" width="35" height="35">
@@ -40,3 +40,10 @@
             </div>
           </form>
           </div>
+          <% }
+            else{ %>
+              <div class="msg_history">
+                  <center><h1 class="mt-5" style="color:gray">Sorry , the Person You are trying to message Does not exist</h1><center>
+                </div>
+            <% }
+          %>

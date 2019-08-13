@@ -28,6 +28,7 @@ module.exports=function(req,res,count){
               var sit_ad=rows;
               console.log(dog_ad);
               console.log(sit_ad);
+              console.log(req.session);
               res.render('admin',{details:req.session,count:count_admin,sit_ad:sit_ad,dog_ad:dog_ad});
             });
           });

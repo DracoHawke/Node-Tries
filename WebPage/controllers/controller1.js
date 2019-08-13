@@ -8,34 +8,38 @@ const formidable = require('formidable');
 var mysql = require('mysql');
 
 //controllers
-var formvalidator = require('./formvalidator');
-insert_db = require('./insert_db');
-login = require('./login');
+var formvalidator=require('./formvalidator');
+insert_db=require('./insert_db');
+login=require('./login');
 var db_connect = require('./db-connect');
-confirmation = require('./confirmation');
-sitter = require('./sittersignup');
-sittervalid = require('./sittervalid');
-fileval = require('./fileval');
-dashboard = require('./dashboard');
-update_form = require('./update_form');
-findsitter = require('./findsitters');
-sitterdetails = require('./sitterdetails');
-allsitters = require('./allsitters');
-allusers = require('./allusers');
-alldogs = require('./alldogs');
-details = require('./details');
-chat_list = require('./chat_list');
-message_db = require('./message_db');
-chatroom = require('./chatroom');
-ins_notif = require('./ins_notif');
-read_noti = require('./read_noti');
-get_notification = ('./get_notification');
+confirmation=require('./confirmation');
+sitter=require('./sittersignup');
+sittervalid=require('./sittervalid');
+fileval=require('./fileval');
+dashboard=require('./dashboard');
+update_form=require('./update_form');
+findsitter=require('./findsitters');
+sitterdetails=require('./sitterdetails');
+allsitters=require('./allsitters');
+allusers=require('./allusers');
+alldogs=require('./alldogs');
+details=require('./details');
+chat_list=require('./chat_list');
+message_db=require('./message_db');
+chatroom=require('./chatroom');
+ins_notif=require('./ins_notif');
+read_noti=require('./read_noti');
+get_notification=('./get_notification');
+registerdog=require('./registerdog');
+registerdogmore = require('./registerdogmore');
+registerdogfirst = require('./registerdogfirst');
 
 //admin modules
-admin_login = require('./admin_login');
-admin_home = require('./admin_home');
+admin_login=require('./admin_login');
+admin_home=require('./admin_home');
+admin_messages=require("./admin_messages");
 
-var count = 0;
+var count=0;
 
 var options = {
     host: 'localhost',
@@ -44,7 +48,7 @@ var options = {
     password: '',
     database: 'dogmate',
     // How frequently expired sessions will be cleared; milliseconds:
-    checkExpirationInterval: 600000,
+    checkExpirationInterval: 60000,
     // The maximum age of a valid session; milliseconds:
     expiration: 6000000,
 };
@@ -57,6 +61,7 @@ module.exports=function(app){
   var io = require('socket.io')(server);
   server.listen(1212);
 
+
   app.use(session({
       //cookie: {maxAge: 60000},
       key: 'key1',
@@ -68,18 +73,35 @@ module.exports=function(app){
   }));
   var con=db_connect();
   var urlencodedParser=bodyParser.urlencoded({extended:false});
+  var urlFile=fileUpload({
+    createParentPath: true,
+    useTempFiles: true,
+    tempFileDir: "/public/assets/temp"
+  });
   var path=[];
 
   function myMiddleware (req, res, next) {
-    con.query('SELECT `message`, `created_at`, `href` FROM `notifications` WHERE `Email`='+mysql.escape(req.session.email)+' and `seen`=0', function(err, rows, fields) {
-      if (err) throw err;
-      console.log(rows);
-      req.session.notifications=rows;
-      console.log('success and here');
-      next()
-    });
+    if(!req.session.admin_name){
+      con.query('SELECT `message`, `created_at`, `href` FROM `notifications` WHERE `Email`='+mysql.escape(req.session.email)+' and `seen`=0 order by created_at desc', function(err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+        req.session.notifications=rows;
+        console.log('success and here');
+        next();
+      });
+    }
+    else{
+      con.query('SELECT `message`, `created_at`, `href` FROM `notifications` WHERE `Email`="admin" and `seen`=0 order by created_at desc', function(err, rows, fields) {
+        if(err) throw err;
+        console.log(rows);
+        req.session.notifications=rows;
+        console.log('success and here');
+        next();
+      });
+    }
   }
-  app.use(myMiddleware);
+
+    app.use(myMiddleware);
 
   app.post('/',urlencodedParser,function(req,res){
     console.log(req.body);
@@ -162,7 +184,7 @@ app.get('/read_noti',function(req,res){
     login(res,req);
     });
 
-  app.get('/contact',urlencodedParser,function(req,res){
+  app.get('/contact',function(req,res){
     if(req.session.uname){
       if(req.session.sid)
         var sid=req.session.sid;
@@ -172,24 +194,61 @@ app.get('/read_noti',function(req,res){
     }
     else
       var uname='';
-    res.render('contact',{uname:uname,sid:sid,login:req.session});
+    res.render('contact',{uname:uname,sid:sid,login:req.session,response:''});
   });
 
-  app.get('/dog',urlencodedParser,function(req,res){
-    if(req.session.uname){
-      if(req.session.sid)
-        var sid=req.session.sid;
-      else
-        var sid='';
-      var uname=req.session.uname;
-    }
-    else
-      var uname='';
-    res.render('registerdog',{uname:uname,sid:sid,login:req.session});
+app.post('/contact',function(req,res){
+  var uname='';
+  var sid='';
+  if(req.session.uname){
+    var uname=req.session.uname;
+    if(req.session.sid)
+      var sid=req.session.sid;
+  }
+  var form = new formidable.IncomingForm();
+  form.parse(req,function (err, fields, files) {
+    console.log(fields);
+    var sql='INSERT INTO `tokens`(`name`,`email`, `msg`) VALUES ('+mysql.escape(fields.name)+','+mysql.escape(fields.email)+','+mysql.escape(fields.message)+')';
+    con.query(sql, function(err, result) {
+      if(err) throw err;
+      console.log('token added');
+    });
+    var data={};
+    data.from=fields.email;
+    data.message=fields.message;
+    data.to='admin';
+    ins_notif(data);
+    res.render('contact',{uname:uname,sid:sid,login:req.session,response:'1'});
   });
+});
+// REFISTER DOG
+app.get('/registerdog',urlencodedParser,function(req,res){
+  if(req.session.uname){
+    if(req.session.sid){
+      var sid = req.session.sid;
+    }
+    else{
+      sid="0";
+    }
+    if(req.session.did){
+      var did = req.session.did;
+      registerdogmore(req,res);
+    }
+    else{
+      registerdogfirst(req,res);
+    }
+  }
+  else{
+    res.render('registerdog', {uname: "",data: "", status: '', sid: "", did: '', set: "",login:req.session});
+  }
+});
+
+app.post('/registerdog',urlFile,function(req,res){
+  registerdog(req,res);
+});
 
 //signup as sitter
-  app.get('/sitter',urlencodedParser,function(req,res){
+  app.get('/sitter',function(req,res){
     sitter(res,req);
   });
 
@@ -293,10 +352,10 @@ app.get('/read_noti',function(req,res){
   app.post('/myacc',function(req,res){
     var form = new formidable.IncomingForm();
     form.parse(req,function (err, fields, files) {
-      req.body = fields;
-      req.files = files;
+      req.body=fields;
+      req.files=files;
       update_form(req,res);
-    });
+  });
   });
 //chat room
 app.get('/chatroom',function(req,res){
@@ -442,6 +501,31 @@ app.post('/admin-login',function(req,res){
 app.get('/admin_home',function(req,res){
   console.log(req.url);
   admin_home(req,res,count);
+});
+
+app.get('/adminnotify',function(req,res){
+  if(req.session.admin_name){
+    req.session.notifications={};
+    con.query('update notifications SET `seen`=1 WHERE `Email`="admin"', function(err, rows, fields) {
+      if(err) throw err;
+      console.log('updated');
+    })
+    con.query('SELECT `message`, `created_at`, `href` FROM `notifications` WHERE `Email`="admin" order by created_at desc', function(err, rows, fields) {
+      if(err) throw err;
+      console.log(rows);
+      var notifications=rows;
+      console.log('agya ji');
+      res.render('notifications',{notifications:notifications,details:req.session});
+    });
+}
+else{
+  res.redirect('/');
+}
+});
+
+app.get('/admin_messages',function(req,res){
+  console.log(req.url);
+  admin_messages(req,res);
 });
 
 app.get('/allsitters',function(req,res){
