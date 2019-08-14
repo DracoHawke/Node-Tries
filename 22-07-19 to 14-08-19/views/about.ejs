@@ -10,8 +10,22 @@
         <div class="col-sm-11 col-md-11 col-lg-11 size-1 font-weight-bold">
           <a href="/" class="red ">Home</a>&nbsp;/&nbsp;About Us
         </div>
-    </div></div>
+    </div>
+  </div>
   <h1>ABOUT US</h1>
+  <div id="edited">
+    <script>
+      $('document').ready(function(){
+        var wrapper = $("#edited");
+        $('#m1').click(function() {
+          var a = decodeURI('<%= data %>');
+          console.log(a.length);
+        });
+        $("#m1").trigger("click");
+      });
+    </script>
+    <input type="button" hidden id="m1">
+  </div>
   <% include footer %>
 </body>
 </html>

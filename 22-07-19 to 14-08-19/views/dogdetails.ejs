@@ -6,8 +6,9 @@
         <h2 class="my-account headmydog"><% var s = send_data[0]; if(typeof send_data !== 'undefined') { %><%= s.DogName %><% } %></h2>
       </div>
     </div>
+    <% if (typeof error !== "undefined") { if (error != "") { %> <span class = "red" > <%= error %> </span><% } } %>
     <% if (typeof send_data.status_err !== 'undefined') { if (send_data.status_err == "verified") { if (did==1){ %>
-      <form class="size-2" action="/dogdetails" name="myform2" id="myform2" method="post" enctype="multipart/form-data">
+      <form class="size-2" action="/dogdetails?did=<%= dogdid %>&dno=<%= dno %>" name="myform2" id="myform2" method="post" enctype="multipart/form-data">
         <div class="card-deck">
           <div class="card noborder1">
             <div class="card-body">
@@ -209,7 +210,7 @@
           <div class="card noborder1">
             <div class="card-body">
               <p class="card-text">Age<span class="red2">*</span></p>
-              <input type="text" class="form-control sel1 dog_age focus1" name="dog_age" placeholder="Dog Age" value="<% if(typeof send_data !== 'undefined'){ %><%= s.DogAge %><% } %>">
+              <input type="text" class="form-control sel1 dog_age focus1" id = "dog_age" name="dog_age" placeholder="Dog Age" value="<% if(typeof send_data !== 'undefined'){ %><%= s.DogAge %><% } %>">
               <p class="red2" id="dog_age0"></p>
             </div>
           </div>

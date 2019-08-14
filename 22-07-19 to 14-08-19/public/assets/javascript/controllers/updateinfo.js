@@ -13,14 +13,12 @@ module.exports = function(req,res,check){
     if(req.session.sid){var sid = req.session.sid;}else{var sid = "";}
     if(req.session.did){var did = req.session.did;}else{var did = "";}
     if(check == "nopass") {
-      console.log("nopass");
       var data_err = formvalidatornopass.fval(req.body);
       if(Object.keys(req.files).length == 1){
         var c = Object.keys(req.files);
         var d = req.files;
         var e = d[c[0]];
         if(e.name == "" && e.mimetype == 'application/octet-stream'){
-          console.log("no file uploaded");
           if(data_err.success == ""){
             res.render("dashboard",{uname: uname, sid: sid, did: did, send_data: req.body, error: data_err, check: "myacc", login: req.session});
           }
@@ -54,20 +52,18 @@ module.exports = function(req,res,check){
       }
     }
     else if(check == "passpresent"){
-      console.log("passpresent");
       var data_err = formvalidatorpass.fval(req.body);
       if(Object.keys(req.files).length == 1){
         var c = Object.keys(req.files);
         var d = req.files;
         var e = d[c[0]];
         if(e.name == "" && e.mimetype == 'application/octet-stream'){
-          console.log("no file uploaded, err1: ", data_err);
           if(data_err.success == ""){
-            console.log("render");
+            data_err = JSON.stringify(data_err);
             //res.render("dashboard",{uname: uname, sid: sid, did: did, send_data: req.body, error: data_err, check: "myacc", login: req.session});
+            res.redirect("/dashboard/myacc?d="+data_err);
           }
           else{
-            console.log("enter?");
             insert_db_passnofile(req,res);
           }
         }
@@ -80,18 +76,19 @@ module.exports = function(req,res,check){
             data_err.success = "";
             data_err.file_err = "Please select valid format files"; // set err feild for file.
           }
+          if(data_err.success == ""){
+            data_err = JSON.stringify(data_err);
+            res.redirect("/dashboard/myacc?d="+data_err);
+          }
+          else{
+            insert_db_passfile(req,res);
+          }
         }
         else{
           data_err.success = "";
           data_err.file_err = "Please select valid format files"; // set err feild for file.
-        }
-        if(data_err.success == ""){
           data_err = JSON.stringify(data_err);
-          //res.render("dashboard",{uname: uname, sid: sid, did: did, send_data: req.body, error: data_err, check: "myacc", login: req.session});
           res.redirect("/dashboard/myacc?d="+data_err);
-        }
-        else{
-          insert_db_passfile(req,res);
         }
       }
     }

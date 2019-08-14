@@ -4,7 +4,7 @@ var mes=require('./dogerrmes');
 const schema_name = Joi.object().keys({dog_name: Joi.string().min(2).max(30).required()})
 const schema_breed = Joi.object().keys({dog_breed: Joi.string().regex(/^[a-zA-Z_\-\\s]*$/).required()})
 const schema_gender = Joi.object().keys({dog_gender: Joi.string().valid(['Male','Female']).required()})
-const schema_age = Joi.object().keys({dog_age:Joi.number().less(20).positive().precision(2).required()})
+const schema_age = Joi.object().keys({dog_age:Joi.string().regex(/^([0-9]\.[0-9])$|^(1[0-9].[0-9])$/).required()})
 const schema_info = Joi.object().keys({dog_info:Joi.string().allow('').optional()})
 
 exports.fval=function(app){
