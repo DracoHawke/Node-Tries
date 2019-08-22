@@ -55,6 +55,8 @@ dogsofuser = require('./dogsofuser');
 admin_about = require('./admin_about');
 admin_faq = require('./admin_faq');
 admin_blog = require('./admin_blog');
+site_home = require('./site_home');
+newsteller = require('./newsteller');
 
 var count = 0;
 
@@ -73,7 +75,7 @@ var options = {
 var sessionStore = new MySQLStore(options);
 
 module.exports = function(app) {
-  var urlFileUpload = fileUpload({
+  var urlFile = fileUpload({
    createParentPath: true,
    useTempFiles: true,
    tempFileDir: "/public/assets/temp"
@@ -141,27 +143,15 @@ module.exports = function(app) {
   })
   //get notification
   app.get('/about',urlencodedParser,function(req,res){
-    if(req.session.uname){
-      about(req,res);
-    }
-    else
-      res.redirect("/");
+    about(req,res);
   });
 
   app.get('/faq',urlencodedParser,function(req,res){
-    if(req.session.uname){
-      faq(req,res);
-    }
-    else
-      res.redirect("/");
+    faq(req,res);
   });
 
   app.get('/blog',urlencodedParser,function(req,res){
-    if(req.session.uname){
-      blog(req,res);
-    }
-    else
-      res.redirect("/");
+    blog(req,res);
   });
 
   app.get('/verify',urlencodedParser,function(req,res){
@@ -283,7 +273,7 @@ module.exports = function(app) {
     }
   })
 
-  app.post('/registeration',urlFileUpload,function(req,res){
+  app.post('/registeration',urlFile,function(req,res){
     console.log(req.files);
     console.log(req.body);
     if(req.session.uname)
@@ -327,7 +317,7 @@ module.exports = function(app) {
     }
   })
 
-  app.post('/registerdog',urlFileUpload,function(req,res){ // function when a user enters information into the dog form and passes js validation
+  app.post('/registerdog',urlFile,function(req,res){ // function when a user enters information into the dog form and passes js validation
     registerdogpost(req,res);
   });
 
@@ -335,23 +325,23 @@ module.exports = function(app) {
     sitter(res,req);
   })
 
-  app.post('/registersitter',urlFileUpload,function(req,res){
+  app.post('/registersitter',urlFile,function(req,res){
     sittervalid(req,res);
   });
 
-  app.get('/findsitter',urlFileUpload,function(req,res){
+  app.get('/findsitter',urlFile,function(req,res){
     findsitter(req,res);
   });
 
-  app.get('/sitterdetails',urlFileUpload,function(req,res){
+  app.get('/sitterdetails',urlFile,function(req,res){
     sitterdetails(req,res);
   })
 
-  app.get('/findmate',urlFileUpload,function(req,res){
+  app.get('/findmate',urlFile,function(req,res){
     findmate(req,res);
   });
 
-  app.get('/matedetails',urlFileUpload,function(req,res){
+  app.get('/matedetails',urlFile,function(req,res){
     matedetails(req,res);
   })
 
@@ -362,7 +352,7 @@ module.exports = function(app) {
     dashboard(req,res,error1,"myacc");
   });
 
-  app.get('/dashboard/:page',urlFileUpload,function(req,res){
+  app.get('/dashboard/:page',urlFile,function(req,res){
     var page = req.params.page;
     var error1 = {};
     if (Object.keys(req.query).length != 0){
@@ -394,7 +384,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/dashboard/:page',urlencodedParser,urlFileUpload,function(req,res){
+  app.post('/dashboard/:page',urlencodedParser,urlFile,function(req,res){
     var page = req.params.page;
     if("location" == page){
       if(req.body.locationnew){
@@ -422,7 +412,7 @@ module.exports = function(app) {
     }
   });
 
-  app.get('/searchmate',urlFileUpload,function(req,res){
+  app.get('/searchmate',urlFile,function(req,res){
     if(!req.session.uname){
       console.log('in no status');
       res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
@@ -455,12 +445,12 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/searchmate',urlFileUpload,function(req,res){
+  app.post('/searchmate',urlFile,function(req,res){
     // somehow in searchmate post, just redirect to intial page.
     res.redirect("/findmate");
   });
 
-  app.get('/searchsitter',urlFileUpload,function(req,res){
+  app.get('/searchsitter',urlFile,function(req,res){
     if(!req.session.uname){
       // check if logged in.
       res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes',login:req.session});
@@ -508,12 +498,12 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/searchsitter',urlFileUpload,function(req,res){
+  app.post('/searchsitter',urlFile,function(req,res){
     // somehow in searchsitter post, redirect to initial page.
     res.redirect("/findsitter");
   });
 
-  app.get('/dogdetails',urlFileUpload,function(req,res){
+  app.get('/dogdetails',urlFile,function(req,res){
     if(!req.session.uname){
       console.log('in no status');
       res.render('AuthenticationNeeded',{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, alert: 'yes'});
@@ -564,7 +554,7 @@ module.exports = function(app) {
     }
   })
 
-  app.post('/dogdetails',urlFileUpload,function(req,res){
+  app.post('/dogdetails',urlFile,function(req,res){
     dogdetails_post(req,res);
   });
 
@@ -699,6 +689,14 @@ module.exports = function(app) {
   }
   });
 
+  app.get('/help',function(req,res){
+    res.render("help",{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, login: req.session})
+  })
+
+  app.get('/terms',function(req,res){
+    res.render("terms",{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, login: req.session})
+  })
+
   app.get('/admin_messages',function(req,res){
     console.log(req.url);
     admin_messages(req,res);
@@ -733,7 +731,7 @@ module.exports = function(app) {
     admin_about(req,res);
   });
 
-  app.post('/admin_about',urlFileUpload,function(req,res){
+  app.post('/admin_about',urlFile,function(req,res){
     var data = req.body.myeditablediv;
     var sql = " UPDATE `admin` INNER JOIN (select min(`no`) as Max FROM `admin`) t2 ON `admin`.`no` = t2.MAX SET `admin`.`about` = "+mysql.escape(data);
     console.log(sql);
@@ -747,7 +745,7 @@ module.exports = function(app) {
     admin_faq(req,res);
   })
 
-  app.post('/admin_faq',urlFileUpload,function(req,res){
+  app.post('/admin_faq',urlFile,function(req,res){
     var data = req.body.myeditablediv;
     var sql = " UPDATE `admin` INNER JOIN (select min(`no`) as Max FROM `admin`) t2 ON `admin`.`no` = t2.MAX SET `admin`.`faq` = "+mysql.escape(data);
     console.log(sql);
@@ -761,7 +759,7 @@ module.exports = function(app) {
     admin_blog(req,res);
   })
 
-  app.post('/admin_blog',urlFileUpload,function(req,res){
+  app.post('/admin_blog',urlFile,function(req,res){
     var data = req.body.myeditablediv;
     var sql = " UPDATE `admin` INNER JOIN (select min(`no`) as Max FROM `admin`) t2 ON `admin`.`no` = t2.MAX SET `admin`.`blog` = "+mysql.escape(data);
     console.log(sql);
@@ -771,9 +769,31 @@ module.exports = function(app) {
     })
   })
 
+  app.get('/site_home',function(req,res){
+    site_home(req,res);
+  });
+
+  app.post('/newsteller',urlFile,function(req,res){
+    console.log("in newsteller");
+    console.log(req.body);
+    if(Object.keys(req.body).length == 1){
+      console.log(req.body.length);
+      newsteller (req.body,res);
+    }
+    else{
+      console.log('no / too many feilds ', Object.keys(req.body).length);
+      res.redirect('/');
+    }
+  })
+
   var clients = 0;
 
   app.get('/temp',function(req,res){
     res.render('chatroom');
   });
+
+  app.get('*',function (req, res) {
+    res.render('notfound');
+  });
+
 };

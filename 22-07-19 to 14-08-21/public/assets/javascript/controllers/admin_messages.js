@@ -1,9 +1,9 @@
 var db_connect = require('./db-connect');
 var mysql = require('mysql');
 
-connection=db_connect();
+connection = db_connect();
 
-module.exports=function(req,res){
+module.exports = function(req,res){
   if(!req.query.tid){
     var sql='SELECT `tid`,`email`,`name`, `msg`, `created_at`, `seen` FROM `tokens` ORDER BY `tokens`.`created_at` ASC';
     connection.query(sql, function(err, rows, fields) {

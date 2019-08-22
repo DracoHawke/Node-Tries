@@ -12,6 +12,32 @@
   </div>
 </footer>
 </div>
+<div class="modal fade" id="reply">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2>send newsletter</h2>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="editableform1">
+          <form method="post" action="/newsteller" enctype="multipart/form-data">
+            <textarea name="news" rows="15" style="width:100%"></textarea>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class = "modal-footer">
+        <button class="btn btn-primary submit center-block Submit">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- JavaScript files-->
 <script src="../assets/vendor/jquery/jquery.min.js"></script>
 <script src="../assets/vendor/popper.js/umd/popper.min.js"> </script>
@@ -19,8 +45,8 @@
 <script src="../assets/javascript/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
 <script src="../assets/vendor/jquery.cookie/jquery.cookie.js"> </script>
 <% if(typeof url1 !== "undefined"){ if(url1.search("/admin_home" != -1)) { %>
-<script src="../assets/vendor/chart.js/Chart.min.js"></script>
-<script src="../assets/javascript/js/charts-home.js"></script>
+  <script src="../assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="../assets/javascript/js/charts-home.js"></script>
 <% } } %>
 <script src="../assets/vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>

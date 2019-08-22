@@ -17,7 +17,7 @@
           <div>Age:<span class="values"><%= rows[0].DogAge %></span></div>
         </div>
         <div class="details">
-          <div>Breed:<span class="values"><%= rows[0].DogBreed %></span></div>
+          <div>Breed:<span class="values"><% rows[0].DogBreed = rows[0].DogBreed.replace(/_/g,' '); %><%= rows[0].DogBreed %></span></div>
         </div>
         <div class="details">
           <span >Rating:</span>

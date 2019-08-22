@@ -1,4 +1,46 @@
 <% include adminheader %>
+<script src = "https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type = "text/javascript">
+  tinymce.init({
+    selector: '#myeditablediv',
+    inline: true,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    // enable title field in the Image dialog
+    image_title: true,
+    // enable automatic uploads of images represented by blob or data URIs
+    automatic_uploads: true,
+    // add custom filepicker only to Image dialog
+    file_picker_types: 'image',
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+    file_picker_callback: function(cb, value, meta) {
+      var input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+
+      input.onchange = function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function () {
+          var id = 'blobid' + (new Date()).getTime();
+          var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+          var base64 = reader.result.split(',')[1];
+          var blobInfo = blobCache.create(id, file, base64);
+          blobCache.add(blobInfo);
+
+          // call the callback and populate the Title field with the file name
+          cb(blobInfo.blobUri(), { title: file.name });
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
+  });
+  </script>
 <div class="container mb-5 mt-5">
 <div id="new-updates" class="card updates recent-updated">
   <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
@@ -10,7 +52,7 @@
   <div id="updates-box" role="tabpanel" class="collapse show">
     <ul class="news list-unstyled">
       <!-- Item-->
-      <% for(var i=0;i<messages.length;i++){%>
+      <% for(var i=0;i<messages.length;i++){ %>
       <li class="row justify-content-between env messrow" data-toggle="modal" data-target="#me<%= messages[i].tid %>" onclick="message_read(<%= messages[i].tid %>)">
         <div class="left-col d-flex col-md-6 col-sm-6 ">
           <div class="icon"><i class="icon-rss-feed"></i></div>
@@ -35,18 +77,19 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-
         <%= messages[i].msg %>
       </div>
 
       <!-- Modal footer -->
-      <div class="modal-footer">
+      <div class = "modal-footer">
+        <% var r = "?reply="+messages[i].email %>
+        <a href = "<%= r %>" class="btn btn-primary" data-toggle="modal" data-target="#reply">Reply</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-<%}%>
+<% } %>
 </div></div></div>
 <!-- SCRIPT TO SEND READ -->
 <script>

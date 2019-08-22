@@ -1,0 +1,90 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.parent1 {
+  position: relative;
+  height: 100vh;
+}
+
+.parent1 .child1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.child1 {
+  max-width: 767px;
+  width: 100%;
+  line-height: 1.4;
+  padding: 0px 15px;
+}
+
+.child1 .content1 {
+  position: relative;
+  height: 150px;
+  line-height: 150px;
+  margin-bottom: 25px;
+}
+
+.child1 .content1 h1 {
+  font-size: 186px;
+  font-weight: 900;
+  margin: 0px;
+  text-transform: uppercase;
+  background-color: #aaaab3;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.child1 h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.child1 p {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+}
+
+.child1 a {
+  display: inline-block;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  background: #5c91fe;
+  padding: 10px 40px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 15px;
+  margin-top: 15px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.child1 a:hover {
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 767px) {
+  .child1 .content1 {
+    height: 110px;
+    line-height: 110px;
+  }
+  .child1 .content1 h1 {
+    font-size: 120px;
+  }
+}

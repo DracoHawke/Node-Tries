@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node" : "12.6.0"
+  },
   "dependencies": {
     "@hapi/joi": "^15.1.0",
     "bcryptjs": "^2.4.3",

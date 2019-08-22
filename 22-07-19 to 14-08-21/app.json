@@ -1,0 +1,5 @@
+{
+  "name": "node try",
+  "description": "first node app deployment",
+  "keywords": ["node","express","static"];
+}
