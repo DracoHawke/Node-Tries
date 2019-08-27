@@ -1,0 +1,284 @@
+.upper{
+  position: relative;
+
+}
+header.site-header {
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.h-contact {
+    display: inline-block;
+    position: relative;
+    padding-left: 40px;
+    text-align: left;
+}
+.h-icon1 {
+    display: inline-block;
+    border-radius: 100px;
+    padding: 5px 0;
+    height: 35px;
+    width: 35px;
+    color: white;
+    background-color: #f26821;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    margin-right: 15px;
+}
+.text1{
+  color: #f26821;
+  font-weight: bold;
+
+}
+.text2 {
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 15px;
+}
+.h-contact:first-child {
+  margin-right: 25px;
+
+}
+
+.navnav{
+      background-color: rgba(0,0,0,0.6);
+      margin-top: 14px;
+}
+.nav2{
+  color: white;
+}
+.navb5{
+  color: white;
+}
+.navb6{
+  color: white;
+  font-size: .8em;
+}
+
+.navbar p{
+  margin-bottom: 0;
+}
+.img1{
+  position: absolute;
+  left: 0;
+
+
+
+}
+
+.navigation1{
+    display: flex;
+  flex-direction: row;
+}
+.navigation1 .login-user{
+padding-left: 29px;
+position: relative;
+}
+ul li{
+  list-style: none;
+}
+footer.site-footer{
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+
+}
+.copy2{
+  color: white;
+  font-size: .8em;
+  margin-top: 10px;
+}
+.foot1 li{
+  display: inline-block;
+
+}
+.foot1{
+  margin-top: 10px;
+}
+.awesome1{
+  
+ display: inline-block;
+    border-radius: 100px;
+    padding: 10px 10px;
+    height: 35px;
+    width: 35px;
+    color: white;
+    background-color:#44609c ;
+  
+    left: 0;
+    text-align: center;
+    
+}
+.awesome2{
+
+  
+   border-radius: 100px;
+    padding: 10px 10px;
+    height: 35px;
+    width: 35px;
+    color: white;
+
+
+  
+    text-align: center;
+  
+    background-color: #c92b82;
+}
+.awesome3{
+   border-radius: 100px;
+   padding: 10px 10px;
+    height: 35px;
+    width: 35px;
+    color: white;
+
+
+  
+    text-align: center;
+  
+    background-color:#e60023 ;
+}
+.awesome4{
+   border-radius: 100px;
+    padding: 10px 10px;
+    height: 35px;
+    width: 35px;
+    color: white;
+
+
+  
+    text-align: center;
+   
+    background-color:#f89a3a ;
+}
+.navbar-nav{
+  position: relative;
+}
+.nav-item::after{
+
+border-left: 2px solid white;
+  height: 20px;
+content: "";
+position: absolute;
+bottom: 9px;
+
+}
+.holo{
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left:50%;
+ transform: translate(-50%, -50%);
+
+ 
+}
+
+.navbar-nav .nav-item:first-child::after{
+  content: none;
+}
+button.owl-next{
+      position: absolute;
+    color: white !important;
+    top: 50%;
+    right: 0;
+    z-index: 999;
+    outline:none;
+     transform: translate(-50%, -50%);
+}
+
+button.owl-prev{
+      position: absolute;
+    top: 50%;
+    color: white !important;
+    z-index: 999;
+    left:0%;
+outline: none;
+ transform: translate(0,-50% );
+}
+
+button.owl-prev span {
+ background-image:url("../images/arrow-left.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+
+  height: 50px;
+  width: 60px;
+  display: inline-block;
+  font-size: 0;
+
+}
+
+button.owl-next span {
+ background-image:url("../images/arrow-right.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+
+  height: 50px;
+  width: 60px;
+  display: inline-block;
+  font-size: 0;
+}
+.owl-dots{
+  display: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+  header.site-header {
+    position:relative;
+  }
+  footer.site-footer{
+    position: relative;
+  }
+  .check{
+  background-color:#10102b;
+
+}
+button.owl-prev{
+  display: none;
+}
+button.owl-next{
+  display: none;
+
+}
+.check1{
+      padding: 20px;
+    margin-left: 28%;
+}
+
+.fa-bars:before {
+    content: "\f0c9";
+    color: white;
+  }
+  .upper1{
+        margin: 0 auto;
+    display: block;
+    /* width: 100%; */
+    text-align: center;
+  }
+
+
+
+@media only screen and (max-width: 991px) {
+  .nav-item::after{
+    display: none;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .holo{
+ width: 100%;
+}
+}

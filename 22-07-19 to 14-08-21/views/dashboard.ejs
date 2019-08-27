@@ -11,6 +11,12 @@
     <% if(send_data.status_err=='not ver') { %><% console.log("Not verified"); %>
           <h2 class="red">Please Verify Your email to Access This Feature......</h2>
     <%  } else { %><% console.log("verified1"); %>
+    <% if(check == "myacc"){ %> <a href="/" class="red ">Home</a>&nbsp;/&nbsp;About Us
+    <% } else if(check == "mydogs"){ %> <a href="/" class="red ">Home</a>&nbsp;/&nbsp;My Dogs
+    <% } else if(check == "settings"){ %> <a href="/" class="red ">Home</a>&nbsp;/&nbsp;Settings
+    <% } else if(check == "dogdetails"){ %> <a href="/" class="red ">Home</a>&nbsp;/&nbsp;<a href="/dashboard/mydogs" class="red ">My Dogs<a>&nbsp;/&nbsp;<% var s = send_data[0]; if(typeof send_data !== 'undefined') { %><%= s.DogName %><% } %>
+    <% } else if(check == "chat"){ %> <a href="/" class="red ">Home</a>&nbsp;/&nbsp;Chat
+    <% } else { %> <%= check %> HELLO <% include myaccount %> <% console.log("myaccount default"); } %>
       <div class="row">
         <div class="col-lg-3 menu-card">
           <div class="row">

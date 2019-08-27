@@ -1,0 +1,120 @@
+span.a1{
+  font-size: 1em;
+  font-weight: 500;
+  color: black;
+}
+
+a.button1{
+  width: 100%;
+  border-radius: 15px;
+  color: white;
+  background-color: #E62F2E;
+  font-weight: 500;
+  font-size: 1em;
+  text-align: center;
+}
+
+img#logo{
+  height: auto;
+  width: 10em;
+}
+
+div.box1{
+  margin-left: 5em;
+  margin-right: 5em;
+  width: 100%;
+}
+
+div.navmarl{
+  /* margin-left: 12vw; */
+}
+
+div#navlinks1{
+  margin-left: 3em;
+}
+
+.navico1{
+  background-color: rgb(250, 250, 250);
+  height: 1.5em;
+  border-radius: 0.6em;
+}
+
+img.home.img1{
+  width: 100%;
+  height: auto;
+}
+
+.container1{
+  padding:0;
+}
+
+.container1.cont1{
+  padding-right:20px;
+}
+
+.container1.cont2{
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.container1.cont3{
+  padding-left:20px;
+}
+
+div.card.crd1{
+  border:none;
+  /* width: 6em; */
+}
+
+img.home.img2{
+  width: 100%;
+  height: auto;
+}
+
+.border1{
+  border: 1px solid rgb(237, 242, 246);
+}
+
+div.martop1{
+  margin-top: 1em;
+}
+
+p.tcent1{
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-top: 1em;
+}
+
+p.tcent1.lorem1{
+  font-size:1em;
+  font-weight: 400;
+  margin-top: 0.5em;
+}
+
+button.button2{
+  width: 50%;
+  margin-top: 1em;
+  height: 2.5em;
+  border-radius: 15px;
+  color: white;
+  border: none;
+  background-color: #E62F2E;
+  font-weight: 500;
+  font-size: 1em;
+  text-align: center;
+}
+
+.cardbut1{
+    text-align: center;
+}
+
+@media (max-width: 991px){
+  div.navmarl{
+    margin-left: 0;
+  }
+  div#navlinks1{
+    margin-left: 0;
+  }
+}

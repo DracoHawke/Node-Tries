@@ -6,7 +6,12 @@ var mysql = require('mysql');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 const formidable = require('formidable');
+var Joi = require('@hapi/joi');
 
+enterdata = require('./enterdata');
+renderpassrec = require('./renderpassrec');
+send_mail_pass = require('./send_mail_pass')
+mes = require('./derrmes');
 db_connect = require('./db-connect');
 formvalidator = require('./formvalidator');
 checkval = require('./checkval');
@@ -46,7 +51,7 @@ dogdetails_post = require('./dogdetails_post');
 //admin modules
 admin_login = require('./admin_login');
 admin_home = require('./admin_home');
-admin_messages=require("./admin_messages");
+admin_messages = require("./admin_messages");
 allsitters = require('./allsitters');
 allusers = require('./allusers');
 alldogs = require('./alldogs');
@@ -57,6 +62,7 @@ admin_faq = require('./admin_faq');
 admin_blog = require('./admin_blog');
 site_home = require('./site_home');
 newsteller = require('./newsteller');
+templater = require('./templater');
 
 var count = 0;
 
@@ -83,8 +89,8 @@ module.exports = function(app) {
   var server = require('http').Server(app);
   var io = require('socket.io')(server);
 
-  server.listen(3000);
-  console.log('listening on port 3000...');
+  server.listen(12122);
+  console.log('listening on port 12122...');
 
   app.use(session({
       //cookie: {maxAge: 60000},
@@ -99,8 +105,6 @@ module.exports = function(app) {
   var urlencodedParser = bodyparser.urlencoded({extended:false});
 
   var connection = db_connect();
-
-  var urlencodedParser = bodyparser.urlencoded({extended:false});
 
   var path = [];
 
@@ -396,6 +400,9 @@ module.exports = function(app) {
       else if(req.body.location){
         getlocation(req,res);
       }
+      else{
+        res.redirect('/dashboard/settings');
+      }
     }
     else if(page == "myacc"){
       if(typeof req.body.password !== "undefined"){
@@ -690,7 +697,7 @@ module.exports = function(app) {
   });
 
   app.get('/help',function(req,res){
-    res.render("help",{uname : " ", data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, login: req.session})
+    res.render("help",{uname : req.session.uname, data: "", status: req.session.status, sid: req.session.sid, did: req.session.did, login: req.session})
   })
 
   app.get('/terms',function(req,res){
@@ -784,6 +791,149 @@ module.exports = function(app) {
       console.log('no / too many feilds ', Object.keys(req.body).length);
       res.redirect('/');
     }
+  })
+
+  app.get("/recoverpass",function(req,res){
+    if(req.query.check && req.query.id){
+      renderpassrec(req,res);
+    }
+    else if(req.session.uname){
+      if(req.session.sid){
+        var sid = req.session.sid;
+      }
+      else{
+        sid = "0";
+      }
+      if(req.session.did){
+        var did = req.session.did;
+      }
+      else{
+        var did = "0";
+      }
+      res.render('recoverpass', {error: {}, uname: req.session.uname, status: req.session.status, sid: sid, did: did, login:req.session, page: ""});
+    }
+    else{
+      res.render('recoverpass', {error: {}, login:req.session ,uname: " ",status: "", sid: "0", did: "0", page: ""});
+    }
+  })
+
+  app.post("/recoverpass",urlFile,function(req,res){
+    console.log(req.body);
+    if(req.session.sid) {
+      var sid = req.session.sid;
+    }
+    else{
+      sid = "0";
+    }
+    if(req.session.did){
+      var did = req.session.did;
+    }
+    else{
+      var did = "0";
+    }
+    if(req.session.uname) {
+      uname = req.session.uname
+    }
+    else {
+      uname = " ";
+    }
+    if(Object.keys(req.body).length == 1){
+      error1 = {};
+      var f = 0;
+      const schema_email = Joi.object().keys({emailadd: Joi.string().email().required()});
+      var txt ='{ "emailadd":"'+req.body.emailadd+'"}';
+      var obj = JSON.parse(txt);
+      var { error } = Joi.validate(obj, schema_email);
+      if (error) {
+        error1.emailerr =  mes.message(error);
+        console.log(mes.message(error));
+        f = 1;
+        res.render('recoverpass', {login:req.session ,uname: " ",status: "", sid: "0", did: "0", page: "", error: error1});
+      }
+      if(f == 0){
+        var emailadd = req.body.emailadd;
+        emailadd = emailadd.toString();
+        send_mail_pass(emailadd,bcrypt.hashSync(emailadd, 10));
+        console.log("no error");
+        if(req.session.uname){
+          if(req.session.sid){
+            var sid = req.session.sid;
+          }
+          else{
+            sid = "0";
+          }
+          if(req.session.did){
+            var did = req.session.did;
+          }
+          else{
+            var did = "0";
+          }
+          res.render('mailsent', {uname: req.session.uname, status: req.session.status, sid: sid, did: did, login:req.session});
+        }
+        else{
+          res.render('mailsent', {login:req.session ,uname: " ",status: "", sid: "0", did: "0"});
+        }
+      }
+    }
+    else{
+      console.log("no");
+      res.redirect('/');
+    }
+  })
+
+  app.post("/recoverpass/:page",urlFile,function(req,res){
+    if(req.session.sid) {
+      var sid = req.session.sid;
+    }
+    else{
+      sid = "0";
+    }
+    if(req.session.did){
+      var did = req.session.did;
+    }
+    else{
+      var did = "0";
+    }
+    if(req.session.uname) {
+      uname = req.session.uname
+    }
+    else {
+      uname = " ";
+    }
+    var page = (req.params.page);
+    console.log(req.body);
+    error1 = {};
+    if(page == "check"){
+      console.log(Object.keys(error1).length);
+      console.log(req.body);
+      if(Object.keys(req.body).length == 3){
+        const schema_password = Joi.object().keys({u_pass: Joi.string().regex(/^(\d{3,4})$|^(?!.*(?:01|12|23|34|45|56|67|78|89|90|09|98|87|76|65|54|43|32|21|10))(?=.*[!@#$%^&*-])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@!.$%]{6,}$/).required(),u_cpass:Joi.any().valid(Joi.ref('u_pass')).required()})
+        var txt ='{ "u_pass":"'+req.body.u_pass+'","u_cpass":"'+req.body.u_cpass+'"}';
+        var obj = JSON.parse(txt);
+        var { error } = Joi.validate(obj, schema_password);
+        if (error){
+          error1.u_pass_err = "New password "+ mes.message(error);
+          f = 1;
+        }
+        if(Object.keys(error1).length != 0){
+          res.render('recoverpass', {login:req.session ,uname: uname, mail: req.body.mail ,status: "", sid: sid, did: did, page: 1, error: error1})
+        }
+        else if(Object.keys(error1).length == 0){
+          enterdata(req,res,error1);
+        }
+        console.log(Object.keys(error1).length);
+        console.log(error1);
+      } else{
+        console.log("no");
+      }
+    }
+    else{
+      res.redirect('/');
+    }
+  })
+
+  app.get('/template',function(req,res){
+    templater(req,res);
   })
 
   var clients = 0;
