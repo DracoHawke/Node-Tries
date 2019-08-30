@@ -1,0 +1,159 @@
+.cards2{
+  font-weight: bold;
+}
+.sel1{
+    height: 3em;
+    border-radius: 0;
+  width: 100%;
+}
+.padlr2{
+  padding-left: 5em;
+  padding-right: 5em;
+}
+.crdleft{
+  margin-left: 0em;
+}
+.fsize{
+  font-size: 2em;
+}
+.margins{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.underline2{
+  width: 20%;
+  background: rgba(229, 46, 82, 1);
+  height: 0.1em;
+  float: left;
+}
+.marlr1{
+  margin-left: 8vw;
+  margin-right: 8vw;
+}
+.policies{
+  font-weight: bold;
+  font-size: 1em;
+}
+.policieslink{
+  color: rgb(99, 203, 191);
+}
+.btn2{
+    border-radius: 30px;
+    background-color: rgb(99, 203, 191);
+    color: white;
+    font-size: 1.2em;
+    width: 12em;
+}
+.btn2:hover{
+    color:white;
+}
+.circleBase {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+.green1{
+  color: rgb(99, 208, 60);
+  font-size: 1em;
+  font-weight: bold;
+}
+.type1{
+    width: 1.5em;
+    height: 1.5em;
+    background: rgb(99, 208, 60);
+    color: rgb(99, 208, 60);
+    border: none;
+    text-align: center;
+}
+.type2{
+    width: 1.5em;
+    height: 1.5em;
+    background: rgba(229, 46, 82, 1);
+    border: none;
+    text-align: center;
+}
+.red2{
+  color: rgba(229, 46, 82, 1);
+  font-size: 1em;
+  font-weight: bold;
+}
+.black2{
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+}
+.red3{
+  color: rgba(229, 46, 82, 1);
+  font-size: 1em;
+}
+.fontplus{
+  color:white;
+  font-size: 1em;
+  font-weight: bold;
+}
+.remove_another:hover{
+  color: rgba(229, 46, 82, 1);
+  text-decoration: none;
+}
+#add_another:hover{
+  color: rgb(99, 208, 60);
+  text-decoration: none;
+}
+.tooltip{
+  font-size: 1em;
+  width: 20em;
+  max-width: 20em;
+}
+.tooltip-inner {
+  max-width: 20em;
+  text-align: center;
+}
+.icon7{
+    margin-top: 1em;
+    position: relative;
+    right: -0.5em;
+}
+.display1{
+    display: inline-flex;
+    width: 100%;
+}
+.display2{
+  display: inline-flex;
+  width: 104%;
+}
+.imgupload{
+  height: 5em;
+  width: 5em;
+  text-align: center;
+  background-color: #f2f2f4;
+  border-radius: 25%;
+  margin-right: 2em;
+}
+.plus{
+    font-size: 2em;
+    color: #c9c9d3;
+    margin-top: 0.5em;
+}
+.display3{
+  display: inline-flex;
+}
+.crdpad1{
+  padding-bottom: 0px;
+}
+.imgpic{
+  height: 5em;
+  width: 5em;
+  border-radius: 25%;
+  display: none;
+}
+.crd1 {
+    border: 0;
+}
+
+@media (max-width: 765px){
+  .card-deck.cards2{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,83 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+<link rel="stylesheet" type="text/css" href="assets/pricingcards.css">
+<title>DogMate</title>
+</head>
+<body class="scrollbar scrollbaar-primary">
+  <% include navigation %>
+  <div class="container-fluid pricing">
+    <% if(data.id!=''){ %>
+    <p class="red size-1 align-cen">Hii !! <%= data.id %> Please Choose a Suitable Plan</p><% } %>
+    <div class="row">
+        <div class="col-sm-1 col-md-1 col-lg-1"></div>
+        <div class="col-sm-11 col-md-11 col-lg-11 size-1 font-weight-bold">
+          <a href="/" class="red ">Home</a>&nbsp;/&nbsp;Pricing
+        </div>
+    </div><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm col-md col-lg">
+          <div class="card">
+            <div class="card-header">BASIC</div>
+            <div class="card-body">$10/month</div>
+            <div class="card-footer">
+              <ul class="fa-ul card-footer-list size-1">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Lorem ipsum dolor sit amet</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>consectetur adipisicing elit</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>sed do eiusmod tempor incididunt</li>
+                <li class="unchecked">Ut enim minim veniam</li>
+                <li class="unchecked">quis nostrud exercitation</li>
+                <li class="unchecked">ut aliquip ex ea commodo</li>
+                <li class="unchecked">Duis aute irure dolor</li>
+                <li class="unchecked">in reprehenderit in voluptate velit</li>
+              </ul>
+              <div class="text-center"><a class="btn custom-btn size-1" href="/register?s=Selected">CHOOSE PLAN</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm col-md col-lg">
+          <div class="card middle-card">
+            <div class="card-header">GOLD</div>
+            <div class="card-body">$20/month</div>
+            <div class="card-footer">
+              <ul class="fa-ul card-footer-list size-1">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Lorem ipsum dolor sit amet</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>consectetur adipisicing elit</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>sed do eiusmod tempor incididunt</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Ut enim minim veniam</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>quis nostrud exercitation</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>ut aliquip ex ea commodo</li>
+                <li class="unchecked">Duis aute irure dolor</li>
+                <li class="unchecked">in reprehenderit in voluptate velit</li>
+              </ul>
+              <div class="text-center"><a class="btn custom-btn size-1" href="/register?g=Selected">CHOOSE PLAN</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm col-md col-lg">
+          <div class="card">
+            <div class="card-header">PLATINUM</div>
+            <div class="card-body">$30/month</div>
+            <div class="card-footer ">
+              <ul class="fa-ul card-footer-list size-1">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Lorem ipsum dolor sit amet</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>consectetur adipisicing elit</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>sed do eiusmod tempor incididunt</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Ut enim minim veniam</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>quis nostrud exercitation</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>ut aliquip ex ea commodo</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Duis aute irure dolor</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>in reprehenderit in voluptate velit</li>
+              </ul>
+              <div class="text-center"><a class="btn custom-btn size-1" href="/register?p=Selected">CHOOSE PLAN</a></div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div><br><br>
+  <% if(data.id!=''){ %>
+  <p class="size-1 align-cen"><a class="red" href="/" >Skip For Now</a></p><% } %>
+</div>
+  <% include footer %>
+</body>
+</html>

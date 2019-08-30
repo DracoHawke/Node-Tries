@@ -1,0 +1,101 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 31, 2019 at 08:40 AM
+-- Server version: 10.1.39-MariaDB
+-- PHP Version: 7.3.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `dogmate`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dogs`
+--
+
+CREATE TABLE `dogs` (
+  `Uid` int(11) DEFAULT NULL,
+  `Did` int(11) NOT NULL,
+  `DogName` varchar(255) DEFAULT NULL,
+  `DogBreed` varchar(255) DEFAULT NULL,
+  `DogGender` varchar(50) DEFAULT NULL,
+  `DogAge` varchar(50) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `City` varchar(50) DEFAULT NULL,
+  `State` varchar(50) DEFAULT NULL,
+  `ZIP` int(11) DEFAULT NULL,
+  `DogPic1` text,
+  `DogPic2` text,
+  `DogPic3` text,
+  `DogPic4` text,
+  `DogPic5` text,
+  `Rating` int(11) DEFAULT '0',
+  `Reviews` int(11) DEFAULT '0',
+  `AdminStatus` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dogs`
+--
+
+INSERT INTO `dogs` (`Uid`, `Did`, `DogName`, `DogBreed`, `DogGender`, `DogAge`, `Description`, `Address`, `City`, `State`, `ZIP`, `DogPic1`, `DogPic2`, `DogPic3`, `DogPic4`, `DogPic5`, `Rating`, `Reviews`, `AdminStatus`) VALUES
+(1, 1, 'a', 'a', 'a', '0.8', 'asdqwdqd', 'awdqwdq', 'c', 'c', 123, 'qwdwdwd', NULL, NULL, NULL, NULL, 1, 1, 1),
+(1, 10, 'aaa', 'AustralianTerrier', 'Male', '1.1', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'PO Box 35286, fdgbdf', 'Bagot', 'Northern Territory', 200, NULL, NULL, NULL, NULL, NULL, 0, 0, 1),
+(1, 11, 'bbb', 'afghan', 'Female', '11', 'bbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'PO Box 35286, fdgbdf', 'Bagot', 'Northern Territory', 200, NULL, NULL, NULL, NULL, NULL, 0, 0, 1),
+(1, 12, 'aaa', 'AustralianTerrier', 'Male', '1.1', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'PO Box 35286, fdgbdf', 'Agnes Water', 'Queensland', 200, NULL, NULL, NULL, NULL, NULL, 0, 0, 1),
+(60, 42, 'aaa', 'akita-dog-breed', 'Female', '1.1', 'aaaaaaaaaaaaaaa', 'PO Box 35286, fdgbdf', 'Albany Creek', 'Queensland', 4200, 'assets/images/60/dog0/tanuj.goyal@satgurutechnologies.com_0.png', 'NULL', 'NULL', 'NULL', 'NULL', 0, 0, 0),
+(61, 43, 'aaa', 'afghan', 'Male', '1.1', 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', 'PO Box 35286, fdgbdf', 'Aberfoyle', 'New South Wales', 4200, 'assets/images/61/dog0/tanuj.goyal1@satgurutechnologies.com_0.png', 'assets/images/61/dog1/tanuj.goyal1@satgurutechnologies.com_1.png', 'NULL', 'NULL', 'NULL', 0, 0, 0),
+(61, 44, 'bbb', 'alaskan-malamute-dogs', 'Female', '11', 'bbbbbbbbbbbbbbbbbbb', 'PO Box 35286, fdgbdf', 'Aberfoyle', 'New South Wales', 4200, 'assets/images/61/dog0/tanuj.goyal1@satgurutechnologies.com_0.png', 'NULL', 'NULL', 'NULL', 'NULL', 0, 0, 0),
+(62, 45, 'ccc', 'afghan', 'Female', '11', 'adqdqwdqwdqwd', 'PO Box 35286, fdgbdf', 'Aberfoyle', 'New South Wales', 4200, 'assets/images/62/dog0/tanuj.goyal2@satgurutechnologies.com_00.png', 'assets/images/62/dog0/tanuj.goyal2@satgurutechnologies.com_11.png', NULL, NULL, NULL, 0, 0, 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `dogs`
+--
+ALTER TABLE `dogs`
+  ADD UNIQUE KEY `Did` (`Did`),
+  ADD KEY `Uid` (`Uid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `dogs`
+--
+ALTER TABLE `dogs`
+  MODIFY `Did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dogs`
+--
+ALTER TABLE `dogs`
+  ADD CONSTRAINT `dogs_ibfk_1` FOREIGN KEY (`Uid`) REFERENCES `users` (`Uid`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

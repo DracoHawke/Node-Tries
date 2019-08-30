@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^$ http://orientaloutsourcing.com:49159/ [P,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ http://orientaloutsourcing.com:49159/$1 [P,L]

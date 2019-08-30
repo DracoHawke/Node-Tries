@@ -1,0 +1,58 @@
+.sign-up{
+  text-align: center;
+  font-weight: 400;
+}
+.green-line{
+  display: inline-block;
+  border: solid #53cbbf 0.07em;
+  width: 68%;
+  margin-bottom: 20%;
+}
+form .size-1{
+      border-width: 0.05em;
+    border-radius: 0;
+}
+.pricing{
+  padding-bottom: 10%;
+  border-top: solid rgb(215, 215, 222) 1px;
+  padding-top: 1%;
+}
+img.image_profile {
+  width: 7em;
+height: 5em;
+object-fit: cover;
+    border-radius: 18px;
+}
+.registeration-head {
+    width: fit-content;
+    padding-bottom: 0.3em;
+    font-weight: 500;
+    font-family: inherit;
+    font-size: 2.5em;
+    border-bottom: solid rgb(202, 202, 202) 2px;
+}
+form.registration-form.size-1 {
+    margin-top: 2%;
+}
+form.registration-form.size-1 input {
+    height: 3em;
+    border-radius: 0;
+}
+.agree{
+  font-weight: 500;
+  font-size: large;
+  margin-top: 1%;
+  margin-bottom: 1%
+}
+.agree a,.agree a:hover{
+  color: #53cbbf;
+}
+.contact-form .col-sm-12,.contact-form .col-sm-6,.contact-form .col-sm-10 {
+    padding-left: 0;
+}
+.agree{
+    padding-left:0;
+    font-weight:600;
+    font-size:1em;
+}
+

@@ -1,0 +1,401 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="/assets/signup.css">
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <link rel="stylesheet" href="/assets/registerdog.css">
+    <script src="/assets/registerdog.js"></script>
+    <script src="//geodata.solutions/includes/statecity.js"></script>
+  </head>
+  <body class="scrollbar scrollbar-primary">
+<% include navigation %>
+    <div class="container">
+      <div class="row margins mb-2">
+          <div class="col-sm-11 col-md-11 col-lg-11 size-1 font-weight-bold">
+            <a href="/"><span class="red2">Home</span></a>&nbsp;<span class="black2">/&nbsp;Register a Dog</span>
+          </div>
+      </div>
+      <div>
+        <% if (data !== "") {%> <p class="red3"> <%if(data.error){%><%= data.error %></p><%}}%>
+        <form class="size-1" name="myform2" id="myform2" method="post" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col" style="line-height:2;">
+              <span class=" registeration-head" style="border-bottom: solid rgb(236, 54, 100) 2px;">Re</span><span class=" registeration-head">gister</span><span class=" registeration-head" style="border:0;"> Your Dog</span>
+            </div>
+          </div>
+        <div class="card-deck cards2">
+          <div class="card crd1 crdleft">
+            <div class="card-body crdpad1">
+              <p class="card-text">Dog Picture(s) <span class="red2">*</span></p>
+              <div class="row">
+                <label for="file0-upload1" class="imgupload"><p class="plus" id="file0-upload1plus">+</p><img id="file0-upload1img" class="imgpic"></img></label>
+                <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload1" accept="image/*" value="" onchange="loadFile(this.id)">
+                <label for="file0-upload2" class="imgupload"><p class="plus" id="file0-upload2plus">+</p><img id="file0-upload2img" class="imgpic"></img></label>
+                <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload2" accept="image/*" value="" onchange="loadFile(this.id)">
+                <label for="file0-upload3" class="imgupload"><p class="plus" id="file0-upload3plus">+</p><img id="file0-upload3img" class="imgpic"></img></label >
+                <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload3" accept="image/*" value="" onchange="loadFile(this.id)">
+                <label for="file0-upload4" class="imgupload"><p class="plus" id="file0-upload4plus">+</p><img id="file0-upload4img" class="imgpic"></img></label >
+                <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload4" accept="image/*" value="" onchange="loadFile(this.id)">
+                <label for="file0-upload5" class="imgupload"><p class="plus" id="file0-upload5plus">+</p><img id="file0-upload5img" class="imgpic"></img></label >
+                <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload5" accept="image/*" value="" onchange="loadFile(this.id)">
+                <input type="hidden" id="dog_pic0" name="dogpic" value="0">
+              </div>
+              <span class="red2" id="fileUpload0"></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-deck cards2">
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Dog Name <span class="red2">*</span></p>
+              <div class="display2">
+                <input type="text" class="form-control sel1" name="dog_name" placeholder="Dog Name">
+                <a data-toggle="tooltip" data-placement="auto" title="The Name must be atleast 2 in length and may contain spaces">
+                  <i class="fas fa-info-circle red2 icon7"></i>
+                </a>
+              </div>
+              <p class="red2" id="dog_name0"></p>
+            </div>
+          </div>
+          <div class="card crd1">
+            <div class="card-body">
+              <p class="card-text">Breed<span class="red2">*</span></p>
+              <select name="dog_breed" id="dog_breed0" class="custom-select sel1">
+                <option value="Select">Select Dog</option>
+                <option value="affenpinscher_dog_breed">Affenpinscher	</option>
+                <option value="afghan">Afghan</option>
+                <option value="Airedale_Terrier">Airedale Terrier</option>
+                <option value="akita_dog_breed">Akita Dog Breed</option>
+                <option value="alaskan_malamute_dogs">Alaskan Malamute Dogs</option>
+                <option value="american_eskimo_dog">American Eskimo Dog</option>
+                <option value="American_Foxhound">American Foxhound</option>
+                <option value="American_Staffordshire_Terrier">American Staffordshire Terrier</option>
+                <option value="American_Water_Spaniel">American Water Spaniel</option>
+                <option value="anatolian_shepherd_dogs">Anatolian Shepherd Dogs</option>
+                <option value="Australian_Cattle_Dog">Australian Cattle Dog</option>
+                <option value="Australian_Shepherd">Australian Shepherd</option>
+                <option value="Australian_Terrier">Australian Terrier</option>
+                <option value="basenji">Basenji</option>
+                <option value="Basset_Hound">Basset Hound</option>
+                <option value="Beagle">Beagle</option>
+                <option value="Bearded_Collie">Bearded Collie</option>
+                <option value="Bedlington_Terrier">Bedlington Terrier</option>
+                <option value="Belgian_Malinois">Belgian Malinois</option>
+                <option value="Belgian_Sheepdog">Belgian Sheepdog</option>
+                <option value="Belgian_Tervuren">Belgian Tervuren</option>
+                <option value="bernese_mountain_dogs">Bernese Mountain Dogs</option>
+                <option value="bichon_frise">Bichon Frise</option>
+                <option value="Black_And_Tan_Coonhound">Black And Tan Coonhound</option>
+                <option value="black_russian_terriers">Black Russian Terriers</option>
+                <option value="Bloodhound">Bloodhound</option>
+                <option value="Border_Collie">Border Collie</option>
+                <option value="Border_Terrier">Border Terrier</option>
+                <option value="Borzoi">Borzoi</option>
+                <option value="boston_terrier">Boston Terrier</option>
+                <option value="Bouvier_des_Flandres">Bouvier_des_Flandres</option>
+                <option value="Briard">Briard</option>
+                <option value="Brittany">Brittany	</option>
+                <option value="toydogs_BrusselsGriffon">Brussels Griffon</option>
+                <option value="english_bull_dogs">Bulldog</option>
+                <option value="bull_mastiff_dog">Bull Mastiff Dog</option>
+                <option value="Bull_Terrier">Bull Terrier</option>
+                <option value="Cairn_Terrier">Cairn Terrier</option>
+                <option value="Canaan_Dog">Canaan Dog</option>
+                <option value="C">Cardigan Welsh Corgi</option>
+                <option value="king_charles_cavalier_spaniel">Cavalier King Charles Spaniel</option>
+                <option value="Chesapeake_Bay_Retriever">Chesapeake Bay Retriever</option>
+                <option value="chihuahua_dog_breed">Chihuahua</option>
+                <option value="chinese_crested_dog_breed">Chinese Crested</option>
+                <option value="chinese_shar_pei">Chinese Shar Pei</option>
+                <option value="chow_chow_dog">Chow Chow</option>
+                <option value="Clumber_Spaniel">Clumber Spaniel</option>
+                <option value="Cocker_Spaniel">Cocker Spaniel</option>
+                <option value="Collie">Collie</option>
+                <option value="Curly_coated_Retriever">Curly_coated Retriever</option>
+                <option value="Dachshund">Dachshund	</option>
+                <option value="dalmatian_dogs">Dalmatian	</option>
+                <option value="Dandie_Dinmont_Terrier">Dandie Dinmont Terrier</option>
+                <option value="doberman_pinscher_dogs">Doberman Pinscher Dogs</option>
+                <option value="english_bull_dogs">English Bull Dogs</option>
+                <option value="English_Cocker_Spaniel">English Cocker Spaniel</option>
+                <option value="English_Foxhound">English Foxhound</option>
+                <option value="English_Setter">English Setter</option>
+                <option value="English_Springer_Spaniel">	English Springer Spaniel</option>
+                <option value="english_toy_spaniels">English Toy Spaniel</option>
+                <option value="Field_Spaniel">Field Spaniel</option>
+                <option value="finnish_spitz_dog">Finnish Spitz</option>
+                <option value="Flat_Coated_Retriever">Flat_Coated Retriever</option>
+                <option value="french_bull_dogs">French Bull Dogs</option>
+                <option value="german_shepherd_dog">German Shepherd Dog</option>
+                <option value="German_Wirehaired_Pointer">German Wirehaired Pointer</option>
+                <option value="Glen_of_Imaal_Terrier">Glen of Imaal Terrier</option>
+                <option value="Gordon_Setter">Gordon Setter</option>
+                <option value="Greyhound">Greyhound</option>
+                <option value="Harrier">Harrier</option>
+                <option value="toydogs_havanese">Havanese </option>
+                <option value="herding_group">Herding Dog Breeds</option>
+                <option value="Hounds">	Hound Dog Breeds</option>
+                <option value="Ibizan_Hound">Ibizan Hound</option>
+                <option value="Irish_Setter">Irish Setter</option>
+                <option value="Irish_Terrier">Irish Terrier</option>
+                <option value="Irish_Water_Spaniel">Irish Water Spaniel</option>
+                <option value="Irish_Wolfhound">Irish Wolfhound</option>
+                <option value="miniature_italian_greyhound">Italian Greyhound</option>
+                <option value="japanese_chin_dog">Japanese Chin</option>
+                <option value="Kerry_Blue_Terrier">	Kerry Blue Terrier</option>
+                <option value="keeshonds">Keeshonds</option>
+                <option value="labrador_retriever">	Labrador Retriever</option>
+                <option value="Lakeland_Terrier">Lakeland Terrier</option>
+                <option value="landseer_newfoundland">Landseer Newfoundland</option>
+                <option value="lhasa_apso_dogs">Lhasa Apso Dogs</option>
+                <option value="maltese_dog_breed">Maltese</option>
+                <option value="Manchester_Terrier">Manchester Terrier </option>
+                <option value="toydogs_ManchesterTerrier">Toy Manchester Terrier</option>
+                <option value="Miniature_Bull_Terrier">Miniature Bull Terrier</option>
+                <option value="Miniature_Dog_Breeds">Miniature Dog Breeds</option>
+                <option value="toydogs_MiniaturePinscher">Miniature Pinscher</option>
+                <option value="Miniature_Schnauzer">Miniature Schnauzer</option>
+                <option value="Non_Sporting_Group">non_sporting group</option>
+                <option value="Norfolk_Terrier">Norfolk Terrier</option>
+                <option value="Norwegian_Elkhound">Norwegian Elkhound</option>
+                <option value="Norwich_Terrier">Norwich Terrier</option>
+                <option value="Nova_Scotia_Duck_Tolling_Retriever">Nova Scotia Duck Tolling Retriever</option>
+                <option value="Old_English_Sheepdog">Old English Sheepdog</option>
+                <option value="Otter_hound">Otterhound</option>
+                <option value="papillon_dog_breed">Papillon </option>
+                <option value="Parson_Russell_Terrier">Parson Russell Terrier</option>
+                <option value="pekingese_dogs">Pekingese</option>
+                <option value="Pembroke_Welsh_Corgi">Pembroke Welsh Corgi</option>
+                <option value="Petit_Basset_Griffon_Vendeen">Petit Basset Griffon Vendeen</option>
+                <option value="Pharaoh_Hound">Pharaoh Hound</option>
+                <option value="polish_lowland_sheepdog">Polish Lowland Sheepdog</option>
+                <option value="pomeranian_care">Pomeranian</option>
+                <option value="toy_poodle_dog">Poodle</option>
+                <option value="pug_dog_breed">Pug</option>
+                <option value="Puli">Puli</option>
+                <option value="rare_mastiff_dog_breeds">Rare Mastiff Dog Breeds</option>
+                <option value="RhodesianRidgeback">Rhodesian Ridgeback</option>
+                <option value="rottweiler_dogs">Rottweiler Dogs</option>
+                <option value="saint_bernard_dogs">Saint Bernard Dogs</option>
+                <option value="Saluki">Saluki</option>
+                <option value="Scottish_Deerhound">Scottish Deerhound</option>
+                <option value="Scottish_Terrier">Scottish Terrier</option>
+                <option value="Sealyham_Terrier">Sealyham Terrier</option>
+                <option value="Shetland_Sheepdog">Shetland Sheepdog</option>
+                <option value="shih_tzu_dogs">Shih Tzu Dogs</option>
+                <option value="toydogs_SilkyTerrier">Silky Terrier</option>
+                <option value="Skye_Terrier">Skye Terrier </option>
+                <option value="Smooth_Fox_Terrier">Smooth Fox Terrier </option>
+                <option value="Soft_Coated_Wheaten_Terrier">Soft Coated Wheaten Terrier </option>
+                <option value="Spinone_Italiano">Spinone Italiano </option>
+                <option value="sporting_group">Sporting Dog Breeds</option>
+                <option value="Staffordshire_Bull_Terrier">Staffordshire Bull Terrier </option>
+                <option value="Sussex_Spaniel">Sussex Spaniel</option>
+                <option value="terrier_group">Terrier Dog Breeds</option>
+                <option value="Toy_Dog_Breeds">Toy Dog Breeds</option>
+                <option value="toy_fox_terriers">Toy Fox Terrier</option>
+                <option value="Vizsla">Vizsla</option>
+                <option value="Weimaraner">Weimaraner</option>
+                <option value="Welsh_Springer_Spaniel">Welsh Springer Spaniel</option>
+                <option value="Welsh_Terrier">Welsh Terrier </option>
+                <option value="West_Highland_White_Terrier">West Highland White Terrier</option>
+                <option value="Whippet">Whippet</option>
+                <option value="Wire_Fox_Terrier">Wire Fox Terrier</option>
+                <option value="wirehaired_pointing_griffon">Wirehaired Pointing Griffon</option>
+                <option value="working_dog_group">Working Dog Breeds</option>
+                <option value="rare_dog_breeds_Xoloitzcuintle">Xoloitzcuintle</option>
+                <option value="miniature_yorkshire_terrier">Yorkshire Terrier</option>
+              </select>
+              <p class="red2" id="dog_breed0err"></p>
+            </div>
+          </div>
+          <div class="card crd1">
+            <div class="card-body">
+              <p class="card-text">Sex<span class="red2">*</span></p>
+              <select name="dog_gender" class="custom-select sel1">
+                <option selected>Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <p class="red2" id="dog_gender0"></p>
+            </div>
+          </div>
+          <div class="card crd1">
+            <div class="card-body">
+              <p class="card-text">Age<span class="red2">*</span></p>
+              <input type="text" class="form-control sel1 dog_age" name="dog_age" placeholder="Dog Age">
+              <p class="red2" id="dog_age0"></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-group cards2">
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">About Me<span class="red2" >*</span></p>
+              <textarea name="dog_info" class="form-control sel1" rows="3" placeholder="Write something about your dog"></textarea>
+              <p class="red2" id="dog_info0"></p>
+            </div>
+          </div>
+          <input type="hidden" name="form0" value="0"/>
+        </div>
+        <div id="wrappers">
+        </div>
+        <div class="col-sm-12">
+        <a class="display1" id="add_another" href="/registerdog" style="display: flex;width: fit-content;">
+          <div class="circleBase type1"><span class="fontplus">+</span></div>
+          <p class="green1">Add Another Dog</p>
+        </a></div>
+        <div class="row">
+          <div class="col">
+            <h3 class="fsize"> Contact Info </h3>
+          </div>
+        </div>
+        <div class="card-deck cards2">
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Your First Name <span class="red2">*</span></p>
+              <input type="text" class="form-control sel1" name="u_fname" placeholder="Owner Name" <% if(uname !== ""){ %> value="<%= uname %>" readonly <% } %> >
+              <p class ="red2" id ="u_fname_err"></p>
+              <% if(set == "yes"){ %><input hidden name="nod" value = <% if(typeof nod !== "undefined") { %>"<%= nod %>"<% } %> > <% } %>
+            </div>
+          </div>
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Your Last Name <span class="red2">*</span></p>
+              <input type="text" class="form-control sel1" name="u_lname" placeholder="Owner Name" <% if(set == "yes"){ %> value="<% if(typeof data.Lname !== 'undefined'){ %><%= data.Lname %><% }else if( typeof data.u_lname !== 'undefined') { %><%= data.u_lname%><% } %>" readonly <% } %>>
+              <p class ="red2" id ="u_lname_err"></p>
+            </div>
+          </div>
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Your Email <span class="red2">*</span></p>
+              <input type="text" class="form-control sel1" name="u_email" placeholder="Email Address" <% if(set == "yes"){ %> value="<% if(typeof data.Email !== 'undefined'){ %><%= data.Email %><% } else if( typeof data.u_email !== 'undefined') { %><%= data.u_email%><% } %>" readonly <% } %> >
+              <p class ="red2" id ="u_email_err"></p>
+            </div>
+          </div>
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Phone <span class="red2">*</span></p>
+              <input type="text" class="form-control sel1" name="u_phone" placeholder="Phone" <% if(set == "yes"){ %> value="<% if(typeof data.Phone !== 'undefined'){ %><%= data.Phone%><% } else if( typeof data.u_phone !== 'undefined') { %><%= data.u_phone%><% } %>" readonly <% } %> >
+              <p class ="red2" id ="u_phone_err"></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-deck cards2">
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <input type="hidden" name="country" id="countryId" value="AU"/>
+              <p class="card-text">Street Address<span class="red2">*</span></p>
+              <input type="text" class="form-control sel1" name="u_add" placeholder="Street Address" <% if(set == "yes" && typeof data.Address !== "undefined"){ %> value="<%= data.Address%>" readonly<% }else if( typeof data.u_add !== 'undefined') { %> value= "<%= data.u_add%>" readonly <% } %>  >
+              <p class ="red2" id ="u_address_err"></p>
+            </div>
+          </div>
+          <div class="card crd1">
+            <div class="card-body">
+              <p class="card-text">City<span class="red2">*</span></p>
+              <% if(set == "yes" && typeof data.State !== "undefined") { %>
+                <select name="u_city" class="form-control sel1" id="cityId">
+                  <option value="<%= data.City %>" selected><% if(typeof data.City !== "undefined") { %><%a = data.City.replace(/_/g," "); a = a.replace(/-/g," ");%><%= a %><% } %> </option>
+                </select>
+                <script>
+                  $('document').ready(function(){
+                    <% if(set == "yes" && typeof data.City !== "undefined") { %>
+                    $('#cityId').attr('readonly', true);
+                    <% } %>
+                  });
+                </script>
+              <% } else if( typeof data.u_city !== 'undefined') { %>
+              <select name="u_city" class="form-control sel1" id="cityId">
+                  <option value="<%= data.u_city%>" selected><% if(typeof data.u_city !== "undefined") { %><% a = data.u_city.replace(/_/g," "); a = a.replace(/-/g," ");%><%= a %><% } %> </option>
+                </select>
+                <script>
+                  $('document').ready(function(){
+                    <% if(set == "yes" && typeof data.u_city !== "undefined") { %>
+                    $('#cityId').attr('readonly', true);
+                    <% } %>
+                  });
+                </script>
+                <% } else { %>
+              <select name="u_city" class="cities order-alpha form-control sel1" id="cityId">
+                <option value="Select" selected>Select City</option>
+                <option value="alto"> Alternate </option>
+              </select>
+              <% } %>
+              <p class="red2" id="u_city_err"></p>
+            </div>
+          </div>
+          <div class="card crd1">
+            <div class="card-body">
+              <p class="card-text">State<span class="red2">*</span></p>
+              <% if(set == "yes" && typeof data.State !== "undefined") { %>
+                <select name="u_state" class="form-control sel1" id="stateId">
+                  <option value="<%= data.State %>" selected><% if(typeof data.State !== "undefined") { %> <%a = data.State.replace(/_/g, " ")%><%= a %> <% } %></option>
+                </select>
+                <script>
+                  $('document').ready(function(){
+                    <% if(set == "yes" && typeof data.State !== "undefined") { %>
+                      $('#stateId').attr('readonly', true);
+                    <% } %>
+                  });
+                </script>
+              <% }else if( typeof data.u_state !== 'undefined') { %>
+              <select name="u_state" class="form-control sel1" id="stateId">
+                  <option value="<%= data.u_state%>" selected><% if(typeof data.u_state !== "undefined") { %> <%a = data.u_state.replace(/_/g, " ")%><%= a %> <% } %></option>
+                </select>
+                <script>
+                  $('document').ready(function(){
+                    <% if(set == "yes" && typeof data.u_state !== "undefined") { %>
+                      $('#stateId').attr('readonly', true);
+                    <% } %>
+                  });
+                </script>
+                <% } else { %>
+              <select name="u_state" class="states order-alpha form-control sel1" id="stateId">
+                <option value="Select" selected>Select State</option>
+                <option value="alto"> Alternate </option>
+              </select>
+              <% } %>
+              <p class="red2" id="u_state_err"></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-deck cards2">
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Zip <span class="red2">*</span></p>
+              <input type="text" class="form-control sel1" name="u_zip" placeholder="Zip" <% if(set == "yes" && typeof data.ZIP !== "undefined"){ %> value= "<%= data.ZIP %>" readonly <% }else if( typeof data.u_zip !== 'undefined') { %> value= "<%= data.u_zip%>" readonly <% } %> >
+              <p class="red2" id="u_zip_err"></p>
+            </div>
+          </div>
+          <div class="card crd1 crdleft">
+            <div class="card-body">
+              <p class="card-text">Password <span class="red2">*</span></p>
+              <div class="display2">
+                <input type="password" class="form-control sel1" name="u_pass" placeholder="Password" <% if(uname !== ""){ %> onsubmit="myfunction1(this)" <% } %>>
+                <a data-toggle="tooltip" data-placement="auto" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc.">
+                  <i class="fas fa-info-circle red2 icon7"></i>
+                </a>
+              </div>
+              <p class="red2" id="u_pass_err"><% if(data.error1 !== ""){ %> <%= data.error1 %> <% } %></p>
+            </div>
+          </div>
+          <% if(uname === ""){ %>
+            <div class="card crd1 crdleft">
+              <div class="card-body">
+                <p class="card-text">Confirm Password <span class="red2">*</span></p>
+                <input type="password" class="form-control sel1" name="u_cpass" placeholder="Confirm Password">
+                <p class="red2" id="u_cpass_err"></p>
+              </div>
+            </div>
+            <input type="hidden" name="logedin" value="0">
+          <% }else { %>
+            <input type="text" id="u_cpass" class="form-control sel1" name="u_cpass" placeholder="Confirm Password" style="display:none">
+            <p class="red2" id="u_cpass_err"></p>
+            <input type="hidden" name="logedin" value="1">
+          <% } %>
+        </div>
+        <div class="col-sm-12" style="padding-left:20px">
+        <p class="policies"> By joining you agree to <a href="/terms" class="policieslink" style="color:rgb(99, 203, 191)">Our Terms and Conditions</a> and <a href="/policy" class="policieslink" style="color:rgb(99, 203, 191)"> Privacy Policies</a></p></div>
+        <div class="col-sm-12 mb-5 mt-4" style="padding-left:17px;"><button type="submit" class="btn button-default btn2" id="dogregister">Register Now</button></div>
+      </form>
+    </div>
+  </div>
+<% include footer %>

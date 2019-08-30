@@ -1,0 +1,65 @@
+<% include adminheader %>
+<div class="container mb-5 mt-5">
+<div id="new-updates" class="card updates recent-updated">
+  <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
+    <h2 class="h5 display"><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box">All Messages</a></h2>
+    <div class="right-column">
+      <div class="badge badge-primary"> Messages</div>&nbsp;&nbsp;<a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box"><i class="fa fa-angle-down"></i></a>
+    </div>
+  </div>
+  <div id="updates-box" role="tabpanel" class="collapse show">
+    <ul class="news list-unstyled">
+      <!-- Item-->
+      <% for(var i=0;i<messages.length;i++){%>
+      <li class="row justify-content-between env messrow" data-toggle="modal" data-target="#me<%= messages[i].tid %>" onclick="message_read(<%= messages[i].tid %>)">
+        <div class="left-col d-flex col-md-6 col-sm-6 ">
+          <div class="icon"><i class="icon-rss-feed"></i></div>
+          <div class="title"><strong><%= messages[i].name %></strong>
+            <p><%= messages[i].email %></p>
+            <% if(messages[i].seen==0){ %> <span class="text-warning" id="read<%= messages[i].tid %>">Unread</span> <%}%>
+          </div>
+        </div>
+        <div class="right-col text-right col-md-6 col-sm-6">
+          <div class="update-date"><img src="/assets/images/envelope.png" height="80" width="80"></div>
+        </div>
+      </li>
+<div class="modal fade" id="me<%= messages[i].tid %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><%= messages[i].name %></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <%= messages[i].msg %>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%}%>
+</div></div></div>
+<!-- SCRIPT TO SEND READ -->
+<script>
+  function message_read(tid){
+    var url=window.location.href+'?tid='+tid;
+    var id='#read'+tid;
+    $.ajax({
+  		url: url,
+  		type: "GET",
+  		success: function(data) {
+        $(id).html("");
+      }
+  	});
+  }
+</script>
+<% include adminfooter%>

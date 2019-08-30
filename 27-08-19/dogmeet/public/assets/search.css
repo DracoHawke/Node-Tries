@@ -1,0 +1,105 @@
+.jumbo{
+  background-color: #37b3a7;
+  text-align: center;
+}
+.heading{
+  font-size: 2.5em;
+  font-weight: 500;
+  color:white;
+}
+.search-bar{
+  width: 50%;
+  margin: 2%;
+  margin-left: 25%;
+  box-shadow: 6px 6px 6px rgb(78, 158, 149);
+}
+input.form-control {
+    padding: 30px;
+    border:0;
+}
+.btn.searching{
+  background-color: #ed2154;
+  color: white;
+}
+img.profile {
+    border-radius: 25%;
+    /* width: 73%; */
+    width: 15em;
+    height: 15em;
+        object-fit: cover;
+     box-shadow: 3px 3px 3px grey;
+}/*
+.container{
+  padding: 0;
+}*/
+.fname{
+  text-align: center;
+      font-weight: bolder;
+}
+.review{
+  text-align: right;
+}
+.rating{
+  font-size: small;
+}
+.checked{
+  color: #ed2154;
+}
+.numofres{
+  text-align: right;
+  color: rgb(134, 134, 155);
+  font-weight: bolder;
+font-size: small;
+padding-top: 1%;
+}
+.line-mate.col-sm-12 {
+    width: 100%;
+    border: solid rgb(232, 232, 236) 1px;
+    margin: 5px 0 15px 0%;
+}
+.find-drop {
+    height: calc(1.5em + .75rem + 2px);
+    border: 1px solid #ced4da;
+    background-color: white;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    margin-left: 1%;
+font-weight: bolder;
+}
+.crd1 {
+    border: 0;
+}
+.grey2 {
+    text-align: center;
+}
+.mypage{
+      line-height: 0.7;
+      border: 0;
+      color: black;
+}
+.page-item.active .page-link{
+  background-color: rgb(83, 203, 191);
+  border-color: rgb(83, 203, 191);
+  border-radius: 0;
+}
+.page-link:hover {
+  background-color: white;
+border-color: white;
+}
+button.ms-choice{
+      border: 0;
+}
+button.ms-choice > span{
+      font-weight: bolder;
+}
+.ms-choice:focus{
+          outline: 0;
+}
+
+@media (max-width: 792px){
+    .search-bar{
+        margin-left:0;
+        margin: 2%;
+        width: 100%;
+    }
+}

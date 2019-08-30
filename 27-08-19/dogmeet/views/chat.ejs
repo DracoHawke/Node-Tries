@@ -1,0 +1,62 @@
+<div id="list">
+  <script>
+  //var url='http://localhost:1212/chatroom'
+  //console.log(url);
+  //console.log('undefined');
+  function linki(url){
+    window.location.assign(url);
+    }
+  </script>
+
+  <h2 class="chat-head">Chat</h2>
+  <p id="uid" hidden><%= login.email %></p>
+  <p id="tome" hidden><%= to %></p>
+  <div class="row chat-row">
+    <div class="col-md-4">
+      <div class="all-rooms mb-5 mt-2">
+        <input type="text" id="myInput"  class="fas fa-search form-control room-search" name="search" value="" placeholder="&#xF002; Search" onkeyup="mySearch()" style="font-weight:600; border-radius:0;">
+      <script>
+      function mySearch() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        li = document.getElementsByClassName("chat-name");
+        li1 = document.getElementsByClassName("chat-list-container");
+        for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li1[i].style.display = "";
+            } else {
+              li1[i].style.display = "none";
+            }
+          }
+        }
+        </script>
+        <% for(var i=0;i<ChatList.length;i++){ %>
+        <div class="row chat-list-container" onclick="return linki('/dashboard/chat?to=<%= ChatList[i].Email %>')" <% if(ChatList[i].Email==to){ %> style="background-color: #02022e;color: white;cursor: pointer;" <% } %>>
+          <div class="col-sm-2" style="">
+            <img class="chat-profile" src="<%= ChatList[i].Profile %>" alt="" width="35" height="35">
+          </div>
+          <div class="col-sm-8">
+            <div class="chat-name ml-2"><%= ChatList[i].Fname %> <%= ChatList[i].Lname %>
+              <div class="date">02 July</div>
+            </div>
+          </div>
+          <div class="col-sm-1" style="padding-top: 1%;">
+            <p class="unread" id="<%=ChatList[i].Email%>"><% if(ChatList[i].unread!=0){ %><%= ChatList[i].unread %><% } %></p>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="chat-room mb-5 mt-2" id="chatroom">
+        <% if(to!='') {%>
+          <% include chatroom1 %>
+        <% } %>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>

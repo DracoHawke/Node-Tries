@@ -1,0 +1,114 @@
+<footer class="main-footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <p>DogMate &copy; 2017-2019</p>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><a href="/" class="external">DogMate.com</a></p>
+        <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions and it helps me to run Bootstrapious. Thank you for understanding :)-->
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+<div class="modal fade" id="reply">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2>Send Newsletter</h2>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="editableform1">
+          <form method="post" action="/newsteller" enctype="multipart/form-data">
+            <textarea name="news" rows="15" style="width:100%"></textarea>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class = "modal-footer">
+        <button class="btn btn-primary submit center-block Submit">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newpage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2>New Route</h2>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <ul class="ul1">
+          <li> Enter the Page You Want To Make.</li>
+          <li> Just Enter Page Name, Don't Enter Reletive path or path with queries.</li>
+          <li> Please Don't Start/End Path with '/' </li>
+          <li> Please Don't Enter Any Special Characters, route/ page name must be alpha/numeric i.e. [a-z,A-Z,0-9]</li>
+          <li> Correct routes Exapmles: "a1", "home1", "gone2",
+        </ul>
+        <form method="post" action="/newpage" enctype="multipart/form-data">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">/newpage/</span>
+            </div>
+            <input type="text" class="form-control" placeholder="route/file name" aria-label="route" name="route" aria-describedby="basic-addon1">
+            <a data-toggle="tooltip" data-placement="right" title="" data-original-title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc."><i class="red fas fa-info-circle" style="margin-top:1em;position: relative;right: -0.8em;"></i></a>
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class = "modal-footer">
+        <button class="btn btn-primary submit center-block Submit">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setmodalvalue(a){
+    console.log(a);
+    var b = document.getElementById('basic-addon1');
+    console.log(b);
+    var c = a.parentElement.parentElement;
+    if(c.id != "dropdown2"){
+      b.innerHTML = c.id;
+    }
+    b.innerHTML = b.innerHTML + '/';
+    console.log(c);
+    document.getElementById('preroute').value = "/newpage/"+b.innerHTML;
+  }
+  $('document').ready(function(){
+    $('#newpage').on('hide.bs.modal',function(e){
+      var b = document.getElementById('basic-addon1');
+      b.innerHTML = "";
+    })
+  })
+</script>
+
+<!-- JavaScript files-->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/popper.js/umd/popper.min.js"> </script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+<script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="/vendor/chart.js/Chart.min.js"></script>
+<script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/js/charts-home.js"></script>
+<!-- Main File-->
+<script src="/js/front.js"></script>
+</body>
+</html>

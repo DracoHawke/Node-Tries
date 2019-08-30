@@ -1,0 +1,14 @@
+<% include adminheader %>
+<div class="container mb-5">
+  <h1 class="bg-white display-4 text-center text-primary mt-5 mb-5" style="font-size:6vmin;">Notifications</h1>
+  <div class="scrollbar scrollbar-primary">
+  <div class="fix force-overflow">
+    <% for(var i=0;i<notifications.length;i++){ %>
+      <div class="bg-white row m-3">
+        <p class="text-center mt-3 text-uppercase" style="width:100%;font-weight:500;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp<a class="text-dark" href="/admin_messages"><%= notifications[i].message %></a></p>
+      </div>
+    <% } %>
+  </div>
+  </div>
+</div>
+<% include adminfooter%>

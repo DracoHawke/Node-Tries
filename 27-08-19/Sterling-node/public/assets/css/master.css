@@ -1,3 +1,15 @@
+/*@font-face {
+    font-family: 'CircularStd';
+    src: url('../webfonts/circular/CircularStd-Book.woff2') format('woff2'),
+        url('../webfonts/circular/CircularStd-Book.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+   font-family: 'CircularStd';
+}*/
+
 span.a1{
   font-size: 1em;
   font-weight: 500;
@@ -73,10 +85,29 @@ img.home.img2{
 
 .border1{
   border: 1px solid rgb(237, 242, 246);
+  border-width: 0px 0px 0px 1px;
+}
+
+div.marbot4{
+  margin-bottom: 4em;
+}
+
+div.padbot4{
+  padding-bottom: 4em;
+}
+
+div.padtop4{
+  padding-top: 4em;
 }
 
 div.martop1{
   margin-top: 1em;
+}
+
+div.bordertop1{
+border-width: 1px 0px 0px 0px;
+border-style: solid;
+border-color: rgb(237, 242, 246);
 }
 
 p.tcent1{
@@ -104,10 +135,157 @@ button.button2{
   font-weight: 500;
   font-size: 1em;
   text-align: center;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+button.button2:hover{
+  color: black;
+
 }
 
 .cardbut1{
     text-align: center;
+}
+
+div.box{
+width: 3em;
+height: 3em;
+background-color: rgb(237, 242, 246);
+}
+
+div.cont5{
+  padding-left:0;
+}
+
+div.cont4{
+  padding-left:0;
+  padding-right:0;
+}
+
+img.home.img3{
+width: 100%;
+}
+
+h2.home.head1{
+  padding-left: 1.2em;
+  padding-right: 1em;
+  font-weight: bold;
+  padding-bottom: 1em;
+  font-size: 2.5em;
+}
+
+div.home.content1{
+  font-size: 1em;
+  font-weight: 500;
+  color: rgba(0,0,0,0.9);
+}
+
+div.home.cont6{
+padding-left: 3em;
+padding-right: 1em;
+}
+
+p.home.link1{
+  margin-top: 1em;
+}
+
+a.click1{
+  color: #E62F2E;
+  font-weight: 500;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+a.click1:hover{
+  text-decoration: none;
+  color: black;
+}
+
+div.foot1{
+  background-color: rgb(14, 37, 62);
+  color: white;
+}
+
+div.space{
+  height: 4em;
+}
+
+div.box2{
+margin-top: 1.4em;
+height: 4em;
+background-color: rgb(19, 46, 75);
+width: 4em;
+margin-left: 2.7em;
+}
+
+.head6{
+  font-size: 1.5em;
+  width: 100%;
+  font-weight: 400;
+  /* text-align: center; */
+}
+
+.icon4{
+  margin-left: -3em;
+  margin-right: 1.5em;
+  height: 1.4em;
+  width: auto;
+}
+
+p.p1{
+  font-size: 0.8em;
+  margin-top: 2em;
+  font-weight: 500;
+  color:white;
+}
+
+a.none1:hover{
+  text-decoration:none;
+}
+
+p.p3{
+  /* margin-bottom: 0em; */
+  margin-top: 1em;
+}
+
+p.p1.p3{
+  margin-bottom: 0em;
+  margin-top: 0.8em;
+}
+
+p.home.p1{
+  margin-bottom: 0em;
+  margin-top: 1em;
+  z-index: 2;
+  position: relative;
+}
+
+.padleft0{
+  padding-left:0;
+}
+
+div.box3{
+  margin-top: -3em;
+  height: 3em;
+  background-color: rgb(19, 46, 75);
+  width: 3em;
+  z-index: 0;
+  position: sticky;
+  /* top: -1em; */
+  /* left: 5em; */
+  margin-left: 5.3em;
+}
+
+div.box4{
+  margin-top: -3em;
+  height: 2.5em;
+  background-color: rgb(19, 46, 75);
+  width: 2.5em;
+  margin-left: -3em;
+}
+
+i.icon5{
+font-size: 2.5em;
+margin-right: 0.5em;
 }
 
 @media (max-width: 991px){
@@ -116,5 +294,17 @@ button.button2{
   }
   div#navlinks1{
     margin-left: 0;
+  }
+}
+
+@media (max-width: 767px){
+  .padrt1{
+    margin-left: 12em;
+  }
+}
+
+@media (max-width: 500px){
+  .padrt1{
+    margin-left: 6em;
   }
 }

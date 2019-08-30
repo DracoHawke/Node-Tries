@@ -1,0 +1,135 @@
+.pagdis{
+  display: none;
+}
+
+.header{
+  border-style: none;
+}
+.body1{
+  border-style: none;
+}
+.inline1{
+  font-size: 1em;
+  color: rgb(99, 203, 191);
+}
+.formicons{
+  font-size: 1em;
+  color: rgb(2, 2, 47);
+  margin-top: 0.35em;
+  padding-left: 5px;
+}
+.input1{
+  font-size: 1em;
+  border-style: none;
+}
+.underline1{
+  width: 100%;
+  background:rgb(99, 203, 191);
+  height: 0.1em;
+  float: left;
+}
+.loginbutton{
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+span.modal-title.font-weight-bold {
+    border-bottom: 0.1em solid rgb(99, 203, 191);
+    padding-bottom:2%
+}
+.login-button{
+    background-color: #53cbbf;
+    border-radius: 0;
+    color: white;
+    width: 100%;
+    box-shadow: 1px 1px 5px #53cbbf;
+    font-size: larger;
+    font-weight: 500;
+    text-align: center;
+}
+.login-button:hover{
+    color:white;
+}
+
+.recover{
+  color: black;
+}
+.matesitstick1{
+    margin-left: .5rem;
+}
+.navlink5{
+    margin-left:1rem;
+}
+@media (min-width: 768px){
+  #navbarCollapse{
+      font-size:0.8em;
+  }
+}
+@media (min-width: 852px){
+  #navbarCollapse{
+      font-size:1em;
+  }
+}
+@media (max-width: 767px){
+  .navlink5{
+      margin-left:0;
+  }
+}
+@media (max-width: 500px){
+    #navbarcontainer1{
+        padding:0;
+    }
+}
+@media screen and (max-width: 470px) {
+  li.li{
+      font-size: 0.8em;
+  }
+  .navbar-nav.navbar-top a{
+      font-size: 0.8em;
+  }
+  .navbar-expand .navbar-nav .nav-link {
+      padding: 0;
+  }
+
+}
+@media screen and (max-width: 510px) {
+  .carousel-caption {
+    position: absolute;
+    bottom: 0%;
+  }
+  .navbar-top a{
+      font-size: 0.8em;
+  }
+}
+@media (max-width: 350px){
+    .matesitstick1{
+        margin-left:0;
+    }
+}
+
+/* Enable / Disable Dogs */
+
+.greenenb{
+  color: rgb(99, 208, 60);
+  font-style: italic;
+}
+
+a.hovred:hover {
+  text-decoration: none;
+}
+
+a.hovred:hover > span {
+  color: rgb(237, 33, 84);
+}
+
+a.hovgreen:hover {
+  text-decoration: none;
+}
+a.hovgreen:hover > span {
+  color: rgb(99, 208, 60);
+}
+
+.reddis{
+  color: rgb(237, 33, 84);
+  font-style: italic;
+}

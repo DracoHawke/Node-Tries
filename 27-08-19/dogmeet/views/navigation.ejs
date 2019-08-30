@@ -1,0 +1,153 @@
+<% if(uname=='') {%>
+<div class="modal fade" id="modalLoginForm" tabindex="-1">
+  <div class="modal-dialog main1" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center header">
+        <div class="loginbutton"><span class="modal-title font-weight-bold">LOGIN</span></div>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true" class="cross">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3 body1">
+        <div class="signin">
+          <div class="md-form mb-5 inline1">
+            <label data-error="wrong" data-success="right" for="defaultForm-email">Email Address</label>
+            <div class="input-group">
+              <input type="email" id="loginemail" class="form-control validate input1" placeholder="Email Address">
+              <div class="input-group-append">
+                <span class="fas fa-envelope prefix grey-text formicons"></span>
+              </div>
+            </div>
+            <span class="underline1" style="background:#bebebe"></span>
+            <span id="emailerr" class="err red" style="font-size:small"></span>
+          </div>
+          <div class="md-form mb-4 inline1">
+            <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
+            <div class="input-group">
+              <input type="password" id="loginpass" class="form-control validate input1" placeholder="Password">
+              <div class="input-group-append">
+                <i class="fas fa-lock prefix grey-text formicons"></i>
+              </div>
+            </div>
+            <span class="underline1" style="background:#bebebe"></span>
+            <span id="passerr" class="red" style="font-size:small"></span>
+          </div>
+          <div class="row">
+              <div class="col-sm-6" style="padding-top:2%;">
+            <a href="/recoverpass" style="font-size:small;font-weight:bolder;color:black;"> Forgot Password? </a>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4" style="text-align:right">
+            <button class="btn login-button" id="loginbtn">Login</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center footer1" style="border-top:0;">
+        <p class="faded"> Don't have an Account? <span class="linkred"><a href="/register" class="red linkred">Register Here</a></span></p>
+      </div>
+    </div>
+  </div>
+</div><%} %>
+<p id="uid" hidden><%= login.email %></p>
+<div class="container-fluid top-nav">
+<div class="container" id="navbarcontainer1">
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 col-md-12">
+    <nav class="navbar navbar-expand nav-top-belt">
+      <div class="navbar-nav navbar-top">
+        <a href="/findmate" class="nav-item nav-link "><i class="fas fa-dog"></i>&nbsp;Find a Mate</a>
+        <a class="nav-item nav-link"><div class="stick matesitstick1"></div></a>
+        <a href="/findsitter" class="nav-item nav-link "><i class="fas fa-user"></i>&nbsp;Find a Sitter</a>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <ul class="navbar-nav nav2  navbar-top">
+        <% if(sid!=1) {%>
+          <li class="navbar-text li"><a href="/sitter">Register as Sitter</a></li>
+          <div class="stick matesitstick1"></div>
+          <% }%>
+          <% if(login.did==undefined) {%>
+          <li class="navbar-text li"><a href="/registerdog">Register a Dog</a></li>
+          <div class="stick matesitstick1"></div>
+          <% }%>
+          <li class="navbar-text li"><a href="/contact">Support</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+</div></div>
+<div class="row address1" style="max-width: 90em;margin: 0 auto;">
+  <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 col-md-12">
+    <nav class="navbar navbar-expand-md second-nav" style="padding: 0;">
+      <a href="/" class="navbar-brand">
+        <img class="assets/images/logo-image" src="/assets/images/logo.png" alt="CoolBrand">
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+          <a href="/about" class="nav-item nav-link ">ABOUT US</a>
+          <a href="/faq" class="nav-item nav-link ">FAQ's</a>
+          <a href="/blog" class="nav-item nav-link ">BLOG</a>
+          <a href="/contact" class="nav-item nav-link ">CONTACT US</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <% if (uname !== '') { %>
+            <ul class="navbar-nav nav2 " style="flex-direction:row">
+              <script>
+                $(document).ready(function(){
+
+                    $("#read_noti").click(function(){
+                      $.ajax({
+                    		url: '/read_noti',
+                    		type: "GET",
+                    		success: function(data) {
+                    			}
+                    	});
+                        $("#mark").html("0");
+                    });
+
+                  });
+              </script>
+              <li class="navbar-text text-dark ml-3"><button id="read_noti" class="btn nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bell" style="font-size:x-large;"></i><span class="mark" id="mark"><%= login.notifications.length %></span></button>
+                <div class="dropit dropdown-menu size-1" style="left:auto;right: auto;top:auto;max-height: 100%;overflow-y:auto;" id="dropit">
+                  <% for(var i=0;i<login.notifications.length;i++){ %>
+                    <div><a href="<%= login.notifications[i].href %>"><%= login.notifications[i].message %></a></div>
+                    <% } %>
+                </div>
+              </li>
+              <li class="navbar-text text-dark ml-3"><img class="nav-link logged-in-pic" src="<%= login.profile %>"></li>
+              <li class="navbar-text text-dark ml-2" style="margin-right: 6em;">
+                  <div class="dropdown dropdown7">
+                    <div class="navlink1 nav-link">
+                      <a href="#" class="dropdown-toggle navlink1" data-toggle="dropdown">
+                        <span class="a1 block1"><p class="text-secondary welcome">Welcome</p><%= uname %></span>
+                      </a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/dashboard"><i class='fas fa-user-alt'></i>&nbsp;&nbsp;Profile</a>
+                        <% if(login.did == 1) { %><% console.log("Have dogs"); %>
+                          <a class="dropdown-item" href="/dashboard/mydogs"><i class="fas fa-dog"></i>&nbsp;&nbsp;My Dog(s)</a>
+                        <% } %>
+                        <a class="dropdown-item" href="/dashboard/chat"><i class='fas fa-comment-alt'></i>&nbsp;&nbsp;Chat</a>
+                        <% if (sid == 1) { %>
+                          <a class="dropdown-item" href="/dashboard/settings"><i class='fas fa-user-cog'></i>&nbsp;&nbsp;Settings</a>
+                        <% } %>
+                        <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;LOG OUT</a>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+            <% } else { %>
+            </form>
+            <ul class="navbar-nav nav2 ">
+            <li class="navbar-text text-dark navlink5" style="margin:auto;"><a class="nav-link" href="?signin" href="?signin" data-toggle="modal" data-target="#modalLoginForm">SIGN IN</a></li>
+            <li class="navbar-text text-light navlink5"><a class=" nav-link btn custom-btn size-1" href="/register">GET STARTED</a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+<div style="border-bottom:solid 1px lightgray;width:100%;"></div>

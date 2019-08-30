@@ -1,0 +1,233 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="/assets/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/search.css">
+<title>DogMate</title>
+</head>
+<body class="scrollbar scrollbar-primary">
+  <% include navigation %>
+  <div class="jumbotron jumbo">
+    <div class="heading">
+        FIND A MATE
+    </div>
+    <form action ="/searchmate" method="get" enctype="multipart/form-data">
+      <div class="input-group search-bar">
+        <input type="text" class="form-control heights" name="name" placeholder="Search Dog by Dog Breed or Age" <% if(typeof c.name !== "undefined"){ %> value = "<%= c.name %>" <% } %> >
+        <button class="btn searching" type="submit" name="button">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
+      </div>
+      <% if(typeof search === 'undefined') { %>
+    </form><% }%>
+  </div>
+  <div class="container mb-4" style="padding:0;">
+    <div class="row mb-4">
+      <div class="col-sm-6">
+        <% if(typeof search === 'undefined') { %>
+        <br><h2 class="h2"><strong>TOP RATED MATES</strong></h2><br></div><div class="line-mate col-sm-12"></div></div><% } else { %>
+          <h2><strong>Search Results</strong></h2></div>
+          <div class="col-sm-6 numofres">
+            <%= totaldogs %> results found
+          </div>
+          <div class="line-mate col-sm-12"></div>
+          <div class = "col-sm-6">
+              <strong>Filter by Age Group:</strong>
+                <select class="find-drop" name="age_group" id="age_group1">
+                  <option value= "All" selected>All</option>
+                  <option id= "l1" value= "l1"> < 1 years </option>
+                  <option id= "b12" value= "b12"> 1-2 years </option>
+                  <option id= "b23" value= "b23"> 2-3 years </option>
+                  <option id= "b35" value= "b35"> 3-5 years </option>
+                  <option id= "b57" value= "b57"> 5-7 years </option>
+                  <option id= "b7t" value= "b7t"> 7-10 years </option>
+                  <option id= "gtt" value= "gtt"> > 10 years </option>
+                </select>
+            </div>
+            <script>
+              $('document').ready(function(){
+                console.log("age-group");
+                <% if(typeof c.age_group !== "undefined") { %>
+                  //console.log("in");
+                  $('#age_group1').val( '<%= c.age_group %>');
+                  //console.log('<%= c.age_group %>')
+                <% } %>
+              });
+            </script>
+            <div class="col-sm-6 text-right">
+              <strong>Sort By:</strong>
+                <select class="find-drop" name="sort_by" id="sort_by1">
+                  <option selected value="Rating"> Top Rated </option>
+                  <option value = "DogAge"> Dog Age </option>
+                  <option value = "Reviews"> Votes </option>
+                </select>
+                <script>
+                  $('document').ready(function(){
+                    //console.log("sort_by");
+                    <% if(typeof c.sort_by !== "undefined") { %>
+                      //console.log("in");
+                      $('#sort_by1').val( '<%= c.sort_by %>');
+                    <% } %>
+                  });
+                </script>
+            </div>
+          </div>
+          </form>
+          <% } %>
+      <div class="row">
+      <% if(rows.length > 0) { %>
+        <% for(var i=0;i<rows.length;i++) {
+          %>
+          <div class="card crd1 crdleft">
+            <div class="card-body crdpad2">
+              <a href="/matedetails?id=<%= rows[i].Email %>&did=<%= rows[i].Did %>">
+                <img class="profile" src="<% if(rows[i].DogPic1){%>/<%= rows[i].DogPic1 %><% }else if(rows[i].DogPic2){ %>/<%= rows[i].DogPic2 %><%}else if(rows[i].DogPic3){%>/<%= rows[i].DogPic3%><%}else if(rows[i].DogPic4){%>/<%= rows[i].DogPic4%><%}else if(rows[i].DogPic5){%>/<%= rows[i].DogPic5%><%}else{%>/users/default.png<%}%>">
+              </a>
+              <div class="fname">
+                <span>
+                  <%= rows[i].DogName %>,
+                  <% if(rows[i].DogAge >= 1 && rows[i].DogAge < 2) { %>
+                    <%= rows[i].DogAge %> Yr
+                  <% } else if(rows[i].DogAge >= 2) { %>
+                    <%= rows[i].DogAge %> Yrs
+                  <% } else if(rows[i].DogAge < 1) {%>
+                    <%= (Number(rows[i].DogAge)/0.1) %> months <% } %>
+                </span>
+              </div>
+              <div class="grey2" style="text-transform:capitalize;">
+                <% rows[i].DogBreed = rows[i].DogBreed.replace(/_/g,' '); %>
+                <%= rows[i].DogBreed %>
+              </div>
+              <div class="row">
+                <div class="rating col-sm-6">
+                  <%
+                  if((rows[i].Rating*2)%2!=0){ rows[i].Rating=rows[i].Rating-1;}
+                  for(var j=0;j<rows[i].Rating;j++){
+                     %>
+                  <span class="fa fa-star checked"></span>
+                  <% }
+                  if((rows[i].Rating*2)%2==1){%>
+                    <i class="fas fa-star-half-alt checked"></i>
+                    <% j=j+1;}
+                  for(var k=0;k<5-j;k++){
+                  %>
+                  <span class="far fa-star" style="color:#ed2154"></span>
+                <% }%>
+                </div>
+                <div class="review col-sm-6">
+                  <i class="fas fa-vote-yea"></i>&nbsp;<%= rows[i].Reviews %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%  }%></div>
+        <% if(page == 2) { %>
+        <div class="cent-pag" style="">
+          <ul class="pagination justify-content-end">
+            <% var url12 = {};
+              url12 = Object.assign(url12, url);
+              if(url12.pageno != 1) {
+                url12.pageno = url12.pageno - 1;
+              }
+              var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');
+            %>
+            <li class = "page-item">
+              <a id="pagleft" value="<%= url12.pageno %>" class = "page-link mypage" href="?<%= queryString %>"><i class="fas fa-angle-left"></i></a>
+            </li>
+            <%  var a = Number(totaldogs);
+              a = a/2;
+              a = Math.ceil(a);
+              if(a <= 5){
+                console.log("in a less than 5");
+                url12 = {};
+                url12 = Object.assign(url12, url);
+                for(i = 0; i < a; i++) {
+                  url12.pageno = i + 1;
+                  var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');
+                  console.log(url12.pageno);
+            %>
+                  <li class = "page-item <% if(url.pageno == i + 1) { %> active <% } %>">
+                    <a class = "page-link mypage" href="?<%= queryString %>"><strong><%= i+1 %></strong></a>
+                  </li>
+            <%  }
+              }
+              else if(a > 5){
+                console.log("in a more than 5");
+                url12 = {};
+                url12 = Object.assign(url12, url);
+                var curr = Number(url.pageno);
+                var flag = 0;
+                for(i = 0; i < a; i++){
+                  console.log("i: ", i, ", curr: ", curr);
+                  if(i == 0 || i == (a-1)){
+                    console.log("in 1");
+                    url12.pageno = i + 1;
+                    var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');
+            %>
+                    <li class = "page-item <% if(curr == i + 1) { %> active <% } %>">
+                      <a class = "page-link mypage" href="?<%= queryString %>"><strong><%= i+1 %></strong></a>
+                    </li>
+            <%
+                    continue;
+                  }
+                  else if(i+1 == (curr-1) || i+1 == (curr+1) || i+1 == curr){
+                    console.log("in 2");
+                    url12.pageno = i + 1;
+                    var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');
+                    flag = 0;
+            %>
+                    <li class = "page-item <% if(curr == i + 1) { %> active <% } %>">
+                      <a class = "page-link mypage" href="?<%= queryString %>"><strong><%= i+1 %></strong></a>
+                    </li>
+            <%
+                    continue;
+                  }
+                  else if(flag == 0){
+                    console.log("in 3");
+                    flag = 1;
+            %>
+                    <li class = "page-item disabled">
+                      <a class = "page-link mypage" href="#"><strong>...</strong></a>
+                    </li>
+            <%
+                    continue;
+                  }
+                  else{
+                    console.log("in 4");
+                    continue;
+                  }
+                }
+              }
+              if(url.pageno != i) {
+                url12.pageno = Number(url.pageno) + 1;
+              }
+              queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');
+            %>
+            <li class = "page-item">
+              <a id="pagright" value="<%= url12.pageno %>" class = "page-link mypage" href="?<%= queryString %>"><i class="fas fa-angle-right"></i></a>
+            </li>
+          </ul>
+          <script type="text/javascript">
+            $('document').ready(function(){
+              var left1 = document.getElementById('pagleft');
+              var right1 = document.getElementById('pagright');
+              var l = Number(left1.getAttribute("value"));
+              var r = Number(right1.getAttribute("value"));
+              var c = Number(<%= url.pageno %>);
+              console.log(left1.getAttribute("value"));
+              console.log(right1.getAttribute("value"));
+              console.log("curr", <%= Number(url.pageno) %>);
+              if(l == c){
+                left1.className += " pagdis";
+                left1.display = "none";
+              }
+              if(r == c){
+                right1.className += " pagdis";
+              }
+            })
+          </script>
+        </div>
+       <% } } else { %>
+        <br><h2 class = "h2"> No Results. </h2><br>
+        <% } %>
+    </div>
+  </div></div></div>
+  <% include footer %>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<div class="container-fluid foot-color">
+  <div class="container">
+    <div class="row reg">
+      <div class="col-lg-5 mt-5" >
+        <h3 class="quick-links-head">Quick Links</h3>
+        <div class="row">
+        <div class="col-6 quick-links size-1 pl-0">
+          <p><a href="/about">About us</a></p>
+          <p><a href="/faq">FAQ's</a></p>
+          <p><a href="/blog">Blog</a></p>
+          <p><a href="/contact">Contact us</a></p>
+          <p><a href="/#Testimonials">Testimonials</a></p>
+          <p><a href="/terms">Terms and Conditions</a></p>
+          <p><a href="/help">Help</a></p>
+        </div>
+        <div class="col-6 quick-links size-1">
+          <p><a href="/findmate">Find a Mate</a></p>
+          <p><a href="/findsitter">Find a Sitter</a></p>
+          <p><% if(login.did != 1){ %><a href="/registerdog">Register a Dog</a><% } %></p>
+          <p><% if(sid != 1){ %><a href="/sitter">Register as a Sitter</a><% } %></p>
+          <p><% if(uname == "") { %><a href="?signin" data-toggle="modal" data-target="#modalLoginForm">Login</a><% } %></p>
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-3 mt-5 text-white" >
+        <h3 class="quick-links-head">Contact</h3>
+            <p><a class="size-1" href="tel:9876 543 210"><i class='fas fa-phone-volume'></i> 9876 543 210</a></p>
+            <p><a class="size-1" href="mailto:email@example.com"><i class='fas fa-envelope'></i> email@example.com</a></p>
+            <h3 class="quick-links-head mt-4">Get in touch</h3>
+            <p class="size-1">
+              <a href="https://www.facebook.com/" target="new"><i class='fab fa-facebook-f' style="font-size:1.5em"></i></a>&nbsp;&nbsp;
+              <a href="https://www.instagram.com/" target="new"><i class='fab fa-instagram' style="font-size:1.5em" ></i></a>&nbsp;&nbsp;
+              <a href="https://twitter.com/?lang=en" target="new"><i class='fab fa-twitter' style="font-size:1.5em" ></i></a>&nbsp;&nbsp;
+              <a href="https://www.youtube.com/" target="new"><i class='fab fa-youtube' style="font-size:1.5em" ></i></a>
+            </p>
+        </div>
+      <div class="col-lg-4 mt-5" >
+        <h3 class="quick-links-head-news">Newsletter</h3>
+        <p class="quick-links size-1">Sign up for free newsletter</p>
+        <form method="get" action="#newsletter">
+          <span><input name="Subscriber" required class="input-my size-1" type="text" placeholder="Email address">
+          <button class="red-button size-1" type="submit" name="button"><i class='fas fa-paper-plane'></i></button></span>
+		  <span class="red"><%= login.Subscriber_err %><span>
+        </form>
+        <% if(login.Subscriber_success) {%>
+<div class="text-success">
+  You have successfully subscribed for the news letter.
+</div>
+<% } %>
+        <img id="newsletter" class="walk" src="/assets/images/walk.png" alt="">
+        </div>
+    </div>
+    <div class="row reg">
+      <div class="col-md-12 col-lg-12 mt-5">
+          <p class="copy-text size-1">Copyrights 2019, Dog Mate</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  <% if(uname !== "") { %>
+    $('document').ready(function() {
+      function myFunction() {
+        setTimeout(function(){
+          $.ajax({
+            url: "/check",
+            type: "GET",
+            success: function(response) {
+              console.log(response);
+              if(String(response)=="Yes") {
+                console.log("session availiable");
+                myFunction();
+              }
+              else {
+                console.log('session expired?');
+                location.reload();
+              }
+            }
+          });
+        }, 7000000);
+      }
+      myFunction();
+    });
+  <% } %>
+</script>

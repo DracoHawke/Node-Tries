@@ -1,0 +1,233 @@
+/* map css */
+#map {
+    /* position: absolute; */
+    /* top: 0; */
+    /* bottom: 0; */
+    width: 100%;
+}
+#details {
+    position: fixed;
+    height: 200px;
+    background: transparent;
+    color: cadetblue;
+    padding-left: 20px;
+    top:50px;
+}
+#details .title {
+    color: slategray;
+    font-size: small;
+}
+#locate {
+    position: fixed;
+    left: 20px;
+    top: 10px;
+}
+#changeyourloc{
+  width:100%;
+}
+.displayinline2{
+  display: inline-flex;
+  width: 100%;
+}
+.ptext{
+  font-weight: bold;
+font-size: 15px;
+}
+.input2{
+  width: 100%;
+  font-size: 1em;
+}
+.submit2{
+  border-radius: 30px;
+  height: 2em;
+  border: none;
+  width: 100%;
+  color: white;
+  font-size: 0.8em;
+  background-color: rgba(92, 189, 177, 1);
+}
+.cancel2{
+  border-radius: 30px;
+  height: 2em;
+  border: none;
+  background-color: #ed2154;
+  width: 100%;
+  color: white;
+  font-size: 0.8em;
+}
+.formloc{
+  width: 100%;
+}
+.text5{
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.alignright{
+  text-align: right;
+  width: 50%;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.slidercontainer{
+  width:100%;
+  margin-top: 2em;
+}
+
+.slider:hover {
+  opacity: 1;
+  /* outline: black; */
+}
+
+.slider::-moz-range-thumb {
+  width: 1em;
+  height: 1em;
+  border-style: solid;
+  border-width: 0.1em;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+output {
+  position: relative;
+    width: fit-content;
+    height: 1.7em;
+    text-align: center;
+    color: #ed2154;
+    display: inline-block;
+    font-weight:bold;
+    font-size: 0.7em;
+    bottom: 55%;
+    background-color: white;
+    border-radius: 3px;
+}
+.btn5{
+  border-radius: 30px;
+  height: 3em;
+  border: none;
+  width: 34%;
+  margin: 1em;
+  color: white;
+  font-size: 1em;
+  background-color: rgba(92, 189, 177, 1);
+}
+.btn5:hover{
+  color: white;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      -webkit-appearance: none;
+      -moz-apperance: none;
+      width: 100%;
+      height: 0.6em;
+      border-radius: 15px;
+      background-color: white;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+      background-image: -webkit-gradient( linear, left top, right top, color-stop(0, red),color-stop(0, white) );
+    }
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: white;
+      margin-top: -10px;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      shadow: 5px;
+      width: 1.4em;
+      height: 1.4em;
+      border-style: solid;
+      border-width: 0.2em;
+      border-color:rgb(210, 210, 210);
+      border-radius: 50%;
+      background: white;
+      /*cursor: pointer;*/
+      /*box-shadow: -30em 0 0 30em red;*/
+    }
+}
+.submit2,.cancel2{
+  margin-top: 0.5em;
+}
+.plrmtb1{
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.mrb1{
+  margin-bottom: 1em;
+}
+.text6{
+  width:100%;
+  font-size: 1em;
+  font-weight: bold;
+}
+.group1{
+  min-height: 3em;
+    padding: 1%;
+    width: 100%;
+    border: 1px solid #dcdcec;
+    background-color: white;
+    text-align: center;
+}
+.checks{
+  width: 1em;
+  height: 1em;
+}
+.checks1{
+  margin-left: 4em;
+}
+.mrt1{
+  font-size: 1em;
+}
+@media (max-width: 767px){
+  .ptext{
+    font-size: 2em;
+  }
+  .input2{
+    margin-top: 1em;
+    font-size: 2em;
+  }
+  .submit2,.cancel2{
+    margin-top: 1em;
+    font-size: 1.5em;
+  }
+  .btn5{
+    width: 100%;
+  }
+  output{
+    height:3em;
+    width:3em;
+    font-size: 0.6em;
+  }
+  input[type='range'] {
+    margin-top: 2em;
+    height: 1em;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    position: relative;
+    border-radius: 50%;
+    height: 1.8em;
+    width: 1.8em;
+  }
+  input[type='range']::-webkit-slider-runnable-track {
+    margin-top: -10px;
+  }
+}
+span.ptext.displayinline2 {font-weight: bold;font-size: 15px;}
+a#yourlocationset {
+    letter-spacing: 0.03em;
+}
+@media (min-width: 2000px){
+
+  input[type='range']::-webkit-slider-thumb {
+    position: relative;
+    border-radius: 20%;
+    height: 0.7em;
+    width: 0.7em;
+  }
+}

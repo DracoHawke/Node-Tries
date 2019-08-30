@@ -1,0 +1,98 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="/assets/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/signup.css">
+<link rel="stylesheet" type="text/css" href="/assets/dashboard.css">
+<link rel="stylesheet" type="text/css" href="/assets/settings.css">
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+<link href="/assets/chatt.css" type="text/css" rel="stylesheet">
+<title>DogMate</title>
+</head>
+<body class="scrollbar scrollbar-primary">
+  <% include navigation %>
+  <div class="container-fluid pricing">
+    <div class="container" >
+    <% if(send_data.status_err=='not ver')
+        { %>
+          <h2 class="red">Please Verify Your email to Access This Feature......</h2>
+    <%  }
+      else{ %>
+      <div class="row size-1 font-weight-bold mb-2">
+      <% if(page == "myacc" || page == '' ){ %> <a href="/" class="red" style="padding-left:15px;">Home</a>&nbsp;/&nbsp;Profile
+      <% } else if(page == "mydogs"){ %> <a href="/" class="red" style="padding-left:15px;">Home</a>&nbsp;/&nbsp;My Dogs
+      <% } else if(page == "settings"){ %> <a href="/" class="red" style="padding-left:15px;">Home</a>&nbsp;/&nbsp;Settings
+      <% } else if(page == "dogdetails"){ %> <a href="/" class="red" style="padding-left:15px;">Home</a>&nbsp;/&nbsp;<a href="/dashboard/mydogs" class="red ">My Dogs<a>&nbsp;/&nbsp;<% var s = send_data[0]; if(typeof send_data !== 'undefined') { %><%= s.DogName %><% } %>
+      <% } else if(page == "chat"){ %> <a href="/" class="red" style="padding-left:15px;">Home</a>&nbsp;/&nbsp;Chat
+      <% } else { %> <%= page %> HELLO <% console.log("myaccount default"); } %>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-lg-3 menu-card">
+              <div class="row">
+                <div class="col-12 menu myacc">
+                  <a class="for_ajax myacc" href="/dashboard/myacc" active><i class='fas fa-user-alt'></i>&nbsp;&nbsp;My Account</a>
+                </div>
+                <div class="col-12 menu chat">
+                  <a class="for_ajax chat" href="/dashboard/chat"><i class='fas fa-comment-alt'></i>&nbsp;&nbsp;Chat</a>
+                </div>
+                <% if(login.did==undefined) {} else {%>
+                  <div class="col-12 menu mydogs">
+                    <a class="for_ajax mydogs" href="/dashboard/mydogs"><i class="fas fa-paw"></i>&nbsp;&nbsp;My Dog(s)</a>
+                  </div>
+                <% } %>
+                <% if(login.sid==undefined) {} else {%>
+                <div class="col-12 menu settings">
+                  <a class="for_ajax settings" href="/dashboard/settings"><i class='fas fa-user-cog'></i>&nbsp;&nbsp;Settings</a>
+                </div>
+                <% } %>
+              </div>
+          </div>
+          <script>
+              var rem_class=document.getElementsByClassName("menu");
+              for(var k=0;k<3;k++){
+              rem_class[k].removeAttribute("style");
+              var c=rem_class[k].children;
+              c[0].removeAttribute("style");
+              }
+          </script>
+      <div class="col-md-9 col-lg-9 dashboard_lay" id="list">
+        <% if(page=='' || page=='myacc'){ %>
+          <script>
+          document.getElementsByClassName("myacc")[0].setAttribute("style", "background-color:#02022e");
+          document.getElementsByClassName("myacc")[1].setAttribute("style", "color:white");
+          </script>
+          <% include myacc %>
+        <% }
+        else if(page=='chat'){ %>
+          <script>
+          document.getElementsByClassName("chat")[0].setAttribute("style", "background-color:#02022e");
+          document.getElementsByClassName("chat")[1].setAttribute("style", "color:white");
+          </script>
+          <% include chat %>
+        <% }
+        else if(page=='mydogs' && login.did!=undefined){ %>
+          <script>
+            document.getElementsByClassName("mydogs")[0].setAttribute("style", "background-color:#02022e");
+            document.getElementsByClassName("mydogs")[1].setAttribute("style", "color:white");
+          </script>
+          <% include mydogs %>
+          <% } else if(page == "dogdetails"){ %>
+            <script>
+              document.getElementsByClassName("mydogs")[0].setAttribute("style", "background-color:#02022e");
+              document.getElementsByClassName("mydogs")[1].setAttribute("style", "color:white");
+            </script>
+             <% include dogdetails %>
+        <% }
+        else if(login.sid!=undefined){ %>
+          <script>
+          document.getElementsByClassName("settings")[0].setAttribute("style", "background-color:#02022e");
+          document.getElementsByClassName("settings")[1].setAttribute("style", "color:white");
+          </script>
+          <% include settings %>
+        <% } %>
+        </div>
+        </div>
+        <% } %>
+    </div>
+  </div>
+  <% include footer %>
+</body>
+</html>

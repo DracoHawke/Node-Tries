@@ -1,0 +1,52 @@
+<span class="head6">
+  Quick Links
+</span>
+<p class="p1">Home</p>
+<p class="p3">Services</p>
+<p class="p3">Employers</p>
+<p class="p3">About Us</p>
+<p class="p3">Contact Us</p>
+
+
+
+
+<p class="p2">Find a Mate</p>
+<p class="p3">Find a Sitter</p>
+<p class="p3">Register a Dog</p>
+<p class="p3">Register a Sitter</p>
+<p class="p3">Login</p>
+
+<span class="head6">Get In Touch</span>
+<p class="p3"><i class="fab fa-facebook-f icon5"></i><i class="fab fa-instagram icon5"></i><i class="fab fa-twitter icon5"></i><i class="	fab fa-youtube icon5"></i></p>
+
+
+
+<div class="col-md-3" id="owlcarousel1"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button>
+                <div class="text-center">
+                  <h2 class="red">Top</h2><h2 class="red">Mates</h2>
+                  <a class="text-dark size-1" href="#car" data-slide="prev"><i class="fas fa-arrow-left"></i></a>
+                  <a class="text-dark size-1" href="#car" data-slide="next"><i class="fas fa-arrow-right"></i></a>
+                </div>
+            <button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div>
+
+
+            (node:13281) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+            events.js:174
+                  throw er; // Unhandled 'error' event
+                  ^
+
+            Error: Connection lost: The server closed the connection.
+                at Protocol.end (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+                at Socket.<anonymous> (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/Connection.js:97:28)
+                at Socket.<anonymous> (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/Connection.js:525:10)
+                at Socket.emit (events.js:194:15)
+                at endReadableNT (_stream_readable.js:1107:12)
+                at process.internalTickCallback (internal/process/next_tick.js:72:19)
+            Emitted 'error' event at:
+                at Connection._handleProtocolError (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/Connection.js:426:8)
+                at Protocol.emit (events.js:189:13)
+                at Protocol._delegateError (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/protocol/Protocol.js:398:10)
+                at Protocol.end (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/protocol/Protocol.js:116:8)
+                at Socket.<anonymous> (/home/orientaloutsourc/public_html/dogmeet/node_modules/mysql/lib/Connection.js:97:28)
+                [... lines matching original stack trace ...]
+                at process.internalTickCallback (internal/process/next_tick.js:72:19)

@@ -1,0 +1,74 @@
+<% include adminheader %>
+<link rel="stylesheet" type="text/css" href="/assets/admin_profile.css">
+<div class="container">
+<div class="row">
+    <strong><p class="my-account text-primary" style="font-size:xx-large">MY ACCOUNT</p></strong>
+</div>
+<form class="size-1 dashboard_form mt-0" name="myform" method="post" enctype="multipart/form-data" onsubmit="return update()">
+  <span>Profile Picture</span><span class="red" >*</span>
+<div class="form-group row">
+    <label for="file-upload" class="col-sm-2 col-form-label"><img class="image_profile" id="imageload" src="<% if(admin_info.Profile==''){ %>/assets/images/profile.png<%} else{ %><%= admin_info.Profile %><% }%>" ></label>
+      <div class="col-sm-9">
+        <input hidden type="file" style="width:1%;height:1%;" class="form-control size-1" name="fileUpload" id="file-upload" accept="image/*" value="" onchange="loadFile(event)">
+        <input hidden type="text" name="img" value="<%= admin_info.Profile %>">
+        <span class="red text-danger"><%= error.file_err %></span>
+      </div></div>
+      <script>
+         var loadFile = function(event) {
+        var output = document.getElementById('imageload');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        console.log(event);
+        };
+      </script>
+<div class="form-group row">
+  <div class="col-sm-6 pl-0">
+    <div class="col-sm-12">
+      <label for="fname" class="col-form-label">Full Name<span class="red">*</span></label>
+      <input type="text" class="form-control size-1" name="name" id="name" value="<%= admin_info.Name %>" placeholder="Enter Your First Name Here" >
+      <span class="red text-danger"><%= error.name_err %></span>
+    </div></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-6 pl-0">
+    <div class="col-sm-12">
+      <label for="Email" class="col-form-label">Email<span class="red">*</span></label>
+      <input type="text" class="form-control size-1" name="email" id="email" value="<%= admin_info.Email %>" readonly>
+      <span class="red"><%= error.email_err %></span>
+    </div>
+  </div>
+</div>
+  <div class="form-group row">
+    <div class="col-sm-6 pl-0">
+      <div class="row" style="margin:0">
+    <div class="col-sm-12">
+      <label for="inputPassword" class=" col-form-label">Password<span class="red">*</span></label>
+      <span style="float:right;"><a data-toggle="tooltip" data-placement="right" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc.    "><i class="red fas fa-info-circle"></i></a></span>
+      <input type="password" class="form-control size-1" name="password" placeholder="Enter Password">
+      <span class="red text-danger"><%= error.password_err %></span>
+      
+    </div>
+      
+    </div>
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+  </div>
+  <div class="col-sm-6 pl-0">
+    <div class="col-sm-12">
+      <label for="confirmPassword" class=" col-form-label">Confirm Password<span class="red">*</span></label>
+      <input type="password" name="confirmPass" class="form-control size-1" placeholder="Re-enter the above Password">
+      <span class="red text-danger"><%= error.confirm_err %></span>
+    </div>
+  </div></div>
+  <div class="form-group row">
+    <div class="col-sm-6 pl-0">
+      <div class="col-sm-5">
+        <label for="pack" class="col-sm-4 col-form-label"></label>
+        <button type="submiit" class="btn btn-primary size-1 " style="width:100%;">Update</button>
+    </div></div>
+    </div>
+</form>
+</div>
+<% include adminfooter%>

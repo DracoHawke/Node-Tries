@@ -1,0 +1,291 @@
+<% include adminheader %>
+<% if(dog_details!=''){ %>
+<div class="container-fluid">
+  <div class="row detail-box">
+    <div class="col-sm-12">
+      <div class="row" style="min-height: 5em;">
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+        <img class="image-dogs" src="<%= dog_details[0].DogPic1 %>">
+      </div>
+      <div class="col-md-2">
+      <% if(dog_details[0].DogPic2) {%>
+        <img class="image-dogs" src="<%= dog_details[0].DogPic2 %>">
+      <% } %>
+      </div>
+      <div class="col-md-2">
+      <% if(dog_details[0].DogPic3) {%>
+        <img class="image-dogs" src="<%= dog_details[0].DogPic3 %>">
+      <% } %>
+      </div>
+      <div class="col-md-2">
+      <% if(dog_details[0].DogPic4) {%>
+        <img class="image-dogs" src="<%= dog_details[0].DogPic4 %>">
+      <% } %>
+      </div>
+      <div class="col-md-2">
+      <% if(dog_details[0].DogPic5) {%>
+        <img class="image-dogs" src="<%= dog_details[0].DogPic5 %>">
+      <% } %>
+      </div>
+      <div class="col-md-1"></div>
+      </div>
+    </div>
+    </div>
+    <div class="row mt-5 mb-5 bg-white" style="background:white;">
+    <div class="col-sm-6" style="padding:1.3em;">
+      <div class="col-sm-12">
+        <center><h2 class="text-primary">Dog's Detail</h2></center>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Dog Name</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].DogName %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Dog Breed</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].DogBreed %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Dog Age</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].DogAge %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Dog Gender</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].DogGender %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Description</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].Description %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Address</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].Address %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>City</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].City %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>State</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].State %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Zip Code</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].ZIP %></p>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-6" style="padding:1.3em;">
+      <div class="col-sm-12">
+        <center><h2 class="text-primary">Owner Details</h2></center>
+      </div>
+      <div class="row">
+      <div class="col-sm-12 text-center">
+        <p><img src="<%= dog_details[0].Profile %>" style="width:20%;border-radius:3vmin"></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Name</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].Fname %> <%=dog_details[0].Lname %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>E-mail</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].Email %></p>
+        <% if(dog_details[0].status==0){%>
+          <p class="text-danger" style="font-size:x-small">NOT VERIFIED</p>
+        <% } %>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values">
+        <strong>Phone</strong>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><%=dog_details[0].Phone %></p>
+      </div>
+      </div>
+   
+    </div>
+       <center style="width:100%;">
+      <% if(dog_details[0].AdminStatus == 0) {
+        %>
+      <a class="btn btn-primary mt-5 mb-4" href="/alldogs?id=<%= dog_details[0].Did %>">Approve</a>
+      <% } else { %>
+          <a class="btn btn-default mt-5 mb-4"> Approved </a> <% } %> </center>
+    </div>
+  </div>
+<%} else {%>
+  <div class="container-fluid">
+    <div class="row detail-box">
+      <img class="image-users" src="<%= user_det[0].Profile %>" >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 mt-5 mb-5 bg-white" style="padding:1.3em;">
+        <center><h2 class="text-primary"><% if(user_det[0].Sid==null){ %>User's Details<% } else {%>Sitter's Details<% }%></h2></center>
+    <div class="row">
+    <div class="col-sm-6 key-values text-center">
+      <strong>Name</strong>
+    </div>
+    <div class="col-sm-6 text-center">
+      <p><%=user_det[0].Fname %> <%=user_det[0].Lname %></p>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6 key-values text-center">
+      <strong>E-mail</strong>
+    </div>
+    <div class="col-sm-6 text-center">
+      <p><%=user_det[0].Email %></p>
+      <% if(user_det[0].status==0){%>
+        <p class="text-danger" style="font-size:x-small">NOT VERIFIED</p>
+      <% } %>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6 key-values text-center">
+      <strong>Phone</strong>
+    </div>
+    <div class="col-sm-6 text-center">
+      <p><%=user_det[0].Phone %></p>
+    </div>
+    </div>
+    <% if(user_det[0].Sid!=null){ %>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Description</strong>
+      </div>
+      <div class="col-sm-6 text-justify" style="padding-left: 2%;padding-right: 2%;">
+        <p style="background-color:#f5f5f5; padding:1%;"><%=user_det[0].Description %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Age</strong>
+      </div>
+      <div class="col-sm-6 text-center">
+        <p>
+          <%
+              var d = new Date(user_det[0].DOB);
+              var ageDifMs = Date.now() - d.getTime();
+
+              var ageDate = new Date(ageDifMs); // miliseconds from epoch
+              var value=Math.abs(ageDate.getUTCFullYear() - 1970);
+           %><%= value %>
+        </p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Rating</strong>
+      </div>
+      <div class="col-sm-6 text-center">
+        <p>
+          <span class="values">
+          <%  if((user_det[0].Rating*2)%2!=0){ user_det[0].Rating=user_det[0].Rating-1;}
+            for(var j=0;j<user_det[0].Rating;j++){
+               %>
+            <span class="fa fa-star" style="color:#33b35a"></span>
+            <% }
+            if((user_det[0].Rating*2)%2==1){%>
+              <i class="fas fa-star-half-alt" style="color:#33b35a"></i>
+              <% j=j+1;}
+            for(var k=0;k<5-j;k++){
+            %>
+            <span class="far fa-star" style="color:#33b35a"></span>
+          <% }%>
+          </span>
+        </p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Location</strong>
+      </div>
+      <div class="col-sm-6 text-center">
+        <p><% if(user_det[0].Location != null){ %><%=user_det[0].Location %><% } else { %> No Location <i>(Default Value)</i><% } %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Prefered Days</strong>
+      </div>
+      <div class="col-sm-6 text-center">
+        <p><% if(user_det[0].Days != null) { %><%=user_det[0].Days %><% } else { %> No Days Set <i>(Default Value)</i><% } %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Area Radius</strong>
+      </div>
+      <div class="col-sm-6 text-center">
+        <p><% if(user_det[0].Radius != 0.5) { %> <%=user_det[0].Radius %> Mile(s) <% } else { %> 0.5 Mile(s) <i>(Default Value)</i> <% } %></p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6 key-values text-center">
+        <strong>Dogs</strong>
+      </div>
+      <div class="col-sm-6 text-center">
+        <p><% if(user_det[0].No_of_Dogs != 0) { %> <a class="btn btn-primary" href="/dogs/<%= user_det[0].Uid %>">Dogs</a> <% } else { %> No Dogs Registered. <% } %></p>
+      </div>
+      </div>
+      <center>
+      <% if(user_det[0].AdminStatus == 0) {
+        %>
+      <a class="btn btn-primary mt-5" href="/allsitters?id=<%= user_det[0].Uid %>">Approve</a>
+      <% } else { %>
+          <a class="btn btn-default mt-5"> Approved </a> <% } %> </center>
+    <% }%>
+  </div>
+  </div>
+<%}%>
+<center><a class="btn btn-primary text-white" onclick="goback()"><< Go Back</a></center>
+<script>
+  function goback(){
+     window.history.back();
+  }
+</script>
+<% include adminfooter %>

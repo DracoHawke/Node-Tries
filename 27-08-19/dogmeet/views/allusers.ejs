@@ -1,0 +1,57 @@
+<% include adminheader %>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ProfilePicture</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Profile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<alluser.length;i++){ %>
+      <tr>
+        <td><a href="/details?Uid=<%=alluser[i].Uid%>"><img class="profile-img" src="<%= alluser[i].Profile %>" alt="" height="95" width="100"></td>
+        <td><%= alluser[i].Fname %> <%= alluser[i].Lname %></td>
+        <td><%= alluser[i].Phone %></td>
+        <td><%= alluser[i].Email %>
+            <% if(alluser[i].status==0){%><p class="text-danger">Not-verified Yet</p><%}%>
+        </td>
+        <td>
+          <% if(!alluser[i].Sid && alluser[i].Did==0){
+            var pos='FINDER';
+            }
+            else if (alluser[i].Sid && alluser[i].Did!=0) {
+              var pos='SITTER AND DOG DISPLAYER';
+            }
+            else if (!alluser[i].Sid && alluser[i].Did!=0 ) {
+              var pos='DOG DISPLAYER';
+            }
+            else{
+              var pos='SITTER';
+            }
+            %>
+          <a class="text-primary font-weight-bold"><%= pos %></a>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  </div>
+  <div class="cent-pag">
+  <ul class="pagination">
+    <% for(var i=0;i<totalusers/4;i++){ %>
+      <% var url12={}
+          url12= Object.assign(url12, url);
+        url12.pageno=i+1;
+        var queryString = Object.keys(url12).map(key => key + '=' + url12[key]).join('&');  %>
+      <li class="page-item <% if(url.pageno==i+1){ %> active <%}%>">
+
+      <a class="page-link" href="?<%= queryString %>"><%= i+1 %></a>
+      </li>
+    <% } %>
+  </ul>
+</div>
+<% include adminfooter %>
