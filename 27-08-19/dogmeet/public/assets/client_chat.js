@@ -9,14 +9,14 @@ window.setInterval(function() {
 //end*/
 
 
-if(pic!=null){
+if(pic != null){
   var pic_path=pic.src;
 }
-if(objDiv!=null){
+if(objDiv != null){
 objDiv.scrollTop = objDiv.scrollHeight;
 }
 
-var socket=io('http://orientaloutsourcing.com:49159');
+var socket = io('http://localhost:49159');
 
 var name=document.getElementById("uid").innerHTML;
 if(document.getElementById("tome")!=null){
@@ -26,7 +26,7 @@ if(to!=''){
 }
 }
 // check online
-socket.on('yes',()=>{
+socket.on('yes',function(){
   document.getElementById("is_online").innerHTML='Active Now';
 });
 
@@ -35,10 +35,10 @@ socket.emit('new-user',name);
 
 //console.log('agya');
 
-socket.on('chat-message',data=>{
+socket.on('chat-message',function(data){
   //console.log(data);
 if(data.from==to){
-  appendMessage(`${data.message}`);
+  appendMessage('${data.message}');
   var unread=1;
 }
 else{
@@ -76,7 +76,7 @@ else{
     var noti_data={href:href,from:data.from,me:name}
     socket.emit('notification-added',noti_data);
   }
-  notifyMe(data.name,`${data.message}`);
+  notifyMe(data.name,'${data.message}');
   var unread=0;
 }
 socket.emit('unread',unread);
@@ -121,11 +121,11 @@ function notifyMe(user,message) {
 }
 
 
-socket.on('user-connected',users=>{
+socket.on('user-connected',function(users){
   //console.log(users);
 })
 
-socket.on('user-disconnected',name=>{
+socket.on('user-disconnected',function(name){
 //  appendMessage(`${name} disconnected`)
 //console.log(name);
 })
@@ -134,7 +134,7 @@ function sender_submit(obj){
   event.preventDefault();
   var msg=document.getElementById("m");
   message=msg.value;
-  appendMeMessage(`${message}`)
+  appendMeMessage('${message}')
   var data={to:to,message:message};
   socket.emit('send-chat-message',data);
   msg.value='';

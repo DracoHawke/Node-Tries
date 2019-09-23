@@ -104,7 +104,7 @@ output {
   border-radius: 30px;
   height: 3em;
   border: none;
-  width: 34%;
+  width: 100%;
   margin: 1em;
   color: white;
   font-size: 1em;
@@ -175,6 +175,12 @@ output {
     text-align: center;
 }
 .checks{
+  margin-top: 3px;
+  width: 1em;
+  height: 1em;
+}
+.checks2{
+  margin-top: 3px;
   width: 1em;
   height: 1em;
 }

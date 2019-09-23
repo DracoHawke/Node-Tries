@@ -10,9 +10,10 @@
         FIND A MATE
     </div>
     <form action ="/searchmate" method="get" enctype="multipart/form-data">
-      <div class="input-group search-bar">
-        <input type="text" class="form-control heights" name="name" placeholder="Search Dog by Dog Breed or Age" <% if(typeof c.name !== "undefined"){ %> value = "<%= c.name %>" <% } %> >
-        <button class="btn searching" type="submit" name="button">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
+      <div class="search-bar2">
+        <input type="text" name="u_state" placeholder="city/state/district" class="form-control sel1" id="stateId" <% if(typeof c.u_state !== "undefined"){ %> value = "<%= c.u_state %>" <% } %> >    
+        <input type="text" class="form-control heights" name="name" placeholder="Search Dog by Dog Breed or Age" style="border: 0px;border-left: 1px solid #57b4a7;" <% if(typeof c.name !== "undefined"){ %> value = "<%= c.name %>" <% } %> >
+        <button class="btn searching searching1" type="submit" name="button" style="height: 60px;"><i class="fas fa-search" style="margin-top: 15px;"></i>&nbsp;</button>
       </div>
       <% if(typeof search === 'undefined') { %>
     </form><% }%>

@@ -1,0 +1,95 @@
+div.options {
+  display:none;
+}
+
+.sidebar-nav ul li button {
+    color: #43425D;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 13px 35px 13px 15px;
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    line-height: 24px;
+  }
+
+.sidebar-nav ul li button:hover {
+  color: #98CD67;
+}
+
+.pagination>.page-item.active>a {
+  background-color: #98CD67;
+  border-color: #98CD67;
+}
+
+div.modal.show > div.modal-dialog,div.modal.in > div.modal-dialog {
+    position: relative;
+    /* top: 25%; */
+    /* transform: translateY(-50%); */
+    width: 95%;
+    max-width:700px;
+}
+div.modal.show > div.modal-dialog.modal-routes,div.modal.in > div.modal-dialog.modal-routes {
+  max-width:700px;
+}
+div.modal.in#known_routes > div.modal-dialog.modal-routes {
+  max-width: 90%;
+}
+div.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+div.modal-header{
+  display:block;
+}
+
+input.form-control {
+  border: 1px solid #ced4da;
+}
+.form-control:hover {
+  border: 1px solid #ced4da;
+}
+.form-control.active, .form-control:focus {
+  border: 1px solid #ced4da;
+}
+#resizable {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+}
+.btn-theme{
+    padding: 7px 30px;
+    background-color: #53cbbf;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+div.row{
+  margin-top:5px;
+}
+.btn-danger.btn-reset{
+  padding: 7px 30px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.btn-theme:hover {
+    background-color: #23a296;
+    color: white;
+}
+.btn.btn-theme:focus {
+    outline:none;
+    box-shadow:none;
+}
+
+.btn-theme:focus {
+    outline:none;
+    box-shadow:none;
+}
+div.modal.in#addform > div.modal-dialog {
+    max-width: none;
+    /* margin-left: 5px; */
+    /* margin-top:20%; */
+    /* margin-right: 0px; */
+}

@@ -1,0 +1,264 @@
+<script>
+  var array1 = {};
+  var options = {};
+
+  function addfield(ipf){
+    console.log(ipf);
+    var id = ipf.id;
+    var fields = document.getElementById('fields1').value;
+    var count = document.getElementById('count1').value;
+    console.log(fields);console.log(count);console.log(id);
+    if(id == "inp_number" || id == "inp_password" || id == "inp_text" || id == "inp_email" || id == "inp_select" || id == "inp_textarea" || id == "inp_checkbox_grp" || id == "inp_radio_grp") {
+      document.getElementById('head_div').style.display = "block";
+      document.getElementById('inp_header').setAttribute("placeholder","let it be unique");
+      document.getElementById('inp_header').value = "";
+    }
+    else if(id == "inp_radio_sin" || id == "inp_checkbox_sin"){
+      console.log("single");
+    }
+    document.getElementById('text1').value = id;
+  }
+
+  function enterfield() {
+    var head = document.getElementById('inp_header');
+    var fields = document.getElementById('fields1').value;
+    var count = Number(document.getElementById('count1').value);
+    console.log(fields);console.log(count);
+    var content = tinymce.get("addform_display").getContent();
+    entry = document.getElementById('entry1').value;
+    end = document.getElementById('end1').value;
+    console.log(entry);console.log(end);
+    if(entry != ""){
+      var n = content.lastIndexOf("</div>");
+      content = content.substr(0,n);
+      console.log(content);
+    }
+    if(fields == 0){
+      entry = "<div class='row'><div class='col-sm-4'>";
+      end =  "</div>";
+      document.getElementById('fields1').value = 1;
+      document.getElementById('count1').value = count + 8;
+    }
+    else if(count < 12) {
+      entry = "<div class='col-sm-4'>";
+      end = "</div>";
+      document.getElementById('count1').value = count + 4;
+    }
+    else {
+      entry = "<div class='col-sm-4'>";
+      end = "</div></div>";
+      document.getElementById('entry1').value = "";
+      document.getElementById('end1').value = "";
+      document.getElementById('fields1').value = 0;
+      document.getElementById('count1').value = 0;
+    }
+    var flag  = 0;
+    var count1 = 1;
+    for (let [key, value] of Object.entries(array1)) {
+      if (array1.hasOwnProperty(key)) {
+        if(key == head.value) {
+          flag = 1;
+          array1[head.value] = array1[head.value] + 1;
+          count1 = array1[head.value];
+        }
+        console.log(key, array1[key]);
+      }
+    }
+    if(flag == 0) {
+      array1[head.value] = 1;
+    }
+    id = document.getElementById('text1').value;
+    id = id.substr(4);
+    pos = id.indexOf('_');
+    console.log("pos ",pos);console.log("id ",id);
+    entry = entry + "<h3>"+head.value+"</h3>";
+    entry = entry + "<input class='form-control update' onfocusout='optionsoff(this)'  onfocus='optionson(this)' type='"+id+"' name='"+head.value+"_"+count1+"'>";
+    console.log("entry ",entry);console.log("end ",end);console.log(array1);
+    data = entry + end;
+    //editor.insertContent(data);
+    content = content + data;
+    console.log(content);
+    tinymce.get("addform_display").setContent("");
+    tinymce.get("addform_display").setContent(content);
+    console.log(data);//$("#data-container").html(content);console.log(content);
+    if(count < 12) {
+      document.getElementById('entry1').value = entry;
+      document.getElementById('end1').value = end;
+    }
+  }
+
+  function addform_action(){
+    event.preventDefault();
+    var formname = document.getElementById('addform_formname').value;
+    formname = formname.trim();
+    var content = tinymce.get("addform_display").getContent();
+    console.log(content);
+    content1 = content.trim();
+    if(formname == ""){
+      event.preventDefault();
+      document.getElementById('blockreason_err').innerHTML = "Please Enter Form Template Title.";
+      return false;
+    }
+    else if(content1 == "") {
+      event.preventDefault();
+      document.getElementById('blockreason_err').innerHTML = "Please Enter any feild before saving template.";
+      return false;
+    }
+    else {
+      document.getElementById('blockreason_err').innerHTML = "";
+      //var formdata = JSON.stringify(content);
+      var formdata = {data: content, names: JSON.stringify(array1), formname: formname};
+      console.log(formdata);
+      //var queryString = new URLSearchParams(formdata).toString();
+      var h = "/savetemp/0";
+      ////console.log(formdata);
+    	$.ajax({
+    		url: h,
+    		type: "POST",
+        data: formdata,
+    		success: function(response) {
+          if(response == "success1"){
+            var alert = '<div class="alert alert-success alert-dismissible" id="alert-success1"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Success!</strong> Form Has been Added succesfully.</div>';
+            document.getElementById('bootstrap_alert').innerHTML = alert;
+            $("#alert-success1").removeClass("in").show();
+            $("#alert-success1").delay(200).addClass("in");
+          }
+    			console.log(response);
+    		}
+    	});
+    	return false;
+    }
+  }
+
+  function getformlist(a){
+    if(a == "forms"){
+      $.ajax({
+    		url: "getformlist",
+    		type: "GET",
+        success: function(response) {
+          var substr = response.substr(0,11);
+          var content = response.substr(11);
+          //console.log(substr);
+          if(substr == "successful1"){
+              console.log(content);
+              document.getElementById('insertform').innerHTML = content;
+              $('#insertform').modal('toggle');
+          }
+    		}
+    	});
+    }
+  }
+
+  function addformpage_action(){
+    var form = document.getElementsByName('forminsert');
+    var len = form.length;
+    var flag = 0;
+    var data_id = -1;
+    for(i = 0; i < len; i++){
+      console.log(form[i]);
+      if(form[i].checked) {
+        flag = 1;
+        data_id = form[i].value;
+      }
+    }
+    if(flag == 0) {
+      var alert = '<div class="alert alert-danger alert-dismissible" id="alert-success2"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Empty Input!</strong> Please Select a From-template to add or cancel to dismiss.</div>';
+      document.getElementById('bootstrap_alert2').innerHTML = alert;
+      $("#alert-success2").removeClass("in").show();
+      $("#alert-success2").delay(200).addClass("in");
+    }
+    else if(flag == 1) {
+      $.ajax({
+    		url: "getformdata?id="+data_id,
+    		type: "GET",
+        success: function(response) {
+          var substr = response.substr(0,11);
+          var content = response.substr(11);
+          if(substr == "successful1"){
+              console.log(content);
+              var page_content = tinymce.get("context-form").getContent();
+              page_content =  page_content + content;
+              tinymce.get("context-form").setContent("");
+              tinymce.get("context-form").setContent(page_content);
+              $('#insertform').modal('hide');
+          }
+    		}
+    	});
+    }
+    event.preventDefault();
+    return false;
+  }
+
+  $('document').ready(function(){
+    $('.update').focusin(function(){
+      document.getElementById('option_box').style.display = "block";
+    })
+    $('.update').focusout(function(){
+      document.getElementById('option_box').style.display = "none";
+    })
+  })
+
+  function optionson(element){
+    document.getElementById('option_box').style.display = "block";
+  }
+  function optionsoff(element){
+    document.getElementById('option_box').style.display = "none";
+  }
+
+  function routename(){
+    var page_content = tinymce.get("context-form").getContent();
+    page_content1 = page_content.trim();
+    page_content1 = page_content1.replace(/<p>/gi, "");
+    page_content1 = page_content1.replace(/&nbsp;/gi, "");
+    page_content1 = page_content1.replace(/<\/p>/gi, "");
+    page_content1 = page_content1.trim();
+    console.log(page_content1);
+    if(page_content1 == "<p></p>" || page_content1 == "") {
+      var alert = '<div class="alert alert-danger alert-dismissible" id="alert-success_3"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Empty Input!</strong> Please Enter any data to create new page/route.</div>';
+      document.getElementById('bootstrap_alert_3').innerHTML = alert;
+      $("#alert-success_3").removeClass("in").show();
+      $("#alert-success_3").delay(200).addClass("in");
+    }
+    else {
+      $("#alert-success_3").alert('close');
+      $('#finalizeroute').modal('toggle');
+    }
+    return false;
+  }
+
+  function routelinkgenerate() {
+    var data = document.getElementById('routenameinput');
+    if(data.value.trim() == "") {
+      var alert = '<div class="alert alert-danger alert-dismissible" id="alert-success_4"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Empty Input!</strong> Please Enter any data to create new page/route.</div>';
+      document.getElementById('bootstrap_alert_4').innerHTML = alert;
+      $("#alert-success_4").removeClass("in").show();
+      $("#alert-success_4").delay(200).addClass("in");
+    }
+    else {
+      var page_content = tinymce.get("context-form").getContent();
+      data = data.value.trim();
+      data = {name: data, content: page_content};
+      $.ajax({
+    		url: "/createnewlink",
+        data: data,
+    		type: "POST",
+        success: function(response) {
+          var substr = response.substr(0,11);
+          var content = response.substr(11);
+          if(substr == "successful1"){
+              console.log(content);
+              $('#finalizeroute').modal('hide');
+              document.getElementById('link_ready').value = "/getknownroutes"+content;
+              page = content.substr(1);
+              var url = "/getdataofpage/1?route='"+content+"'";
+              var content1 = '<div id="unique_id_'+page+'"></div><script>function ajax_call_'+page+'(){$.ajax({'+
+                'url:"'+url+'",type: "GET",success: function(response) {'+
+                'document.getElementById("unique_id_'+page+'").innerHTML = response;}});}ajax_call_'+page+'();';
+              document.getElementById('pagename_ready').value = content1+"</"+"script>";
+              $('#linkready').modal('show');
+          }
+    		}
+    	});
+    }
+  }
+</script>

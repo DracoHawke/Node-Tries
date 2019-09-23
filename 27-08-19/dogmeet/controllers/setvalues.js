@@ -8,7 +8,7 @@ module.exports = function(req,res){
   var body = req.body;
   var ds = ['mon','tue','wed','thu','fri','sat','sun'];
   var days = '';
-  for(a in ds){
+  for(a in ds) {
     c = "days["+ds[a]+"]";
     console.log(c);
     if(typeof body[c] !== 'undefined'){
@@ -16,7 +16,7 @@ module.exports = function(req,res){
       days = days + ds[a] + ",";
     }
   }
-  if (days == ""){
+  if (days == "") {
     days = null;
   }
   var sql = "UPDATE `sitters`,`users` SET `sitters`.`Radius` = "+mysql.escape(req.body.rangebar)+", `sitters`.`Days` = '"+days+"' WHERE `users`.`Uid` = `sitters`.`Uid` and `users`.`Email` = "+mysql.escape(req.session.email)
@@ -24,6 +24,6 @@ module.exports = function(req,res){
   con.query(sql, function (err, rows, fields) {
     if(err) throw err;
     console.log("updated"); //check
-    res.redirect('/dashboard/settings');
+    res.redirect('/dashboard/setsuccess');
   });
 }

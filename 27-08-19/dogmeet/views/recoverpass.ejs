@@ -7,8 +7,8 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-sm-12" style="border: 0.005vw solid grey;background-color: rgb(250,250,250);padding:15px;">
-        <% console.log(page) %>
-          <% if(typeof page !== "undefined") { if( page != 1 && page != 2) { %>
+        <% console.log("page: ",page) %>
+          <% if(typeof page !== "undefined") { if( page != 1 && page != 2 && page != 4) { %>
             <form class="" action="/recoverpass" method="post" enctype="multipart/form-data">
               <div class="md-form mb-5 inline1">
                 <div class="row">
@@ -23,7 +23,7 @@
                       </div>
                     </div>
                     <span class="underline1"></span>
-                    <span id="emailerr" class="err"></span>
+                    <span id="emailerr" class="err red2"><% if(typeof error !== "undefined") { if( typeof error.emailerr !== "undefined") { %><%- error.emailerr %> <% }} %></span>
                   </div>
                   <div class="col-md-3"></div>
                 </div>
@@ -37,7 +37,7 @@
               </div>
             </form>
           <% } else if( page == 1) { %>
-            <form class="" action="/recoverpass/check" method="post" enctype="multipart/form-data">
+            <form class="" action="/recoverpass/check?check=<%= mail %>&id=<%= hash%>" method="post" enctype="multipart/form-data">
               <div class="md-form mb-5 inline1">
                 <div class="row">
                   <div class="col-md-3"></div>
@@ -50,7 +50,7 @@
                       </div>
                     </div>
                     <span class="underline1"></span>
-                    <span id="u_pass_err" class="err"><%if (typeof error.u_pass_err !== "undefined"){ %> <%= error.u_pass_err %> <% } %></span>
+                    <span id="u_pass_err" class="err red2"><%if (typeof error.u_pass_err !== "undefined"){ %> <%= error.u_pass_err %> <% } %></span>
                   </div>
                   <div class="col-md-3"></div>
                 </div>
@@ -67,7 +67,7 @@
                       </div>
                     </div>
                     <span class="underline1"></span>
-                    <span id="cpasserr" class="err"></span>
+                    <span id="cpasserr" class="err red2"></span>
                   </div>
                   <div class="col-md-3"></div>
                 </div>
@@ -82,6 +82,8 @@
             </form>
           <% } else if(page == 2) { %>
             <span> Your Password has been Changed, Please try to <a href="/?signin"> Login </a> Or go to our <a href="/">Home Page</a></span>
+          <% } else if(page == 4) { %>
+            <span> Sorry, Your Link Has Expired. Please <a href="/recoverpass"> Enter Your Email </a> To Generate New Link. </span>
           <% } } %>
       </div>
     </div>

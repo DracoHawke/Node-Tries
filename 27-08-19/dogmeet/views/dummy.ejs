@@ -1,0 +1,27 @@
+<div class="modal fade" id="confirmation">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2>Send Newsletter</h2>
+      </div>
+
+      <!-- Modal body -->
+      <form method="post" action="" id="areyousureaboutthat" name="formsurity" enctype="multipart/form-data">
+      <!-- Modal footer -->
+      <div class = "modal-footer">
+        <button type="submit" class="btn btn-theme">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+    function suredisable(href1){
+      document.getElementById('areyousureaboutthat').action = href1;
+    }
+</script>
+
+<a href="#confirmation" data-toggle="modal" onclick="suredisable('/admindisable?did=<%= dog_details[0].Did %>&link=<%= uri %>&block=1')"class="btn btn-vote btn-danger" style="border:none;"><i class="fa fa-ban" aria-hidden="true"></i>&nbsp;Block</a>

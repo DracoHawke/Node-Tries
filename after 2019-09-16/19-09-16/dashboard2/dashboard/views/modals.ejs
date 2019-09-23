@@ -1,0 +1,118 @@
+<div class="modal fade" id="known_routes"></div>
+
+<div class="modal fade" id="addform">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="bootstrap_alert"></div>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2>Add input form for user.</h2><br>
+        <h3> Form-Template Name </h3>
+        <input type="text" id="addform_formname" class="form-control">
+        <p> > Use buttons below to add fields for the form </p>
+        <p> > A submit and reset button will automatically be added to the form on submission.</p>
+        <p> > Add name/header for fields in the text editor below after adding the respective field.</p>
+        <div style="display:inline-flex;">
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Input Field
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" id="inp_text" onclick=" addfield(this)" href="#">Text</a>
+              <a class="dropdown-item" id="inp_number" onclick=" addfield(this)" href="#">Number</a>
+              <a class="dropdown-item" id="inp_email" onclick=" addfield(this)" href="#">Email</a>
+              <a class="dropdown-item" id="inp_password" onclick=" addfield(this)" href="#">Password</a>
+            </div>
+          </div>
+          <a class="btn btn-primary" style="color:white;" href="#" id="inp_textarea" onclick=" addfield(this)">
+            Textarea
+          </a>
+          <a class="btn btn-primary" style="color:white;" href="#" id="inp_select"  onclick=" addfield(this)">
+            Select Box
+          </a>
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Checkbox
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" id="inp_checkbox_sin" onclick=" addfield(this)" href="#">Single</a>
+              <a class="dropdown-item" id="inp_checkbox_grp" onclick=" addfield(this)" href="#">Group</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Radio
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" id="inp_radio_sin" onclick=" addfield(this)" href="#">Independent</a>
+              <a class="dropdown-item" id="inp_radio_grp" onclick=" addfield(this)" href="#">Group</a>
+            </div>
+          </div>
+        </div>
+        <div id="head_div" style="display:none">
+          <br>
+          Heading: <input class="form-control" type="text" id="inp_header">
+          <button class="btn btn-primary" onclick="enterfield()">Save</button>
+        </div>
+      </div>
+      <form method="post" action="" id="addform_form" onsubmit="return addform_action()" name="formsurity2" enctype="multipart/form-data">
+      <!-- Modal body -->
+      <div class="modal-body" id="addform_display"></div>
+      <div class="options">This is the options box</div>
+      <span id="blockreason_err" style="color:red;"></span>
+      <!-- Modal footer -->
+      <div class = "modal-footer">
+        <button type="submit" class="btn btn-theme">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="insertform">
+</div>
+<div class="modal fade" id="finalizeroute">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div id="bootstrap_alert_4"></div>
+        <h3> You are Nearly There...</h3>
+      </div>
+      <div class="modal-body">
+        <p> You just need to add new route name so we can provide you with the link to your new page. </p>
+        <input type="text" id="routenameinput" name="routenameinput" value="" placeholder="route name" class="form-control">
+      </div>
+      <div class = "modal-footer">
+        <button onclick="routelinkgenerate()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="linkready">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div id="bootstrap_alert_4"></div>
+        <h3> Your Route Has Been Added</h3>
+      </div>
+      <div class="modal-body">
+        <p> Use the link below to refer this route in any href/anchor/link on any other page.</p>
+        <input type="text" id="link_ready" name="routenameinput" value="" placeholder="route link" class="form-control">
+        <p> To Include the page as a part in any other page use the snippet below. </p>
+        <textarea style="width:100%;" rows="5" id="pagename_ready"></textarea>
+      </div>
+      <div class = "modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" name="link1" value="0" id="fields1">
+<input type="hidden" name="link1" value="0" id="count1">
+<input type="text" hidden id="entry1">
+<input type="text" hidden id="end1">
+<input type="text" hidden id="text1">

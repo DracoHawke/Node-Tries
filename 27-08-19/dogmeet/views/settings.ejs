@@ -1,11 +1,23 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
 <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
 <script type="text/javascript" src="/assets/settings.js"></script>
+<% if(typeof error.wrongpass !== "undefined") { if(error.wrongpass == "Wrong Password") { %>
+<script>
+  $('document').ready(function(){
+    $("#delsitmodal").modal();
+  })
+</script>
+<% } } else if(typeof error.success !== "undefined") { if(error.success == "setsuccess") { %>
+<div class="alert alert-success" style="margin:0;margin-left:-15px;margin-right:-15px;">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Success!</strong> Info Updated succesfully.
+</div>
+<% } } %>
   <div class="cardlike1">
     <div class="row">
       <div class="col-lg-12">
         <h2 class="my-account headmydog">Settings</h2>
+        <p style="width:100%;text-align:right;"><% if(typeof send_data !== "undefined") { if(typeof send_data.enabled !== "undefined") { if(send_data.enabled == 1) { %><span class="green2">(Enabled)</span><a class="hovred" style="padding-left:0.2em;" href="/disablesit"><span class="greenenb">(click to disable)</span></a><% } else { %> <span class="red2">(disabled)</span><a class="hovgreen" style="padding-left:0.2em;" href="/disablesit"><span class="reddis ">(click to enable)</span></a> <% }}} %></p>
         <% console.log("Send_Data: ", send_data) %>
       </div>
     </div>
@@ -141,8 +153,47 @@
               $('#rad').trigger('change');
             });
             </script>
+            <script>
+              $(document).ready(function() {
+                $("#select-all").click(function() {
+                    var checkBoxes = $(".form-control.checks");
+                    console.log(checkBoxes);
+                    checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+                });
+              });
+              $(document).ready(function() {
+                $("#select-all").click(function () {
+                  $(".form-control.checks").prop('checked', $(this).prop('checked'));
+                });
+                $(".form-control.checks").change(function(){
+                  if (!$(this).prop("checked")){
+                    $("#select-all").prop("checked",false);
+                  }
+                });
+                function selectchecks() {
+                  var checkBoxes1 = $(".form-control.checks");
+                  console.log(checkBoxes1);
+                  var count  = 0;
+                  for (i = 0; i < checkBoxes1.length ; i++) {
+                      console.log(checkBoxes1[i]);
+                      if(checkBoxes1[i].checked == true){
+                        count = count + 1;
+                      }
+                  }
+                  console.log(count);
+                  if(count == (checkBoxes1.length)){
+                    document.getElementById('select-all').checked = true;
+                  }
+                  else{
+                    document.getElementById('select-all').checked = false;
+                  }
+                }
+                selectchecks();
+              });
+            </script>
             <p class = " text6" >Prefered days:</p>
           <div class = "row mrb1 group1">
+              <input type = "checkbox" id="select-all" class = "form-control checks2" name = "days[all]"><span class="mrt1">&nbsp;All&nbsp;</span>
               <input type = "checkbox" id="mon" class = "form-control checks" name = "days[mon]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("mon"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Monday&nbsp;</span>
               <input type = "checkbox" id="tue" class = "form-control checks" name = "days[tue]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("tue"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Tuesday&nbsp;</span>
               <input type = "checkbox" id="wed" class = "form-control checks" name = "days[wed]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("wed"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Wednesday&nbsp;</span>
@@ -151,7 +202,16 @@
               <input type = "checkbox" id="sat" class = "form-control checks" name = "days[sat]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("sat"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Saturday&nbsp;</span>
               <input type = "checkbox" id="sun" class = "form-control checks" name = "days[sun]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("sun"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Sunday&nbsp;</span>
             </div>
-            <input type="submit" class="btn btn5" value="Update Settings" id="Save">
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-3">
+                <input type="submit" class="btn btn5" value="Update Settings" id="Save">
+              </div>
+              <div class="col-md-4">
+                <a href="#delsitmodal"><button id="delsitmodalopen" type="button" class="btn size-1 btn-danger mt-4 mb-5" style="width:100%;border-radius:2em;">Delete Sitter Profile</button></a>
+              </div>
+              <div class="col-md-4"></div>
+            </div>
             <% } else { %>
               <div class="col-md-3"><span class="ptext displayinline2"> Your Location:</span></div>
               <div class="col-md-6 displayinline2">
@@ -164,6 +224,40 @@
               <% } %>
           </div>
         </form>
+        <div class="modal fade" id="delsitmodal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h2>DELETE SITTER PROFILE</h2>
+              </div>
+
+              <!-- Modal body -->
+              <form method="post" action="/deletesit" enctype="multipart/form-data">
+                <div class="modal-body">
+                  <ul class="ul1">
+                    <li> Are You Sure You Want To Delete Your Sitter Profile? Data Recovery Is Not Possible.</li>
+                    <li> Enter Your Password below to Delete Your Sitter Profile:</li>
+                  </ul>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Password: </span>
+                      </div>
+                      <input type="Password" class="form-control" placeholder="Password" aria-label="password" name="password" aria-describedby="basic-addon1">
+                      <a data-toggle="tooltip" data-placement="right" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc."><i class="red fas fa-info-circle" style="margin-top: 0.7em;position: relative;right: -0.5em;"></i></a>
+                    </div>
+                    <span class="red" id="deldog"><% if(typeof error.wrongpass !== "undefined") { %> <%= error.wrongpass %> <% } %></span>
+                </div>
+                <!-- Modal footer -->
+                <div class = "modal-footer">
+                  <button class="btn btn-primary submit center-block Submit">Submit</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
     <% } else{ %>
       <h2 class="red">Please Verify Your email to Access This Feature ......</h2>
     <% } } %>

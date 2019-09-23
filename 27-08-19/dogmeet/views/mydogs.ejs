@@ -1,3 +1,9 @@
+<% if(typeof error.success !== "undefined") { if(error.success == "dogsuccess") { %>
+<div class="alert alert-success" style="margin:0;margin-left:-15px;margin-right:-15px;">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Success!</strong> Info Updated succesfully.
+</div>
+<% } } %>
 <link rel="stylesheet" href="/assets/mydogs.css">
   <div class="cardlike1">
     <div class="row">
@@ -11,59 +17,53 @@
     <% if (typeof send_data.status_err !== 'undefined') {
     if(send_data.status_err == "verified") { %>
       <% if(did==1){ %>
-      <div class="card-deck">
-        <div class="card noborder1">
-          <div class="card-body">
-            <div class="card-deck">
-              <% a = send_data.length;
-              for(var i = 0; i < a; i++ ){
-              s = send_data[i]; %>
-              <div class="card noborder1 minwidth1">
-                <div class="card-body">
-                  <img class="profile" src="/<%= s.DogPicFront %>">
-                  <div class="fname">
-                    <span>
-                      <%= s.DogName %>,
-                      <% if(s.DogAge >= 1 && s.DogAge < 2) { %>
-                        <%= s.DogAge %> Yr
-                      <% } else if(s.DogAge >= 2) { %>
-                        <%= s.DogAge %> Yrs
-                      <% } else if(s.DogAge < 1) {%>
-                        <%= (Number(s.DogAge)/0.1) %> months <% } %>
-                      <% if(s.enabled == 1) { %>(Enabled)<% }else { %>(disabled)<% } %>
-                    </span>
-                  </div>
-                  <div class="grey2">
-                    <% s.DogBreed = s.DogBreed.replace(/_/g,' '); %>
-                    <%= s.DogBreed %>
-                  </div>
-                  <div class="display2">
-                    <div class="rating">
-                      <% if((s.Rating*2)%2!=0){ s.Rating=s.Rating-1;}
-                        for(var j=0;j<s.Rating;j++){ %>
-                          <span class="fa fa-star checked"></span>
-                      <% } if((s.Rating*2)%2==1){%>
-                        <i class="fas fa-star-half-alt checked"></i>
-                      <% j=j+1;}
-                      for(var k=0;k<5-j;k++){ %>
-                        <span class="far fa-star" style="color:#ed2154"></span>
-                      <% } %>
-                    </div>
-                    <div class="review">
-                      <i class="fas fa-vote-yea"></i>&nbsp;<%= s.Reviews %>
-                    </div>
-                  </div>
-                  <a class="for_ajax myacc nohover1" href="/dogdetails?did=<%= s.Did %>&dno=<%= i %>">
-                    <p class="fname edit4">Edit Info</p>
-                  </a>
+          <% a = send_data.length;
+          var i = 0;
+          while(i < a){ %>
+          <div class="row">
+            <% var z = 0;
+            while(z < 2 && i < a) { s = send_data[i]; %>
+              <div class="col-md-6">
+                <img class="profile" src="/<%= s.DogPicFront %>">
+                <div class="fname">
+                  <span>
+                    <%= s.DogName %>,
+                    <% if(s.DogAge >= 1 && s.DogAge < 2) { %>
+                      <%= s.DogAge %> Yr
+                    <% } else if(s.DogAge >= 2) { %>
+                      <%= s.DogAge %> Yrs
+                    <% } else if(s.DogAge < 1) {%>
+                      <%= (Number(s.DogAge)/0.1) %> months <% } %>
+                  </span>
                 </div>
+                <div class="grey2">
+                  <% s.DogBreed = s.DogBreed.replace(/_/g,' '); %>
+                  <%= s.DogBreed %>
+                </div>
+                <div class="display2">
+                  <div class="rating">
+                    <% if((s.Rating*2)%2!=0){ s.Rating=s.Rating-1;}
+                      for(var j=0;j<s.Rating;j++){ %>
+                        <span class="fa fa-star checked"></span>
+                    <% } if((s.Rating*2)%2==1){%>
+                      <i class="fas fa-star-half-alt checked"></i>
+                    <% j=j+1;}
+                    for(var k=0;k<5-j;k++){ %>
+                      <span class="far fa-star" style="color:#ed2154"></span>
+                    <% } %>
+                  </div>
+                  <div class="review">
+                    <i class="fas fa-vote-yea"></i>&nbsp;<%= s.Reviews %>
+                  </div>
+                </div>
+                <a class="for_ajax myacc nohover1" href="/dogdetails?did=<%= s.Did %>&dno=<%= i %>">
+                  <p class="fname edit4">Edit Info<% if(s.enabled == 1) { %><p class="green2" style="width: 100%;text-align: right;margin-top: -2.5em;">(Enabled)</p><% }else { %><p class="red2" style="width:100%;text-align:right;margin-top:-2.5em;">(disabled)</p><% } %></p>
+                </a>
               </div>
-            <% } } %>
+            <% i = i + 1; console.log("i: ", i); z = z + 1; } %>
           </div>
-        </div>
-      </div>
-    </div>
-    <% } }else{ %>
-      <h2 class="red">Please Verify Your email to Access This Feature......</h2>
-    <% } %>
+        <% console.log("i: ", i); } } %>
+      <% } }else{ %>
+        <h2 class="red">Please Verify Your email to Access This Feature......</h2>
+      <% } %>
   </div>

@@ -20,13 +20,13 @@ module.exports = function(req,res){
   else {
     var uname = '';
   }
-  var sql = "SELECT `sitters`.`Rating`,`sitters`.`Reviews`,`sitters`.`Description`, `users`.`Fname`, `users`.`Lname`,`users`.`Email`,`users`.`Profile`, `users`.`status` FROM `users` INNER JOIN `sitters` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`=1 and `users`.`status`=1 order by `sitters`.`Rating` DESC LIMIT 0,8";
+  var sql = "SELECT `sitters`.`Rating`,`sitters`.`Reviews`,`sitters`.`Description`, `users`.`Fname`, `users`.`Lname`,`users`.`Email`,`users`.`Profile`, `users`.`status` FROM `users` INNER JOIN `sitters` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus` = 1 and `users`.`status` = 1 AND `sitters`.`enabled` = 1 order by `sitters`.`Rating` DESC LIMIT 0,8";
   console.log(sql);
   con.query (sql, function (err, rows, fields) {
     if(err) throw err;
     var allsitters = rows;
     var c = {};
-    var sql2 = "select count(`sitters`.`Sid`) as totalsitters from `sitters` WHERE `sitters`.`AdminStatus` = 1";
+    var sql2 = "Select count(`sitters`.`Sid`) as totalsitters from `sitters` WHERE `sitters`.`AdminStatus` = 1 AND `sitters`.`enabled` = 1";
     console.log(sql2);
     con.query(sql2, function(err, rows2, fields) {
       if(err) throw err;

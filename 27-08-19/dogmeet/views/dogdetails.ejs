@@ -7,10 +7,16 @@
     <div class="row">
       <div class="col-lg-12">
         <h2 class="my-account headmydog1"><% var s = send_data[0]; if(typeof send_data !== 'undefined') { %><%= s.DogName %><% } %></h2>
-        <% if (typeof error !== "undefined") { if (error != "") { %> <span class = "red" > <%= error %> </span><% } } %>
+        <% if (typeof error !== "undefined") { if(typeof error.deldog !== "undefined") { %>
+          <script>
+            $('document').ready(function(){
+              $("#deldogmodal").modal();
+            })
+          </script>
+        <% }else if (error != "") { %> <span class = "red" > <%= error %> </span><% } } %>
       </div>
     </div>
-    <div class="row"><div class="col-md-12"><% if(s.enabled == 1) { %><span class="green1">(Enabled)</span><a class="hovred" style="padding-left:0.2em;" href="/disable?did=<%= dogdid %>&dno=<%= dno %>"><span class="greenenb">(click to disable)</span></a><% }else { %><span class="red2">(disabled)</span><a class="hovgreen" style="padding-left:0.2em;" href="/disable?did=<%= dogdid %>&dno=<%= dno %>"><span class="reddis ">(click to disable)</span></a><% } %></div></div>
+    <div class="row"><div class="col-md-12"><% if(s.enabled == 1) { %><span class="green1">(Enabled)</span><a class="hovred" style="padding-left:0.2em;" href="/disable?did=<%= dogdid %>&dno=<%= dno %>"><span class="greenenb">(click to disable)<% console.log(s); %></span></a><% }else { %><span class="red2">(disabled)</span><a class="hovgreen" style="padding-left:0.2em;" href="/disable?did=<%= dogdid %>&dno=<%= dno %>"><span class="reddis ">(click to enable)<% console.log(s); %></span></a><% } %></div></div>
     <% if (typeof send_data.status_err !== 'undefined') { if (send_data.status_err == "verified") { if (did==1){ %>
       <form style="font-weight:bolder;" action="/dogdetails?did=<%= dogdid %>&dno=<%= dno %>" name="myform2" id="myform2" method="post" enctype="multipart/form-data">
         <div class="card-deck">
@@ -231,19 +237,19 @@
         <div class="card-deck">
           <div class="card-body noborder1 crdpad1">
             <div class="row padldi">
-              <label id="imgupload0" for="file0-upload1" class="imgupload focus2"><p class="plus" id="file0-upload1plus">+</p><img id="file0-upload1img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic1 !== 'undefined') { if (s.DogPic1 != null) { %>/<%= s.DogPic1 %><% } } } %>"></img></label>
+              <label id="imgupload0" for="file0-upload1" class="imgupload focus2"><p class="plus" id="file0-upload1plus">+</p><img id="file0-upload1img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic1 !== 'undefined') { if (s.DogPic1 != null) { %>/<%= s.DogPic1 %><% } } } %>"><div id="filediv0" class="overlayimg1"><div class="textimg1">Edit</div></div></label>
               <input type="text" hidden value="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic1 !== 'undefined') { if (s.DogPic1 != null) { %><%= s.DogPic1 %><% } } } %>" id="fileupload0" name="fileupload0">
               <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload focus2" name="fileUpload[0]" id="file0-upload1" accept="image/*" value="" onchange="loadFile(this.id)">
-              <label id="imgupload1" for="file0-upload2" class="imgupload focus2"><p class="plus" id="file0-upload2plus">+</p><img id="file0-upload2img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic2 !== 'undefined') { if (s.DogPic2 != null) { %>/<%= s.DogPic2 %><% } } } %>"></img></label>
+              <label id="imgupload1" for="file0-upload2" class="imgupload focus2"><p class="plus" id="file0-upload2plus">+</p><img id="file0-upload2img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic2 !== 'undefined') { if (s.DogPic2 != null) { %>/<%= s.DogPic2 %><% } } } %>"><div id="filediv1" class="overlayimg1"><div class="textimg1">Edit</div></div></label>
               <input type="text" hidden value="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic2 !== 'undefined') { if (s.DogPic2 != null) { %><%= s.DogPic2 %><% } } } %>" id="fileupload1" name="fileupload1">
               <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload focus2" name="fileUpload[0]" id="file0-upload2" accept="image/*" value="" onchange="loadFile(this.id)">
-              <label id="imgupload2" for="file0-upload3" class="imgupload focus2"><p class="plus" id="file0-upload3plus">+</p><img id="file0-upload3img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic3 !== 'undefined') { if (s.DogPic3 != null) { %>/<%= s.DogPic3 %><% } } } %>"></img></label >
+              <label id="imgupload2" for="file0-upload3" class="imgupload focus2"><p class="plus" id="file0-upload3plus">+</p><img id="file0-upload3img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic3 !== 'undefined') { if (s.DogPic3 != null) { %>/<%= s.DogPic3 %><% } } } %>"><div id="filediv2" class="overlayimg1"><div class="textimg1">Edit</div></div></label >
               <input type="text" hidden value="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic3 !== 'undefined') { if (s.DogPic3 != null) { %><%= s.DogPic3 %><% } } } %>" id="fileupload2" name="fileupload2">
               <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload focus2" name="fileUpload[0]" id="file0-upload3" accept="image/*" value="" onchange="loadFile(this.id)">
-              <label id="imgupload3" for="file0-upload4" class="imgupload focus2"><p class="plus" id="file0-upload4plus">+</p><img id="file0-upload4img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic4 !== 'undefined') { if (s.DogPic4 != null) { %>/<%= s.DogPic4 %><% } } } %>"></img></label >
+              <label id="imgupload3" for="file0-upload4" class="imgupload focus2"><p class="plus" id="file0-upload4plus">+</p><img id="file0-upload4img" class="imgpic" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic4 !== 'undefined') { if (s.DogPic4 != null) { %>/<%= s.DogPic4 %><% } } } %>"><div id="filediv3" class="overlayimg1"><div class="textimg1">Edit</div></div></label >
               <input type="text" hidden value="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic4 !== 'undefined') { if (s.DogPic4 != null) { %><%= s.DogPic4 %><% } } } %>" id="fileupload3" name="fileupload3">
               <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload focus2" name="fileUpload[0]" id="file0-upload4" accept="image/*" value="" onchange="loadFile(this.id)">
-              <label id="imgupload4" for="file0-upload5" class="imgupload"><p class="plus" id="file0-upload5plus">+</p><img id="file0-upload5img" class="imgpic focus2" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic5 !== 'undefined') { if (s.DogPic5 != null) { %>/<%= s.DogPic5 %><% } } } %>"></img></label >
+              <label id="imgupload4" for="file0-upload5" class="imgupload"><p class="plus" id="file0-upload5plus">+</p><img id="file0-upload5img" class="imgpic focus2" src="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic5 !== 'undefined') { if (s.DogPic5 != null) { %>/<%= s.DogPic5 %><% } } } %>"><div id="filediv4" class="overlayimg1 "><div class="textimg1">Edit</div></div></label >
               <input type="text" hidden value="<% if(typeof send_data !== 'undefined'){ if (typeof s.DogPic5 !== 'undefined') { if (s.DogPic5 != null) { %><%= s.DogPic5 %><% } } } %>" id="fileupload4" name="fileupload4">
               <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload focus2" name="fileUpload[0]" id="file0-upload5" accept="image/*" value="" onchange="loadFile(this.id)">
               <span class="red2">*</span>
@@ -259,8 +265,45 @@
           <div class="col-md-3">
             <button type="submit" class="btn custom-btn size-1 mt-4 mb-5" style="width:100%" id="dogregister">Update</button>
           </div>
-          <div class="col-md-8"></div>
+          <div class="col-md-3">
+            <a href="#deldogmodal" onclick = "return deletedog(<%= send_data[0].Did %>,<%= dno%>)"><button type="button" class="btn size-1 btn-danger mt-4 mb-5" style="width:100%;border-radius:2em;">Delete Dog</button></a>
+          </div>
+          <div class="col-md-5"></div>
         </div>
       </form>
+      <div class="modal fade" id="deldogmodal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h2>New Route</h2>
+            </div>
+
+            <!-- Modal body -->
+            <form method="post" action="/deletedog" enctype="multipart/form-data">
+              <div class="modal-body">
+                <ul class="ul1">
+                  <li> Are You Sure You Want To Delete Your Dog? Data Recovery Is Not Possible.</li>
+                  <li> Enter Your Password below to Delete Your Dog:</li>
+                </ul>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Password: </span>
+                    </div>
+                    <input type="Password" class="form-control" placeholder="Password" aria-label="password" name="password" aria-describedby="basic-addon1">
+                    <a data-toggle="tooltip" data-placement="right" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc."><i class="red fas fa-info-circle" style="margin-top: 0.7em;position: relative;right: -0.5em;"></i></a>
+                  </div>
+                  <span class="red" id="deldog"><% if(typeof error.deldog !== "undefined") { %> <%= error.deldog %> <% } %></span>
+              </div>
+              <!-- Modal footer -->
+              <div class = "modal-footer">
+                <button class="btn btn-primary submit center-block Submit">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     <% } } } %>
   </div>

@@ -25,9 +25,9 @@
           <div class="col-sm-12">
             <strong>Profile Picture<span class="red">*</span></strong>
           </div>
-          <label for="file-upload" class="col-sm-10 col-form-label"><img class="image_profile" id="imageload" src="assets/images/profile.png"></label>
+          <label id="label10" for="file_upload" class="col-sm-10 col-form-label"><img class="image_profile" id="imageload" src="assets/images/profile.png"></label>
           <div class="col-sm-2">
-            <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1" name="fileUpload" id="file-upload" accept="image/*" value="" onchange="loadFile(event)">
+            <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1" name="fileUpload" id="file_upload" accept="image/*" value="" onchange="loadFile(event)">
             <span class="red" id="file_err" style="font-size: smaller;"><%= data.file_err %></span>
           </div>
         </div>

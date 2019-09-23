@@ -7,6 +7,7 @@ connection=db_connect();
 module.exports=function(res,req){
   console.log("i'm in");
   var id = req.params.id;
+  console.log(id);
   if (Number(id)==0){
   var email = req.query.email;
   var password = req.query.password;
@@ -50,8 +51,9 @@ module.exports=function(res,req){
             console.log('ending');
             res.end();
         });
-        }
-      else{
+      }
+      else {
+        console.log("error?");
         error = 1;
       }
       if(error==1){

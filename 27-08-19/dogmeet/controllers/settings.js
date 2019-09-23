@@ -10,7 +10,7 @@ module.exports=function(req,res,error1){
   if(req.session.did){did = 1;}else{did=0;}
   if(req.session.uname){
     uname = req.session.uname;
-    var sql = "SELECT `sitters`.`Location`, `sitters`.`Longitude`, `sitters`.`Latitude`, `sitters`.`Days`, `sitters`.`Radius`,`sitters`.`AdminStatus`  from `sitters` left join `users` on `sitters`.`Uid` = `users`.`Uid` where `users`.`Email`="+mysql.escape(req.session.email);
+    var sql = "SELECT `sitters`.`Location`, `sitters`.`Longitude`, `sitters`.`Latitude`, `sitters`.`Days`, `sitters`.`Radius`,`sitters`.`AdminStatus`,`sitters`.`enabled` from `sitters` left join `users` on `sitters`.`Uid` = `users`.`Uid` where `users`.`Email`="+mysql.escape(req.session.email);
     con.query(sql, function (err, rows, fields) {
       if(err) throw err;
       console.log(sql);
@@ -18,7 +18,7 @@ module.exports=function(req,res,error1){
       if(rows.length == 0){
         res.render('dashboard',{uname:req.session.uname,sid:sid,did:did,send_data:{status_err:'not ver',file:''},error:{},page:"", adms: "no", login:req.session});
       }
-      else if(rows.length == 1){
+      else if(rows.length == 1) {
         send_data = rows[0];
         send_data.status_err = "verified";
         if(send_data.AdminStatus == 0){
@@ -35,7 +35,7 @@ module.exports=function(req,res,error1){
           getlocation(req,res,"getback",send_data);
         }
       }
-      else{
+      else {
         console.log("hmmmmmmmmmmmmmmmmm??????????", rows.length);
       }
     });

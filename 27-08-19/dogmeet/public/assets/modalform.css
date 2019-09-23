@@ -1,3 +1,38 @@
+.overlayimg1{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+label:hover .overlayimg1.imgthere {
+  opacity: 1;
+}
+
+
+label:focus{
+  border:none;
+  outline:none;
+}
+
+label:focus .overlayimg1.imgthere {
+  opacity: 1;
+}
+
 .pagdis{
   display: none;
 }
@@ -23,7 +58,7 @@
   border-style: none;
 }
 .underline1{
-  width: 100%;
+  width: 95.5%;
   background:rgb(99, 203, 191);
   height: 0.1em;
   float: left;
@@ -60,6 +95,7 @@ span.modal-title.font-weight-bold {
 .navlink5{
     margin-left:1rem;
 }
+
 @media (min-width: 768px){
   #navbarCollapse{
       font-size:0.8em;
@@ -108,6 +144,18 @@ span.modal-title.font-weight-bold {
 }
 
 /* Enable / Disable Dogs */
+
+.green2{
+  color: rgb(99, 208, 60);
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.red2{
+  color: rgba(229, 46, 82, 1);
+  font-size: 1em;
+  font-weight: 400;
+}
 
 .greenenb{
   color: rgb(99, 208, 60);

@@ -1,5 +1,5 @@
 //node modules
-var bodyParser=require('body-parser');
+var bodyParser = require('body-parser');
 var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -7,6 +7,7 @@ const fileUpload = require('express-fileupload');
 const formidable = require('formidable');
 var mysql = require('mysql');
 var Joi = require('@hapi/joi');
+var randombytes = require('randombytes');
 
 //controllers
 enterdata = require('./enterdata');
@@ -14,9 +15,9 @@ renderpassrec = require('./renderpassrec');
 send_mail_pass = require('./send_mail_pass')
 mes = require('./derrmes');
 registerdogpost = require("./registerdogpost");
-var formvalidator=require('./formvalidator');
-insert_db=require('./insert_db');
-homepage=require('./homepage');
+var formvalidator = require('./formvalidator');
+insert_db = require('./insert_db');
+homepage = require('./homepage');
 mydogs = require('./mydogs');
 findmate = require('./findmate');
 searchmate = require('./searchmate');
@@ -25,29 +26,29 @@ searchsitter = require('./searchsitter');
 login = require('./login');
 matedetails = require('./matedetails');
 var db_connect = require('./db-connect');
-confirmation=require('./confirmation');
-sitter=require('./sittersignup');
-sittervalid=require('./sittervalid');
+confirmation = require('./confirmation');
+sitter = require('./sittersignup');
+sittervalid = require('./sittervalid');
 getlocation = require('./getlocation');
 setvalues = require('./setvalues');
-fileval=require('./fileval');
-dashboard=require('./dashboard');
-update_form=require('./update_form');
+fileval = require('./fileval');
+dashboard = require('./dashboard');
+update_form = require('./update_form');
 dogdetails = require('./dogdetails');
-findsitter=require('./findsitters');
-sitterdetails=require('./sitterdetails');
-allsitters=require('./allsitters');
-allusers=require('./allusers');
-alldogs=require('./alldogs');
+findsitter = require('./findsitters');
+sitterdetails = require('./sitterdetails');
+allsitters = require('./allsitters');
+allusers = require('./allusers');
+alldogs = require('./alldogs');
 settings = require('./settings');
-details=require('./details');
-chat_list=require('./chat_list');
-message_db=require('./message_db');
-chatroom=require('./chatroom');
-ins_notif=require('./ins_notif');
-read_noti=require('./read_noti');
-get_notification=('./get_notification');
-registerdog=require('./registerdog');
+details = require('./details');
+chat_list = require('./chat_list');
+message_db = require('./message_db');
+chatroom = require('./chatroom');
+ins_notif = require('./ins_notif');
+read_noti = require('./read_noti');
+get_notification = ('./get_notification');
+registerdog = require('./registerdog');
 registerdogmore = require('./registerdogmore');
 registerdogfirst = require('./registerdogfirst');
 dogdetails_post = require('./dogdetails_post');
@@ -56,11 +57,16 @@ faq = require("./faq");
 blog = require("./blog");
 dogsofuser = require('./dogsofuser');
 disable = require('./disable');
+set_deletedog = require('./set_deletedog');
+delete_curr_dog = require('./delete_curr_dog');
+delete_sit = require('./delete_sit');
+set_del_sit = require('./set_del_sit');
+recoverpasspost1 = require('./recoverpasspost1');
 
 //admin modules
-admin_login=require('./admin_login');
-admin_home=require('./admin_home');
-admin_messages=require("./admin_messages");
+admin_login = require('./admin_login');
+admin_home = require('./admin_home');
+admin_messages = require("./admin_messages");
 admin_about = require('./admin_about');
 admin_faq = require('./admin_faq');
 admin_blog = require('./admin_blog');
@@ -68,7 +74,7 @@ newsteller = require('./newsteller');
 newpage1 = require('./newpage1');
 pages = require('./pages');
 
-var count=0;
+var count = 0;
 
 var options = {
   host: 'localhost',
@@ -76,10 +82,6 @@ var options = {
   user: 'root',
   password: '',
   database: 'dogmate',
-  // How frequently expired sessions will be cleared; milliseconds:
-  checkExpirationInterval: 600000,
-  // The maximum age of a valid session; milliseconds:
-  expiration: 6000000,
 };
 
 var sessionStore = new MySQLStore(options);
@@ -103,9 +105,9 @@ module.exports=function(app){
       saveUninitialized: false,
       name: 'id'
   }));
-  var con=db_connect();
-  var urlencodedParser=bodyParser.urlencoded({extended:false});
-  var urlFile=fileUpload({
+  var con = db_connect();
+  var urlencodedParser = bodyParser.urlencoded({extended:false});
+  var urlFile = fileUpload({
     createParentPath: true,
     useTempFiles: true,
     tempFileDir: "./public/assets/temp"
@@ -132,7 +134,7 @@ function myMiddleware (req, res, next) {
 				next();
 			}
 			else{
-				var query='INSERT INTO `subscribers`(`Email`) VALUES ('+mysql.escape(req.query.Subscriber)+')';
+				var query = 'INSERT INTO `subscribers`(`Email`) VALUES ('+mysql.escape(req.query.Subscriber)+')';
 				con.query(query, function(err, results) {
 					if(err){
 						if(err.code=='ER_DUP_ENTRY') {
@@ -280,7 +282,7 @@ app.get('/registerdog',urlencodedParser,function(req,res){
       var sid = req.session.sid;
     }
     else{
-      sid="0";
+      sid = "0";
     }
     if(req.session.did){
       var did = req.session.did;
@@ -373,6 +375,10 @@ app.post('/registerdog',urlFile,function(req,res){ // function when a user enter
         var sid = req.session.sid;
       else
         var sid = '';
+      if(req.session.did == 1)
+        var did = req.session.did;
+      else
+        var did = '';
       var uname = req.session.uname;
     }
     else
@@ -382,10 +388,42 @@ app.post('/registerdog',urlFile,function(req,res){ // function when a user enter
     res.redirect('/dashboard')
     }
     else if(page == "mydogs"){
-      mydogs(req,res,error1);
+      if(did != '') {
+          mydogs(req,res,error1);
+      }
+      else {
+          res.redirect('/dashboard');
+      }
     }
     else if(page == 'chat') {
       chat_list(req,res);
+    }
+    else if(page == 'dogsuccess'){
+      if(did != '') {
+        error1.success = "dogsuccess";
+        mydogs(req,res,error1);
+      }
+      else {
+          res.redirect('/dashboard');
+      }
+    }
+    else if(page == "setsuccess"){
+      error1.success = "setsuccess";
+      if(sid != '') {
+          settings(req,res,error1);
+      }
+      else {
+          res.redirect('/dashboard');
+      }
+    }
+    else if(page == "setwrong"){
+      error1.wrongpass = "Wrong Password";
+      if(sid != '') {
+          settings(req,res,error1);
+      }
+      else {
+          res.redirect('/dashboard');
+      }
     }
     else {
       if(req.session.email_status == 0){
@@ -591,8 +629,8 @@ app.get('/searchmate',function(req,res){
     //console.log(req.query);
     //console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     var error1 = {};
-    if(Object.keys(req.query).length == 2){
-      if(req.query.name == ""){
+    if(Object.keys(req.query).length == 3){
+      if(req.query.name == "" && req.query.u_state == "Select"){
         res.redirect('/findmate');
       }
       else{
@@ -896,6 +934,7 @@ app.post('/newsteller',urlFile,function(req,res){
   })
 
   app.get("/recoverpass",function(req,res){
+    console.log("in recoverpass get");
     if(req.query.check && req.query.id){
       renderpassrec(req,res);
     }
@@ -921,66 +960,7 @@ app.post('/newsteller',urlFile,function(req,res){
 
   app.post("/recoverpass",urlFile,function(req,res){
     //console.log(req.body);
-    if(req.session.sid) {
-      var sid = req.session.sid;
-    }
-    else{
-      sid = "0";
-    }
-    if(req.session.did){
-      var did = req.session.did;
-    }
-    else{
-      var did = "0";
-    }
-    if(req.session.uname) {
-      uname = req.session.uname
-    }
-    else {
-      uname = " ";
-    }
-    if(Object.keys(req.body).length == 1){
-      error1 = {};
-      var f = 0;
-      const schema_email = Joi.object().keys({emailadd: Joi.string().email().required()});
-      var txt ='{ "emailadd":"'+req.body.emailadd+'"}';
-      var obj = JSON.parse(txt);
-      var { error } = Joi.validate(obj, schema_email);
-      if (error) {
-        error1.emailerr =  mes.message(error);
-        //console.log(mes.message(error));
-        f = 1;
-        res.render('recoverpass', {login:req.session ,uname: " ",status: "", sid: "0", did: "0", page: "", error: error1});
-      }
-      if(f == 0){
-        var emailadd = req.body.emailadd;
-        emailadd = emailadd.toString();
-        send_mail_pass(emailadd,bcrypt.hashSync(emailadd, 10));
-        //console.log("no error");
-        if(req.session.uname){
-          if(req.session.sid){
-            var sid = req.session.sid;
-          }
-          else{
-            sid = "0";
-          }
-          if(req.session.did){
-            var did = req.session.did;
-          }
-          else{
-            var did = "0";
-          }
-          res.render('mailsent', {uname: req.session.uname, status: req.session.status, sid: sid, did: did, login:req.session});
-        }
-        else{
-          res.render('mailsent', {login:req.session ,uname: " ",status: "", sid: "0", did: "0"});
-        }
-      }
-    }
-    else{
-      //console.log("no");
-      res.redirect('/');
-    }
+    recoverpasspost1(req,res);
   })
 
   app.post("/recoverpass/:page",urlFile,function(req,res){
@@ -1015,17 +995,20 @@ app.post('/newsteller',urlFile,function(req,res){
         var { error } = Joi.validate(obj, schema_password);
         if (error){
           error1.u_pass_err = "New password "+ mes.message(error);
+          error1.u_pass_err = error1.u_pass_err.replace(/"u_pass"/g,"");
+          error1.u_pass_err = error1.u_pass_err.replace(/New password does not match the password/g,"Passwords don't match");
           f = 1;
         }
-        if(Object.keys(error1).length != 0){
-          res.render('recoverpass', {login:req.session ,uname: uname, mail: req.body.mail ,status: "", sid: sid, did: did, page: 1, error: error1})
+        if(Object.keys(error1).length != 0) {
+          console.log("error1: ",error1);
+          res.render('recoverpass', {login:req.session ,uname: uname, mail: req.body.mail ,status: "", sid: sid, did: did, page: 1, error: error1, hash: req.query.id})
         }
         else if(Object.keys(error1).length == 0){
           enterdata(req,res,error1);
         }
         //console.log(Object.keys(error1).length);
         //console.log(error1);
-      } else{
+      } else {
         //console.log("no");
       }
     }
@@ -1045,7 +1028,68 @@ app.post('/newsteller',urlFile,function(req,res){
   });
 
   app.get('/disable',function(req,res){
-    disable(req,res);
+    error1 = {};
+    disable(req,res,error1);
+  })
+
+  app.get("/deletedog",function(req,res){
+    set_deletedog(req,res);
+  })
+
+  app.post("/deletedog",urlFile,function(req,res){
+    //console.log(req.body);
+    if(Object.keys(req.body).length == 1){
+      delete_curr_dog(req,res);
+    }
+  })
+
+  app.get('/deletesit',function(req,res){
+    set_del_sit(req,res);
+  })
+
+  app.post('/deletesit',urlFile, function(req,res){
+    console.log(req.body);
+    if(Object.keys(req.body).length == 1){
+      delete_sit(req,res);
+    }
+    else{
+      res.redirect('/');
+    }
+  })
+
+  app.get('/disablesit',function(req,res) {
+    if(req.session.uname) {
+      var sql = "SELECT `users`.`status`, `sitters`.`Sid`, `sitters`.`enabled` FROM `sitters` INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` WHERE `users`.`email` = '" + req.session.email + "'";
+      console.log("sql: ", sql);
+      con.query(sql,function(err,rows) {
+        if(err) throw err;
+        if(rows.length == 1 && rows[0].status == 1) {
+          var enb = 1;
+          console.log(rows);
+          if(rows[0].enabled == 1) {
+            console.log("enabled, going to disable");
+            enb = 0;
+          }
+          var sql2 = "UPDATE  `sitters` SET `sitters`.`enabled` = "+enb+" WHERE `sitters`.`Sid` = "+ rows[0].Sid;
+          console.log(sql2);
+          con.query(sql2, function(err,results) {
+            if(err) throw err;
+            res.redirect('/dashboard/settings');
+          })
+        }
+        else if(rows.length == 1 && rows[0].status == 0) {
+          delete req.session;
+          res.redirect('/logout');
+        }
+        else if(rows.length == 0) {
+          console.log("row length : 0, session: ",req.session);
+          res.redirect('/');
+        }
+      })
+    } else {
+      console.log("no uname");
+      res.redirect('/');
+    }
   })
 
   app.get('*',function (req, res) {

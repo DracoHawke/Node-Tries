@@ -1,0 +1,44 @@
+{
+  "name": "dogmate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^15.1.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cryptr": "^4.0.2",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-breadcrumbs": "0.0.2",
+    "express-ejs-layouts": "^2.5.0",
+    "express-fileupload": "^1.1.5",
+    "express-formidable": "^1.2.0",
+    "express-mysql-session": "^2.1.0",
+    "express-session": "^1.16.2",
+    "forever": "^1.0.0",
+    "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
+    "image-type": "^4.1.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
+    "node-geocoder": "^3.23.0",
+    "nodemailer": "^6.3.0",
+    "nodemon": "^1.19.2",
+    "owl.carousel": "^2.3.4",
+    "path": "^0.12.7",
+    "randombytes": "^2.1.0",
+    "read-chunk": "^3.2.0",
+    "rs-chat": "^2.0.7",
+    "sync": "^0.2.5",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "flightplan": "^0.6.20"
+  },
+  "description": ""
+}

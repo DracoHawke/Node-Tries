@@ -7,17 +7,24 @@ module.exports = function(req,res,error1){
   var sortflag = 0;
   var c = {};
   if(req.query.name){
+    req.query.name = req.query.name.trim();
     c.name = req.query.name;
     var nm =  req.query.name.replace(/ /g,'_');
   }
   else{
     nm = "";
   }
-  if(typeof req.query.state !== "undefined"){
-    c.state = req.query.state;
-    var st = mysql.escape(req.query.state).slice(1,-1);
+  if(typeof req.query.u_state !== "undefined"){
+    req.query.u_state = req.query.u_state.trim();
+    if(req.query.u_state != ""){
+    c.u_state = req.query.u_state;
+    var st = mysql.escape(req.query.u_state).slice(1,-1);
+    }
+    else {
+      st = "";
+    }
   }
-  else{
+  else {
     st = "";
   }
   if(typeof req.query.age_group !== "undefined"){
@@ -87,27 +94,27 @@ module.exports = function(req,res,error1){
     }
   }
   if(bflag == 0) {
-    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and (DogBreed LIKE '%"+ a +"%') order by "+sb+" DESC LIMIT "+off+",2";
-    var sql2 = "select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 and (DogBreed LIKE '%"+ a +"%')";
+    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and `dogs`.`enabled` = 1 and (DogBreed LIKE '%"+ a +"%') AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') order by "+sb+" DESC LIMIT "+off+",2";
+    var sql2 = "select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND `dogs`.`enabled` = 1 and (DogBreed LIKE '%"+ a +"%') AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%')";
     if(ageflag == 1) {
-      var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and (`dogs`.`DogBreed` LIKE '%"+ a +"%' AND DogAge BETWEEN "+b1+" AND "+b2+") order by "+sb+" DESC LIMIT "+off+",2";
-      var sql2 = "Select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1  and `dogs`.`DogBreed` LIKE '%"+ a +"%' AND  DogAge BETWEEN "+b1+" AND "+b2;
+      var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and `dogs`.`enabled` = 1 and (`dogs`.`DogBreed` LIKE '%"+ a +"%' AND DogAge BETWEEN "+b1+" AND "+b2+") AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') order by "+sb+" DESC LIMIT "+off+",2";
+      var sql2 = "Select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND `dogs`.`enabled` = 1 and `dogs`.`DogBreed` LIKE '%"+ a +"%' AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') AND DogAge BETWEEN "+b1+" AND "+b2;
     }
   }
   else if(bflag == 1) {
-    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 order by "+sb+" DESC LIMIT "+off+",2";
-    var sql2 = "select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 ";
+    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and `dogs`.`enabled` = 1 AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') order by "+sb+" DESC LIMIT "+off+",2";
+    var sql2 = "select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND `dogs`.`enabled` = 1 AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%')";
     if(ageflag == 1) {
-      var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and (DogAge BETWEEN "+b1+" AND "+b2+") order by "+sb+" DESC LIMIT "+off+",2";
-      var sql2 = "Select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND  DogAge BETWEEN "+b1+" AND "+b2;
+      var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and `dogs`.`enabled` = 1 and (DogAge BETWEEN "+b1+" AND "+b2+") AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') order by "+sb+" DESC LIMIT "+off+",2";
+      var sql2 = "Select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND `dogs`.`enabled` = 1 AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') AND DogAge BETWEEN "+b1+" AND "+b2;
     }
   }
   else if(bflag == 2) {
-    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and (DogAge = '" + a + "' OR DogAge REGEXP '"+regexp+"') order by "+sb+" DESC LIMIT "+off+",2";
-    var sql2 = "select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 and (DogAge = '" + a + "' OR DogAge REGEXP '"+regexp+"')";
+    var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus`=1 and `users`.`status`=1 and `dogs`.`enabled` = 1 and (DogAge = '" + a + "' OR DogAge REGEXP '"+regexp+"') AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') order by "+sb+" DESC LIMIT "+off+",2";
+    var sql2 = "select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND `dogs`.`enabled` = 1 and (DogAge = '" + a + "' OR DogAge REGEXP '"+regexp+"') AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%')";
     if(ageflag == 1) {
-      var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and (DogAge BETWEEN "+b1+" AND "+b2+") order by "+sb+" DESC LIMIT "+off+",2";
-      var sql2 = "Select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND  DogAge BETWEEN "+b1+" AND "+b2;
+      var sql = "SELECT `dogs`.`DogAge`, `dogs`.`Did`, `dogs`.`DogName`, `dogs`.`Rating`, `dogs`.`Reviews`, `dogs`.`Description`, `users`.`Fname`, `users`.`Lname`, `users`.`Email`, `dogs`.`DogPic1`, `dogs`.`DogPic2`, `dogs`.`DogPic3`, `dogs`.`DogPic4`, `dogs`.`DogPic5`, `dogs`.`DogBreed`, `users`.`status` FROM `users` INNER JOIN `dogs` ON `dogs`.`Uid` = `users`.`Uid` where `dogs`.`AdminStatus` = 1 and `users`.`status` = 1 and `dogs`.`enabled` = 1 and (DogAge BETWEEN "+b1+" AND "+b2+") AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') order by "+sb+" DESC LIMIT "+off+",2";
+      var sql2 = "Select count(`dogs`.`Did`) as totaldogs from `dogs` WHERE `dogs`.`AdminStatus` = 1 AND `dogs`.`enabled` = 1 AND (`dogs`.`State` LIKE '%"+st+"%' OR `dogs`.`city` LIKE '%"+st+"%' OR `dogs`.`Address` LIKE '%"+st+"%') AND DogAge BETWEEN "+b1+" AND "+b2;
     }
   }
   console.log(sql);

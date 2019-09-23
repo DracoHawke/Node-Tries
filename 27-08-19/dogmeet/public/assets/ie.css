@@ -1,0 +1,28 @@
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+   input#loginemail {
+        height: 50px;
+        padding:15px;
+   }
+   input#loginpass {
+        height: 50px;
+        padding:15px;
+   }
+   input.form-control.heights{
+     padding: 15px;
+     height: 60px;
+   }
+   div.image_profile{
+     display:block !important;
+   }
+   button#iebutton1{
+       border:none;
+       padding:0;
+       width: 7em;
+       height: 5em;
+       object-fit: cover;
+       border-radius: 18px;
+   }
+   button#iebutton1:focus{
+       outline: none;
+   }
+}

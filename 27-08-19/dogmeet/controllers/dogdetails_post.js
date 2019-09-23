@@ -11,9 +11,9 @@ module.exports = function(req, res){
   console.log("q did: ", req.query.did);
   console.log("did: ", dog.did);
   console.log("curr did: ", req.session.currdog);
-  if(req.query.did == dog.did && req.query.did == req.session.currdog){
-    console.log(dog);
-    console.log(req.files)
+  if(req.query.did == dog.did && req.query.did == req.session.currdog) {
+    //console.log(dog);
+    //console.log(req.files)
     var flag = 1;
     var flag2 = 1;
     var length1 = req.files.length;
@@ -23,9 +23,13 @@ module.exports = function(req, res){
     }
     var error1 = dogformvalidator.fval(dog);
     if(error1.success != "Yes"){
-      flag2 = 0;
+      console.log("error1_in: ",error1);
+      flag = 0;
     }
-    if(flag2 == 1){
+    console.log("error1: ", error1);
+    console.log("flag: ", flag);
+    console.log("flag2: ", flag2);
+    if(flag2 == 1 && flag == 1) {
       console.log("flag2 pass");
       var files1 = req.files['fileUpload[0]'];
       var i = 0;
@@ -88,11 +92,13 @@ module.exports = function(req, res){
         dog = b; // return the updated information to the original array which will now have the dog pic files.
       }
     }
-    if(flag2 == 1 && flag == 1){
+    if(flag2 == 1 && flag == 1) {
+      console.log("flag: ", flag);
+      console.log("flag2: ", flag2);
       var i = 0;
       e = dog['files'];
       var dpic = [];
-      console.log(e);
+      //console.log(e);
       while(i < e.length){
         c = 'fileupload'+i;
         f = req.session.email +'_'+ i;
@@ -131,14 +137,14 @@ module.exports = function(req, res){
           e.mv(path, function(err) {
             if(err)
               return res.status(500).send(err);
-            console.log("e ", e);
+            //console.log("e ", e);
           })
         }
         else {
           e[i].mv(path, function(err) {
             if(err)
               return res.status(500).send(err);
-            console.log("e[i] path: ", path);
+            //console.log("e[i] path: ", path);
           })
         }
         dpic[i] = path1; // set path to be used in the query.
@@ -146,21 +152,37 @@ module.exports = function(req, res){
       }
       let updatequery = "update ??,?? set DogName = ?, DogBreed = ?, DogGender = ?, DogAge = ?, Description = ?, DogPic1 = ?, DogPic2 = ?, DogPic3 = ?, DogPic4 = ?, DogPic5 = ? where ??.`Uid` = ??.`Uid` and ??.`Did` = ? and ??.`email` = "+mysql.escape(req.session.email);
       let query = mysql.format(updatequery,["dogs","users",dog.dog_name,dog.dog_breed,dog.dog_gender,dog.dog_age,dog.dog_info, dpic[0], dpic[1], dpic[2], dpic[3], dpic[4], `users`,`dogs`,`dogs`,dog.did,`users`]);
-      //console.log(query);
       connection.query(query,(err, response) => {
         console.log(query);
         if(err) {
           console.error(err);
           flags = 4060; // server database connectivity error;
         }
-        else{
+        else {
           console.log('data entered'); // updated user's dog.
-          res.redirect("/dashboard/myacc");
+          res.redirect("/dashboard/dogsuccess");
         }
       });
     }
-    else if(flag2 == 0 || flag == 0){
-      console.log("errors?", error1);
+    else if(flag2 == 0 && flag == 1) {
+      let updatequery = "update ??,?? set DogName = ?, DogBreed = ?, DogGender = ?, DogAge = ?, Description = ? where ??.`Uid` = ??.`Uid` and ??.`Did` = ? and ??.`email` = "+mysql.escape(req.session.email);
+      let query = mysql.format(updatequery,["dogs","users",dog.dog_name,dog.dog_breed,dog.dog_gender,dog.dog_age,dog.dog_info, `users`,`dogs`,`dogs`,dog.did,`users`]);
+      connection.query(query,(err, response) => {
+        console.log(query);
+        if(err) {
+          console.error(err);
+          flags = 4060; // server database connectivity error;
+        }
+        else {
+          console.log('data entered'); // updated user's dog.
+          res.redirect("/dashboard/dogsuccess");
+        }
+      });
+    }
+    else if(flag2 == 0 || flag == 0) {
+      console.log("flag: ", flag);
+      console.log("flag2: ", flag2);
+      console.log("errors?: ", error1);
       error1 = JSON.stringify(error1);
       query1 = "?did="+dog.did+"&dno="+dog.dno;
       res.redirect("/dogdetails/"+error1+query1);

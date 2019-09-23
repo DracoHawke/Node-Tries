@@ -130,11 +130,11 @@ z-index: 1;
     background-image: linear-gradient(45deg, white, transparent);
 }
 .overlay {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to right,#fcfcfc 37%, transparent 55%);
+    /* position: absolute; */
+    /* top: 0; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* background-image: linear-gradient(to right,#fcfcfc 37%, transparent 55%); */
 }
 .carousel-caption {
   position: absolute;
@@ -330,8 +330,8 @@ img.image-topmates {
 
 @media screen and (max-width: 992px){
     img.profile{
-        height: 10em;
-        width: 10em;
+        /* height: 10em; */
+        /* width: 10em; */
     }
 }
 

@@ -5,14 +5,13 @@ var con=db_connect();
 
 module.exports=function(res,req){
   var name={uname:'',lname:'',email:'',phone:'',status_err:'',read:'',dob:'',fname:'',file:''};
-  if(req.session.uname)
-  {
+  if(req.session.uname) {
       console.log(req.session);
-      if(req.session.sid==1){
+      if(req.session.sid==1) {
         var sid=req.session.sid;
         res.redirect('/');
       }
-      else{
+      else {
         var sid='';
       var uname=req.session.uname;
     console.log('here');

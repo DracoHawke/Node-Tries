@@ -1,9 +1,28 @@
 $('document').ready(function(){
-  var url =new URLSearchParams(window.location.search);
-  //console.log(url);
-  //console.log(url.has("signin"))
-  if(url.has("signin")){
-    $('#modalLoginForm').modal();
+  var isIE = /*@cc_on!@*/false || !!document.documentMode;
+  if(isIE == true){
+    $.urlParam = function(name){
+      var results = new RegExp('[\?&]' + name).exec(window.location.href);
+      console.log("results: ",results);
+      if (results == null){
+         return null;
+      }
+      else {
+         return "yes";
+      }
+    }
+    var signin = $.urlParam('signin');
+    if(signin == "yes"){
+      $('#modalLoginForm').modal();
+    }
+  }
+  else{
+    var url = new URLSearchParams(window.location.search);
+    //console.log(url);
+    //console.log(url.has("signin"))
+    if(url.has("signin")){
+      $('#modalLoginForm').modal();
+    }
   }
   $('#loginbtn').click(function(){
     event.preventDefault();
@@ -14,8 +33,7 @@ $('document').ready(function(){
 })
 // DASHBOARD AJAX
 //posting form data
-function update()
-{
+function update() {
   event.preventDefault();
 	var fd=$("form")[0];
 	var formdata=new FormData(fd);
@@ -41,8 +59,7 @@ function update()
 }
 //links// dashboard ajax finish
 //dog
-function addmore()
-{
+function addmore() {
   event.preventDefault();
   var div = document.createElement('div');
   div.innerHTML = document.getElementById('repeat').innerHTML;
@@ -233,42 +250,43 @@ function submit_rating(){
 
 //star-rating finish
 //contact form validation
-function contact_form()
-{
-    var orm=document.getElementsByName("myform")[0];
+function contact_form() {
+    document.getElementById('contact_formbtn1').setAttribute("disabled","disabled");
+    var orm = document.getElementsByName("myform")[0];
     var formData = new FormData(orm);
-    var name=document.myform.name.value;
-    var mess=document.myform.message.value;
-    var email=document.myform.email.value;
-    var flag=0;
+    var name = document.myform.name.value;
+    var mess = document.myform.message.value;
+    var email = document.myform.email.value;
+    var flag = 0;
     var regexp = /^[a-zA-Z][a-zA-Z\s]+$/;
-    if(name==''){
-        document.getElementById("name_err").innerHTML="Name Cannot Be Left Empty";
-        flag=1;
+    if(name == ''){
+        document.getElementById("name_err").innerHTML = "Name Cannot Be Left Empty";
+        flag = 1;
     }
     else{
-        document.getElementById("name_err").innerHTML="";
+        document.getElementById("name_err").innerHTML = "";
     }
     regexp = /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-    if(email==''){
-        document.getElementById("email_err").innerHTML="E-mail Cannot Be Left Empty";
-        flag=1;
+    if(email == ''){
+        document.getElementById("email_err").innerHTML = "E-mail Cannot Be Left Empty";
+        flag = 1;
     }
     else if(!email.match(regexp)){
-        document.getElementById("email_err").innerHTML="Please enter a valid E-mail address";
-        flag=1;
+        document.getElementById("email_err").innerHTML = "Please enter a valid E-mail address";
+        flag = 1;
     }
     else{
-        document.getElementById("email_err").innerHTML="";
+        document.getElementById("email_err").innerHTML = "";
     }
     if(mess==''){
-        document.getElementById("mess_err").innerHTML="Please type in a message to send.";
-        flag=1;
+        document.getElementById("mess_err").innerHTML = "Please type in a message to send.";
+        flag = 1;
     }
     else{
-        document.getElementById("mess_err").innerHTML="";
+        document.getElementById("mess_err").innerHTML = "";
     }
-    if(flag==1){
+    if(flag==1) {
+      document.getElementById('contact_formbtn1').removeAttribute("disabled");
         return false;
     }
     else {

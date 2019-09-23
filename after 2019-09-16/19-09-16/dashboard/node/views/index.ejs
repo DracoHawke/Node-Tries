@@ -1,0 +1,521 @@
+<% include header %>
+<script src="/assets/js/index.js"></script>
+</head>
+<body class="header-fix fix-sidebar">
+    <!-- Main wrapper  -->
+    <div id="main-wrapper">
+        <!-- header header  -->
+        <div class="header">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- Logo -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/assets/index.html">
+                        <!-- Logo icon -->
+                        <b class="logo-ico"><img src="/assets/images/logo.png" alt="homepage" class="dark-logo" /></b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-txt"><img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" /></span>
+                    </a>
+                </div>
+                <!-- End Logo -->
+                <div class="navbar-collapse">
+                    <!-- toggle and nav items -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link toggle-nav hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-r-10"> <a class="nav-link sidebartoggle hidden-sm-down text-muted  " href="javascript:void(0)"><img src="/assets/images/bars-ico.png"></a> </li>
+                        <!-- Messages -->
+                        <li class="nav-item"> <span class="text-muted h-100 d-flex align-items-center">ADMINISTRATOR</span>
+
+                        </li>
+                        <!-- End Messages -->
+                    </ul>
+                    <!-- User profile and search -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- Comment -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated slideInRight">
+                                <ul>
+                                    <li>
+                                        <div class="drop-title">Notifications</div>
+                                    </li>
+                                    <li>
+                                        <div class="header-notify">
+                                            <!-- Message -->
+                                            <a href="#">
+                                                <i class="cc BTC m-r-10 f-s-40" title="BTC"></i>
+
+                                                <div class="notification-contnet">
+                                                    <h5>All Transaction BTC</h5> <span class="mail-desc">Just see the my new admin!</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="#">
+                                                <i class="cc LTC m-r-10 f-s-40" title="BTC"></i>
+                                                <div class="notification-contnet">
+                                                    <h5>This is LTC coin</h5> <span class="mail-desc">Just a reminder that you have event</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="#">
+                                                <i class="cc DASH m-r-10 f-s-40" title="BTC"></i>
+                                                <div class="notification-contnet">
+                                                    <h5>This is DASH coin</h5> <span class="mail-desc">You can customize this template as you want</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="#">
+                                                <i class="cc XRP m-r-10 f-s-40" title="BTC"></i>
+                                                <div class="notification-contnet">
+                                                    <h5>This is LTC coin</h5> <span class="mail-desc">Just see the my admin!</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center" href="/assets/javascript:void(0);"> Check all notifications <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- End Comment -->
+                        <!-- Profile -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="profile-img"><img src="/assets/images/admin.jpg"></span> John Doe <i class="fa fa-angle-down"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="dropdown-user">
+                                    <li><a href="#"> Settings</a></li>
+                                    <li><a href="#"> Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- End header header -->
+        <!-- Left Sidebar  -->
+        <div class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebar-menu">
+                        <li class="nav-devider"></li>
+                        <li class="active"> <a class="" href="/assets/index.html"><i class="icon-t ico-dashboard"></i>Dashboard</a></li>
+                        <li> <a class="" href="#"><i class="icon-t ico-student"></i>Students</a></li>
+                        <li> <a class="" href="#"><i class="icon-t ico-user"></i>Users</a></li>
+                        <li> <a class="" href="#"><i class="icon-t ico-school"></i>Schools</a></li>
+                        <li> <a class="" href="#"><i class="icon-t ico-visits"></i>Pending Approvals</a></li>
+
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="icon-t ico-config"></i><span class="hide-menu">Configuration</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="#">Outcomes</a></li>
+                                <li><a href="#">Reason for Absence</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="#" href="#"><i class="icon-t ico-profile"></i>Profile Settings</a></li>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="icon-t ico-config"></i><span class="hide-menu">Routes</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <a href="#" onclick="getknownroutes('current')"><li>Known Routes</li></a>
+                                <a href="/newpage"><li>Make New Routes</li></a>
+                                <a href="/getknownroutes/route4_3?query=1"><li>Examples</li></a>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </div>
+        <!-- End Left Sidebar  -->
+        <!-- Page wrapper  -->
+        <div class="page-wrapper">
+            <!-- Bread crumb -->
+            <% if(typeof(data) !== "undefined") { %>
+              <div class="container-fluid">
+                <%- data %>
+                <div id="unique_id_home_14"></div><script>function ajax_call_home_14(){ $.ajax({url:"/getdataofpage/1?route='/home_14'",type: "GET",success: function(response) {document.getElementById("unique_id_home_14").innerHTML = response;}}); } ajax_call_home_14();</script>
+              </div>
+            <% } else { %>
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 >Dashboard</h3> </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Bread crumb -->
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="card bg-warning-t p-20">
+                            <div class="media widget-ten">
+
+                                <div class="media-body media-text-left">
+                                    <p class="m-b-0 text-white">Total Visits</p>
+                                    <h2 class="color-white text-white">278</h2>
+                                </div>
+                                <div class="media-left meida media-middle">
+                                    <span><img src="/assets/images/visit-ico-lg@2x.png"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success-t p-20">
+                            <div class="media widget-ten">
+
+                                <div class="media-body media-text-left">
+                                    <p class="m-b-0 text-white">Schools</p>
+                                    <h2 class="color-white text-white">278</h2>
+                                </div>
+                                <div class="media-left meida media-middle">
+                                    <span><img src="/assets/images/school-ico-lg@2x.png"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-primary-t p-20">
+                            <div class="media widget-ten">
+
+                                <div class="media-body media-text-left">
+                                    <p class="m-b-0 text-white">Users</p>
+                                    <h2 class="color-white text-white">$27647</h2>
+                                </div>
+                                 <div class="media-left meida media-middle">
+                                    <span><img src="/assets/images/user-ico-lg@2x.png"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-danger-t p-20">
+                            <div class="media widget-ten">
+
+                                <div class="media-body media-text-left">
+                                    <p class="m-b-0 text-white">Students</p>
+                                    <h2 class="color-white text-white">278</h2>
+                                </div>
+                                <div class="media-left meida media-middle">
+                                    <span><img src="/assets/images/students-ico-lg@2x.png"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-lg-8">
+                        <div class="card card-fixed">
+                            <div class="card-title">
+                                <h4><i class="ico-title ico-visits"></i> Pending Approvals Outcomes</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-theme">
+                                        <thead>
+                                            <tr>
+                                                <th>Student name</th>
+                                                <th>School name</th>
+                                                <th>Cohort</th>
+                                                <th>Outcome </th>
+                                                <th>Submitted by</th>
+                                                <th>Submitted on</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Gibson, Richard</td>
+                                               <td>Hanford High School</td>
+                                                <td>C1</td>
+                                                <td>Transportation</td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/12/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fraser, Stephen</td>
+                                               <td>Kamiakin High School</td>
+                                                <td>C2</td>
+                                                <td>Family Challenges</td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/12/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gill, Stewart</td>
+                                               <td>Kiona-Benton City High School</td>
+                                                <td>C3</td>
+                                                <td>Student Mental Health</td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/12/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Graham, Tim</td>
+                                               <td>Liberty Christian School</td>
+                                                <td>C4</td>
+                                                <td>Other </td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/12/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Henderson, Lily</td>
+                                               <td>Delta High School</td>
+                                                <td>C5</td>
+                                                <td>Family Illness </td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/14/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hunter, Megan</td>
+                                               <td>Cascade High School</td>
+                                                <td>C6</td>
+                                                <td>Transportation</td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/15/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                             <tr>
+                                                <td>Hunter, Megan</td>
+                                               <td>Cascade High School</td>
+                                                <td>C6</td>
+                                                <td>Transportation</td>
+                                                <td>Oliver Brown</td>
+                                                <td>11/15/18</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr><td colspan="7" class="text-center"><a href="#">View All</a></td></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="card card-fixed">
+                            <div class="card-title">
+                                <h4><i class="ico-title ico-user"></i> Users</h4>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-theme">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email ID</th>
+                                                <th>Creation Date</th>
+                                                <th>Status </th>
+                                                <th>Training Validation</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Matt Allan</td>
+                                               <td>matt.allan@loremipsum.com</td>
+                                                <td>10/12/17</td>
+                                                <td>Active</td>
+                                                <td>Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Liam Bailey</td>
+                                               <td>l.bailey@loremipsum.com</td>
+                                                <td>05/11/17</td>
+                                                <td>Active</td>
+                                                <td>Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                             <tr>
+                                                <td>Luke Baker</td>
+                                               <td>lukebaker@loremipsum.com</td>
+                                                <td>02/01/18</td>
+                                                <td>Active</td>
+                                                <td>Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                             <tr>
+                                                <td>Max Bell</td>
+                                               <td>bell_max@loremipsum.com</td>
+                                                <td>04/10/18</td>
+                                                <td>Inactive</td>
+                                                <td>Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                             <tr>
+                                                <td>Nicholas Black</td>
+                                               <td>mnicholas.black@loremipsum.com</td>
+                                                <td>04/10/18</td>
+                                                <td>Active</td>
+                                                <td>Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                             <tr>
+                                                <td>Matt Allan</td>
+                                               <td>matt.allan@loremipsum.com</td>
+                                                <td>10/12/17</td>
+                                                <td>Active</td>
+                                                <td>Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+                                             <tr>
+                                                <td>Oliver Brown</td>
+                                               <td>obrown@loremipsum.com</td>
+                                                <td>05/11/18</td>
+                                                <td>Active</td>
+                                                <td>Not Trained</td>
+                                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                            </tr>
+
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr><td colspan="7" class="text-center"><a href="#" >View All</a></td></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4><i class="ico-title ico-school"></i> New Schools</h4>
+                                <a href="#" class="float-right add-ico"><i class="fa fa-plus-circle"></i>Add School</a>
+                            </div>
+                            <div class="card-body">
+                                 <div class="table-responsive">
+                                    <table class="table table-hover table-theme">
+                                        <thead>
+                                            <tr>
+
+                                                <th>School name</th>
+                                                <th>Students</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Hanford High School, Richland</td>
+                                               <td>300</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kamiakin High School, Kennewick</td>
+                                               <td>350</td>
+                                            </tr>
+                                             <tr>
+                                                <td>Kennewick High School, Kennewick</td>
+                                               <td>375</td>
+                                            </tr>
+                                             <tr>
+                                                <td>Liberty Christian School, Richland</td>
+                                               <td>290</td>
+                                            </tr>
+                                             <tr>
+                                                <td>Prosser Falls Education Center, Prosser</td>
+                                               <td>450</td>
+                                            </tr>
+                                             <tr>
+                                                <td>Prosser High School, Prosser</td>
+                                               <td>415</td>
+                                            </tr>
+                                             <tr>
+                                                <td>Tri City Area Vocational Skills Center, Kennewick</td>
+                                               <td>415</td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr><td colspan="7" class="text-center"><a href="#">View All</a></td></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                         <div class="card card-reasons">
+                            <div class="card-title">
+                                <h4><i class="ico-title ico-reason"></i> Reasons for Absence</h4><a href="#" class="float-right add-ico">
+                                    <i class="fa fa-plus-circle"></i>Add Reason</a>
+                            </div>
+                            <div class="card-body">
+                        <div class="table-responsive">
+                                    <table class="table table-hover table-theme">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Reason</th>
+                                                <!-- <th>Students</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Transportation</td>
+                                               <!-- <td>300</td> -->
+                                            </tr>
+                                            <tr>
+                                                <td>Family Challenges</td>
+                                               <!-- <td>350</td> -->
+                                            </tr>
+                                             <tr>
+                                                <td>Student Illness</td>
+                                               <!-- <td>375</td> -->
+                                            </tr>
+                                             <tr>
+                                                <td>Lack of Student Interest</td>
+                                               <!-- <td>290</td> -->
+                                            </tr>
+                                             <tr>
+                                                <td>Other </td>
+                                               <!-- <td>450</td> -->
+                                            </tr>
+                                             <tr>
+                                                <td>Death in Family</td>
+                                               <!-- <td>415</td> -->
+                                            </tr>
+                                             <tr>
+                                                <td>Student Mental Health Concerns</td>
+                                               <!-- <td>415</td> -->
+                                            </tr>
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr><td colspan="7" class="text-center"><a href="#">View All</a></td></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End PAge Content -->
+            </div>
+            <!-- End Container fluid  -->
+            <% } %>
+            <!-- footer -->
+            <footer class="footer"> © 2018 Concentric All Right Reserved.</footer>
+            <!-- End footer -->
+        </div>
+        <!-- End Page wrapper  -->
+    </div>
+    <!-- End Wrapper -->
+<% include footer %>

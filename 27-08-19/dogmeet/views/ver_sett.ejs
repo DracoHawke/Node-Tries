@@ -1,0 +1,179 @@
+<% include header %>
+<link rel="stylesheet" type="text/css" href="/assets/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/signup.css">
+<link rel="stylesheet" type="text/css" href="/assets/dashboard.css">
+<link rel="stylesheet" type="text/css" href="/assets/settings.css">
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+<link href="/assets/chatt.css" type="text/css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+<title>DogMate</title>
+</head>
+<script type="text/javascript" src="/assets/settings.js"></script>
+  <div class="cardlike1">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="my-account headmydog">Settings</h2>
+        <% console.log("Send_Data: ", send_data) %>
+      </div>
+    </div>
+    <% if(typeof send_data !== 'undefined') { %>
+      <% if(send_data.status_err == "verified") { %>
+        <form class="size-1 formloc" name="myform2" id="myform2" action="/dashboard/location" method="post" enctype="multipart/form-data">
+          <div class="row">
+            <% if(send_data.Location != null) { %>
+              <div id="yourlocation" class="col-md-12 displayinline2">
+                <span class="ptext displayinline2"> Your Location:&nbsp;&nbsp;
+                  <a href="#" class="change red text-capitalize" id="yourlocationset" onclick="set()">
+                    <%= send_data.Location %>
+                  </a>
+                </span>
+              </div>
+                <div class="row" id="changeyourloc" style="display:none">
+                <div class="col-md-3"><span class="ptext displayinline2"> Your Location:</span></div>
+                <div class="col-md-6 displayinline2">
+                  <input type="text" id="Location" class="form-control input2" name="locationnew" placeholder="Please enter your Location for better results">
+                </div>
+                <div class="col-md-3">
+                  <button id = "setnewloc" class="submit submit2">Set Location</button>
+                  <input type="button" class = "submit2" id="MyLocation" name="Location" value="Use My Location">
+                  <button id = "cancel" class="cancel2">Cancel</button>
+                </div>
+              </div>
+            </div>
+            <div class = "row plrmtb1">
+              <strong><span class = "ptext"> Select Service Area Range <span class="red" style="font-weight:bolder;">*</span></span></strong>
+              <div class = "slidercontainer">
+                <input type = "range" class="slider" name="rangebar" step="0.5" value="0.5" id="rad" min="0.5" max="100" onchange="Make_Circle()">
+                <output for = "foo" oninput="value = rangebar.valueAsNumber;"></output>
+                <div class="displayinline2"><p class="formloc text5">0.5miles<p class="alignright">100 miles</p></div>
+              </div>
+              <script>
+                var el, newPoint, newPlace, offset;
+                $("input[type='range']").change(function() {
+                  el = $(this);
+                  width = el.width();
+                  newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
+                  offset = -1;
+                  if (newPoint < 0) { newPlace = 0; }
+                  else if (newPoint > 1) { newPlace = width; }
+                  else { newPlace = width * newPoint + offset; offset -= newPoint; }
+                  el
+                  .next("output")
+                  .css({
+                    left: newPlace,
+                    marginLeft: offset + "%"
+                  })
+                 .text(el.val()+' Mile');
+                 var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+                 $(this).css('background-image','-webkit-gradient(linear, left top, right top, color-stop(' + val + ', #ed2154), '
+                 + 'color-stop(' + val + ', white))');
+                })
+                .trigger('change');
+              </script>
+            </div>
+            <input type="hidden" name="Long" id="Long" value=<% if(send_data.Longitude){ %>"<%= send_data.Longitude %>"<% } %> >
+            <input type="hidden" name="Lat" id="Lat" value=<% if(send_data.Latitude){ %>"<%= send_data.Latitude %>"<% } %> >
+            <div id='map' style='width:100%; height:20em;'></div><br>
+            <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWppc2hrYWxpYTk5IiwiYSI6ImNqeWljMTF6cjA0bzQzbXBkem5hZ2JzMngifQ.OzX0jUVnSxDi8WIEaC-c5A';
+            var map = new mapboxgl.Map({
+              container: 'map',
+              style: 'mapbox://styles/mapbox/streets-v11',
+              minZoom: 0,
+              zoom: 14,
+              maxZoom: 22,
+              center: {lon: "<%= send_data.Longitude %>", lat: "<%= send_data.Latitude %>"}
+            });
+            var Mk1 = new mapboxgl.Marker ({'draggable':false})
+            .setLngLat({lon: "<%= send_data.Longitude %>", lat: "<%= send_data.Latitude %>"})
+            .addTo(map);
+            function Make_Circle() {
+              $(document).ready(function(){
+                var Rad = $("#rad").val();
+                var Long = $("#Long").val();
+                var Lat = $("#Lat").val();
+                if(!Rad) {
+                  return;
+                }
+                console.log(Rad, Long, Lat);
+                var data1 = {
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Point',
+                    coordinates:[Long,Lat]
+                  },
+                  properties: {
+                    name: 'Service Radius'
+                  }
+                };
+                var circle = turf.buffer(data1, Rad, { unit: 'miles' });
+                if(map.getLayer("Circle")) {
+                  map.removeLayer("Circle");
+                }
+                if(map.getSource("Circle")) {
+                  map.removeSource("Circle");
+                }
+                map.addLayer({
+                  id: 'Circle',
+                  type: 'fill',
+                  source: {
+                    type: 'geojson',
+                    data: circle
+                  },
+                  paint:{
+                    'fill-color':"rgba(95, 134, 150, 0.59)"
+                  }
+                });
+              });
+            }
+            var geojson={
+              type: 'FeatureCollection',
+              features: [{
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: ['<%= send_data.Logitude %>' ,'<%= send_data.Latitude %>']
+                },
+                properties: {
+                  title: "random",
+                  description: "try"
+                }
+              }]
+            };
+            map.on('load', function () {
+              <% if(send_data.Radius != null) { %>
+                console.log("set value of rad");
+                document.getElementById('rad').value = <%= send_data.Radius %>;
+              <% } %>
+              $('#rad').trigger('change');
+            });
+            </script>
+            <p class = " text6" >Prefered days:</p>
+          <div class = "row mrb1 group1">
+              <input type = "checkbox" id="mon" class = "form-control checks" name = "days[mon]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("mon"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Monday&nbsp;</span>
+              <input type = "checkbox" id="tue" class = "form-control checks" name = "days[tue]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("tue"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Tuesday&nbsp;</span>
+              <input type = "checkbox" id="wed" class = "form-control checks" name = "days[wed]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("wed"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Wednesday&nbsp;</span>
+              <input type = "checkbox" id="thu" class = "form-control checks" name = "days[thu]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("thu"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Thursday&nbsp;</span>
+              <input type = "checkbox" id="fri" class = "form-control checks" name = "days[fri]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("fri"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Friday&nbsp;</span>
+              <input type = "checkbox" id="sat" class = "form-control checks" name = "days[sat]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("sat"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Saturday&nbsp;</span>
+              <input type = "checkbox" id="sun" class = "form-control checks" name = "days[sun]" <% if(send_data.Days != null){ var a1 = send_data.Days.indexOf("sun"); if(a1 >= 0) { %> checked <% } } %>><span class="mrt1">&nbsp;Sunday&nbsp;</span>
+            </div>
+            <input type="submit" class="btn btn5" value="Update Settings" id="Save">
+            <% } else { %>
+              <div class="col-md-3"><span class="ptext displayinline2"> Your Location:</span></div>
+              <div class="col-md-6 displayinline2">
+                <input type="text" class="form-control input2" id="Location" name="location" placeholder="Please enter your Location for better results">
+              </div>
+              <div class="col-md-3">
+                <button class="submit submit2">Set Location</button>
+                <input type="button" class="submit2" id="MyLocation" name="MyLocation" value="Use My Location">
+              </div>
+              <% } %>
+          </div>
+        </form>
+    <% } else{ %>
+      <h2 class="red">Please Verify Your email to Access This Feature ......</h2>
+    <% } } %>
+  </div>

@@ -1,0 +1,61 @@
+i'm in
+in1
+SELECT Sid,AdminStatus from sitters where Uid = "25" ORDER BY Sid ASC
+[]
+DB Connection established
+DB Connection established
+in3
+ending
+in2,  1
+1
+Have dogs
+Have dogs
+i'm in
+in1
+SELECT Sid,AdminStatus from sitters where Uid = "25" ORDER BY Sid ASC
+[]
+in2,  1
+1
+in3
+ending
+Have dogs
+Have dogs
+Have dogs
+Have dogs
+
+i'm in
+in1
+SELECT Sid,AdminStatus from sitters where Uid = "25" ORDER BY Sid ASC
+[]
+in2,  1
+1
+in3
+ending
+Have dogs
+Have dogs
+Have dogs
+Have dogs
+i'm in
+in1
+SELECT Sid,AdminStatus from sitters where Uid = "25" ORDER BY Sid ASC
+[]
+in2,  1
+1
+in3
+ending
+Have dogs
+Have dogs
+Have dogs
+Have dogs
+i'm in
+in1
+SELECT Sid,AdminStatus from sitters where Uid = "25" ORDER BY Sid ASC
+in3
+ending
+in2,  1
+1
+[]
+Have dogs
+Have dogs
+Have dogs
+Have dogs

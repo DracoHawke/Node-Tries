@@ -43,7 +43,6 @@ module.exports = function(req,res,error1){
     c.sort_by = req.query.sort_by;
     if(req.query.sort_by != "Rating"){
       if(req.query.sort_by == "Distance"){
-        sb = "Distance";
       }else{
         sb = "`sitters`.`"+mysql.escape(req.query.sort_by).slice(1,-1)+"`";
       }
@@ -134,19 +133,19 @@ if(daysflag == 0 || daysflag == 1){
     ",`users`.`Email`,`users`.`Profile`, `users`.`status` FROM `sitters`"+
     " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
     " and `users`.`status` = 1 and `users`.`Email`!="+mysql.escape(req.session.email)+"  and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' "+
-    " order by "+sb+" DESC LIMIT "+off+",16";
+    " AND `sitters`.`enabled` = 1 order by "+sb+" DESC LIMIT "+off+",16";
     var sql2 = "SELECT COUNT(`sitters`.`Sid`) as totalsitters FROM `sitters` INNER JOIN `users` "+
     "ON `sitters`.`Uid` = `users`.`Uid` WHERE `sitters`.`AdminStatus` = 1 and `users`.`Email`!="+mysql.escape(req.session.email)+" and `users`.`status` = 1 "+
-    "and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' ";
+    "and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND `sitters`.`enabled` = 1";
   }else if(daysflag == 2){
     var sql = "SELECT `sitters`.`Rating`,`sitters`.`Reviews`,`sitters`.`Description`, `users`.`Fname`, `users`.`Lname`"+
     ",`users`.`Email`,`users`.`Profile`, `users`.`status` FROM `sitters`"+
     " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
     " and `users`.`status` = 1 and `users`.`Email`!="+mysql.escape(req.session.email)+" and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND "+mainst+
-    " order by "+sb+" DESC  LIMIT "+off+",16";
+    " AND `sitters`.`enabled` = 1 order by "+sb+" DESC  LIMIT "+off+",16";
     var sql2 = "SELECT COUNT(`sitters`.`Sid`) as totalsitters FROM `sitters` INNER JOIN `users` "+
     "ON `sitters`.`Uid` = `users`.`Uid` WHERE `sitters`.`AdminStatus` = 1 and `users`.`Email`!="+mysql.escape(req.session.email)+" AND `users`.`status` = 1 "+
-    "AND CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND " + mainst;
+    "AND CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND `sitters`.`enabled` = 1 AND " + mainst;
   }
   console.log("sql: ", sql);
   console.log("sql2: ", sql2);

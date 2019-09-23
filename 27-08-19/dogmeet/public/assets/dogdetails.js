@@ -16,24 +16,33 @@ $('document').ready(function(){
     count2 = count2 + 1;
   });
   var a = document.getElementsByClassName('imgpic');
+  var iter40 = 0;
   for (var key in a) {
     if (a.hasOwnProperty(key)) {
       b = a[key];
-      c = $(b).attr("src");
-      d = $(b).attr("id");
+      console.log(b);
+      c = b.getAttribute("src");
+      d = b.getAttribute("id");
       if(!(c == "" || c== "undefined" || typeof c === "undefined")){
+        console.log(d);
         b = document.getElementById(d);
-        d = "fileupload"+key;
+        d = "fileupload"+iter40;
+        console.log(b);
+        console.log(d);
+        console.log(iter40);
         d = document.getElementById(d);
         d.value= c;
-        plus = "file0-upload"+(Number(key)+1)+"plus";
+        plus = "file0-upload"+(Number(iter40)+1)+"plus";
         b.style.display = "block";
-        d = "imgupload"+key;
+        d = "imgupload"+iter40;
         d = document.getElementById(d);
         //d.style.paddingTop = "2.4vw";
         d.style.backgroundColor = "rgb(248, 248, 253)";
+        d.style.position = "relative";
+        document.getElementById('filediv'+iter40).classList.add("imgthere");
         document.getElementById(plus).style.display = "none";
       }
+      iter40 = iter40 + 1;
     }
   }
   $('#dogregister').click(function(){
@@ -41,8 +50,13 @@ $('document').ready(function(){
     var obj = {};
     var x1 = 0;
     var formData = new FormData(document.getElementById('myform2'));
-    for (var pair of formData.entries()) {
+    var formDataEntries = formData.entries(), formDataEntry = formDataEntries.next(), pair;
+    var pairs1 = {};
+    var userdata = {};
+    while (!formDataEntry.done) {
+      pair = formDataEntry.value;
       obj[pair[0]] = pair[1];
+      formDataEntry = formDataEntries.next();
     }
     var i = 0;
     var e = [0,0,"",0];
@@ -156,9 +170,35 @@ function loadFile(a){
     b.value = c;
     document.getElementById(e).value="updated";
   }
-  img1.src=URL.createObjectURL(event.target.files[0]);
+  img1.src = URL.createObjectURL(event.target.files[0]);
   img1.style.display = "block";
   //label.style.paddingTop = "2.4vw";
   label.style.backgroundColor = "rgb(248, 248, 253)";
   document.getElementById(plus).style.display = "none";
+}
+
+
+function deletedog(a,b){
+  var h = "/deletedog";
+  data = {};
+  h = h+"?did="+a+"&dno="+b;
+  //console.log(formdata);
+	$.ajax({
+		url: h,
+		type: "GET",
+    processData: false,
+    contentType: false,
+    data: data,
+		success: function(data) {
+      if(data == "Yes"){
+        console.log("yes?");
+        $("#deldogmodal").modal();
+      }
+      else{
+        console.log("no?");
+        event.preventDefault();
+      }
+    }
+	});
+	return false;
 }

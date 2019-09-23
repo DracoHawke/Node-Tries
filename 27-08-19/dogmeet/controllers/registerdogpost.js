@@ -148,7 +148,7 @@ module.exports = function(req,res){
             var data1 = c;
             if(c.logedin == '1'){var set1 = "yes";}else{var set1 = "";}
             data1.error1 = "Wrong Password";
-            res.render('registerdog',{uname : req.session.uname, data: data1, sid: req.session.sid, did: req.session.did, status: req.session.status,set: set1,login:req.session});
+            res.render('registerdog',{uname : req.session.uname, data: data1, sid: req.session.sid, did: req.session.did, status: req.session.status,set: set1,login:req.session, c: dog});
           }
         }
         else if(c.logedin == '0' || flags == 1){ // we check if user is successfully loged in / not logged in to see if user has any dogs listed.
@@ -163,7 +163,7 @@ module.exports = function(req,res){
               flags == 10; // user exists but not loged in and currently has no dogs listed.
             }
             else{
-              res.render('registerdog',{uname : "", data: {error1: "Wrong Password"}, sid: "", status:req.session.status, did: "", set:"", login:req.session});
+              res.render('registerdog',{uname : "", data: {error1: "Wrong Password"}, sid: "", status:req.session.status, did: "", set:"", login:req.session, c: dog});
               // user not logged in but input the wrong password while trying to register as sitter.
             }
           }
@@ -178,7 +178,7 @@ module.exports = function(req,res){
               flags == 20; // user exists but not loged in and currently has one or more dogs listed.
             }
             else{
-              res.render('registerdog',{uname : "", data: {error1: "Wrong Password"}, sid: "", did: "", status: req.session.status, set:"", login:req.session});
+              res.render('registerdog',{uname : "", data: {error1: "Wrong Password"}, sid: "", did: "", status: req.session.status, set:"", login:req.session, c: dog});
               //user not logged in but input the wrong password while trying to register a dog.
             }
           }
@@ -285,7 +285,7 @@ module.exports = function(req,res){
                 flags = 4060; // server database connectivity error;
             }
             else{
-              flags = 3; // new user successfully enteres
+              flags = 3; // new user successfully enters
               //console.log('get uid');
               send_mail(c.u_email,bcrypt.hashSync(result.insertId.toString(), 10));
               connection.query('select users.Uid from users where users.Email = "'+c.u_email+'"',function(err,rows3,feilds){
@@ -368,7 +368,7 @@ module.exports = function(req,res){
                     //console.log('aaaaaaa');
                     i = i + 1;
                   }
-                  res.redirect('/');
+                  res.render('registerdog', {uname: "",data: "", status: '', sid: "", did: '', set: "",login:req.session, addeduser:1});
                 }
               })
               //console.log("successful");
@@ -383,16 +383,17 @@ module.exports = function(req,res){
       uname = req.session.uname;
       if(req.session.did){
         var did = req.session.did;
-        registerdogmore(req,res,err);
+        registerdogmore(req,res,err,dog);
       }
       else{
-        registerdogfirst(req,res,err);
+        registerdogfirst(req,res,err,dog);
       }
     }
     else {
       uname = "";
       //console.log("errorrrrrrr");
-      res.render('registerdog', {uname: uname,body: req.body, data: {error: err}, set:"", sid: req.session.sid, did: req.session.did });
+      console.log(dog);
+      res.render('registerdog', {uname: uname,body: req.body, data: {error: err}, set:"", sid: req.session.sid, did: req.session.did, c: dog});
     }
   }
 }

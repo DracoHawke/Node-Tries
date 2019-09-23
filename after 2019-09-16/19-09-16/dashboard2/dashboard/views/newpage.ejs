@@ -1,0 +1,133 @@
+<% include header %>
+<% include newpagescript %>
+</head>
+    <script src="./assets/js/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript">
+      tinymce.init({
+        selector: '#context-form',
+        height: 400,
+        plugins: [
+          'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+          'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+          'save table directionality emoticons template paste'
+        ],
+        content_css : "./assets/css/lib/bootstrap/bootstrap.min.css?"+new Date().getTime()+",./assets/css/custom.css?"+new Date().getTime(),
+        force_br_newlines : true,
+        // enable title field in the Image dialog
+        image_title: true,
+        // enable automatic uploads of images represented by blob or data URIs
+        automatic_uploads: true,
+        // add custom filepicker only to Image dialog
+        file_picker_types: 'image',
+        image_advtab: true,
+        toolbar: 'customInsertButton customInsertButton2 | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+        file_picker_callback: function(cb, value, meta) {
+          var input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          input.setAttribute('accept', 'image/*');
+
+          input.onchange = function() {
+            var file = this.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function () {
+              var id = 'blobid' + (new Date()).getTime();
+              var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+              var base64 = reader.result.split(',')[1];
+              var blobInfo = blobCache.create(id, file, base64);
+              blobCache.add(blobInfo);
+
+              // call the callback and populate the Title field with the file name
+              cb(blobInfo.blobUri(), { title: file.name });
+            };
+            reader.readAsDataURL(file);
+          };
+          input.click();
+        },
+        setup: function (editor) {
+          var isAnchorElement = function (node) {
+            return node.nodeName.toLowerCase() === 'a' && node.href;
+          };
+
+          var getAnchorElement = function () {
+            var node = editor.selection.getNode();
+            return isAnchorElement(node) ? node : null;
+          };
+
+          editor.ui.registry.addButton('customInsertButton', {
+            text: 'Add Form-Template',
+            onAction: function (_) {
+              $('#addform').modal("toggle");
+            }
+          });
+
+          editor.ui.registry.addButton('customInsertButton2', {
+            text: 'Saved Form-Templates',
+            onAction: function (_) {
+              getformlist("forms");
+            }
+          });
+          editor.on('load', function(){
+            var editor_htmlitem = document.getElementsByClassName('tox-edit-area__iframe');
+            editor_document = editor_htmlitem[0].contentDocument;
+              if (!$(editor_document.head).find("#bootstrap_script")[0]) {
+                var script = document.createElement('script');
+                script.id = "jQuery_script2";
+                script.src = "./assets/js/lib/jquery/jquery.min.js";
+                editor_document.head.appendChild(script);
+
+                var script = document.createElement('script');
+                script.id = "popper_script2";
+                script.src = "./assets/js/lib/bootstrap/js/popper.min.js";
+                editor_document.head.appendChild(script);
+
+                var script = document.createElement('script');
+                script.id = "bootstrap_script2";
+                script.src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
+                editor_document.head.appendChild(script);
+              }
+          });
+        }
+      });
+    </script>
+    <script type="text/javascript">
+      tinymce.init({
+        selector: '#addform_display',
+        height: 300,
+        content_css : "./assets/css/lib/bootstrap/bootstrap.min.css?"+new Date().getTime()+",./assets/css/custom.css?"+new Date().getTime(),
+        setup: function (editor) {
+          editor.on('load', function(){
+            var editor_htmlitem = document.getElementsByClassName('tox-edit-area__iframe');
+            console.log(editor_htmlitem);
+            editor_document = editor_htmlitem[1].contentDocument;
+              if (!$(editor_document.head).find("#bootstrap_script")[0]) {
+                  var script = document.createElement('script');
+                  script.id = "jQuery_script1";
+                  script.src = "./assets/js/lib/jquery/jquery.min.js";
+                  editor_document.head.appendChild(script);
+
+                  var script = document.createElement('script');
+                  script.id = "popper_script1";
+                  script.src = "./assets/js/lib/bootstrap/js/popper.min.js";
+                  editor_document.head.appendChild(script);
+
+                  var script = document.createElement('script');
+                  script.id = "bootstrap_script1";
+                  script.src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
+                  editor_document.head.appendChild(script);
+                  //console.log(editor.contentDocument.head);
+              }
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="editableform1 container">
+      <div id="bootstrap_alert_3"></div>
+      <form method="post" onsubmit="return routename()" action="" enctype="multipart/form-data" style="margin-top: 4.9em;">
+        <div id="context-form"></div>
+        <button class="btn btn-theme" style="margin-top:10px;">Submit</button>
+      </form>
+    </div>
+  <% include footer %>

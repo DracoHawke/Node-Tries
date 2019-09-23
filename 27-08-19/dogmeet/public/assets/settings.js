@@ -32,4 +32,24 @@ $('document').ready(function(){
         });
       }
   });
+  $("#delsitmodalopen").click(function(){
+    var h = "/deletesit";
+    $.ajax({
+      url: h,
+      type: "GET",
+      processData: false,
+      contentType: false,
+      success: function(data) {
+        if(data == "Yes"){
+          //console.log("yes?");
+          $("#delsitmodal").modal();
+        }
+        else {
+          //console.log("no?");
+          event.preventDefault();
+        }
+      }
+    });
+    return false;
+  })
 });

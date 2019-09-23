@@ -46,13 +46,13 @@ module.exports = function(req, res, check, send_data) {
         "cos(radians(`sitters`.`Latitude`))*cos(radians(`sitters`.`Longitude`)-radians("+a.longitude+"))"+
         "+sin(radians("+a.latitude+"))*sin(radians(`sitters`.`Latitude`)))) AS distance FROM `sitters`"+
         " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
-        "and `users`.`status` = 1 HAVING distance < `sitters`.`Radius` order by `sitters`.`Rating` DESC LIMIT "+off+",16";
+        "and `users`.`status` = 1 AND `sitters`.`enabled` = 1 HAVING distance < `sitters`.`Radius` order by `sitters`.`Rating` DESC LIMIT "+off+",16";
         var sql2 = "SELECT `sitters`.`Radius`, (6371*acos(cos(radians("+a.latitude+"))*"+
         "cos(radians(`sitters`.`Latitude`))*cos(radians(`sitters`.`Longitude`)-radians("+a.longitude+"))"+
         "+sin(radians("+a.latitude+"))*sin(radians(`sitters`.`Latitude`)))) AS distance "+
         "FROM `sitters` INNER JOIN `users`"+
         "ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 AND `users`.`status` = 1 "+
-        "HAVING distance < `sitters`.`Radius`";
+        "AND `sitters`.`enabled` = 1 HAVING distance < `sitters`.`Radius`";
         console.log("sql1: ",sql);
         con.query(sql, function (err, rows, fields) {
           if(err) throw err;
@@ -193,26 +193,28 @@ module.exports = function(req, res, check, send_data) {
           "cos(radians(`sitters`.`Latitude`))*cos(radians(`sitters`.`Longitude`)-radians("+a.longitude+"))"+
           "+sin(radians("+a.latitude+"))*sin(radians(`sitters`.`Latitude`)))) AS distance FROM `sitters`"+
           " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
-          " and `users`.`status` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' HAVING distance < `sitters`.`Radius`"+
+          " and `users`.`status` = 1 AND `sitters`.`enabled` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' HAVING distance < `sitters`.`Radius`"+
           " order by "+sb+" DESC LIMIT "+off+",16";
           var sql2 = "SELECT `sitters`.`Radius`, (6371*acos(cos(radians("+a.latitude+"))*"+
           "cos(radians(`sitters`.`Latitude`))*cos(radians(`sitters`.`Longitude`)-radians("+a.longitude+"))"+
           "+sin(radians("+a.latitude+"))*sin(radians(`sitters`.`Latitude`)))) AS distance FROM `sitters`"+
           " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
-          " and `users`.`status` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' HAVING distance < `sitters`.`Radius`";
+          " and `users`.`status` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' "+
+          " AND `sitters`.`enabled` = 1 HAVING distance < `sitters`.`Radius`";
         } else if(daysflag == 2) {
           var sql = "SELECT `sitters`.`Rating`,`sitters`.`Reviews`,`sitters`.`Description`, `users`.`Fname`, `users`.`Lname`"+
           ",`users`.`Email`,`users`.`Profile`, `users`.`status`,`sitters`.`Radius`, (6371*acos(cos(radians("+a.latitude+"))*"+
           "cos(radians(`sitters`.`Latitude`))*cos(radians(`sitters`.`Longitude`)-radians("+a.longitude+"))"+
           "+sin(radians("+a.latitude+"))*sin(radians(`sitters`.`Latitude`)))) AS distance FROM `sitters`"+
           " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
-          " and `users`.`status` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND "+mainst+" HAVING distance < `sitters`.`Radius`"+
+          " and `users`.`status` = 1 AND `sitters`.`enabled` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND "+mainst+" HAVING distance < `sitters`.`Radius`"+
           " order by "+sb+" DESC LIMIT "+off+",16";
           var sql2 = "SELECT `sitters`.`Radius`, (6371*acos(cos(radians("+a.latitude+"))*"+
           "cos(radians(`sitters`.`Latitude`))*cos(radians(`sitters`.`Longitude`)-radians("+a.longitude+"))"+
           "+sin(radians("+a.latitude+"))*sin(radians(`sitters`.`Latitude`)))) AS distance FROM `sitters`"+
           " INNER JOIN `users` ON `sitters`.`Uid` = `users`.`Uid` where `sitters`.`AdminStatus`= 1 "+
-          " and `users`.`status` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND "+mainst+" HAVING distance < `sitters`.`Radius`"
+          " and `users`.`status` = 1 and CONCAT(`users`.`Fname`,' ',`users`.`Lname`) LIKE '%"+nm+"%' AND "+mainst+
+          " AND `sitters`.`enabled` = 1 HAVING distance < `sitters`.`Radius`"
         }
         console.log(sql);
         con.query(sql, function (err, rows, fields) {

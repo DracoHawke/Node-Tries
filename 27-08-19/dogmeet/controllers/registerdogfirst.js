@@ -3,7 +3,7 @@ var db_connect = require('./db-connect');
 
 var con=db_connect();
 
-module.exports=function(req,res,err1){
+module.exports=function(req,res,err1,c){
   var did = req.session.did;
   var sid = req.session.sid;
   var email = req.session.email;
@@ -30,7 +30,7 @@ module.exports=function(req,res,err1){
               data.error = err1;
             }
             var set1 = "yes";
-            res.render('registerdog', {uname: req.session.uname, data: data, sid: sid, did: did, set: set1, status: req.session.status, login:req.session});
+            res.render('registerdog', {uname: req.session.uname, data: data, sid: sid, did: did, set: set1, status: req.session.status, login:req.session, c: c});
           }
         }
       });

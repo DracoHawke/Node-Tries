@@ -35,7 +35,7 @@
         <% for(var i=0;i<ChatList.length;i++){ %>
         <div class="row chat-list-container" onclick="return linki('/dashboard/chat?to=<%= ChatList[i].Email %>')" <% if(ChatList[i].Email==to){ %> style="background-color: #02022e;color: white;cursor: pointer;" <% } %>>
           <div class="col-sm-2" style="">
-            <img class="chat-profile" src="<%= ChatList[i].Profile %>" alt="" width="35" height="35">
+            <img class="chat-profile" src="/<%= ChatList[i].Profile %>" alt="" width="35" height="35">
           </div>
           <div class="col-sm-8">
             <div class="chat-name ml-2"><%= ChatList[i].Fname %> <%= ChatList[i].Lname %>

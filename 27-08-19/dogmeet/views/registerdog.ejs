@@ -4,17 +4,21 @@
     <link rel="stylesheet" href="/assets/registerdog.css">
     <script src="/assets/registerdog.js"></script>
     <script src="//geodata.solutions/includes/statecity.js"></script>
+    <script src="https://unpkg.com/weakmap-polyfill/weakmap-polyfill.min.js"></script>
+        <script src="https://unpkg.com/formdata-polyfill"></script>
   </head>
-  <body class="scrollbar scrollbar-primary">
+  <body class="">
+      <% if( typeof addeduser !== "undefined") { if(addeduser = 1) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alertmodal"><strong>Data Added! </strong>Please Verify Your Email to use Our Services<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><% } } %>
 <% include navigation %>
     <div class="container">
       <div class="row margins mb-2">
-          <div class="col-sm-11 col-md-11 col-lg-11 size-1 font-weight-bold">
+          <div class="col-sm-11 col-md-11 col-lg-11 size-1">
             <a href="/"><span class="red2">Home</span></a>&nbsp;<span class="black2">/&nbsp;Register a Dog</span>
           </div>
       </div>
       <div>
-        <% if (data !== "") {%> <p class="red3"> <%if(data.error){%><%= data.error %></p><%}}%>
+        <% if (data !== "") { %> <p class="red3" style="padding-left:15px;"> <%if(data.error){ %><%= data.error %></p><% }} %>
         <form class="size-1" name="myform2" id="myform2" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="col" style="line-height:2;">
@@ -26,15 +30,15 @@
             <div class="card-body crdpad1">
               <p class="card-text">Dog Picture(s) <span class="red2">*</span></p>
               <div class="row">
-                <label for="file0-upload1" class="imgupload"><p class="plus" id="file0-upload1plus">+</p><img id="file0-upload1img" class="imgpic"></img></label>
+                <label for="file0-upload1" class="imgupload"><p class="plus" id="file0-upload1plus">+</p><img id="file0-upload1img" class="imgpic"><div id="file0-div1" class="overlayimg1"><div class="textimg1">Edit</div></div></label>
                 <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload1" accept="image/*" value="" onchange="loadFile(this.id)">
-                <label for="file0-upload2" class="imgupload"><p class="plus" id="file0-upload2plus">+</p><img id="file0-upload2img" class="imgpic"></img></label>
+                <label for="file0-upload2" class="imgupload"><p class="plus" id="file0-upload2plus">+</p><img id="file0-upload2img" class="imgpic"><div id="file0-div2" class="overlayimg1"><div class="textimg1">Edit</div></div></label>
                 <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload2" accept="image/*" value="" onchange="loadFile(this.id)">
-                <label for="file0-upload3" class="imgupload"><p class="plus" id="file0-upload3plus">+</p><img id="file0-upload3img" class="imgpic"></img></label >
+                <label for="file0-upload3" class="imgupload"><p class="plus" id="file0-upload3plus">+</p><img id="file0-upload3img" class="imgpic"><div id="file0-div3" class="overlayimg1"><div class="textimg1">Edit</div></div></label >
                 <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload3" accept="image/*" value="" onchange="loadFile(this.id)">
-                <label for="file0-upload4" class="imgupload"><p class="plus" id="file0-upload4plus">+</p><img id="file0-upload4img" class="imgpic"></img></label >
+                <label for="file0-upload4" class="imgupload"><p class="plus" id="file0-upload4plus">+</p><img id="file0-upload4img" class="imgpic"><div id="file0-div4" class="overlayimg1"><div class="textimg1">Edit</div></div></label >
                 <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload4" accept="image/*" value="" onchange="loadFile(this.id)">
-                <label for="file0-upload5" class="imgupload"><p class="plus" id="file0-upload5plus">+</p><img id="file0-upload5img" class="imgpic"></img></label >
+                <label for="file0-upload5" class="imgupload"><p class="plus" id="file0-upload5plus">+</p><img id="file0-upload5img" class="imgpic"><div id="file0-div5" class="overlayimg1"><div class="textimg1">Edit</div></div></label >
                 <input hidden style="width:1%; height:1%;" type="file" class="form-control size-1 fileUpload" name="fileUpload[0]" id="file0-upload5" accept="image/*" value="" onchange="loadFile(this.id)">
                 <input type="hidden" id="dog_pic0" name="dogpic" value="0">
               </div>
@@ -47,10 +51,7 @@
             <div class="card-body">
               <p class="card-text">Dog Name <span class="red2">*</span></p>
               <div class="display2">
-                <input type="text" class="form-control sel1" name="dog_name" placeholder="Dog Name">
-                <a data-toggle="tooltip" data-placement="auto" title="The Name must be atleast 2 in length and may contain spaces">
-                  <i class="fas fa-info-circle red2 icon7"></i>
-                </a>
+                <input type="text" class="form-control sel1" name="dog_name" placeholder="Dog Name" title="The Name must be atleast 2 in length and may contain spaces" <% if(typeof c !== "undefined") { if(typeof c[0].dog_name !== "undefined") { %> value="<%= c[0].dog_name %>" <% } } %> >
               </div>
               <p class="red2" id="dog_name0"></p>
             </div>
@@ -204,6 +205,13 @@
                 <option value="rare_dog_breeds_Xoloitzcuintle">Xoloitzcuintle</option>
                 <option value="miniature_yorkshire_terrier">Yorkshire Terrier</option>
               </select>
+              <script>
+                $('document').ready(function(){
+                  <% if(typeof c !== "undefined") { if(typeof c[0].dog_breed !== "undefined") { %>
+                    $("select#dog_breed0").val("<%= c[0].dog_breed %>");
+                  <% } } %>
+                });
+              </script>
               <p class="red2" id="dog_breed0err"></p>
             </div>
           </div>
@@ -211,17 +219,26 @@
             <div class="card-body">
               <p class="card-text">Sex<span class="red2">*</span></p>
               <select name="dog_gender" class="custom-select sel1">
-                <option selected>Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option id="se02" selected>Select</option>
+                <option id="ma0" value="Male">Male</option>
+                <option id="fe0" value="Female">Female</option>
               </select>
+              <script>
+                $('document').ready(function(){
+                  <% if(typeof c !== "undefined") { if(typeof c[0].dog_gender !== "undefined") { if(c[0].dog_gender == "Male") { %>
+                    $('#ma0').attr('selected', "selected");
+                  <% } else if(c[0].dog_gender == "Female") { %>
+                    $('#fe0').attr('selected', "selected");
+                  <% } } } %>
+                });
+              </script>
               <p class="red2" id="dog_gender0"></p>
             </div>
           </div>
           <div class="card crd1">
             <div class="card-body">
               <p class="card-text">Age<span class="red2">*</span></p>
-              <input type="text" class="form-control sel1 dog_age" name="dog_age" placeholder="Dog Age">
+              <input type="text" class="form-control sel1 dog_age" name="dog_age" placeholder="Dog Age" <% if(typeof c !== "undefined") { if(typeof c[0].dog_age !== "undefined") { %> value="<%= c[0].dog_age %>" <% } } %>  >
               <p class="red2" id="dog_age0"></p>
             </div>
           </div>
@@ -229,8 +246,8 @@
         <div class="card-group cards2">
           <div class="card crd1 crdleft">
             <div class="card-body">
-              <p class="card-text">About Me<span class="red2" >*</span></p>
-              <textarea name="dog_info" class="form-control sel1" rows="3" placeholder="Write something about your dog"></textarea>
+              <p class="card-text">About Me</p>
+              <textarea name="dog_info" class="form-control sel1" rows="3" placeholder="Write something about your dog"><% if(typeof c !== "undefined") { if(typeof c[0].dog_info !== "undefined") { %> <%= c[0].dog_info %> <% } } %></textarea>
               <p class="red2" id="dog_info0"></p>
             </div>
           </div>
@@ -252,7 +269,7 @@
           <div class="card crd1 crdleft">
             <div class="card-body">
               <p class="card-text">Your First Name <span class="red2">*</span></p>
-              <input type="text" class="form-control sel1" name="u_fname" placeholder="Owner Name" <% if(uname !== ""){ %> value="<%= uname %>" readonly <% } %> >
+              <input type="text" class="form-control sel1" name="u_fname" placeholder="Owner Name" <% if(uname !== ""){ %> value="<%= uname %>" readonly <% } else if (typeof c !== "undefined") { var len = (Object.keys(c).length); console.log(c[len-1].u_fname); if(typeof c[len-1].u_fname !== "undefined") { %> value="<%= c[len-1].u_fname%>" <% } } %> >
               <p class ="red2" id ="u_fname_err"></p>
               <% if(set == "yes"){ %><input hidden name="nod" value = <% if(typeof nod !== "undefined") { %>"<%= nod %>"<% } %> > <% } %>
             </div>
@@ -260,21 +277,21 @@
           <div class="card crd1 crdleft">
             <div class="card-body">
               <p class="card-text">Your Last Name <span class="red2">*</span></p>
-              <input type="text" class="form-control sel1" name="u_lname" placeholder="Owner Name" <% if(set == "yes"){ %> value="<% if(typeof data.Lname !== 'undefined'){ %><%= data.Lname %><% }else if( typeof data.u_lname !== 'undefined') { %><%= data.u_lname%><% } %>" readonly <% } %>>
+              <input type="text" class="form-control sel1" name="u_lname" placeholder="Owner Name" <% if(set == "yes"){ %> value="<% if(typeof data.Lname !== 'undefined'){ %><%= data.Lname %><% }else if( typeof data.u_lname !== 'undefined') { %><%= data.u_lname%><% } %>" readonly <% } else if (typeof c !== "undefined") { if(typeof c[len-1].u_lname !== "undefined") { %> value="<%= c[len-1].u_lname%>" <% } } %> >
               <p class ="red2" id ="u_lname_err"></p>
             </div>
           </div>
           <div class="card crd1 crdleft">
             <div class="card-body">
               <p class="card-text">Your Email <span class="red2">*</span></p>
-              <input type="text" class="form-control sel1" name="u_email" placeholder="Email Address" <% if(set == "yes"){ %> value="<% if(typeof data.Email !== 'undefined'){ %><%= data.Email %><% } else if( typeof data.u_email !== 'undefined') { %><%= data.u_email%><% } %>" readonly <% } %> >
+              <input type="text" class="form-control sel1" name="u_email" placeholder="Email Address" <% if(set == "yes"){ %> value="<% if(typeof data.Email !== 'undefined'){ %><%= data.Email %><% } else if( typeof data.u_email !== 'undefined') { %><%= data.u_email%><% } %>" readonly <% } else if (typeof c !== "undefined") { if(typeof c[len-1].u_email !== "undefined") { %> value="<%= c[len-1].u_email%>" <% } } %> >
               <p class ="red2" id ="u_email_err"></p>
             </div>
           </div>
           <div class="card crd1 crdleft">
             <div class="card-body">
               <p class="card-text">Phone <span class="red2">*</span></p>
-              <input type="text" class="form-control sel1" name="u_phone" placeholder="Phone" <% if(set == "yes"){ %> value="<% if(typeof data.Phone !== 'undefined'){ %><%= data.Phone%><% } else if( typeof data.u_phone !== 'undefined') { %><%= data.u_phone%><% } %>" readonly <% } %> >
+              <input type="text" class="form-control sel1" name="u_phone" placeholder="Phone" <% if(set == "yes"){ %> value="<% if(typeof data.Phone !== 'undefined'){ %><%= data.Phone%><% } else if( typeof data.u_phone !== 'undefined') { %><%= data.u_phone%><% } %>" readonly <% } else if (typeof c !== "undefined") { if(typeof c[len-1].u_phone !== "undefined") { %> value="<%= c[len-1].u_phone%>" <% } } %> >
               <p class ="red2" id ="u_phone_err"></p>
             </div>
           </div>
@@ -284,7 +301,7 @@
             <div class="card-body">
               <input type="hidden" name="country" id="countryId" value="AU"/>
               <p class="card-text">Street Address<span class="red2">*</span></p>
-              <input type="text" class="form-control sel1" name="u_add" placeholder="Street Address" <% if(set == "yes" && typeof data.Address !== "undefined"){ %> value="<%= data.Address%>" readonly<% }else if( typeof data.u_add !== 'undefined') { %> value= "<%= data.u_add%>" readonly <% } %>  >
+              <input type="text" class="form-control sel1" name="u_add" placeholder="Street Address" <% if(set == "yes" && typeof data.Address !== "undefined"){ %> value="<%= data.Address%>" readonly<% }else if( typeof data.u_add !== 'undefined') { %> value= "<%= data.u_add%>" readonly <% } else if (typeof c !== "undefined") { if(typeof c[len-1].u_add !== "undefined") { %> value="<%= c[len-1].u_add%>" <% } } %> >
               <p class ="red2" id ="u_address_err"></p>
             </div>
           </div>
@@ -313,7 +330,13 @@
                     <% } %>
                   });
                 </script>
-                <% } else { %>
+                <% } else if( typeof c !== 'undefined') { console.log(c[len-1].u_city);%>
+                <select name="u_city" class="cities order-alpha form-control sel1" id="cityId">
+                  <option value="Select">Select City</option>
+                  <option value="alto"> Alternate </option>
+                  <option value="<%= c[len-1].u_city%>" selected><% if(typeof c[len-1].u_city !== "undefined") { %><% a = c[len-1].u_city.replace(/_/g," "); a = a.replace(/-/g," ");%><%= a %><% } %> </option>
+                  </select>
+                <% } else  { %>
               <select name="u_city" class="cities order-alpha form-control sel1" id="cityId">
                 <option value="Select" selected>Select City</option>
                 <option value="alto"> Alternate </option>
@@ -347,6 +370,12 @@
                     <% } %>
                   });
                 </script>
+                <% }else if( typeof c !== 'undefined') { console.log(c[len-1].u_state);%>
+                <select name="u_state" class="states order-alpha form-control sel1" id="stateId">
+                  <option value="Select">Select State</option>
+                  <option value="alto"> Alternate </option>
+                  <option value="<%= c[len-1].u_state%>" selected><% if(typeof c[len-1].u_state !== "undefined") { %> <%a = c[len-1].u_state.replace(/_/g, " ")%><%= a %> <% } %></option>
+                </select>
                 <% } else { %>
               <select name="u_state" class="states order-alpha form-control sel1" id="stateId">
                 <option value="Select" selected>Select State</option>
@@ -361,7 +390,7 @@
           <div class="card crd1 crdleft">
             <div class="card-body">
               <p class="card-text">Zip <span class="red2">*</span></p>
-              <input type="text" class="form-control sel1" name="u_zip" placeholder="Zip" <% if(set == "yes" && typeof data.ZIP !== "undefined"){ %> value= "<%= data.ZIP %>" readonly <% }else if( typeof data.u_zip !== 'undefined') { %> value= "<%= data.u_zip%>" readonly <% } %> >
+              <input type="text" class="form-control sel1" name="u_zip" placeholder="Zip" <% if(set == "yes" && typeof data.ZIP !== "undefined"){ %> value= "<%= data.ZIP %>" readonly <% }else if( typeof data.u_zip !== 'undefined') { %> value= "<%= data.u_zip%>" readonly <% } else if (typeof c !== "undefined") { if(typeof c[len-1].u_zip !== "undefined") { %> value="<%= c[len-1].u_zip%>" <% } } %> >
               <p class="red2" id="u_zip_err"></p>
             </div>
           </div>
@@ -370,7 +399,7 @@
               <p class="card-text">Password <span class="red2">*</span></p>
               <div class="display2">
                 <input type="password" class="form-control sel1" name="u_pass" placeholder="Password" <% if(uname !== ""){ %> onsubmit="myfunction1(this)" <% } %>>
-                <a data-toggle="tooltip" data-placement="auto" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc.">
+                <a style="margin-left:-0.3em;" data-toggle="tooltip" data-placement="auto" title="The Password must be minimum 1 Capital letter,1 Small letter,1 Special Character,1 Number and there should be no trailing numbers in the password eg. 123,456 etc[len-1].">
                   <i class="fas fa-info-circle red2 icon7"></i>
                 </a>
               </div>
@@ -393,9 +422,10 @@
           <% } %>
         </div>
         <div class="col-sm-12" style="padding-left:20px">
-        <p class="policies"> By joining you agree to <a href="/terms" class="policieslink" style="color:rgb(99, 203, 191)">Our Terms and Conditions</a> and <a href="/policy" class="policieslink" style="color:rgb(99, 203, 191)"> Privacy Policies</a></p></div>
+        <p class="policies"> By joining you agree to <a href="/terms" class="policieslink">Our Terms and Conditions</a> and <a href="/policy" class="policieslink"> Privacy Policies</a></p></div>
         <div class="col-sm-12 mb-5 mt-4" style="padding-left:17px;"><button type="submit" class="btn button-default btn2" id="dogregister">Register Now</button></div>
       </form>
     </div>
   </div>
+<% include registerdogscript %>
 <% include footer %>

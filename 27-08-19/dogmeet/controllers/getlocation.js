@@ -16,19 +16,19 @@ module.exports = function(req, res, check, send_data){
   if(check == "getback"){
     if(send_data){
       if(send_data.Location == null){
-        res.render('dashboard',{uname:req.session.uname,sid:sid,did:did,send_data:{status_err:'not ver',file:''},error:{},check:""})
+        res.redirect('/dashboard');
       }
       geocoder.geocode(send_data.Location, function(err, response) {
         var a = response[0];
-        if(typeof a !== "undefined"){
+        if(typeof a !== "undefined") {
           var sql = " UPDATE `sitters`,`users` SET `sitters`.`Location` = "+mysql.escape(send_data.Location)+", `sitters`.`Longitude` = "+a.longitude+", `sitters`.`Latitude` = "+a.latitude+"  WHERE `users`.`Uid` = `sitters`.`Uid` and `users`.`Email` = "+mysql.escape(req.session.email);
           console.log(sql);
           con.query(sql, function (err, rows, fields) {
             if(err) throw err;
-            res.redirect('/dashboard/settings');
+            res.redirect('/dashboard/setsuccess');
           });
         }
-        else{
+        else {
           res.redirect('/dashboard/settings');
         }
       });
@@ -43,15 +43,15 @@ module.exports = function(req, res, check, send_data){
       }
       geocoder.geocode(send_data.Location, function(err, response) {
         var a = response[0];
-        if(typeof a === "undefined"){
+        if(typeof a === "undefined") {
           res.redirect("back");
         }
-        else if(typeof a !== "undefined"){
+        else if(typeof a !== "undefined") {
           var sql = " UPDATE `sitters`,`users` SET `sitters`.`Location` = "+mysql.escape(send_data.Location)+", `sitters`.`Longitude` = "+a.longitude+", `sitters`.`Latitude` = "+a.latitude+"  WHERE `users`.`Uid` = `sitters`.`Uid` and `users`.`Email` = "+mysql.escape(req.session.email);
           console.log(sql);
           con.query(sql, function (err, rows, fields) {
             if(err) throw err;
-            res.redirect('/dashboard/settings');
+            res.redirect('/dashboard/setsuccess');
           });
         }
         else{
@@ -60,11 +60,11 @@ module.exports = function(req, res, check, send_data){
       });
     }
   }
-  else if(check == "newlocation"){
+  else if(check == "newlocation") {
     geocoder.geocode(req.body.locationnew, function(err, response) {
       console.log(response);
       var a = response[0];
-      if(typeof a === "undefined"){
+      if(typeof a === "undefined") {
         res.redirect("back");
       }
       else if(typeof a !== "undefined"){
@@ -72,7 +72,7 @@ module.exports = function(req, res, check, send_data){
         console.log(sql);
         con.query(sql, function (err, rows, fields) {
           if(err) throw err;
-          if(req.body.rangebar){
+          if(req.body.rangebar) {
             setvalues(req,res);
           }
           else{

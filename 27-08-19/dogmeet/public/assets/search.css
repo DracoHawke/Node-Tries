@@ -13,6 +13,12 @@
   margin-left: 25%;
   box-shadow: 6px 6px 6px rgb(78, 158, 149);
 }
+.search-bar2{
+  width: 50%;
+  margin: 2%;
+  box-shadow: 6px 6px 6px rgb(78, 158, 149);
+  display: inline-flex;
+}
 input.form-control {
     padding: 30px;
     border:0;
@@ -102,4 +108,19 @@ button.ms-choice > span{
         margin: 2%;
         width: 100%;
     }
+    .search-bar2{
+        margin: 2%;
+        margin-left:0;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width:500px){
+  .search-bar2{
+    display:block;
+  }
+  button.btn.searching.searching1{
+    width:100%;
+  }
 }
