@@ -28,7 +28,7 @@
             Textarea
           </a>
           <a class="btn btn-primary" style="color:white;" href="#" id="inp_select"  onclick=" addfield(this)">
-            Select Box
+            Select/Dropdown Box
           </a>
           <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -52,7 +52,28 @@
         <div id="head_div" style="display:none">
           <br>
           Heading: <input class="form-control" type="text" id="inp_header">
-          <button class="btn btn-primary" onclick="enterfield()">Save</button>
+          <div style="display:none;" id="options_modal_div">
+            <div class="row" id="options_modal_row" style="margin-bottom:5px;"></div>
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" id="no_of_options" placeholder="Add options" aria-label="Number of options" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" onclick="addoptions()" type="button">Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="number_of_items1" style="display:none;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> Number Of Items.</span>
+              </div>
+              <input type="number" class="form-control" id="number_of_items2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" onclick="addoptions('radio')" type="button">Add</button>
+              </div>
+            </div>
+            <div class="row" id="noi_modal_rows" style="margin-bottom:5px;"></div>
+          </div>
+          <button class="btn btn-primary" onclick="createfield()">Save</button>
         </div>
       </div>
       <form method="post" action="" id="addform_form" onsubmit="return addform_action()" name="formsurity2" enctype="multipart/form-data">

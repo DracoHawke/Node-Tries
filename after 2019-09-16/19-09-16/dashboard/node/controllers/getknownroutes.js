@@ -62,7 +62,7 @@ module.exports = function(req,res) {
             flag = 1;
           }
           else if(flag==1) {
-            pagitems = pagitems+'<li class="page-item"><a class="page-link mypage">...</a></li>';
+            pagitems = pagitems+'<li class="page-item disabled"><a class="page-link mypage">...</a></li>';
             flag = 0;
           }
         }

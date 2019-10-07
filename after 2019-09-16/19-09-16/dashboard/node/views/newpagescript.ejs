@@ -1,37 +1,364 @@
 <script>
   var array1 = {};
   var options = {};
+  var current_option = "";
 
   function addfield(ipf){
-    console.log(ipf);
+    //console.log(ipf);
     var id = ipf.id;
     var fields = document.getElementById('fields1').value;
     var count = document.getElementById('count1').value;
-    console.log(fields);console.log(count);console.log(id);
-    if(id == "inp_number" || id == "inp_password" || id == "inp_text" || id == "inp_email" || id == "inp_select" || id == "inp_textarea" || id == "inp_checkbox_grp" || id == "inp_radio_grp") {
+    //console.log(fields);//console.log(count);//console.log(id);
+    if(id == "inp_number" || id == "inp_password" || id == "inp_text" || id == "inp_email") {
       document.getElementById('head_div').style.display = "block";
+      document.getElementById('options_modal_div').style.display = "none";
       document.getElementById('inp_header').setAttribute("placeholder","let it be unique");
       document.getElementById('inp_header').value = "";
+      document.getElementById('number_of_items1').style.display = "none";
+      current_option = "input";
     }
-    else if(id == "inp_radio_sin" || id == "inp_checkbox_sin"){
-      console.log("single");
+    else if(id == "inp_textarea") {
+      document.getElementById('head_div').style.display = "block";
+      document.getElementById('options_modal_div').style.display = "none";
+      document.getElementById('inp_header').setAttribute("placeholder","let it be unique");
+      document.getElementById('inp_header').value = "";
+      document.getElementById('number_of_items1').style.display = "none";
+      current_option = "textarea";
+    }
+    else if( id == "inp_select") {
+      document.getElementById('head_div').style.display = "block";
+      document.getElementById('options_modal_div').style.display = "block";
+      document.getElementById('inp_header').setAttribute("placeholder","let it be unique");
+      document.getElementById('inp_header').value = "";
+      document.getElementById('number_of_items1').style.display = "none";
+      current_option="select";
+    }
+    else if( id == "inp_radio_sin" || id == "inp_radio_grp") {
+      document.getElementById('head_div').style.display = "block";
+      document.getElementById('options_modal_div').style.display = "none";
+      document.getElementById('inp_header').setAttribute("placeholder","let it be unique");
+      document.getElementById('inp_header').value = "";
+      document.getElementById('number_of_items1').style.display = "block";
+      if( id == "inp_radio_sin" ) {
+        current_option = "radio_sin";
+      }
+      else {
+        current_option="radio_grp";
+      }
+    }
+    else if( id == "inp_checkbox_grp" || id == "inp_checkbox_sin") {
+      document.getElementById('head_div').style.display = "block";
+      document.getElementById('options_modal_div').style.display = "none";
+      document.getElementById('inp_header').setAttribute("placeholder","let it be unique");
+      document.getElementById('inp_header').value = "";
+      document.getElementById('number_of_items1').style.display = "block";
+      if( id == "inp_checkbox_sin" ) {
+        current_option = "checkbox_sin";
+      }
+      else {
+        current_option = "checkbox_grp";
+      }
     }
     document.getElementById('text1').value = id;
+  }
+
+  function addoptions(ch) {
+    if(ch == "radio") {
+      var noo = document.getElementById('number_of_items2').value;
+    }
+    else {
+      var noo = document.getElementById('no_of_options').value;
+    }
+    if(noo != "") {
+      noo = Number(noo);
+      if(!Number.isNaN(noo)) {
+        for(i = 0; i < noo; i++) {
+          if(ch == "radio") {
+            var inhtml = document.getElementById('noi_modal_rows').innerHTML;
+          }
+          else {
+            var inhtml = document.getElementById('options_modal_row').innerHTML;
+          }
+          if(inhtml == "") {
+            inhtml = "<div class='col-md-12' style='padding-left:0;'><h3>Options</h3></div>";
+          }
+          inhtml = inhtml + "<div class='col-md-4' style='padding-left:0;padding-right:0;margin-bottom:5px;'><input type='text' class='form-control options_modal_options' placeholder='option entry'></div>"
+          if(ch == "radio") {
+            document.getElementById('noi_modal_rows').innerHTML = inhtml;
+          }
+          else {
+            document.getElementById('options_modal_row').innerHTML = inhtml;
+          }
+        }
+      }
+    }
+  }
+
+  function createfield() {
+    var type = current_option;
+    if(type == "input") {
+      enterfield();
+    }
+    else if(type == "textarea") {
+      textareafield();
+    }
+    else if(type == "select") {
+      selectfield();
+    }
+    else if(type == "radio_sin") {
+      radiofield("sin");
+    }
+    else if(type == "radio_grp") {
+      radiofield("grp");
+    }
+    else if(type == "checkbox_sin") {
+      checkboxfield("sin");
+    }
+    else if(type == "checkbox_grp") {
+      checkboxfield("grp");
+    }
+  }
+
+  function radiofield(choice) {
+    var head = document.getElementById('inp_header');
+    var fields = document.getElementById('fields1').value;
+    var count = Number(document.getElementById('count1').value);
+    var content = tinymce.get("addform_display").getContent();
+    entry = document.getElementById('entry1').value;
+    end = document.getElementById('end1').value;
+    if(head.value.trim() != "") {
+      var fella = document.getElementById('number_of_items2').value;
+      fella = Number(fella);
+      if(!Number.isNaN(fella)) {
+        if(fella > 0) {
+          if(entry != "") {
+            var n = content.lastIndexOf("</div>");
+            content = content.substr(0,n);
+          }
+          if(fields == 0){
+            entry = "<div class='row'><div class='col-sm-4'>";
+            end =  "</div>";
+            document.getElementById('fields1').value = 1;
+            document.getElementById('count1').value = count + 8;
+          }
+          else if(count < 12) {
+            entry = "<div class='col-sm-4'>";
+            end = "</div>";
+            document.getElementById('count1').value = count + 4;
+          }
+          else {
+            entry = "<div class='col-sm-4'>";
+            end = "</div></div>";
+            document.getElementById('entry1').value = "";
+            document.getElementById('end1').value = "";
+            document.getElementById('fields1').value = 0;
+            document.getElementById('count1').value = 0;
+          }
+          var flag  = 0;
+          var count1 = 1;
+          for (let [key, value] of Object.entries(array1)) {
+            if (array1.hasOwnProperty(key)) {
+              if(key == head.value) {
+                flag = 1;
+                array1[head.value] = array1[head.value] + 1;
+                count1 = array1[head.value];
+              }
+            }
+          }
+          if(flag == 0) {
+            array1[head.value] = 1;
+          }
+          var art = document.getElementsByClassName('options_modal_options');
+          //console.log(art);
+          var i = 0;
+          var j = 0;
+          var options = "";
+          for (var option_art in art) {
+            if (art.hasOwnProperty(option_art)) {
+              //console.log(art[i]);
+              //console.log(art[i].value);
+              if(art[i].value != "") {
+                var value1 = art[i].value;
+                value1 = value1.replace(/[\/\\\!\:\;\#\&\*\(\)\^\@\$\%\+\=\[\]\;\"\?\>\<\{\}]/gmi, "");
+                value1 = value1.replace(/ /gmi,"_")
+                options = options + "<option value='"+value1+"_"+j+"'>"+art[i].value+"</option>";
+                j = j + 1;
+              }
+              i = i + 1;
+            }
+          }
+          entry = entry + "<h3>"+head.value+"</h3>";
+          for(i = 0; i < fella; i++) {
+            if(choice == "sin") {
+              entry = entry + "<input type='checkbox' class='form-control update' onfocusout='optionsoff(this)'  onfocus='optionson(this)' name='"+head.value+"_"+count1+"'>";
+            }
+            else if(choice == "grp") {
+              entry = entry + "<input type='checkbox' class='form-control update' onfocusout='optionsoff(this)'  onfocus='optionson(this)' name='"+head.value+"_"+count1+"'>";
+            }
+          }
+          data = entry + end;
+          content = content + data;
+          tinymce.get("addform_display").setContent("");
+          tinymce.get("addform_display").setContent(content);
+          if(count < 12) {
+            document.getElementById('entry1').value = entry;
+            document.getElementById('end1').value = end;
+          }
+        }
+      }
+    }
+  }
+
+  function selectfield() {
+    var head = document.getElementById('inp_header');
+    var fields = document.getElementById('fields1').value;
+    var count = Number(document.getElementById('count1').value);
+    //console.log(fields);//console.log(count);
+    var content = tinymce.get("addform_display").getContent();
+    entry = document.getElementById('entry1').value;
+    end = document.getElementById('end1').value;
+    //console.log(entry);//console.log(end);
+    if(head.value.trim() != "") {
+      if(entry != ""){
+        var n = content.lastIndexOf("</div>");
+        content = content.substr(0,n);
+        //console.log(content);
+      }
+      if(fields == 0){
+        entry = "<div class='row'><div class='col-sm-4'>";
+        end =  "</div>";
+        document.getElementById('fields1').value = 1;
+        document.getElementById('count1').value = count + 8;
+      }
+      else if(count < 12) {
+        entry = "<div class='col-sm-4'>";
+        end = "</div>";
+        document.getElementById('count1').value = count + 4;
+      }
+      else {
+        entry = "<div class='col-sm-4'>";
+        end = "</div></div>";
+        document.getElementById('entry1').value = "";
+        document.getElementById('end1').value = "";
+        document.getElementById('fields1').value = 0;
+        document.getElementById('count1').value = 0;
+      }
+      var flag  = 0;
+      var count1 = 1;
+      for (let [key, value] of Object.entries(array1)) {
+        if (array1.hasOwnProperty(key)) {
+          if(key == head.value) {
+            flag = 1;
+            array1[head.value] = array1[head.value] + 1;
+            count1 = array1[head.value];
+          }
+          //console.log(key, array1[key]);
+        }
+      }
+      if(flag == 0) {
+        array1[head.value] = 1;
+      }
+      var art = document.getElementsByClassName('options_modal_options');
+      //console.log(art);
+      var i = 0;
+      var j = 0;
+      var options = "";
+      for (var option_art in art) {
+        if (art.hasOwnProperty(option_art)) {
+          //console.log(art[i]);
+          //console.log(art[i].value);
+          if(art[i].value != "") {
+            var value1 = art[i].value;
+            value1 = value1.replace(/[\/\\\!\:\;\#\&\*\(\)\^\@\$\%\+\=\[\]\;\"\?\>\<\{\}]/gmi, "");
+            value1 = value1.replace(/ /gmi,"_")
+            options = options + "<option value='"+value1+"_"+j+"'>"+art[i].value+"</option>";
+            j = j + 1;
+          }
+          i = i + 1;
+        }
+      }
+      //console.log(options);
+      entry = entry + "<h3>"+head.value.trim()+"</h3>";
+      entry = entry + "<select class='form-control' name='"+head.value+"_"+count1+"'>";
+      entry = entry + options;
+      entry = entry + "</select>";
+      //console.log("entry ",entry);//console.log("end ",end);//console.log(array1);
+      data = entry + end;
+      //editor.insertContent(data);
+      content = content + data;
+      //console.log(content);
+      tinymce.get("addform_display").setContent("");
+      tinymce.get("addform_display").setContent(content);
+      //console.log(data);//$("#data-container").html(content);//console.log(content);
+      if(count < 12) {
+        document.getElementById('entry1').value = entry;
+        document.getElementById('end1').value = end;
+      }
+    }
+  }
+
+  function textareafield() {
+    var head = document.getElementById('inp_header');
+    var fields = document.getElementById('fields1').value;
+    var count = Number(document.getElementById('count1').value);
+    //console.log(fields);//console.log(count);
+    var content = tinymce.get("addform_display").getContent();
+    entry = document.getElementById('entry1').value;
+    end = document.getElementById('end1').value;
+    var n = content.lastIndexOf("<div class=\"row\">");
+    //console.log(content);//console.log(n);//console.log(entry);//console.log(end);
+    if(entry != "" && n > -1){
+      entry = "</div></div><div class='row'><div class='col-sm-12'>";
+      end = "</div></div>";
+    }
+    else if(fields == 0){
+      entry = "<div class='row'><div class='col-sm-12'>";
+      end = "</div></div>";
+    }
+    document.getElementById('entry1').value = "";
+    document.getElementById('end1').value = "";
+    document.getElementById('fields1').value = 0;
+    document.getElementById('count1').value = 0;
+    var flag  = 0;
+    var count1 = 1;
+    for (let [key, value] of Object.entries(array1)) {
+      if (array1.hasOwnProperty(key)) {
+        if(key == head.value) {
+          flag = 1;
+          array1[head.value] = array1[head.value] + 1;
+          count1 = array1[head.value];
+        }
+        //console.log(key, array1[key]);
+      }
+    }
+    if(flag == 0) {
+      array1[head.value] = 1;
+    }
+    entry = entry + "<h3>"+head.value+"</h3>";
+    entry = entry + "<textarea class='form-control update' rows='4' style='width:100%;' onfocusout='optionsoff(this)'  onfocus='optionson(this)' name='"+head.value+"_"+count1+"'></textarea>";
+    //console.log("entry ",entry);//console.log("end ",end);//console.log(array1);
+    data = entry + end;
+    //editor.insertContent(data);
+    content = content + data;
+    //console.log(content);
+    tinymce.get("addform_display").setContent("");
+    tinymce.get("addform_display").setContent(content);
+    //console.log(data);//$("#data-container").html(content);//console.log(content);
   }
 
   function enterfield() {
     var head = document.getElementById('inp_header');
     var fields = document.getElementById('fields1').value;
     var count = Number(document.getElementById('count1').value);
-    console.log(fields);console.log(count);
+    //console.log(fields);//console.log(count);
     var content = tinymce.get("addform_display").getContent();
     entry = document.getElementById('entry1').value;
     end = document.getElementById('end1').value;
-    console.log(entry);console.log(end);
+    //console.log(entry);//console.log(end);
     if(entry != ""){
       var n = content.lastIndexOf("</div>");
       content = content.substr(0,n);
-      console.log(content);
+      //console.log(content);
     }
     if(fields == 0){
       entry = "<div class='row'><div class='col-sm-4'>";
@@ -61,7 +388,7 @@
           array1[head.value] = array1[head.value] + 1;
           count1 = array1[head.value];
         }
-        console.log(key, array1[key]);
+        //console.log(key, array1[key]);
       }
     }
     if(flag == 0) {
@@ -70,17 +397,17 @@
     id = document.getElementById('text1').value;
     id = id.substr(4);
     pos = id.indexOf('_');
-    console.log("pos ",pos);console.log("id ",id);
+    //console.log("pos ",pos);//console.log("id ",id);
     entry = entry + "<h3>"+head.value+"</h3>";
     entry = entry + "<input class='form-control update' onfocusout='optionsoff(this)'  onfocus='optionson(this)' type='"+id+"' name='"+head.value+"_"+count1+"'>";
-    console.log("entry ",entry);console.log("end ",end);console.log(array1);
+    //console.log("entry ",entry);//console.log("end ",end);//console.log(array1);
     data = entry + end;
     //editor.insertContent(data);
     content = content + data;
-    console.log(content);
+    //console.log(content);
     tinymce.get("addform_display").setContent("");
     tinymce.get("addform_display").setContent(content);
-    console.log(data);//$("#data-container").html(content);console.log(content);
+    //console.log(data);//$("#data-container").html(content);//console.log(content);
     if(count < 12) {
       document.getElementById('entry1').value = entry;
       document.getElementById('end1').value = end;
@@ -92,7 +419,7 @@
     var formname = document.getElementById('addform_formname').value;
     formname = formname.trim();
     var content = tinymce.get("addform_display").getContent();
-    console.log(content);
+    //console.log(content);
     content1 = content.trim();
     if(formname == ""){
       event.preventDefault();
@@ -108,10 +435,10 @@
       document.getElementById('blockreason_err').innerHTML = "";
       //var formdata = JSON.stringify(content);
       var formdata = {data: content, names: JSON.stringify(array1), formname: formname};
-      console.log(formdata);
+      //console.log(formdata);
       //var queryString = new URLSearchParams(formdata).toString();
       var h = "/savetemp/0";
-      ////console.log(formdata);
+      //console.log(formdata);
     	$.ajax({
     		url: h,
     		type: "POST",
@@ -123,7 +450,7 @@
             $("#alert-success1").removeClass("in").show();
             $("#alert-success1").delay(200).addClass("in");
           }
-    			console.log(response);
+    			//console.log(response);
     		}
     	});
     	return false;
@@ -140,7 +467,7 @@
           var content = response.substr(11);
           //console.log(substr);
           if(substr == "successful1"){
-              console.log(content);
+              //console.log(content);
               document.getElementById('insertform').innerHTML = content;
               $('#insertform').modal('toggle');
           }
@@ -155,7 +482,7 @@
     var flag = 0;
     var data_id = -1;
     for(i = 0; i < len; i++){
-      console.log(form[i]);
+      //console.log(form[i]);
       if(form[i].checked) {
         flag = 1;
         data_id = form[i].value;
@@ -175,7 +502,7 @@
           var substr = response.substr(0,11);
           var content = response.substr(11);
           if(substr == "successful1"){
-              console.log(content);
+              //console.log(content);
               var page_content = tinymce.get("context-form").getContent();
               page_content =  page_content + content;
               tinymce.get("context-form").setContent("");
@@ -212,7 +539,7 @@
     page_content1 = page_content1.replace(/&nbsp;/gi, "");
     page_content1 = page_content1.replace(/<\/p>/gi, "");
     page_content1 = page_content1.trim();
-    console.log(page_content1);
+    //console.log(page_content1);
     if(page_content1 == "<p></p>" || page_content1 == "") {
       var alert = '<div class="alert alert-danger alert-dismissible" id="alert-success_3"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Empty Input!</strong> Please Enter any data to create new page/route.</div>';
       document.getElementById('bootstrap_alert_3').innerHTML = alert;
@@ -246,7 +573,7 @@
           var substr = response.substr(0,11);
           var content = response.substr(11);
           if(substr == "successful1"){
-              console.log(content);
+              //console.log(content);
               $('#finalizeroute').modal('hide');
               document.getElementById('link_ready').value = "/getknownroutes"+content;
               page = content.substr(1);

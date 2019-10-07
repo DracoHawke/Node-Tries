@@ -1,0 +1,67 @@
+Array (
+  [0] => Array (
+    [in] => Array (
+      [file1.txt] => Array (
+        [linenum3] => 2
+        [linenum7] => 2
+        [linenum11] => 2
+        [linenum15] => 2
+        [linenum19] => 2
+        [linenum23] => 2
+        [linenum27] => 2
+        [linenum31] => 2
+        [linenum35] => 2
+        [linenum39] => 2
+        [linenum43] => 2
+        [linenum47] => 2
+      )
+      [file2.txt] => Array (
+        [linenum1] => 1
+        [linenum2] => 1
+        [linenum3] => 1
+        [linenum4] => 1
+      )
+      [india.txt] => Array (
+        [linenum5] => 12
+      )
+      [russia.txt] => Array (
+        [linenum3] => 7
+      )
+    )
+    [the] => Array (
+      [file2.txt] => Array (
+        [linenum2] => 1
+        [linenum3] => 1
+        [linenum4] => 2
+      )
+      [india.txt] => Array (
+        [linenum1] => 17
+        [linenum3] => 18
+        [linenum5] => 8
+        [linenum7] => 5
+      )
+      [russia.txt] => Array (
+        [linenum1] => 15
+        [linenum3] => 19
+        [linenum5] => 26
+        [linenum7] => 18
+      )
+    )
+    [in the] => Array (
+      [file2.txt] => Array -(
+        [linenum3] => 1
+        [linenum4] => 1
+      )
+      [india.txt] => Array (
+        [linenum1] => 2
+        [linenum3] => 3
+      )
+      [russia.txt] => Array (
+        [linenum1] => 3
+        [linenum3] => 2
+        [linenum5] => 2
+        [linenum7] => 1
+      )
+    )
+  )
+)

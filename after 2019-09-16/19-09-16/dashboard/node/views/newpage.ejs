@@ -1,7 +1,7 @@
 <% include header %>
 <% include newpagescript %>
 </head>
-    <script src="/assets/js/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="./assets/js/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript">
       tinymce.init({
         selector: '#context-form',
@@ -11,7 +11,7 @@
           'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
           'save table directionality emoticons template paste'
         ],
-        content_css : "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css?"+new Date().getTime()+",./assets/css/custom.css?"+new Date().getTime(),
+        content_css : "./assets/css/lib/bootstrap/bootstrap.min.css?"+new Date().getTime()+",./assets/css/custom.css?"+new Date().getTime(),
         force_br_newlines : true,
         // enable title field in the Image dialog
         image_title: true,
@@ -73,17 +73,17 @@
               if (!$(editor_document.head).find("#bootstrap_script")[0]) {
                 var script = document.createElement('script');
                 script.id = "jQuery_script2";
-                script.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js";
+                script.src = "./assets/js/lib/jquery/jquery.min.js";
                 editor_document.head.appendChild(script);
 
                 var script = document.createElement('script');
                 script.id = "popper_script2";
-                script.src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js";
+                script.src = "./assets/js/lib/bootstrap/js/popper.min.js";
                 editor_document.head.appendChild(script);
 
                 var script = document.createElement('script');
                 script.id = "bootstrap_script2";
-                script.src = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js";
+                script.src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
                 editor_document.head.appendChild(script);
               }
           });
@@ -94,7 +94,7 @@
       tinymce.init({
         selector: '#addform_display',
         height: 300,
-        content_css : "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css?"+new Date().getTime()+",./assets/css/custom.css?"+new Date().getTime(),
+        content_css : "./assets/css/lib/bootstrap/bootstrap.min.css?"+new Date().getTime()+",./assets/css/custom.css?"+new Date().getTime(),
         setup: function (editor) {
           editor.on('load', function(){
             var editor_htmlitem = document.getElementsByClassName('tox-edit-area__iframe');
@@ -103,17 +103,17 @@
               if (!$(editor_document.head).find("#bootstrap_script")[0]) {
                   var script = document.createElement('script');
                   script.id = "jQuery_script1";
-                  script.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js";
+                  script.src = "./assets/js/lib/jquery/jquery.min.js";
                   editor_document.head.appendChild(script);
 
                   var script = document.createElement('script');
                   script.id = "popper_script1";
-                  script.src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js";
+                  script.src = "./assets/js/lib/bootstrap/js/popper.min.js";
                   editor_document.head.appendChild(script);
 
                   var script = document.createElement('script');
                   script.id = "bootstrap_script1";
-                  script.src = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js";
+                  script.src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
                   editor_document.head.appendChild(script);
                   //console.log(editor.contentDocument.head);
               }
