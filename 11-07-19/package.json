@@ -5,7 +5,7 @@
   "main": "express1.js",
   "dependencies": {
     "ejs": "1.0.0",
-    "express": "~3.4.8",
+    "express": "~4.17.3",
     "express-ejs-layouts": "^2.5.0",
     "mysql": "^2.17.1",
     "siege": "^0.2.0"
